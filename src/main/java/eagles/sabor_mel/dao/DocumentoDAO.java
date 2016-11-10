@@ -12,7 +12,11 @@ public class DocumentoDAO extends DAO<Documento>{
     }
     
     public Documento getByPessoa(Long id){
-        return (Documento) entityManager.createQuery("SELECT * FROM Documento WHERE pessoa = '"+id+"';").getSingleResult();
+        return (Documento) entityManager.createQuery("FROM Documento WHERE pessoa = '"+id+"';").getSingleResult();
+    }
+    
+    public Documento getByNumero(String numero){
+        return (Documento) entityManager.createQuery("FROM Documento WHERE nuemro = '"+numero+"';").getSingleResult();
     }
     
     public boolean removeById(final Long id) {

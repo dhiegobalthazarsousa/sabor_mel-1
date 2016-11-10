@@ -25,8 +25,8 @@ public class PessoaDAO extends DAO<Pessoa>{
     }
  
     @SuppressWarnings("unchecked")
-	public List<Pessoa> findAll() {
-    	return entityManager
-    		.createQuery("FROM Pessoa").getResultList();
-    }        
+    public List<Pessoa> findAll() {
+        return entityManager
+                .createQuery("FROM Pessoa").getResultList();
+    }   
 }
