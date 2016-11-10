@@ -326,7 +326,7 @@ public class Principal extends javax.swing.JFrame {
         radioVendaParcelado = new javax.swing.JRadioButton();
         labelParcelasVenda = new javax.swing.JLabel();
         parcelas = new javax.swing.JComboBox<>();
-        jButton9 = new javax.swing.JButton();
+        fecharVenda = new javax.swing.JButton();
         labelClienteVenda = new javax.swing.JLabel();
         buscaDocumentoCliente = new javax.swing.JFormattedTextField();
         btnBuscaDocumentoCliente = new javax.swing.JButton();
@@ -785,7 +785,12 @@ public class Principal extends javax.swing.JFrame {
 
         parcelas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/checked (1).png"))); // NOI18N
+        fecharVenda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/checked (1).png"))); // NOI18N
+        fecharVenda.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                fecharVendaMouseClicked(evt);
+            }
+        });
 
         labelClienteVenda.setText("Cliente");
 
@@ -801,6 +806,8 @@ public class Principal extends javax.swing.JFrame {
                 btnBuscaDocumentoClienteMouseClicked(evt);
             }
         });
+
+        nomeBuscaCliente.setEditable(false);
 
         checkClienteCadastrado.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
         checkClienteCadastrado.setText("Cliente não cadastrado");
@@ -918,7 +925,7 @@ public class Principal extends javax.swing.JFrame {
                                 .addGroup(vendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(parcelas, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(labelParcelasVenda)))
-                            .addComponent(jButton9)
+                            .addComponent(fecharVenda)
                             .addComponent(labelTipoPagamentoVista)
                             .addComponent(labelTipoPagamentoParcelado))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
@@ -1005,7 +1012,7 @@ public class Principal extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(labelTipoPagamentoParcelado)
                         .addGap(11, 11, 11)
-                        .addComponent(jButton9)))
+                        .addComponent(fecharVenda)))
                 .addContainerGap(55, Short.MAX_VALUE))
         );
 
@@ -4277,12 +4284,15 @@ public class Principal extends javax.swing.JFrame {
         if(checkClienteCadastrado.isSelected()){
             buscaDocumentoCliente.setVisible(false);
             btnBuscaDocumentoCliente.setVisible(false);
+            nomeBuscaCliente.setText("cliente");
             nomeBuscaCliente.setVisible(false);
             labelClienteVenda.setVisible(false);
         }
         else{
+            buscaDocumentoCliente.setText(null);
             buscaDocumentoCliente.setVisible(true);
             btnBuscaDocumentoCliente.setVisible(true);
+            nomeBuscaCliente.setText(null);
             nomeBuscaCliente.setVisible(true);
             labelClienteVenda.setVisible(true);
         }
@@ -4469,6 +4479,43 @@ public class Principal extends javax.swing.JFrame {
         valorTrocoVenda.setVisible(false);
         calculaTrocoVenda.setVisible(false);
     }//GEN-LAST:event_chequeVendaVistaMouseClicked
+
+    private void fecharVendaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fecharVendaMouseClicked
+        if(!nomeBuscaCliente.getText().equals("")){
+            if(tabelaVendaProduto.getRowCount() > 0){
+                if(radioVendaVista.isSelected() || radioVendaParcelado.isSelected()){
+                    if(radioVendaVista.isSelected()){
+                        if(!labelTipoPagamentoVista.getText().equals("pagamento")){
+                            if(labelTipoPagamentoVista.getText().equals("Dinheiro")){
+                                if(!valorTrocoVenda.getText().equals("")){
+                                    /*Persistir Venda a vista*/
+                                    
+                                }
+                                else{
+                                    JOptionPane.showMessageDialog(null, "Calcule o troco antes de prosseguir");
+                                }
+                            }
+                        }
+                        else{
+                            JOptionPane.showMessageDialog(null, "Selecione um método de pagamento.");
+                        }
+                    }
+                    else{
+                        /*venda parcelada selecionada*/
+                    }
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "Selecione uma opção de pagamento.");
+                }
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Não existem produtos.\nAdicione produtos antes de continuar.");
+            }
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Não há cliente selecionado.\nMarque a caixa de selecão ou busce o cliente por cpf");
+        }
+    }//GEN-LAST:event_fecharVendaMouseClicked
     
     private static BufferedImage resizeImage(BufferedImage originalImage, int type){
 	BufferedImage resizedImage = new BufferedImage(200, 200, type);
@@ -4595,9 +4642,9 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> estados;
     private javax.swing.JComboBox<String> estadosCliente;
     private javax.swing.JComboBox<String> estadosFornecedor;
+    private javax.swing.JButton fecharVenda;
     private javax.swing.JPanel fornecedores;
     private javax.swing.JLabel imagemProduto;
-    private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

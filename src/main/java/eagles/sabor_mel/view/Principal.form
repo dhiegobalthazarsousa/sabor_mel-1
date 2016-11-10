@@ -304,7 +304,7 @@
                                           <Component id="labelParcelasVenda" alignment="0" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
-                                  <Component id="jButton9" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="fecharVenda" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="labelTipoPagamentoVista" min="-2" max="-2" attributes="0"/>
                                   <Component id="labelTipoPagamentoParcelado" min="-2" max="-2" attributes="0"/>
                               </Group>
@@ -415,7 +415,7 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="labelTipoPagamentoParcelado" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
-                              <Component id="jButton9" min="-2" max="-2" attributes="0"/>
+                              <Component id="fecharVenda" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace pref="55" max="32767" attributes="0"/>
@@ -617,12 +617,15 @@
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
               </AuxValues>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton9">
+            <Component class="javax.swing.JButton" name="fecharVenda">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/img/checked (1).png"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="fecharVendaMouseClicked"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="labelClienteVenda">
               <Properties>
@@ -647,6 +650,9 @@
               </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="nomeBuscaCliente">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JCheckBox" name="checkClienteCadastrado">
               <Properties>
