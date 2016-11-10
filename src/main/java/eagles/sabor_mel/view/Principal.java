@@ -728,8 +728,18 @@ public class Principal extends javax.swing.JFrame {
         jLabel59.setText("Método de Pagamento");
 
         visaVendaVista.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/visa.png"))); // NOI18N
+        visaVendaVista.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                visaVendaVistaMouseClicked(evt);
+            }
+        });
 
         masterVendaVista.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/mastercard.png"))); // NOI18N
+        masterVendaVista.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                masterVendaVistaMouseClicked(evt);
+            }
+        });
 
         dinheiroVendaVista.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/notes.png"))); // NOI18N
         dinheiroVendaVista.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -741,6 +751,11 @@ public class Principal extends javax.swing.JFrame {
         labelVendaPagamentoVista.setText("Pagamento à vista");
 
         chequeVendaVista.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/writing-cheque.png"))); // NOI18N
+        chequeVendaVista.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                chequeVendaVistaMouseClicked(evt);
+            }
+        });
 
         labelVendaPagamentoParcelado.setText("Parcelado");
 
@@ -817,8 +832,10 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
+        labelTipoPagamentoVista.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         labelTipoPagamentoVista.setText("pagamento");
 
+        labelTipoPagamentoParcelado.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         labelTipoPagamentoParcelado.setText("pagamento");
 
         javax.swing.GroupLayout vendasLayout = new javax.swing.GroupLayout(vendas);
@@ -862,7 +879,7 @@ public class Principal extends javax.swing.JFrame {
                 .addGroup(vendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(vendasLayout.createSequentialGroup()
                         .addComponent(jLabel59)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(0, 582, Short.MAX_VALUE))
                     .addGroup(vendasLayout.createSequentialGroup()
                         .addGroup(vendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(vendasLayout.createSequentialGroup()
@@ -904,7 +921,7 @@ public class Principal extends javax.swing.JFrame {
                             .addComponent(jButton9)
                             .addComponent(labelTipoPagamentoVista)
                             .addComponent(labelTipoPagamentoParcelado))
-                        .addContainerGap(450, Short.MAX_VALUE))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         vendasLayout.setVerticalGroup(
             vendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -942,7 +959,7 @@ public class Principal extends javax.swing.JFrame {
                             .addComponent(jLabel58)
                             .addComponent(quantidadeVendaProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, vendasLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(radioVendaVista)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(radioVendaParcelado)
@@ -4380,7 +4397,6 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_radioVendaParceladoMouseClicked
 
     private void dinheiroVendaVistaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dinheiroVendaVistaMouseClicked
-        dinheiroVendaVista.setSelected(true);
         labelTipoPagamentoVista.setText("Dinheiro");
         /**/
         labelTipoPagamentoVista.setVisible(true);
@@ -4400,7 +4416,7 @@ public class Principal extends javax.swing.JFrame {
         DecimalFormat df = new DecimalFormat("0.00");
         if(!valorPagoVenda.getText().equals("")){
             if(Double.parseDouble(valorPagoVenda.getText().replace(",", ".")) > 0.0 && 
-                    Double.parseDouble(valorPagoVenda.getText().replace(",", ".")) > 
+                    Double.parseDouble(valorPagoVenda.getText().replace(",", ".")) >= 
                     Double.parseDouble(valorTotalVenda.getText().replace(",", "."))){
                 
                 Double troco = Double.parseDouble(valorPagoVenda.getText().replace(",", ".")) 
@@ -4414,6 +4430,45 @@ public class Principal extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_calculaTrocoVendaMouseClicked
+
+    private void visaVendaVistaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_visaVendaVistaMouseClicked
+        labelTipoPagamentoVista.setText("Cartão de Débito Visa");
+        /**/
+        labelTipoPagamentoVista.setVisible(true);
+        labelPagoVenda.setVisible(false);
+        labelTotalVenda.setVisible(false);
+        labelTrocoVenda.setVisible(false);
+        valorPagoVenda.setVisible(false);
+        valorTotalVenda.setVisible(false);
+        valorTrocoVenda.setVisible(false);
+        calculaTrocoVenda.setVisible(false);
+    }//GEN-LAST:event_visaVendaVistaMouseClicked
+
+    private void masterVendaVistaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_masterVendaVistaMouseClicked
+        labelTipoPagamentoVista.setText("Cartão de Débito MasterCard");
+        /**/
+        labelTipoPagamentoVista.setVisible(true);
+        labelPagoVenda.setVisible(false);
+        labelTotalVenda.setVisible(false);
+        labelTrocoVenda.setVisible(false);
+        valorPagoVenda.setVisible(false);
+        valorTotalVenda.setVisible(false);
+        valorTrocoVenda.setVisible(false);
+        calculaTrocoVenda.setVisible(false);
+    }//GEN-LAST:event_masterVendaVistaMouseClicked
+
+    private void chequeVendaVistaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_chequeVendaVistaMouseClicked
+        labelTipoPagamentoVista.setText("Pagamento em Cheque");
+        /**/
+        labelTipoPagamentoVista.setVisible(true);
+        labelPagoVenda.setVisible(false);
+        labelTotalVenda.setVisible(false);
+        labelTrocoVenda.setVisible(false);
+        valorPagoVenda.setVisible(false);
+        valorTotalVenda.setVisible(false);
+        valorTrocoVenda.setVisible(false);
+        calculaTrocoVenda.setVisible(false);
+    }//GEN-LAST:event_chequeVendaVistaMouseClicked
     
     private static BufferedImage resizeImage(BufferedImage originalImage, int type){
 	BufferedImage resizedImage = new BufferedImage(200, 200, type);
