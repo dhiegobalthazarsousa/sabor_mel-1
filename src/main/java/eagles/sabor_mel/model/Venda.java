@@ -1,6 +1,7 @@
 package eagles.sabor_mel.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -57,12 +58,12 @@ public class Venda implements Serializable{
        targetEntity = ItemVenda.class, 
        fetch = FetchType.LAZY, 
        cascade = CascadeType.ALL)
-    private List<ItemVenda> itens;
+    private List<ItemVenda> itens = new ArrayList<ItemVenda>();
     
     /*Construtores*/
-    Venda(){}
+    public Venda(){}
     
-    Venda(Calendar dataVenda, TipoVenda tipoVenda, FormaPagamento formaPagamento){
+    public Venda(Calendar dataVenda, TipoVenda tipoVenda, FormaPagamento formaPagamento){
         this.dataVenda = dataVenda;
         this.tipoVenda = tipoVenda;
         this.formaPagamento = formaPagamento;
@@ -73,8 +74,6 @@ public class Venda implements Serializable{
     public Long getIdVenda() {
         return idVenda;
     }
-
-   
 
     public Calendar getDataVenda() {
         return dataVenda;
@@ -110,8 +109,6 @@ public class Venda implements Serializable{
         this.idVenda = idVenda;
     }
 
-   
-
     public void setDataVenda(Calendar dataVenda) {
         this.dataVenda = dataVenda;
     }
@@ -142,6 +139,7 @@ public class Venda implements Serializable{
     
     /*Add*/
     public void addItemVenda(ItemVenda item){
+        item.setVenda(this);
         this.itens.add(item);
     }
 }

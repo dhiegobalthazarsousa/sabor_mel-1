@@ -31,11 +31,16 @@ public class ItemVenda implements Serializable{
     private Produto produto;
     
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "venda", nullable = false)
+    @JoinColumn(name = "venda")
     private Venda venda;
     
     /*Construtores*/
     public ItemVenda() {}
+    
+    public ItemVenda(Integer quantidade, Produto produto){
+        this.quantidade = quantidade;
+        this.produto = produto;
+    }
 
     /*Getters*/
     public Long getIdItemVenda() {
