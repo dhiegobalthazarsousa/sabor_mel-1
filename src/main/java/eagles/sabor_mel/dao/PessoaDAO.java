@@ -1,18 +1,21 @@
-
 package eagles.sabor_mel.dao;
 
+import eagles.sabor_mel.model.Documento;
 import eagles.sabor_mel.model.Pessoa;
 import java.util.*;
+import javax.persistence.Query;
+import javax.persistence.TemporalType;
 
-public class PessoaDAO extends DAO<Pessoa>{
+public class PessoaDAO extends DAO<Pessoa> {
+
     public Pessoa getById(final Long id) {
         return entityManager.find(Pessoa.class, id);
     }
- 
+
     public boolean removeById(final Long id) {
-    	
-    	boolean result = true;
-    	
+
+        boolean result = true;
+
         try {
             Pessoa pessoa = this.getById(id);
             super.remove(pessoa);
@@ -20,13 +23,21 @@ public class PessoaDAO extends DAO<Pessoa>{
             ex.printStackTrace();
             result = false;
         }
-        
+
         return result;
     }
- 
+
     @SuppressWarnings("unchecked")
     public List<Pessoa> findAll() {
         return entityManager
                 .createQuery("FROM Pessoa").getResultList();
-    }   
+    }
+
+    public Pessoa getByDocument(String numero) {        
+       
+        Query query = entityManager.createQuery("FROM Pessoa p WHERE p.documento.numero = :numero");
+        query.setParameter("numero", numero);
+        
+        return (Pessoa) query.getSingleResult();
+    }
 }

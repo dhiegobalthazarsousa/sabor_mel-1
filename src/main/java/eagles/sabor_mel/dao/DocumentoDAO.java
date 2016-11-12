@@ -2,6 +2,7 @@ package eagles.sabor_mel.dao;
 
 import eagles.sabor_mel.model.Documento;
 import java.util.*;
+import javax.persistence.Query;
 /**
  *
  * @author etivideo
@@ -12,11 +13,20 @@ public class DocumentoDAO extends DAO<Documento>{
     }
     
     public Documento getByPessoa(Long id){
-        return (Documento) entityManager.createQuery("FROM Documento WHERE pessoa = '"+id+"';").getSingleResult();
+        Query query = entityManager.createQuery("FROM Documento d WHERE d.pessoa.idPessoa = :idPessoa");
+        
+        query.setParameter("idPessoa", id);
+        
+        return (Documento) query.getSingleResult();
     }
     
     public Documento getByNumero(String numero){
-        return (Documento) entityManager.createQuery("FROM Documento WHERE nuemro = '"+numero+"';").getSingleResult();
+       
+        Query query = entityManager.createQuery("FROM Documento d WHERE d.numero = :numero");
+        
+        query.setParameter("numero", numero);
+        
+        return (Documento) query.getSingleResult();
     }
     
     public boolean removeById(final Long id) {

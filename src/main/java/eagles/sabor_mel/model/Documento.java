@@ -19,10 +19,18 @@ public class Documento implements Serializable{
     @Column(nullable = false, length = 18)
     private String numero;
     
-    
-
-    
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "documento", targetEntity = Pessoa.class)
+    private Pessoa pessoa;
+       
     public Documento(){}
+    
+    public Pessoa getPessoa() {
+        return this.pessoa;
+    }
+    
+    public void setPessoa(Pessoa pessoa) {
+        this.pessoa = pessoa;
+    }
     
     public Documento(String numero, TipoDocumento tipo){
         this.numero = numero;

@@ -2,6 +2,8 @@ package eagles.sabor_mel.dao;
 
 import eagles.sabor_mel.model.Venda;
 import java.util.List;
+import java.util.Date;
+import javax.persistence.Query;
 
 /**
  *
@@ -35,5 +37,18 @@ public class VendaDAO extends DAO<Venda>{
 	public List<Venda> findAll() {
     	return entityManager
     		.createQuery("FROM Venda").getResultList();
+    }
+        
+    public List<Venda> getByInterval(Date start, Date end) {
+       Query query = entityManager.createQuery("FROM Venda v WHERE v.dataVenda BETWEEN :startDate AND :endDate");
+       query.setParameter("startDate", start);
+       query.setParameter("endDate", end);
+       return query.getResultList();
+    }
+         
+    public List<Venda> getByClient(long idCliente){
+        Query query = entityManager.createQuery("FROM Venda v WHERE v.idCliente = :idCliente");
+        query.setParameter("idCliente", idCliente);
+        return query.getResultList();
     }
 }

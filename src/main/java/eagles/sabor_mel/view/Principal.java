@@ -1,6 +1,9 @@
 package eagles.sabor_mel.view;
 
 
+import eagles.sabor_mel.control.ControllerFuncionario;
+import eagles.sabor_mel.control.ControllerPessoa;
+import eagles.sabor_mel.control.ControllerVendas;
 import eagles.sabor_mel.control.HashSha;
 import eagles.sabor_mel.control.Mensagem;
 import eagles.sabor_mel.control.Validacao;
@@ -56,6 +59,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -4528,74 +4532,99 @@ public class Principal extends javax.swing.JFrame {
                         if(!labelTipoPagamentoVista.getText().equals("pagamento")){
                             if(labelTipoPagamentoVista.getText().equals("Dinheiro")){
                                 if(!valorTrocoVenda.getText().equals("")){
-                                    /*Persistir Venda a vista*/
+//                                    /*Persistir Venda a vista*/
+//                                    
+//                                    /*DAO para os produtos*/
+//                                    ProdutoDAO produtoDAO = new ProdutoDAO();
+//                                    
+//                                    /*DAO para itens Venda*/
+//                                    ItemVendaDAO itemVendaDAO = new ItemVendaDAO();
+//                                    List<ItemVenda> listItens = null;
+//                                    
+//                                    
+//                                    
+//                                    /*Dados para a Venda*/
+//                                    Calendar c = Calendar.getInstance();
+//                                    TipoVenda tipoVenda = TipoVenda.Vista;
+//                                    FormaPagamento formaPagamento = FormaPagamento.Vista_Dinheiro;
+//                                    
+//                                    /*Nova Venda e DAO*/
+//                                    Venda venda = new Venda();
+//                                    VendaDAO vendaDAO = new VendaDAO();
+//                                    
+//                                    /*DAO para encontrar o funcionario*/
+//                                    Funcionario funcionario = null;
+//                                    FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
+//                                    List<Funcionario> listFuncionarios = funcionarioDAO.findAll();
+//                                    
+//                                    for(int i = 0; i < listFuncionarios.size(); i++){
+//                                        if(listFuncionarios.get(i).getNome().equals(Login.nome)){
+//                                            
+//                                            venda.setFuncionario(listFuncionarios.get(i)); 
+//                                            break;
+//                                        }
+//                                    }
+//                                    
+//                                    /*DAO para encontrar o cliente*/
+//                                    Pessoa cliente = null;
+//                                    PessoaDAO pessoaDAO = new PessoaDAO();
+//                                    List<Pessoa> listClientes = pessoaDAO.findAll();
+//                                    
+//                                    if(!nomeBuscaCliente.getText().equals("cliente")){
+//                                        for(int i = 0; i < listClientes.size(); i++){
+//                                            if(listClientes.get(i).getNome().equals(nomeBuscaCliente.getText())){
+//                                                
+//                                                venda.setCliente(listClientes.get(i));
+//                                                break;
+//                                            }
+//                                        }
+//                                    }
+//                                    JOptionPane.showMessageDialog(null, tabelaVendaProduto.getRowCount());
+//                                    for(int i = 0; i < tabelaVendaProduto.getRowCount(); i++){
+//                                        Long id = Long.parseLong(tabelaVendaProduto.getValueAt(i, 0).toString());
+//                                        Integer quantidade = Integer.parseInt(tabelaVendaProduto.getValueAt(i, 3).toString());
+//                                        
+//                                        venda.addItemVenda(new ItemVenda(quantidade, produtoDAO.getById(id)));
+//                                    }
+//                                    
+//                                    /*Sets*/
+//                                    venda.setDataVenda(c);
+//                                    venda.setTipoVenda(tipoVenda);
+//                                    venda.setFormaPagamento(formaPagamento);
+//                                    venda.setDesconto(Double.parseDouble(descontoVenda.getValue().toString()));
+//                                    
+//                                    /*Verificar se funciona desta forma*/
+//                                    //venda.setFuncionario(funcionario);
+//                                    //venda.setCliente(cliente);
+//                                    //venda.setItens(listItens);
+//                                    
+//                                    /*Vamos Lá!!!*/
+//                                    vendaDAO.merge(venda); 
                                     
-                                    /*DAO para os produtos*/
-                                    ProdutoDAO produtoDAO = new ProdutoDAO();
+
+
+                                    int [] quantidades = new int[tabelaVendaProduto.getRowCount()];
                                     
-                                    /*DAO para itens Venda*/
-                                    ItemVendaDAO itemVendaDAO = new ItemVendaDAO();
-                                    List<ItemVenda> listItens = null;
+                                    Long[] produtosVenda = new Long[tabelaVendaProduto.getRowCount()];
                                     
-                                    
-                                    
-                                    /*Dados para a Venda*/
-                                    Calendar c = Calendar.getInstance();
-                                    TipoVenda tipoVenda = TipoVenda.Vista;
-                                    FormaPagamento formaPagamento = FormaPagamento.Vista_Dinheiro;
-                                    
-                                    /*Nova Venda e DAO*/
-                                    Venda venda = new Venda();
-                                    VendaDAO vendaDAO = new VendaDAO();
-                                    
-                                    /*DAO para encontrar o funcionario*/
-                                    Funcionario funcionario = null;
-                                    FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
-                                    List<Funcionario> listFuncionarios = funcionarioDAO.findAll();
-                                    
-                                    for(int i = 0; i < listFuncionarios.size(); i++){
-                                        if(listFuncionarios.get(i).getNome().equals(Login.nome)){
-                                            
-                                            venda.setFuncionario(listFuncionarios.get(i)); 
-                                            break;
-                                        }
-                                    }
-                                    
-                                    /*DAO para encontrar o cliente*/
-                                    Pessoa cliente = null;
-                                    PessoaDAO pessoaDAO = new PessoaDAO();
-                                    List<Pessoa> listClientes = pessoaDAO.findAll();
-                                    
-                                    if(!nomeBuscaCliente.getText().equals("cliente")){
-                                        for(int i = 0; i < listClientes.size(); i++){
-                                            if(listClientes.get(i).getNome().equals(nomeBuscaCliente.getText())){
-                                                
-                                                venda.setCliente(listClientes.get(i));
-                                                break;
-                                            }
-                                        }
-                                    }
-                                    JOptionPane.showMessageDialog(null, tabelaVendaProduto.getRowCount());
-                                    for(int i = 0; i < tabelaVendaProduto.getRowCount(); i++){
+                                     for(int i = 0; i < tabelaVendaProduto.getRowCount(); i++){
                                         Long id = Long.parseLong(tabelaVendaProduto.getValueAt(i, 0).toString());
-                                        Integer quantidade = Integer.parseInt(tabelaVendaProduto.getValueAt(i, 3).toString());
-                                          //JOptionPane.showMessageDialog(null, id);
-                                          //JOptionPane.showMessageDialog(null, quantidade);
+                                        int quantidade = Integer.parseInt(tabelaVendaProduto.getValueAt(i, 3).toString());
                                         
-                                        venda.addItemVenda(new ItemVenda(quantidade, produtoDAO.getById(id)));
+                                        quantidades[i] = quantidade;
+                                        produtosVenda[i] = id;
+                                        
                                     }
-                                    
-                                    /*Sets*/
-                                    venda.setDataVenda(c);
-                                    venda.setTipoVenda(tipoVenda);
-                                    venda.setFormaPagamento(formaPagamento);
-                                    venda.setDesconto(Double.parseDouble(descontoVenda.getValue().toString()));
-                                    //venda.setFuncionario(funcionario);
-                                    //venda.setCliente(cliente);
-                                    //venda.setItens(listItens);
-                                    
-                                    /*Vamos Lá!!!*/
-                                    vendaDAO.merge(venda); 
+                                     
+                                     ControllerPessoa controlPessoa = new ControllerPessoa();
+                                     ControllerFuncionario controlFuncionario = new ControllerFuncionario();
+                                     ControllerVendas controlVenda = new ControllerVendas();
+                                     
+                                     Map<String, String> mapFuncionario = controlFuncionario.searchFuncionario(Login.nome);
+                                     Map<String, String> mapPessoa = controlPessoa.searchPessoa(buscaDocumentoCliente.getText());
+                                     
+                                     controlVenda.vender(Long.valueOf(mapPessoa.get("idPessoa")), 7L, TipoVenda.Vista, produtosVenda, quantidades, Double.parseDouble(descontoVenda.getValue().toString()));
+                                     
                                 }
                                 else{
                                     JOptionPane.showMessageDialog(null, "Calcule o troco antes de prosseguir");

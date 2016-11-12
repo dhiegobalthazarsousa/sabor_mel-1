@@ -7,7 +7,7 @@ import java.util.List;
  *
  * @author Tiago Lima Villalobos
  */
-public class CreadiarioDAO extends DAO<Crediario>{
+public class CrediarioDAO extends DAO<Crediario>{
     public Crediario getById(final Long id) {
         return entityManager.find(Crediario.class, id);
     }

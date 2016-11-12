@@ -22,7 +22,7 @@ public class Telefone implements Serializable{
     private TipoTelefone tipo;
  
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
-    @JoinColumn(name = "pessoa", nullable = false)
+    @JoinColumn(name = "idPessoa", nullable = false)
     private Pessoa pessoa;
 
     public Telefone(){}

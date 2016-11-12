@@ -24,7 +24,7 @@ public class Pessoa implements Serializable{
     private Endereco endereco;
     
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name="documento", nullable=false)
+    @JoinColumn(name="idDocumento", nullable=true)
     private Documento documento;
 
     @Column(nullable = false, length = 100)
