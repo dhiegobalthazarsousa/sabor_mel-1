@@ -16,7 +16,7 @@ public class Pessoa implements Serializable{
     @Column(nullable = false, length = 100)
     private String nome;
     
-    @Enumerated(EnumType.ORDINAL)
+    @Enumerated(EnumType.STRING)
     private Sexo sexo;
 
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)

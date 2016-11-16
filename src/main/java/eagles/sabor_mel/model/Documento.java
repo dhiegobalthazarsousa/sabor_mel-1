@@ -13,7 +13,7 @@ public class Documento implements Serializable{
     @GeneratedValue
     private Long idDocumento;
     
-    @Enumerated(EnumType.ORDINAL)
+    @Enumerated(EnumType.STRING)
     private TipoDocumento tipo;
     
     @Column(nullable = false, length = 18)

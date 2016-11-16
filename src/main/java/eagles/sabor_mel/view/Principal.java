@@ -13,20 +13,16 @@ import eagles.sabor_mel.dao.DocumentoDAO;
 import eagles.sabor_mel.dao.EnderecoDAO;
 import eagles.sabor_mel.dao.EstadoDAO;
 import eagles.sabor_mel.dao.FuncionarioDAO;
-import eagles.sabor_mel.dao.ItemVendaDAO;
 import eagles.sabor_mel.dao.PessoaDAO;
 import eagles.sabor_mel.dao.ProdutoDAO;
 import eagles.sabor_mel.dao.TelefoneDAO;
-import eagles.sabor_mel.dao.VendaDAO;
 import eagles.sabor_mel.model.Acesso;
 import eagles.sabor_mel.model.Bairro;
 import eagles.sabor_mel.model.Cidade;
 import eagles.sabor_mel.model.Documento;
 import eagles.sabor_mel.model.Endereco;
 import eagles.sabor_mel.model.Estado;
-import eagles.sabor_mel.model.FormaPagamento;
 import eagles.sabor_mel.model.Funcionario;
-import eagles.sabor_mel.model.ItemVenda;
 import eagles.sabor_mel.model.Pessoa;
 import eagles.sabor_mel.model.Produto;
 import eagles.sabor_mel.model.Sexo;
@@ -34,14 +30,10 @@ import eagles.sabor_mel.model.Telefone;
 import eagles.sabor_mel.model.TipoDocumento;
 import eagles.sabor_mel.model.TipoTelefone;
 import eagles.sabor_mel.model.TipoVenda;
-import eagles.sabor_mel.model.Venda;
-import eagles.sabor_mel.test.Temp;
-import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Cursor;
-import java.awt.FlowLayout;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -63,12 +55,8 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
@@ -114,9 +102,9 @@ public class Principal extends javax.swing.JFrame {
             redefineEstilo();
         }
         else{
+            this.dispose();
             JOptionPane.showMessageDialog(null, "Permissão Negada.... ");
             new Login().setVisible(true);
-            this.dispose();
             //System.exit(0);
         }
         
@@ -134,17 +122,6 @@ public class Principal extends javax.swing.JFrame {
         }
     }
     
-//    public void carregaComboFornecedores(){
-//        PessoaDAO dao = new PessoaDAO();
-//        List<Pessoa> Listfornecedores = dao.findAll();
-//        
-//        for(int i = 0; i < Listfornecedores.size(); i++){
-//           if(Listfornecedores.get(i).getDocumento().getTipo().toString().equals("CNPJ")){
-//                comboFornecedores.addItem(Listfornecedores.get(i).getNome());
-//            }
-//        }
-//    }
-
     public void redefineEstilo() {
         acessos.setBackground(Color.white);
         estados.setBackground(Color.white);
@@ -195,20 +172,13 @@ public class Principal extends javax.swing.JFrame {
         opcoesPagamento.clearSelection();
         /**/
         labelTipoPagamentoParcelado.setVisible(false);
-        labelVendaPagamentoParcelado.setVisible(false);
-        visaVendaParcelado.setVisible(false);
-        masterVendaParcelado.setVisible(false);
-        chequeVendaParcelado.setVisible(false);
+        
         labelParcelasVenda.setVisible(false);
         parcelas.setVisible(false);
         
         /**/
         labelTipoPagamentoVista.setVisible(false);
-        labelVendaPagamentoVista.setVisible(false);
-        dinheiroVendaVista.setVisible(false);
-        visaVendaVista.setVisible(false);
-        masterVendaVista.setVisible(false);
-        chequeVendaVista.setVisible(false);
+        
         labelPagoVenda.setVisible(false);
         labelTotalVenda.setVisible(false);
         labelTrocoVenda.setVisible(false);
@@ -323,15 +293,6 @@ public class Principal extends javax.swing.JFrame {
         jLabel58 = new javax.swing.JLabel();
         quantidadeVendaProduto = new javax.swing.JTextField();
         jLabel59 = new javax.swing.JLabel();
-        visaVendaVista = new javax.swing.JButton();
-        masterVendaVista = new javax.swing.JButton();
-        dinheiroVendaVista = new javax.swing.JButton();
-        labelVendaPagamentoVista = new javax.swing.JLabel();
-        chequeVendaVista = new javax.swing.JButton();
-        labelVendaPagamentoParcelado = new javax.swing.JLabel();
-        visaVendaParcelado = new javax.swing.JButton();
-        masterVendaParcelado = new javax.swing.JButton();
-        chequeVendaParcelado = new javax.swing.JButton();
         radioVendaVista = new javax.swing.JRadioButton();
         radioVendaParcelado = new javax.swing.JRadioButton();
         labelParcelasVenda = new javax.swing.JLabel();
@@ -354,6 +315,8 @@ public class Principal extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         descontoVenda = new javax.swing.JSpinner();
         jLabel60 = new javax.swing.JLabel();
+        jLabel61 = new javax.swing.JLabel();
+        dataVencimentoParcela = new javax.swing.JFormattedTextField();
         clientes = new javax.swing.JPanel();
         jLabel26 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -740,44 +703,6 @@ public class Principal extends javax.swing.JFrame {
         jLabel59.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel59.setText("Método de Pagamento");
 
-        visaVendaVista.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/visa.png"))); // NOI18N
-        visaVendaVista.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                visaVendaVistaMouseClicked(evt);
-            }
-        });
-
-        masterVendaVista.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/mastercard.png"))); // NOI18N
-        masterVendaVista.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                masterVendaVistaMouseClicked(evt);
-            }
-        });
-
-        dinheiroVendaVista.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/notes.png"))); // NOI18N
-        dinheiroVendaVista.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                dinheiroVendaVistaMouseClicked(evt);
-            }
-        });
-
-        labelVendaPagamentoVista.setText("Pagamento à vista");
-
-        chequeVendaVista.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/writing-cheque.png"))); // NOI18N
-        chequeVendaVista.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                chequeVendaVistaMouseClicked(evt);
-            }
-        });
-
-        labelVendaPagamentoParcelado.setText("Parcelado");
-
-        visaVendaParcelado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/visa.png"))); // NOI18N
-
-        masterVendaParcelado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/mastercard.png"))); // NOI18N
-
-        chequeVendaParcelado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/writing-cheque.png"))); // NOI18N
-
         opcoesPagamento.add(radioVendaVista);
         radioVendaVista.setText("Á Vista");
         radioVendaVista.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -795,8 +720,6 @@ public class Principal extends javax.swing.JFrame {
         });
 
         labelParcelasVenda.setText("Parcelas");
-
-        parcelas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         fecharVenda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/checked (1).png"))); // NOI18N
         fecharVenda.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -853,10 +776,10 @@ public class Principal extends javax.swing.JFrame {
         });
 
         labelTipoPagamentoVista.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        labelTipoPagamentoVista.setText("pagamento");
+        labelTipoPagamentoVista.setText("Pagamento à Vista");
 
         labelTipoPagamentoParcelado.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        labelTipoPagamentoParcelado.setText("pagamento");
+        labelTipoPagamentoParcelado.setText("Pagamento Parcelado");
 
         jLabel2.setText("DESCONTO");
 
@@ -864,68 +787,71 @@ public class Principal extends javax.swing.JFrame {
 
         jLabel60.setText("%");
 
+        jLabel61.setText("Vencimento");
+
+        try {
+            dataVencimentoParcela.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
         javax.swing.GroupLayout vendasLayout = new javax.swing.GroupLayout(vendas);
         vendas.setLayout(vendasLayout);
         vendasLayout.setHorizontalGroup(
             vendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(vendasLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(vendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(vendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(vendasLayout.createSequentialGroup()
-                            .addComponent(buscaDocumentoCliente)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(btnBuscaDocumentoCliente)
-                            .addGap(268, 268, 268))
-                        .addGroup(vendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(vendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(nomeBuscaCliente, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, vendasLayout.createSequentialGroup()
-                                    .addGroup(vendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(codigoProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel57))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(procuraProduto)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(deleteProdutoVenda)))
-                            .addGroup(vendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, vendasLayout.createSequentialGroup()
-                                    .addComponent(labelClienteVenda)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(checkClienteCadastrado))
-                                .addComponent(jScrollPane6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, vendasLayout.createSequentialGroup()
-                                    .addComponent(jLabel7)
-                                    .addGap(28, 28, 28)
-                                    .addComponent(totalVendaProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel58)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(quantidadeVendaProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addGroup(vendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(vendasLayout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(6, 6, 6)
-                        .addComponent(descontoVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(buscaDocumentoCliente)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel60)))
-                .addGap(18, 18, 18)
+                        .addComponent(btnBuscaDocumentoCliente)
+                        .addGap(268, 268, 268))
+                    .addGroup(vendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(vendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(nomeBuscaCliente, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, vendasLayout.createSequentialGroup()
+                                .addGroup(vendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(codigoProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel57))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(procuraProduto)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(deleteProdutoVenda)))
+                        .addGroup(vendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, vendasLayout.createSequentialGroup()
+                                .addComponent(labelClienteVenda)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(checkClienteCadastrado))
+                            .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, vendasLayout.createSequentialGroup()
+                                .addComponent(jLabel7)
+                                .addGap(28, 28, 28)
+                                .addComponent(totalVendaProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel58)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(quantidadeVendaProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, vendasLayout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(6, 6, 6)
+                                .addComponent(descontoVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel60)))))
                 .addGroup(vendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(vendasLayout.createSequentialGroup()
-                        .addComponent(jLabel59)
-                        .addGap(0, 582, Short.MAX_VALUE))
-                    .addGroup(vendasLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
                         .addGroup(vendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(vendasLayout.createSequentialGroup()
-                                .addComponent(dinheiroVendaVista)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(visaVendaVista)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(masterVendaVista)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(chequeVendaVista))
-                            .addComponent(labelVendaPagamentoVista)
-                            .addComponent(radioVendaVista)
-                            .addComponent(radioVendaParcelado)
+                                .addComponent(jLabel59)
+                                .addGap(0, 603, Short.MAX_VALUE))
+                            .addGroup(vendasLayout.createSequentialGroup()
+                                .addGroup(vendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(radioVendaVista)
+                                    .addComponent(radioVendaParcelado))
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addGroup(vendasLayout.createSequentialGroup()
+                        .addGroup(vendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(vendasLayout.createSequentialGroup()
                                 .addGroup(vendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(labelPagoVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -940,21 +866,18 @@ public class Principal extends javax.swing.JFrame {
                                     .addComponent(valorTrocoVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(calculaTrocoVenda))
-                            .addComponent(labelVendaPagamentoParcelado)
-                            .addGroup(vendasLayout.createSequentialGroup()
-                                .addComponent(visaVendaParcelado)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(masterVendaParcelado)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(chequeVendaParcelado)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(vendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(parcelas, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(labelParcelasVenda)))
+                            .addComponent(labelTipoPagamentoVista)
                             .addComponent(labelTipoPagamentoParcelado)
                             .addComponent(fecharVenda)
-                            .addComponent(labelTipoPagamentoVista))
-                        .addContainerGap(450, Short.MAX_VALUE))))
+                            .addGroup(vendasLayout.createSequentialGroup()
+                                .addGroup(vendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(parcelas, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(labelParcelasVenda))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(vendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel61)
+                                    .addComponent(dataVencimentoParcela, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         vendasLayout.setVerticalGroup(
             vendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -988,18 +911,9 @@ public class Principal extends javax.swing.JFrame {
                         .addComponent(radioVendaVista)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(radioVendaParcelado)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(vendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(18, 18, 18)
+                .addGroup(vendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(vendasLayout.createSequentialGroup()
-                        .addComponent(labelVendaPagamentoVista)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(vendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(dinheiroVendaVista)
-                            .addGroup(vendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(visaVendaVista)
-                                .addComponent(masterVendaVista))
-                            .addComponent(chequeVendaVista))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(labelTipoPagamentoVista)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(vendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1013,8 +927,7 @@ public class Principal extends javax.swing.JFrame {
                                         .addComponent(labelTotalVenda)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(valorTotalVenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(labelVendaPagamentoParcelado))
+                                .addGap(7, 7, 7))
                             .addGroup(vendasLayout.createSequentialGroup()
                                 .addComponent(labelTrocoVenda)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1022,20 +935,17 @@ public class Principal extends javax.swing.JFrame {
                                     .addComponent(valorTrocoVenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(calculaTrocoVenda))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(vendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(vendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(visaVendaParcelado)
-                                .addComponent(masterVendaParcelado)
-                                .addComponent(chequeVendaParcelado))
-                            .addGroup(vendasLayout.createSequentialGroup()
-                                .addComponent(labelParcelasVenda)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(parcelas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(labelTipoPagamentoParcelado)
-                        .addGap(10, 10, 10)
-                        .addComponent(fecharVenda)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(vendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(labelParcelasVenda)
+                            .addComponent(jLabel61))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(vendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(parcelas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(dataVencimentoParcela, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(79, 79, 79)
+                        .addComponent(fecharVenda))
                     .addGroup(vendasLayout.createSequentialGroup()
                         .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1043,14 +953,14 @@ public class Principal extends javax.swing.JFrame {
                             .addComponent(jLabel7)
                             .addComponent(totalVendaProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel58)
-                            .addComponent(quantidadeVendaProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(vendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(vendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel2)
-                                .addComponent(descontoVenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel60))
-                        .addGap(0, 36, Short.MAX_VALUE))))
+                            .addComponent(quantidadeVendaProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(vendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(vendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel2)
+                        .addComponent(descontoVenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel60))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         mainPanel.add(vendas, "vendas");
@@ -2229,49 +2139,56 @@ public class Principal extends javax.swing.JFrame {
         CardLayout card = (CardLayout)mainPanel.getLayout();
         card.show(mainPanel, "vendas");
         menu = "vendas";
+        limpaCampos();
     }//GEN-LAST:event_btnVendaActionPerformed
 
     private void btnClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClienteActionPerformed
         CardLayout card = (CardLayout)mainPanel.getLayout();
         card.show(mainPanel, "clientes");
         menu = "clientes";
+        limpaCampos();
     }//GEN-LAST:event_btnClienteActionPerformed
 
     private void btnProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProdutoActionPerformed
         CardLayout card = (CardLayout)mainPanel.getLayout();
         card.show(mainPanel, "produtos");
         menu = "produtos";
-        //carregaComboFornecedores();
+        limpaCampos();
     }//GEN-LAST:event_btnProdutoActionPerformed
 
     private void btnCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCompraActionPerformed
         CardLayout card = (CardLayout)mainPanel.getLayout();
         card.show(mainPanel, "compras");
         menu = "compras";
+        limpaCampos();
     }//GEN-LAST:event_btnCompraActionPerformed
 
     private void btnRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRelatorioActionPerformed
         CardLayout card = (CardLayout)mainPanel.getLayout();
         card.show(mainPanel, "relatorios");
         menu = "relatorios";
+        limpaCampos();
     }//GEN-LAST:event_btnRelatorioActionPerformed
 
     private void btnFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFornecedorActionPerformed
         CardLayout card = (CardLayout)mainPanel.getLayout();
         card.show(mainPanel, "fornecedores");
         menu = "fornecedores";
+        limpaCampos();
     }//GEN-LAST:event_btnFornecedorActionPerformed
 
     private void btnUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUsuarioActionPerformed
         CardLayout card = (CardLayout)mainPanel.getLayout();
         card.show(mainPanel, "usuarios");
         menu = "usuarios";
+        limpaCampos();
     }//GEN-LAST:event_btnUsuarioActionPerformed
 
     private void btnVendaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVendaMouseClicked
         CardLayout card = (CardLayout)mainPanel.getLayout();
         card.show(mainPanel, "vendas");
         menu = "vendas";
+        limpaCampos();
     }//GEN-LAST:event_btnVendaMouseClicked
 
     private void btnClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnClienteMouseClicked
@@ -2337,6 +2254,35 @@ public class Principal extends javax.swing.JFrame {
             imagemProduto.setIcon(null);
             imagemProduto.setText("IMAGEM");
             quantidadeProduto.setValue(1);
+            
+        }
+        
+        if(menu.equals("vendas")){
+            for (Component C : vendas.getComponents()){
+            
+                if (C instanceof JTextField){
+
+                    ((JTextComponent) C).setText(null);
+                }
+                
+            }
+            tabelaVendaProduto.clearSelection();
+            ((DefaultTableModel)tabelaVendaProduto.getModel()).setNumRows(0);
+            descontoVenda.setValue(0);
+            labelTipoPagamentoParcelado.setVisible(false);
+            labelParcelasVenda.setVisible(false);
+            parcelas.setVisible(false);
+
+            labelTipoPagamentoVista.setVisible(false);
+            labelPagoVenda.setVisible(false);
+            labelTotalVenda.setVisible(false);
+            labelTrocoVenda.setVisible(false);
+
+            valorPagoVenda.setVisible(false);
+            valorTotalVenda.setVisible(false);
+            valorTrocoVenda.setVisible(false);
+
+            calculaTrocoVenda.setVisible(false);
             
         }
         
@@ -2688,7 +2634,7 @@ public class Principal extends javax.swing.JFrame {
             Produto produto = dao.getById(id);
 
             quantidadeProduto.setValue(produto.getQuantidade());
-            precoProduto.setText(df.format(produto.getValorUnitario()).toString());
+            precoProduto.setText(df.format(produto.getValorUnitario()));
             descricaoProduto.setText(produto.getDescricao());
             imagemProduto.setText(null);
             imagemProduto.setIcon(new javax.swing.ImageIcon(produto.getImagem()));
@@ -2843,13 +2789,10 @@ public class Principal extends javax.swing.JFrame {
                                                                 if(!delete.isVisible()){
                                                                     /*Persistence With Hibernate - Good Luck For Us!!!!*/
 
-                                                                    EstadoDAO      estDAO = new EstadoDAO();
+                                                                    
                                                                     CidadeDAO      cidDAO = new CidadeDAO();
                                                                     BairroDAO      baiDAO = new BairroDAO();
-                                                                    EnderecoDAO    endDAO = new EnderecoDAO();
-                                                                    PessoaDAO      pesDAO = new PessoaDAO();
-                                                                    DocumentoDAO   docDAO = new DocumentoDAO();
-                                                                    TelefoneDAO    telDAO = new TelefoneDAO();
+                                     
 
                                                                     Cidade objCidade = null;
                                                                     for(int i = 0; i < cidDAO.findAll().size(); i++){
@@ -4380,20 +4323,29 @@ public class Principal extends javax.swing.JFrame {
         if(!quantidadeVendaProduto.getText().equals("")){
             if(Integer.parseInt(quantidadeVendaProduto.getText()) > 0){
                 /**/
+                DecimalFormat df = new DecimalFormat("0.00");
+                Double desconto = Double.parseDouble(descontoVenda.getValue().toString());
+                desconto = Double.parseDouble(totalVendaProduto.getText().replace(",",".")) -
+                           Double.parseDouble(totalVendaProduto.getText().replace(",","."))*(desconto/100);
+                
+                valorTotalVenda.setText(df.format(desconto));
+                
                 labelTipoPagamentoParcelado.setVisible(false);
-                labelVendaPagamentoParcelado.setVisible(false);
-                visaVendaParcelado.setVisible(false);
-                masterVendaParcelado.setVisible(false);
-                chequeVendaParcelado.setVisible(false);
                 labelParcelasVenda.setVisible(false);
                 parcelas.setVisible(false);
+                
+                labelTipoPagamentoVista.setVisible(true);
+                labelPagoVenda.setVisible(true);
+                labelTotalVenda.setVisible(true);
+                labelTrocoVenda.setVisible(true);
+                
+                valorPagoVenda.setVisible(true);
+                valorTotalVenda.setVisible(true);
+                valorTrocoVenda.setVisible(true);
+                
+                calculaTrocoVenda.setVisible(true);
 
                 /**/
-                labelVendaPagamentoVista.setVisible(true);
-                dinheiroVendaVista.setVisible(true);
-                visaVendaVista.setVisible(true);
-                masterVendaVista.setVisible(true);
-                chequeVendaVista.setVisible(true);
             }
             else{
                 JOptionPane.showMessageDialog(null, "Não existem produtos na compra!");
@@ -4408,29 +4360,30 @@ public class Principal extends javax.swing.JFrame {
 
     private void radioVendaParceladoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_radioVendaParceladoMouseClicked
         if(!quantidadeVendaProduto.getText().equals("")){
+            DecimalFormat df = new DecimalFormat("0.00");
+            for(int i = 2; i <= 10; i++){
+                Double valor = Double.parseDouble(totalVendaProduto.getText().replace(",", "."));
+                parcelas.addItem(i+"X "+df.format((valor/i)));
+            }
             if(Integer.parseInt(quantidadeVendaProduto.getText()) > 0){
                 /**/
-                labelVendaPagamentoParcelado.setVisible(true);
-                visaVendaParcelado.setVisible(true);
-                masterVendaParcelado.setVisible(true);
-                chequeVendaParcelado.setVisible(true);
+                labelTipoPagamentoParcelado.setVisible(true);
                 labelParcelasVenda.setVisible(true);
                 parcelas.setVisible(true);
-
-                /**/
+                
+                
                 labelTipoPagamentoVista.setVisible(false);
-                labelVendaPagamentoVista.setVisible(false);
-                dinheiroVendaVista.setVisible(false);
-                visaVendaVista.setVisible(false);
-                masterVendaVista.setVisible(false);
-                chequeVendaVista.setVisible(false);
                 labelPagoVenda.setVisible(false);
                 labelTotalVenda.setVisible(false);
                 labelTrocoVenda.setVisible(false);
+                
                 valorPagoVenda.setVisible(false);
                 valorTotalVenda.setVisible(false);
                 valorTrocoVenda.setVisible(false);
+                
                 calculaTrocoVenda.setVisible(false);
+
+                /**/
             }
             else{
                 JOptionPane.showMessageDialog(null, "Não existem produtos na compra!");
@@ -4442,29 +4395,6 @@ public class Principal extends javax.swing.JFrame {
             opcoesPagamento.clearSelection();
         }
     }//GEN-LAST:event_radioVendaParceladoMouseClicked
-
-    private void dinheiroVendaVistaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dinheiroVendaVistaMouseClicked
-        DecimalFormat df = new DecimalFormat("0.00");
-        labelTipoPagamentoVista.setText("Dinheiro");
-        /**/
-        labelTipoPagamentoVista.setVisible(true);
-        labelPagoVenda.setVisible(true);
-        labelTotalVenda.setVisible(true);
-        labelTrocoVenda.setVisible(true);
-        valorPagoVenda.setVisible(true);
-        valorTotalVenda.setVisible(true);
-        valorTrocoVenda.setVisible(true);
-        calculaTrocoVenda.setVisible(true);
-        
-        /**/
-        Double desconto = 
-                Double.parseDouble(totalVendaProduto.getText().replace(",", ".")) - 
-                ((Double.parseDouble(descontoVenda.getValue().toString())/100) * 
-                Double.parseDouble(totalVendaProduto.getText().replace(",", ".")));
-        
-        
-        valorTotalVenda.setText(df.format(desconto));
-    }//GEN-LAST:event_dinheiroVendaVistaMouseClicked
 
     private void calculaTrocoVendaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_calculaTrocoVendaMouseClicked
         DecimalFormat df = new DecimalFormat("0.00");
@@ -4485,170 +4415,79 @@ public class Principal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_calculaTrocoVendaMouseClicked
 
-    private void visaVendaVistaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_visaVendaVistaMouseClicked
-        labelTipoPagamentoVista.setText("Cartão de Débito Visa");
-        /**/
-        labelTipoPagamentoVista.setVisible(true);
-        labelPagoVenda.setVisible(false);
-        labelTotalVenda.setVisible(false);
-        labelTrocoVenda.setVisible(false);
-        valorPagoVenda.setVisible(false);
-        valorTotalVenda.setVisible(false);
-        valorTrocoVenda.setVisible(false);
-        calculaTrocoVenda.setVisible(false);
-    }//GEN-LAST:event_visaVendaVistaMouseClicked
-
-    private void masterVendaVistaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_masterVendaVistaMouseClicked
-        labelTipoPagamentoVista.setText("Cartão de Débito MasterCard");
-        /**/
-        labelTipoPagamentoVista.setVisible(true);
-        labelPagoVenda.setVisible(false);
-        labelTotalVenda.setVisible(false);
-        labelTrocoVenda.setVisible(false);
-        valorPagoVenda.setVisible(false);
-        valorTotalVenda.setVisible(false);
-        valorTrocoVenda.setVisible(false);
-        calculaTrocoVenda.setVisible(false);
-    }//GEN-LAST:event_masterVendaVistaMouseClicked
-
-    private void chequeVendaVistaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_chequeVendaVistaMouseClicked
-        labelTipoPagamentoVista.setText("Pagamento em Cheque");
-        /**/
-        labelTipoPagamentoVista.setVisible(true);
-        labelPagoVenda.setVisible(false);
-        labelTotalVenda.setVisible(false);
-        labelTrocoVenda.setVisible(false);
-        valorPagoVenda.setVisible(false);
-        valorTotalVenda.setVisible(false);
-        valorTrocoVenda.setVisible(false);
-        calculaTrocoVenda.setVisible(false);
-    }//GEN-LAST:event_chequeVendaVistaMouseClicked
-
     private void fecharVendaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fecharVendaMouseClicked
         if(!nomeBuscaCliente.getText().equals("")){
             if(tabelaVendaProduto.getRowCount() > 0){
                 if(radioVendaVista.isSelected() || radioVendaParcelado.isSelected()){
                     if(radioVendaVista.isSelected()){
-                        if(!labelTipoPagamentoVista.getText().equals("pagamento")){
-                            if(labelTipoPagamentoVista.getText().equals("Dinheiro")){
-                                if(!valorTrocoVenda.getText().equals("")){
-//                                    /*Persistir Venda a vista*/
-//                                    
-//                                    /*DAO para os produtos*/
-//                                    ProdutoDAO produtoDAO = new ProdutoDAO();
-//                                    
-//                                    /*DAO para itens Venda*/
-//                                    ItemVendaDAO itemVendaDAO = new ItemVendaDAO();
-//                                    List<ItemVenda> listItens = null;
-//                                    
-//                                    
-//                                    
-//                                    /*Dados para a Venda*/
-//                                    Calendar c = Calendar.getInstance();
-//                                    TipoVenda tipoVenda = TipoVenda.Vista;
-//                                    FormaPagamento formaPagamento = FormaPagamento.Vista_Dinheiro;
-//                                    
-//                                    /*Nova Venda e DAO*/
-//                                    Venda venda = new Venda();
-//                                    VendaDAO vendaDAO = new VendaDAO();
-//                                    
-//                                    /*DAO para encontrar o funcionario*/
-//                                    Funcionario funcionario = null;
-//                                    FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
-//                                    List<Funcionario> listFuncionarios = funcionarioDAO.findAll();
-//                                    
-//                                    for(int i = 0; i < listFuncionarios.size(); i++){
-//                                        if(listFuncionarios.get(i).getNome().equals(Login.nome)){
-//                                            
-//                                            venda.setFuncionario(listFuncionarios.get(i)); 
-//                                            break;
-//                                        }
-//                                    }
-//                                    
-//                                    /*DAO para encontrar o cliente*/
-//                                    Pessoa cliente = null;
-//                                    PessoaDAO pessoaDAO = new PessoaDAO();
-//                                    List<Pessoa> listClientes = pessoaDAO.findAll();
-//                                    
-//                                    if(!nomeBuscaCliente.getText().equals("cliente")){
-//                                        for(int i = 0; i < listClientes.size(); i++){
-//                                            if(listClientes.get(i).getNome().equals(nomeBuscaCliente.getText())){
-//                                                
-//                                                venda.setCliente(listClientes.get(i));
-//                                                break;
-//                                            }
-//                                        }
-//                                    }
-//                                    JOptionPane.showMessageDialog(null, tabelaVendaProduto.getRowCount());
-//                                    for(int i = 0; i < tabelaVendaProduto.getRowCount(); i++){
-//                                        Long id = Long.parseLong(tabelaVendaProduto.getValueAt(i, 0).toString());
-//                                        Integer quantidade = Integer.parseInt(tabelaVendaProduto.getValueAt(i, 3).toString());
-//                                        
-//                                        venda.addItemVenda(new ItemVenda(quantidade, produtoDAO.getById(id)));
-//                                    }
-//                                    
-//                                    /*Sets*/
-//                                    venda.setDataVenda(c);
-//                                    venda.setTipoVenda(tipoVenda);
-//                                    venda.setFormaPagamento(formaPagamento);
-//                                    venda.setDesconto(Double.parseDouble(descontoVenda.getValue().toString()));
-//                                    
-//                                    /*Verificar se funciona desta forma*/
-//                                    //venda.setFuncionario(funcionario);
-//                                    //venda.setCliente(cliente);
-//                                    //venda.setItens(listItens);
-//                                    
-//                                    /*Vamos Lá!!!*/
-//                                    vendaDAO.merge(venda); 
-                                    
+                        if(!valorTrocoVenda.getText().equals("")){
+                            /*Vista*/
+                            int [] quantidades = new int[tabelaVendaProduto.getRowCount()];
 
+                            Long[] produtosVenda = new Long[tabelaVendaProduto.getRowCount()];
 
-                                    int [] quantidades = new int[tabelaVendaProduto.getRowCount()];
-                                    
-                                    Long[] produtosVenda = new Long[tabelaVendaProduto.getRowCount()];
-                                    
-                                     for(int i = 0; i < tabelaVendaProduto.getRowCount(); i++){
-                                        Long id = Long.parseLong(tabelaVendaProduto.getValueAt(i, 0).toString());
-                                        int quantidade = Integer.parseInt(tabelaVendaProduto.getValueAt(i, 3).toString());
-                                        
-                                        quantidades[i] = quantidade;
-                                        produtosVenda[i] = id;
-                                        
-                                    }
-                                     
-                                     ControllerPessoa controlPessoa = new ControllerPessoa();
-                                     ControllerFuncionario controlFuncionario = new ControllerFuncionario();
-                                     ControllerVendas controlVenda = new ControllerVendas();
-                                     
-                                     Map<String, String> mapFuncionario = controlFuncionario.searchFuncionario(Login.nome);
-                                     Map<String, String> mapPessoa = controlPessoa.searchPessoa(buscaDocumentoCliente.getText());
-                                     
-                                     controlVenda.vender(Long.valueOf(mapPessoa.get("idPessoa")), Long.valueOf(mapFuncionario.get("idFuncionario")), TipoVenda.Vista, produtosVenda, quantidades, Double.parseDouble(descontoVenda.getValue().toString()));
-                                     
-                                }
-                                else{
-                                    JOptionPane.showMessageDialog(null, "Calcule o troco antes de prosseguir");
-                                }
+                             for(int i = 0; i < tabelaVendaProduto.getRowCount(); i++){
+                                Long id = Long.parseLong(tabelaVendaProduto.getValueAt(i, 0).toString());
+                                int quantidade = Integer.parseInt(tabelaVendaProduto.getValueAt(i, 3).toString());
+
+                                quantidades[i] = quantidade;
+                                produtosVenda[i] = id;
+
                             }
+
+                            ControllerPessoa controlPessoa = new ControllerPessoa();
+                            ControllerFuncionario controlFuncionario = new ControllerFuncionario();
+                            ControllerVendas controlVenda = new ControllerVendas();
+
+                            Map<String, String> mapFuncionario = controlFuncionario.searchFuncionario(Login.nome);
+                            Map<String, String> mapPessoa = controlPessoa.searchPessoa(buscaDocumentoCliente.getText());
+
+                            controlVenda.vender(
+                                    Long.valueOf(mapPessoa.get("idPessoa")), 
+                                    Long.valueOf(mapFuncionario.get("idFuncionario")), 
+                                    TipoVenda.Vista, 
+                                    produtosVenda, 
+                                    quantidades, 
+                                    Double.parseDouble(descontoVenda.getValue().toString())
+                            );
+                            
+                            menu = "vendas";
+                            limpaCampos();
+
+                            JOptionPane.showMessageDialog(null, "Venda Realizada com Sucesso!");
                         }
                         else{
-                            JOptionPane.showMessageDialog(null, "Selecione um método de pagamento.");
+                            JOptionPane.showMessageDialog(null, "Calcule o troco para prosseguir.");
                         }
                     }
                     else{
-                        /*venda parcelada selecionada*/
+                        /*Crediario*/
+//                        ControllerCrediario crediarioControl = new ControllerCrediario();
+//                        Calendar c = Calendar.getInstance();
+//                        int day   = Integer.parseInt(dataVencimentoParcela.getText().substring(0, 2));
+//                        int month = Integer.parseInt(dataVencimentoParcela.getText().substring(3, 5));
+//                        int year  = Integer.parseInt(dataVencimentoParcela.getText().substring(6, 10));
+//                        c.set(year, (month-1), day);
+//
+//                        crediarioControl.createCrediario(
+//                                int quantidadeParcela, 
+//                                int dia, 
+//                                int mes, 
+//                                int ano, 
+//                                double valorTotal, 
+//                                Venda venda);
                     }
                 }
                 else{
-                    JOptionPane.showMessageDialog(null, "Selecione uma opção de pagamento.");
+                    JOptionPane.showMessageDialog(null, "Não foi selecionada opção de pagamento");
                 }
             }
             else{
-                JOptionPane.showMessageDialog(null, "Não existem produtos.\nAdicione produtos antes de continuar.");
+                JOptionPane.showMessageDialog(null, "Não existem produtos na compra!");
             }
         }
         else{
-            JOptionPane.showMessageDialog(null, "Não há cliente selecionado.\nMarque a caixa de selecão ou busce o cliente por cpf");
+            JOptionPane.showMessageDialog(null, "Cliente não selecionado!");
         }
     }//GEN-LAST:event_fecharVendaMouseClicked
     
@@ -4731,8 +4570,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JTextField cepFornecedor;
     private javax.swing.JCheckBox checkClienteCadastrado;
     private javax.swing.JCheckBox checkSenha;
-    private javax.swing.JButton chequeVendaParcelado;
-    private javax.swing.JButton chequeVendaVista;
     private javax.swing.JTextField cidade;
     private javax.swing.JTextField cidadeCliente;
     private javax.swing.JTextField cidadeFornecedor;
@@ -4745,6 +4582,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton confirmProduto;
     private javax.swing.JTextField dataNascimento;
     private javax.swing.JTextField dataNascimentoCliente;
+    private javax.swing.JFormattedTextField dataVencimentoParcela;
     private javax.swing.JTextField ddd;
     private javax.swing.JTextField ddd2;
     private javax.swing.JTextField ddd2Cliente;
@@ -4767,7 +4605,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton deleteProdutoVenda;
     private javax.swing.JSpinner descontoVenda;
     private javax.swing.JTextArea descricaoProduto;
-    private javax.swing.JButton dinheiroVendaVista;
     private javax.swing.JTextField documento;
     private javax.swing.JTextField documentoCliente;
     private javax.swing.JTextField documentoFornecedor;
@@ -4838,6 +4675,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel59;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel60;
+    private javax.swing.JLabel jLabel61;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
@@ -4860,16 +4698,12 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel labelTipoPagamentoVista;
     private javax.swing.JLabel labelTotalVenda;
     private javax.swing.JLabel labelTrocoVenda;
-    private javax.swing.JLabel labelVendaPagamentoParcelado;
-    private javax.swing.JLabel labelVendaPagamentoVista;
     private javax.swing.JLabel logado;
     private javax.swing.JLabel logo;
     private javax.swing.JTextField logradouro;
     private javax.swing.JTextField logradouroCliente;
     private javax.swing.JTextField logradouroFornecedor;
     private javax.swing.JPanel mainPanel;
-    private javax.swing.JButton masterVendaParcelado;
-    private javax.swing.JButton masterVendaVista;
     public static javax.swing.JLabel mensagem;
     private javax.swing.JTextField nome;
     private javax.swing.JTextField nomeBuscaCliente;
@@ -4915,7 +4749,5 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JTextField valorTotalVenda;
     private javax.swing.JTextField valorTrocoVenda;
     private javax.swing.JPanel vendas;
-    private javax.swing.JButton visaVendaParcelado;
-    private javax.swing.JButton visaVendaVista;
     // End of variables declaration//GEN-END:variables
 }

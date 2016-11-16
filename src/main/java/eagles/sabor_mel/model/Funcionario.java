@@ -17,7 +17,7 @@ public class Funcionario extends Pessoa{
     @Column(nullable = false, length = 100)
     private String senha;
     
-    @Enumerated(EnumType.ORDINAL)
+    @Enumerated(EnumType.STRING)
     private Acesso acesso;
 
     public Acesso getAcesso() {

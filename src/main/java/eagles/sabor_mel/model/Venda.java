@@ -36,10 +36,10 @@ public class Venda implements Serializable{
     @Temporal(TemporalType.DATE)
     private Calendar dataVenda;
     
-    @Enumerated(EnumType.ORDINAL)
+    @Enumerated(EnumType.STRING)
     private TipoVenda tipoVenda;
     
-    @Enumerated(EnumType.ORDINAL)
+    @Enumerated(EnumType.STRING)
     private FormaPagamento formaPagamento;
     
     @Column
