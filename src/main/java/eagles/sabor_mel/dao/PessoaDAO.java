@@ -4,12 +4,15 @@ import eagles.sabor_mel.model.Documento;
 import eagles.sabor_mel.model.Pessoa;
 import java.util.*;
 import javax.persistence.Query;
-import javax.persistence.TemporalType;
 
 public class PessoaDAO extends DAO<Pessoa> {
 
     public Pessoa getById(final Long id) {
-        return entityManager.find(Pessoa.class, id);
+        
+        Query query = entityManager.createQuery("FROM Pessoa p WHERE p.idPessoa = :idPessoa");
+        query.setParameter("idPessoa", id);
+        
+        return (Pessoa) query.getSingleResult();
     }
 
     public boolean removeById(final Long id) {

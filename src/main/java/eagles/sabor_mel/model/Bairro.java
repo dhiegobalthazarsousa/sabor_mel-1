@@ -24,7 +24,7 @@ public class Bairro implements Serializable{
     private final List<Endereco> enderecos = new ArrayList<Endereco>();
     
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "cidade", nullable = false)
+    @JoinColumn(name = "idCidade", nullable = false)
     private Cidade cidade;
     
     public Bairro(){}

@@ -94,7 +94,7 @@ public class ControllerVendas {
         Venda venda = createVenda(idPessoa, idFuncionario, tipoVenda, desconto, produtos, quantidades);
 
         VendaDAO daoVenda = new VendaDAO();
-        return daoVenda.persist(venda);
+        return daoVenda.merge(venda);
 
     }
 
@@ -128,8 +128,8 @@ public class ControllerVendas {
         venda.setDataVenda(cal);
         venda.setTipoVenda(tipoVenda);
         venda.setDesconto(desconto);
-        venda.setCliente(cliente);
-        venda.setFuncionario(funcionario);
+        venda.setCliente(daoPessoa.getById(idPessoa));
+        venda.setFuncionario(daoFuncionario.getById(idFuncionario));
 
         for (int i = 0; i < produtos.length; i++) {
             Produto produto = daoProduto.getById(produtos[i]);

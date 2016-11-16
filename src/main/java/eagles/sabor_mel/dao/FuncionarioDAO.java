@@ -7,7 +7,11 @@ import javax.persistence.Query;
 
 public class FuncionarioDAO extends DAO<Funcionario>{
     public Funcionario getById(final Long id) {
-        return entityManager.find(Funcionario.class, id);
+        
+        Query query = entityManager.createQuery("FROM Funcionario f WHERE f.idPessoa = :idPessoa");
+        query.setParameter("idPessoa", id);
+        
+        return (Funcionario) query.getSingleResult();
     }
  
     public boolean removeById(final Long id) {

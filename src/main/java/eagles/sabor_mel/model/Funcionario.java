@@ -5,7 +5,7 @@ import javax.persistence.*;
 import java.util.Calendar;
 
 @Entity(name="Funcionario")
-@PrimaryKeyJoinColumn(name="pessoa")
+@PrimaryKeyJoinColumn(name="idPessoa")
 //@Table
 public class Funcionario extends Pessoa{
     

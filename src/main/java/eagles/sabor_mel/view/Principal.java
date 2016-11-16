@@ -4623,7 +4623,7 @@ public class Principal extends javax.swing.JFrame {
                                      Map<String, String> mapFuncionario = controlFuncionario.searchFuncionario(Login.nome);
                                      Map<String, String> mapPessoa = controlPessoa.searchPessoa(buscaDocumentoCliente.getText());
                                      
-                                     controlVenda.vender(Long.valueOf(mapPessoa.get("idPessoa")), 7L, TipoVenda.Vista, produtosVenda, quantidades, Double.parseDouble(descontoVenda.getValue().toString()));
+                                     controlVenda.vender(Long.valueOf(mapPessoa.get("idPessoa")), Long.valueOf(mapFuncionario.get("idFuncionario")), TipoVenda.Vista, produtosVenda, quantidades, Double.parseDouble(descontoVenda.getValue().toString()));
                                      
                                 }
                                 else{

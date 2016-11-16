@@ -33,7 +33,7 @@ public class Fornecimento implements Serializable{
     private Calendar dataFornecimento;
     
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
-    @JoinColumn(name = "pessoa", nullable = false)
+    @JoinColumn(name = "idPessoa", nullable = false)
     private Pessoa pessoa;
     
     @OneToMany(

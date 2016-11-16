@@ -17,7 +17,7 @@ public class Cidade implements Serializable{
     private String nome;
     
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "estado", nullable = false)
+    @JoinColumn(name = "idEstado", nullable = false)
     private Estado estado;
     
     @OneToMany(

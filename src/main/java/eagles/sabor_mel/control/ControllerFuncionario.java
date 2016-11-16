@@ -37,7 +37,7 @@ public class ControllerFuncionario {
         specFuncionario.put("idFuncionario", String.valueOf(funcionario.getIdPessoa()));
         specFuncionario.put("nome", funcionario.getNome());
         specFuncionario.put("email", funcionario.getEmail());
-        specFuncionario.put("documento", funcionario.getDocumento().getNumero());
+        specFuncionario.put("idDocumento", funcionario.getDocumento().getNumero());
         specFuncionario.put("sexo", String.valueOf(funcionario.getSexo()));
         specFuncionario.put("username", funcionario.getUsuario());
         specFuncionario.put("senha", funcionario.getSenha());

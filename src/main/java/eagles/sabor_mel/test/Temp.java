@@ -5,6 +5,12 @@
  */
 package eagles.sabor_mel.test;
 
+import eagles.sabor_mel.dao.FuncionarioDAO;
+import eagles.sabor_mel.dao.PessoaDAO;
+import eagles.sabor_mel.dao.VendaDAO;
+import eagles.sabor_mel.model.FormaPagamento;
+import eagles.sabor_mel.model.TipoVenda;
+import eagles.sabor_mel.model.Venda;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -15,6 +21,7 @@ import java.net.URL;
 import java.nio.channels.FileChannel;
 import java.nio.file.Paths;
 import java.text.DecimalFormat;
+import java.util.Calendar;
 import javax.swing.JFileChooser;
 
 
@@ -64,7 +71,28 @@ public class Temp {
 //        s
 //        System.out.println(a);
 //        System.out.println(Double.parseDouble(a)+b);
+        VendaDAO dao = new VendaDAO();
+        Venda venda = new Venda();
+        PessoaDAO daoPes = new PessoaDAO();
+        FuncionarioDAO daoFun = new FuncionarioDAO();
         
+        Calendar data = Calendar.getInstance();
+        Double desconto = 0.0;
+        FormaPagamento formaPagamento = FormaPagamento.Vista_Dinheiro;
+        TipoVenda tipoVenda = TipoVenda.Vista;
+        Long idCliente = 33l;
+        Long idFuncionario = 33l;
+        
+        venda.setDataVenda(data);
+        venda.setDesconto(desconto);
+        venda.setFormaPagamento(formaPagamento);
+        venda.setTipoVenda(tipoVenda);
+        venda.setCliente(daoPes.getById(idCliente));
+        venda.setFuncionario(daoFun.getById(idFuncionario));
+        
+        dao.merge(venda);
+        
+        System.exit(0);
         
     }
 }

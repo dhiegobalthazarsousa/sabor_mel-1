@@ -27,12 +27,11 @@ import javax.persistence.Table;
  */
 
 @Entity
-@Table(name = "crediario")
+@Table
 public class Crediario implements Serializable{
     
     @Id
-    @SequenceGenerator(name = "idCrediario", sequenceName = "idCrediario", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "idCrediario")
+    @GeneratedValue
     @Column(name = "idCrediario", nullable = false)
     private Long idCrediario;
     
@@ -40,7 +39,7 @@ public class Crediario implements Serializable{
     private Integer quantidadeParcela;
     
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "venda", nullable = false)
+    @JoinColumn(name = "idVenda", nullable = false)
     private Venda venda;
     
     @OneToMany(mappedBy = "crediario", fetch = FetchType.LAZY, cascade = CascadeType.ALL)

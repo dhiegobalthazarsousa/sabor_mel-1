@@ -45,7 +45,7 @@ public class Parcela implements Serializable{
     private String status;
     
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "crediario", nullable = false)
+    @JoinColumn(name = "idCrediario", nullable = false)
     private Crediario crediario;
     
     @Column(name = "dataVencimento", nullable = false)

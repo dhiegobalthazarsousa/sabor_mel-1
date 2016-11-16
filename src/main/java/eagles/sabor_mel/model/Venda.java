@@ -46,11 +46,11 @@ public class Venda implements Serializable{
     private Double desconto;
     
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name="funcionario", nullable=false)
+    @JoinColumn(name="idFuncionario", nullable=false)
     private Pessoa funcionario;
     
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name="cliente", nullable=false)
+    @JoinColumn(name="idCliente", nullable=false)
     private Pessoa cliente;
     
     @OneToMany(

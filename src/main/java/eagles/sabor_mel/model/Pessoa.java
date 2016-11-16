@@ -20,7 +20,7 @@ public class Pessoa implements Serializable{
     private Sexo sexo;
 
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name="endereco", nullable=false)
+    @JoinColumn(name="idEndereco", nullable=false)
     private Endereco endereco;
     
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)

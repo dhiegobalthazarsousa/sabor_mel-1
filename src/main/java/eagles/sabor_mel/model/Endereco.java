@@ -22,8 +22,11 @@ public class Endereco implements Serializable{
     private String cep;
     
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
-    @JoinColumn(name = "bairro", nullable = false)
+    @JoinColumn(name = "idBairro", nullable = false)
     private Bairro bairro;
+    
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "endereco", targetEntity = Pessoa.class)
+    private Pessoa pessoa;
     
     public Endereco(){}
     
