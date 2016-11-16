@@ -5,13 +5,10 @@
  */
 package eagles.sabor_mel.control;
 
-import com.sun.javafx.scene.control.skin.VirtualFlow;
 import eagles.sabor_mel.dao.CrediarioDAO;
-import eagles.sabor_mel.dao.PessoaDAO;
-import eagles.sabor_mel.dao.VendaDAO;
 import eagles.sabor_mel.model.Crediario;
 import eagles.sabor_mel.model.Parcela;
-import eagles.sabor_mel.model.Pessoa;
+import eagles.sabor_mel.model.TipoVenda;
 import eagles.sabor_mel.model.Venda;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -24,9 +21,11 @@ import java.util.Map;
  * @author a1655086
  */
 public class ControllerCrediario {
-    
-    public static boolean createCrediario(int quantidadeParcela, int dia, int mes, int ano, double valorTotal, Venda venda){
-        CrediarioDAO daoCrediario = new CrediarioDAO();
+
+    private static CrediarioDAO daoCrediario = new CrediarioDAO();
+
+    public static boolean createCrediario(int quantidadeParcela, int dia, int mes, int ano, double valorTotal, Venda venda) {
+        daoCrediario = new CrediarioDAO();
         mes -= 1;
         Crediario crediario = new Crediario();
         //crediario.setQuantidadeParcelas(quantidadeParcela);
@@ -48,28 +47,31 @@ public class ControllerCrediario {
 
         return daoCrediario.persist(crediario);
     }
-    
-//    public static List<Map> searchCrediario(String clientDocument){
-//        PessoaDAO daoPessoa = new PessoaDAO();
-//        Pessoa pessoa = daoPessoa.getByDocument(clientDocument);
-//        
-//        VendaDAO daoVenda = new VendaDAO();
-//        List<Venda> vendas = daoVenda.getByClient(pessoa.getIdPessoa());
-//        
-//        Map<String, String> specCrediario = new HashMap<>();
-//        List<Crediario> crediarios = new ArrayList<>();
-//        CrediarioDAO daoCrediario = new CrediarioDAO();
-//        for(Venda v : vendas){
-//            Map<String, String> parcela = new HashMap<>();
-//            List<Map> parcelas = new ArrayList<>();
-//            //Crediario crediario = daoCrediario.getByVenda(v.getIdVenda());
-//            specCrediario.put("idCrediario", String.valueOf(crediario.getIdCrediario()));
-//            specCrediario.put("quantidade_parcelas", String.valueOf(crediario.getQuantidadeParcela()));
-//            specCrediario.put("dataVenda", String.valueOf(crediario.getVenda().getDataVenda()));
-////            for(int i = 0; i<crediario.getQuantidadeParcela(); i++){
-////                fdsa
-////            }
-//        }
-        
-//    }
+
+    public static List<Map> searchCrediario(String documentoCliente) {
+        List<Map> mapVendasParcelada = ControllerVendas.searchVenda(TipoVenda.Parcelado);
+        List<Map> mapVendas = ControllerVendas.searchVenda(documentoCliente);
+
+        List<Map> mapCrediario = new ArrayList<>();
+        if (!mapVendas.isEmpty()) {
+            for (Map<String, String> specVenda : mapVendas) {
+                Crediario c = daoCrediario.getByVendaId(Long.valueOf(specVenda.get("idVenda")));
+                Map<String, String> specCrediario = new HashMap<>();
+                specCrediario.put("idCrediario", String.valueOf(c.getIdCrediario()));
+                specCrediario.put("quantidade", String.valueOf(c.getQuantidadeParcela()));
+                specCrediario.put("dataVenda", String.valueOf(c.getVenda().getDataVenda()));
+                List<Map> mapParcelas = new ArrayList();
+                for (Parcela par : c.getParcelas()) {
+                    Map<String, String> specParcela = new HashMap<>();
+                    specParcela.put("dataVencimento", String.valueOf(par.getDataVencimento()));
+                    specParcela.put("numeroParcela", String.valueOf(par.getParcela()));
+                    specParcela.put("valorParcela", String.valueOf(par.getValorParcela()));
+                    specParcela.put("status", par.getStatus());
+                    mapParcelas.add(specParcela);
+                }
+                mapCrediario.add(specCrediario);
+            }
+        }
+        return mapCrediario;
+    }
 }

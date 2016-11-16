@@ -39,6 +39,9 @@ public class ControllerVendas {
      * @author Dhiego
      * Map<String,String> produtos: recebe o id e a quantidade de produtos escolhidos na View
      */
+    
+    private static VendaDAO daoVenda = new VendaDAO();
+    
     public static List<Map> searchVenda(int dia, int mes, int ano) {
         List<Map> listMapVendas = new ArrayList<>();
         Map<String, String> specVenda = new HashMap<>();
@@ -50,7 +53,6 @@ public class ControllerVendas {
         cal.set(DateGenerator.getYear(), DateGenerator.getMonth(), DateGenerator.getDay());
         end = cal.getTime();
 
-        VendaDAO daoVenda = new VendaDAO();
         List<Venda> vendas = daoVenda.getByInterval(start, end);
 
         for (Venda v : vendas) {
@@ -70,11 +72,29 @@ public class ControllerVendas {
     public static List<Map> searchVenda(String documentoCliente) {
         List<Map> listMapVendas = new ArrayList<>();
         Map<String, String> specVenda = new HashMap<>();
-        VendaDAO daoVenda = new VendaDAO();
         PessoaDAO daoPessoa = new PessoaDAO();
         Pessoa pessoa = daoPessoa.getByDocument(documentoCliente);
         
         List<Venda> vendas = daoVenda.getByClient(pessoa.getIdPessoa());
+
+        for (Venda v : vendas) {
+            specVenda.put("idVenda", String.valueOf(v.getIdVenda()));
+            specVenda.put("dataVenda", String.valueOf(v.getDataVenda()));
+            specVenda.put("tipoVenda", v.getTipoVenda().toString());
+            specVenda.put("desconto", String.valueOf(v.getDesconto()));
+            specVenda.put("cliente_name", v.getCliente().getNome());
+            specVenda.put("cliente_document", v.getCliente().getDocumento().getNumero());            
+            specVenda.put("vendedor_name", v.getFuncionario().getNome());
+            specVenda.put("vendedor_document", v.getFuncionario().getDocumento().getNumero());
+            listMapVendas.add(specVenda);
+        }
+        return listMapVendas;
+    }
+    
+    public static List<Map> searchVenda(TipoVenda tipo) {
+        List<Map> listMapVendas = new ArrayList<>();
+        Map<String, String> specVenda = new HashMap<>();        
+        List<Venda> vendas = daoVenda.getByTipo(tipo);
 
         for (Venda v : vendas) {
             specVenda.put("idVenda", String.valueOf(v.getIdVenda()));
