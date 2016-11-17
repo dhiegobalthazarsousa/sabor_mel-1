@@ -1,7 +1,5 @@
 package eagles.sabor_mel.view;
 
-
-import eagles.sabor_mel.control.ControllerCrediario;
 import eagles.sabor_mel.control.ControllerFuncionario;
 import eagles.sabor_mel.control.ControllerPessoa;
 import eagles.sabor_mel.control.ControllerVendas;
@@ -176,6 +174,8 @@ public class Principal extends javax.swing.JFrame {
         
         labelParcelasVenda.setVisible(false);
         parcelas.setVisible(false);
+        labelDataVencimentoParcela.setVisible(false);
+        dataVencimentoParcela.setVisible(false);
         
         /**/
         labelTipoPagamentoVista.setVisible(false);
@@ -316,7 +316,7 @@ public class Principal extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         descontoVenda = new javax.swing.JSpinner();
         jLabel60 = new javax.swing.JLabel();
-        jLabel61 = new javax.swing.JLabel();
+        labelDataVencimentoParcela = new javax.swing.JLabel();
         dataVencimentoParcela = new javax.swing.JFormattedTextField();
         clientes = new javax.swing.JPanel();
         jLabel26 = new javax.swing.JLabel();
@@ -788,7 +788,7 @@ public class Principal extends javax.swing.JFrame {
 
         jLabel60.setText("%");
 
-        jLabel61.setText("Vencimento");
+        labelDataVencimentoParcela.setText("Vencimento");
 
         try {
             dataVencimentoParcela.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
@@ -839,46 +839,37 @@ public class Principal extends javax.swing.JFrame {
                                 .addComponent(descontoVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel60)))))
+                .addGap(18, 18, 18)
                 .addGroup(vendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(vendasLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(vendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(vendasLayout.createSequentialGroup()
-                                .addComponent(jLabel59)
-                                .addGap(0, 603, Short.MAX_VALUE))
-                            .addGroup(vendasLayout.createSequentialGroup()
-                                .addGroup(vendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(radioVendaVista)
-                                    .addComponent(radioVendaParcelado))
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addComponent(jLabel59)
+                    .addComponent(radioVendaVista)
+                    .addComponent(radioVendaParcelado)
                     .addGroup(vendasLayout.createSequentialGroup()
                         .addGroup(vendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(vendasLayout.createSequentialGroup()
-                                .addGroup(vendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(labelPagoVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(valorPagoVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(vendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(labelTotalVenda)
-                                    .addComponent(valorTotalVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(vendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(labelTrocoVenda)
-                                    .addComponent(valorTrocoVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(calculaTrocoVenda))
-                            .addComponent(labelTipoPagamentoVista)
-                            .addComponent(labelTipoPagamentoParcelado)
-                            .addComponent(fecharVenda)
-                            .addGroup(vendasLayout.createSequentialGroup()
-                                .addGroup(vendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(parcelas, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(labelParcelasVenda))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(vendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel61)
-                                    .addComponent(dataVencimentoParcela, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                            .addComponent(labelPagoVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(valorPagoVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(vendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(labelTotalVenda)
+                            .addComponent(valorTotalVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(vendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(labelTrocoVenda)
+                            .addComponent(valorTrocoVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(calculaTrocoVenda))
+                    .addComponent(labelTipoPagamentoVista)
+                    .addComponent(labelTipoPagamentoParcelado)
+                    .addComponent(fecharVenda)
+                    .addGroup(vendasLayout.createSequentialGroup()
+                        .addGroup(vendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(parcelas, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(labelParcelasVenda))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(vendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(labelDataVencimentoParcela)
+                            .addComponent(dataVencimentoParcela, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(521, Short.MAX_VALUE))
         );
         vendasLayout.setVerticalGroup(
             vendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -912,23 +903,20 @@ public class Principal extends javax.swing.JFrame {
                         .addComponent(radioVendaVista)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(radioVendaParcelado)))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(vendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(vendasLayout.createSequentialGroup()
                         .addComponent(labelTipoPagamentoVista)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(vendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(vendasLayout.createSequentialGroup()
-                                .addGroup(vendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(vendasLayout.createSequentialGroup()
-                                        .addComponent(labelPagoVenda)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(valorPagoVenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(vendasLayout.createSequentialGroup()
-                                        .addComponent(labelTotalVenda)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(valorTotalVenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(7, 7, 7))
+                                .addComponent(labelPagoVenda)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(valorPagoVenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(vendasLayout.createSequentialGroup()
+                                .addComponent(labelTotalVenda)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(valorTotalVenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(vendasLayout.createSequentialGroup()
                                 .addComponent(labelTrocoVenda)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -940,7 +928,7 @@ public class Principal extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(vendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(labelParcelasVenda)
-                            .addComponent(jLabel61))
+                            .addComponent(labelDataVencimentoParcela))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(vendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(parcelas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -961,7 +949,7 @@ public class Principal extends javax.swing.JFrame {
                         .addComponent(jLabel2)
                         .addComponent(descontoVenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel60))
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
 
         mainPanel.add(vendas, "vendas");
@@ -1402,7 +1390,7 @@ public class Principal extends javax.swing.JFrame {
                                     .addComponent(refreshProduto)
                                     .addComponent(deleteProduto)))))
                     .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         mainPanel.add(produtos, "produtos");
@@ -1424,7 +1412,7 @@ public class Principal extends javax.swing.JFrame {
             .addGroup(comprasLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addContainerGap(427, Short.MAX_VALUE))
+                .addContainerGap(447, Short.MAX_VALUE))
         );
 
         mainPanel.add(compras, "compras");
@@ -1446,7 +1434,7 @@ public class Principal extends javax.swing.JFrame {
             .addGroup(relatoriosLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel4)
-                .addContainerGap(427, Short.MAX_VALUE))
+                .addContainerGap(447, Short.MAX_VALUE))
         );
 
         mainPanel.add(relatorios, "relatorios");
@@ -1704,7 +1692,7 @@ public class Principal extends javax.swing.JFrame {
                             .addComponent(refreshFornecedor)
                             .addComponent(deleteFornecedor)
                             .addComponent(confirmFornecedor))))
-                .addContainerGap(79, Short.MAX_VALUE))
+                .addContainerGap(99, Short.MAX_VALUE))
         );
 
         mainPanel.add(fornecedores, "fornecedores");
@@ -2110,7 +2098,7 @@ public class Principal extends javax.swing.JFrame {
                     .addComponent(logado, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 470, Short.MAX_VALUE)
+                    .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 491, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnVenda)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -2273,6 +2261,8 @@ public class Principal extends javax.swing.JFrame {
             labelTipoPagamentoParcelado.setVisible(false);
             labelParcelasVenda.setVisible(false);
             parcelas.setVisible(false);
+            labelDataVencimentoParcela.setVisible(false);
+            dataVencimentoParcela.setVisible(false);
 
             labelTipoPagamentoVista.setVisible(false);
             labelPagoVenda.setVisible(false);
@@ -2821,7 +2811,7 @@ public class Principal extends javax.swing.JFrame {
                                                                     Endereco objEndereco       = new Endereco   (logradouro.getText(), numero.getText(), cep.getText());
                                                                     Documento objDocumento     = new Documento  (documento.getText(), TipoDocumento.CPF);
 
-                                                                    /*Hex para Senha*/
+                                                                    /*Hash para Senha*/
                                                                     HashSha hash = new HashSha(senha.getText());
                                                                     String hashSenha = "";
                                                                     try {
@@ -4334,6 +4324,8 @@ public class Principal extends javax.swing.JFrame {
                 labelTipoPagamentoParcelado.setVisible(false);
                 labelParcelasVenda.setVisible(false);
                 parcelas.setVisible(false);
+                labelDataVencimentoParcela.setVisible(false);
+                dataVencimentoParcela.setVisible(false);
                 
                 labelTipoPagamentoVista.setVisible(true);
                 labelPagoVenda.setVisible(true);
@@ -4371,6 +4363,8 @@ public class Principal extends javax.swing.JFrame {
                 labelTipoPagamentoParcelado.setVisible(true);
                 labelParcelasVenda.setVisible(true);
                 parcelas.setVisible(true);
+                labelDataVencimentoParcela.setVisible(true);
+                dataVencimentoParcela.setVisible(true);
                 
                 
                 labelTipoPagamentoVista.setVisible(false);
@@ -4714,7 +4708,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel59;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel60;
-    private javax.swing.JLabel jLabel61;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
@@ -4725,6 +4718,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JLabel labelClienteVenda;
+    private javax.swing.JLabel labelDataVencimentoParcela;
     private javax.swing.JLabel labelPagoVenda;
     private javax.swing.JLabel labelParcelasVenda;
     private javax.swing.JLabel labelTelefone2;
