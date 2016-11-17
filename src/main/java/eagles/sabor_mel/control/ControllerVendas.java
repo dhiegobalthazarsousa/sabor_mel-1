@@ -61,20 +61,20 @@ public class ControllerVendas {
             specVenda.put("tipoVenda", v.getTipoVenda().toString());
             specVenda.put("desconto", String.valueOf(v.getDesconto()));
             specVenda.put("cliente_name", v.getCliente().getNome());
-            specVenda.put("cliente_document", v.getCliente().getDocumento().getNumero());            
+            specVenda.put("cliente_document", v.getCliente().getDocumento().getNumero());
             specVenda.put("vendedor_name", v.getFuncionario().getNome());
             specVenda.put("vendedor_document", v.getFuncionario().getDocumento().getNumero());
             listMapVendas.add(specVenda);
         }
         return listMapVendas;
     }
-    
+
     public static List<Map> searchVenda(String documentoCliente) {
         List<Map> listMapVendas = new ArrayList<>();
         Map<String, String> specVenda = new HashMap<>();
         PessoaDAO daoPessoa = new PessoaDAO();
         Pessoa pessoa = daoPessoa.getByDocument(documentoCliente);
-        
+
         List<Venda> vendas = daoVenda.getByClient(pessoa.getIdPessoa());
 
         for (Venda v : vendas) {
@@ -83,7 +83,7 @@ public class ControllerVendas {
             specVenda.put("tipoVenda", v.getTipoVenda().toString());
             specVenda.put("desconto", String.valueOf(v.getDesconto()));
             specVenda.put("cliente_name", v.getCliente().getNome());
-            specVenda.put("cliente_document", v.getCliente().getDocumento().getNumero());            
+            specVenda.put("cliente_document", v.getCliente().getDocumento().getNumero());
             specVenda.put("vendedor_name", v.getFuncionario().getNome());
             specVenda.put("vendedor_document", v.getFuncionario().getDocumento().getNumero());
             listMapVendas.add(specVenda);
@@ -110,29 +110,31 @@ public class ControllerVendas {
         return listMapVendas;
     }
 
+    /*
+     * @author Dhiego e Thiago
+     * Método para venda À VISTA
+     */
     public boolean vender(Long idPessoa, Long idFuncionario, TipoVenda tipoVenda, Long[] produtos, int[] quantidades, double desconto) {
         Venda venda = createVenda(idPessoa, idFuncionario, tipoVenda, desconto, produtos, quantidades);
 
-        VendaDAO daoVenda = new VendaDAO();
         return daoVenda.merge(venda);
 
     }
+    
+    /*
+     * @author Dhiego e Thiago
+     * Método para venda a Crediário
+    */
+    public static boolean vender(Long idPessoa, Long idFuncionario, TipoVenda tipoVenda, Long[] produtos, int[] quantidades, double desconto, int quantidadeParcela, int dia, int mes, int ano) {
 
-    public boolean vender(Long idPessoa, Long idFuncionario, TipoVenda tipoVenda, Long[] produtos, int[] quantidades, double desconto, int quantidadeParcela, int dia, int mes, int ano) {
-        boolean vendaOk = true;
         Venda venda = createVenda(idPessoa, idFuncionario, tipoVenda, desconto, produtos, quantidades);
 
-        VendaDAO daoVenda = new VendaDAO();
         double valorTotal = getValorTotal(venda.getItens(), desconto);
 
-        if(!(daoVenda.persist(venda)) && (ControllerCrediario.createCrediario(quantidadeParcela, dia, mes, ano, valorTotal, venda)))
-                vendaOk = false;
-        
-        return vendaOk;
-
+        return ControllerCrediario.createCrediario(quantidadeParcela, dia, mes, ano, valorTotal, venda);
     }
 
-    private Venda createVenda(Long idPessoa, Long idFuncionario, TipoVenda tipoVenda, double desconto, Long[] produtos, int[] quantidades) {
+    private static Venda createVenda(Long idPessoa, Long idFuncionario, TipoVenda tipoVenda, double desconto, Long[] produtos, int[] quantidades) {
 
         Venda venda = new Venda();
         PessoaDAO daoPessoa = new PessoaDAO();
@@ -163,7 +165,7 @@ public class ControllerVendas {
 
     }
 
-    private Double getValorTotal(List<ItemVenda> itens, double desconto) {
+    private static Double getValorTotal(List<ItemVenda> itens, double desconto) {
         double valorTotal = 0d;
         for (ItemVenda iv : itens) {
             valorTotal += iv.getProduto().getValorUnitario();
@@ -174,7 +176,7 @@ public class ControllerVendas {
         return valorTotal;
     }
 
-    private boolean changeQuantityProduto(Produto p, int quantity) {
+    private static boolean changeQuantityProduto(Produto p, int quantity) {
         ProdutoDAO pDAO = new ProdutoDAO();
         int newQuantity = p.getQuantidade() - quantity;
         p.setQuantidade(newQuantity);

@@ -1,9 +1,26 @@
 package eagles.sabor_mel.test;
 
+import eagles.sabor_mel.control.HashSha;
+import eagles.sabor_mel.dao.BairroDAO;
+import eagles.sabor_mel.dao.CidadeDAO;
 import eagles.sabor_mel.model.Estado;
 import eagles.sabor_mel.dao.EstadoDAO;
+import eagles.sabor_mel.dao.FuncionarioDAO;
+import eagles.sabor_mel.model.Acesso;
+import eagles.sabor_mel.model.Bairro;
+import eagles.sabor_mel.model.Cidade;
+import eagles.sabor_mel.model.Documento;
+import eagles.sabor_mel.model.Endereco;
+import eagles.sabor_mel.model.Funcionario;
+import eagles.sabor_mel.model.Sexo;
+import eagles.sabor_mel.model.TipoDocumento;
+import eagles.sabor_mel.view.Principal;
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Main {
     public static void main(String[] args){

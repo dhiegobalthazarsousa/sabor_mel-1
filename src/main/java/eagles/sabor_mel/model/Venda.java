@@ -39,9 +39,6 @@ public class Venda implements Serializable{
     @Enumerated(EnumType.STRING)
     private TipoVenda tipoVenda;
     
-    @Enumerated(EnumType.STRING)
-    private FormaPagamento formaPagamento;
-    
     @Column
     private Double desconto;
     
@@ -53,6 +50,17 @@ public class Venda implements Serializable{
     @JoinColumn(name="idCliente", nullable=false)
     private Pessoa cliente;
     
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "venda", targetEntity = Crediario.class)
+    private Crediario crediario;
+
+    public Crediario getCrediario() {
+        return crediario;
+    }
+
+    public void setCrediario(Crediario crediario) {
+        this.crediario = crediario;
+    }
+    
     @OneToMany(
        mappedBy = "venda", 
        targetEntity = ItemVenda.class, 
@@ -63,10 +71,9 @@ public class Venda implements Serializable{
     /*Construtores*/
     public Venda(){}
     
-    public Venda(Calendar dataVenda, TipoVenda tipoVenda, FormaPagamento formaPagamento){
+    public Venda(Calendar dataVenda, TipoVenda tipoVenda){
         this.dataVenda = dataVenda;
         this.tipoVenda = tipoVenda;
-        this.formaPagamento = formaPagamento;
     }
     
     /*Getters*/
@@ -81,10 +88,6 @@ public class Venda implements Serializable{
 
     public TipoVenda getTipoVenda() {
         return tipoVenda;
-    }
-
-    public FormaPagamento getFormaPagamento() {
-        return formaPagamento;
     }
 
     public Double getDesconto() {
@@ -115,10 +118,6 @@ public class Venda implements Serializable{
 
     public void setTipoVenda(TipoVenda tipoVenda) {
         this.tipoVenda = tipoVenda;
-    }
-
-    public void setFormaPagamento(FormaPagamento formaPagamento) {
-        this.formaPagamento = formaPagamento;
     }
 
     public void setDesconto(Double desconto) {

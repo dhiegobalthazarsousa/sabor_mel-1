@@ -71,26 +71,7 @@ public class Temp {
 //        s
 //        System.out.println(a);
 //        System.out.println(Double.parseDouble(a)+b);
-        VendaDAO dao = new VendaDAO();
-        Venda venda = new Venda();
-        PessoaDAO daoPes = new PessoaDAO();
-        FuncionarioDAO daoFun = new FuncionarioDAO();
         
-        Calendar data = Calendar.getInstance();
-        Double desconto = 0.0;
-        FormaPagamento formaPagamento = FormaPagamento.Vista_Dinheiro;
-        TipoVenda tipoVenda = TipoVenda.Vista;
-        Long idCliente = 33l;
-        Long idFuncionario = 33l;
-        
-        venda.setDataVenda(data);
-        venda.setDesconto(desconto);
-        venda.setFormaPagamento(formaPagamento);
-        venda.setTipoVenda(tipoVenda);
-        venda.setCliente(daoPes.getById(idCliente));
-        venda.setFuncionario(daoFun.getById(idFuncionario));
-        
-        dao.merge(venda);
         
         System.exit(0);
         

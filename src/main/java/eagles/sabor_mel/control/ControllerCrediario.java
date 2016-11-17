@@ -28,7 +28,7 @@ public class ControllerCrediario {
         daoCrediario = new CrediarioDAO();
         mes -= 1;
         Crediario crediario = new Crediario();
-        //crediario.setQuantidadeParcelas(quantidadeParcela);
+        crediario.setQuantidadeParcela(quantidadeParcela);
         crediario.setVenda(venda);
 
         double valorParcela = valorTotal / quantidadeParcela;
@@ -45,7 +45,7 @@ public class ControllerCrediario {
             crediario.addParcela(parcela);
         }
 
-        return daoCrediario.persist(crediario);
+        return daoCrediario.merge(crediario);
     }
 
     public static List<Map> searchCrediario(String documentoCliente) {

@@ -27,6 +27,14 @@ public class Endereco implements Serializable{
     
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "endereco", targetEntity = Pessoa.class)
     private Pessoa pessoa;
+
+    public Pessoa getPessoa() {
+        return pessoa;
+    }
+
+    public void setPessoa(Pessoa pessoa) {
+        this.pessoa = pessoa;
+    }
     
     public Endereco(){}
     
