@@ -2,6 +2,7 @@ package eagles.sabor_mel.view;
 
 import eagles.sabor_mel.control.ControllerFuncionario;
 import eagles.sabor_mel.control.ControllerPessoa;
+import eagles.sabor_mel.control.ControllerProduto;
 import eagles.sabor_mel.control.ControllerVendas;
 import eagles.sabor_mel.control.HashSha;
 import eagles.sabor_mel.control.Mensagem;
@@ -318,6 +319,7 @@ public class Principal extends javax.swing.JFrame {
         jLabel60 = new javax.swing.JLabel();
         labelDataVencimentoParcela = new javax.swing.JLabel();
         dataVencimentoParcela = new javax.swing.JFormattedTextField();
+        jPanel1 = new javax.swing.JPanel();
         clientes = new javax.swing.JPanel();
         jLabel26 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -796,6 +798,17 @@ public class Principal extends javax.swing.JFrame {
             ex.printStackTrace();
         }
 
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 286, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 192, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout vendasLayout = new javax.swing.GroupLayout(vendas);
         vendas.setLayout(vendasLayout);
         vendasLayout.setHorizontalGroup(
@@ -841,24 +854,6 @@ public class Principal extends javax.swing.JFrame {
                                 .addComponent(jLabel60)))))
                 .addGap(18, 18, 18)
                 .addGroup(vendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel59)
-                    .addComponent(radioVendaVista)
-                    .addComponent(radioVendaParcelado)
-                    .addGroup(vendasLayout.createSequentialGroup()
-                        .addGroup(vendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(labelPagoVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(valorPagoVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(vendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(labelTotalVenda)
-                            .addComponent(valorTotalVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(vendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(labelTrocoVenda)
-                            .addComponent(valorTrocoVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(calculaTrocoVenda))
-                    .addComponent(labelTipoPagamentoVista)
                     .addComponent(labelTipoPagamentoParcelado)
                     .addComponent(fecharVenda)
                     .addGroup(vendasLayout.createSequentialGroup()
@@ -868,27 +863,55 @@ public class Principal extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(vendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(labelDataVencimentoParcela)
-                            .addComponent(dataVencimentoParcela, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(521, Short.MAX_VALUE))
+                            .addComponent(dataVencimentoParcela, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(vendasLayout.createSequentialGroup()
+                        .addGroup(vendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(vendasLayout.createSequentialGroup()
+                                .addGroup(vendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(labelPagoVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(valorPagoVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(vendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(labelTotalVenda)
+                                    .addComponent(valorTotalVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(vendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(labelTrocoVenda)
+                                    .addComponent(valorTrocoVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(calculaTrocoVenda))
+                            .addComponent(labelTipoPagamentoVista)
+                            .addComponent(jLabel59)
+                            .addComponent(radioVendaVista)
+                            .addComponent(radioVendaParcelado))
+                        .addGap(19, 19, 19)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(216, Short.MAX_VALUE))
         );
         vendasLayout.setVerticalGroup(
             vendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(vendasLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(vendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelClienteVenda)
-                    .addComponent(checkClienteCadastrado))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(vendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(buscaDocumentoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnBuscaDocumentoCliente))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(vendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel59)
-                    .addComponent(nomeBuscaCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(vendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(vendasLayout.createSequentialGroup()
-                        .addGap(24, 24, 24)
+                        .addGroup(vendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(vendasLayout.createSequentialGroup()
+                                .addGroup(vendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(labelClienteVenda)
+                                    .addComponent(checkClienteCadastrado))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(vendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(buscaDocumentoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnBuscaDocumentoCliente))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(nomeBuscaCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(vendasLayout.createSequentialGroup()
+                                .addComponent(jLabel59)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(radioVendaVista)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(radioVendaParcelado)))
+                        .addGap(27, 27, 27)
                         .addGroup(vendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel57)
                             .addGroup(vendasLayout.createSequentialGroup()
@@ -897,59 +920,55 @@ public class Principal extends javax.swing.JFrame {
                                     .addComponent(deleteProdutoVenda)
                                     .addGroup(vendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                         .addComponent(codigoProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(procuraProduto))))))
-                    .addGroup(vendasLayout.createSequentialGroup()
+                                        .addComponent(procuraProduto)))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(radioVendaVista)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(radioVendaParcelado)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(vendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(vendasLayout.createSequentialGroup()
-                        .addComponent(labelTipoPagamentoVista)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(vendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(vendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(vendasLayout.createSequentialGroup()
-                                .addComponent(labelPagoVenda)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(valorPagoVenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(vendasLayout.createSequentialGroup()
-                                .addComponent(labelTotalVenda)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(valorTotalVenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(vendasLayout.createSequentialGroup()
-                                .addComponent(labelTrocoVenda)
+                                .addComponent(labelTipoPagamentoVista)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(vendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(valorTrocoVenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(calculaTrocoVenda))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(labelTipoPagamentoParcelado)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(vendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(labelParcelasVenda)
-                            .addComponent(labelDataVencimentoParcela))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(vendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(parcelas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(dataVencimentoParcela, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(79, 79, 79)
-                        .addComponent(fecharVenda))
-                    .addGroup(vendasLayout.createSequentialGroup()
-                        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(vendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel7)
-                            .addComponent(totalVendaProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel58)
-                            .addComponent(quantidadeVendaProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addGroup(vendasLayout.createSequentialGroup()
+                                        .addComponent(labelPagoVenda)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(valorPagoVenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(vendasLayout.createSequentialGroup()
+                                        .addComponent(labelTotalVenda)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(valorTotalVenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(vendasLayout.createSequentialGroup()
+                                        .addComponent(labelTrocoVenda)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(vendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(valorTrocoVenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(calculaTrocoVenda))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(labelTipoPagamentoParcelado)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(vendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(labelParcelasVenda)
+                                    .addComponent(labelDataVencimentoParcela))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(vendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(parcelas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(dataVencimentoParcela, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(79, 79, 79)
+                                .addComponent(fecharVenda))
+                            .addGroup(vendasLayout.createSequentialGroup()
+                                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(vendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel7)
+                                    .addComponent(totalVendaProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel58)
+                                    .addComponent(quantidadeVendaProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(vendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(vendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel2)
                         .addComponent(descontoVenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel60))
-                .addContainerGap(57, Short.MAX_VALUE))
+                .addContainerGap(53, Short.MAX_VALUE))
         );
 
         mainPanel.add(vendas, "vendas");
@@ -2098,7 +2117,7 @@ public class Principal extends javax.swing.JFrame {
                     .addComponent(logado, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 491, Short.MAX_VALUE)
+                    .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnVenda)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -4173,61 +4192,74 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_deleteProdutoMouseClicked
 
     private void procuraProdutoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_procuraProdutoMouseClicked
-        ProdutoDAO dao = new ProdutoDAO();
-        DecimalFormat df = new DecimalFormat("0.00");
-        boolean existe = false;
         Long id = Long.parseLong(codigoProduto.getText());
-        Integer quantidade = 1;
         
-
         try{
-            /*Verificar se produto esta na tabela*/
-            int linhas = tabelaVendaProduto.getRowCount();
-            
-            if(linhas > 0){
-                for(int i = 0; i < linhas; i++){
-                    if(tabelaVendaProduto.getValueAt(i, 0).equals(codigoProduto.getText())){
-                        quantidade = Integer.valueOf(tabelaVendaProduto.getValueAt(i, 3).toString());
-                        if((quantidade+1) <= dao.getById(id).getQuantidade()){
-                            ((DefaultTableModel)tabelaVendaProduto.getModel()).setValueAt(quantidade+1,i, 3);
-                            ((DefaultTableModel)tabelaVendaProduto.getModel()).setValueAt(df.format(dao.getById(id).getValorUnitario() * (quantidade+1)),i, 4);
-                            existe = true;
-                            break;
-                        }
-                        else{
-                            JOptionPane.showMessageDialog(null, "Estoque insuficiente.");
-                            existe = true;
-                        }
-                    }   
-                }
-                
-                if(!existe){
-                    ((DefaultTableModel)tabelaVendaProduto.getModel()).addRow(new String[]{
-                        dao.getById(id).getIdProduto().toString(),
-                        dao.getById(id).getDescricao(),
-                        df.format(dao.getById(id).getValorUnitario()),
-                        quantidade.toString(),
-                        df.format(dao.getById(id).getValorUnitario() * quantidade) 
+            Map mapProduto = ControllerProduto.searchProduto(id);
 
+            DecimalFormat df = new DecimalFormat("0.00");
+            boolean existe = false;
+
+            Integer quantidade = 1;
+
+            if(Integer.parseInt(mapProduto.get("quantidade").toString()) > 0){
+
+                /*Verificar se produto esta na tabela*/
+                int linhas = tabelaVendaProduto.getRowCount();
+
+                if(linhas > 0){
+                    for(int i = 0; i < linhas; i++){
+                        if(tabelaVendaProduto.getValueAt(i, 0).equals(codigoProduto.getText())){
+                            quantidade = Integer.valueOf(tabelaVendaProduto.getValueAt(i, 3).toString());
+                            if((quantidade+1) <= Integer.parseInt(mapProduto.get("quantidade").toString())){
+                                ((DefaultTableModel)tabelaVendaProduto.getModel()).setValueAt(quantidade+1,i, 3);
+                                ((DefaultTableModel)tabelaVendaProduto.getModel()).setValueAt(
+                                        df.format(
+                                                Double.parseDouble(
+                                                        mapProduto.get("valorUnitario").toString()
+                                                ) * (quantidade+1)
+                                        ),i, 4);
+                                existe = true;
+                                break;
+                            }
+                            else{
+                                JOptionPane.showMessageDialog(null, "Estoque insuficiente.");
+                                existe = true;
+                            }
+                        }   
+                    }
+
+                    if(!existe){
+                        ((DefaultTableModel)tabelaVendaProduto.getModel()).addRow(new String[]{
+                            mapProduto.get("idProduto").toString(),
+                            String.valueOf(mapProduto.get("descricao")),
+                            df.format(Double.parseDouble(mapProduto.get("valorUnitario").toString())),
+                            quantidade.toString(),
+                            df.format(Double.parseDouble(mapProduto.get("valorUnitario").toString()) * quantidade)
+                        });
+                    }
+                }
+                else{
+                    ((DefaultTableModel)tabelaVendaProduto.getModel()).addRow(new String[]{
+                        mapProduto.get("idProduto").toString(),
+                        String.valueOf(mapProduto.get("descricao")),
+                        df.format(Double.parseDouble(mapProduto.get("valorUnitario").toString())),
+                        quantidade.toString(),
+                        df.format(Double.parseDouble(mapProduto.get("valorUnitario").toString()) * quantidade)
                     });
                 }
+
+
+                setValorQuantidadeVenda();
             }
             else{
-                ((DefaultTableModel)tabelaVendaProduto.getModel()).addRow(new String[]{
-                    dao.getById(id).getIdProduto().toString(),
-                    dao.getById(id).getDescricao(),
-                    df.format(dao.getById(id).getValorUnitario()),
-                    quantidade.toString(),
-                    df.format(dao.getById(id).getValorUnitario() * quantidade)
-                });
+                JOptionPane.showMessageDialog(null, "Produto Fora de Estoque!");
+                codigoProduto.setText(null);
             }
-            
-
-            setValorQuantidadeVenda();
         }
         catch(NullPointerException e){
-            JOptionPane.showMessageDialog(null, "Produto não encontrado");
-            codigoProduto.setText(null);
+                JOptionPane.showMessageDialog(null, "Produto não encontrado");
+                codigoProduto.setText(null);
         }
     }//GEN-LAST:event_procuraProdutoMouseClicked
 
@@ -4711,6 +4743,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
