@@ -107,6 +107,7 @@ public class Pessoa implements Serializable{
     }
 
     public void setEndereco(Endereco endereco) {
+        endereco.setPessoa(this);
         this.endereco = endereco;
     }
     

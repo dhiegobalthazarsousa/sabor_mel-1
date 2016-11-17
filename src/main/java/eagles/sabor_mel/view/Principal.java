@@ -1,6 +1,7 @@
 package eagles.sabor_mel.view;
 
 
+import eagles.sabor_mel.control.ControllerCrediario;
 import eagles.sabor_mel.control.ControllerFuncionario;
 import eagles.sabor_mel.control.ControllerPessoa;
 import eagles.sabor_mel.control.ControllerVendas;
@@ -4416,6 +4417,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_calculaTrocoVendaMouseClicked
 
     private void fecharVendaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fecharVendaMouseClicked
+        Validacao valida = new Validacao();
         if(!nomeBuscaCliente.getText().equals("")){
             if(tabelaVendaProduto.getRowCount() > 0){
                 if(radioVendaVista.isSelected() || radioVendaParcelado.isSelected()){
@@ -4462,20 +4464,57 @@ public class Principal extends javax.swing.JFrame {
                     }
                     else{
                         /*Crediario*/
-//                        ControllerCrediario crediarioControl = new ControllerCrediario();
-//                        Calendar c = Calendar.getInstance();
-//                        int day   = Integer.parseInt(dataVencimentoParcela.getText().substring(0, 2));
-//                        int month = Integer.parseInt(dataVencimentoParcela.getText().substring(3, 5));
-//                        int year  = Integer.parseInt(dataVencimentoParcela.getText().substring(6, 10));
-//                        c.set(year, (month-1), day);
-//
-//                        crediarioControl.createCrediario(
-//                                int quantidadeParcela, 
-//                                int dia, 
-//                                int mes, 
-//                                int ano, 
-//                                double valorTotal, 
-//                                Venda venda);
+                        if(valida.validaDataNascimento(dataVencimentoParcela.getText())){
+                            int dia   = Integer.parseInt(dataVencimentoParcela.getText().substring(0, 2));
+                            int mes   = Integer.parseInt(dataVencimentoParcela.getText().substring(3, 5));
+                            int ano   = Integer.parseInt(dataVencimentoParcela.getText().substring(6, 10));
+                            
+                            int [] quantidades = new int[tabelaVendaProduto.getRowCount()];
+                            
+                            int quantidadeParcelas = 
+                                    Integer.parseInt(parcelas.getSelectedItem().toString().substring(0, 1));
+                            
+//  
+                            Long[] produtosVenda = new Long[tabelaVendaProduto.getRowCount()];
+
+                             for(int i = 0; i < tabelaVendaProduto.getRowCount(); i++){
+                                Long id = Long.parseLong(tabelaVendaProduto.getValueAt(i, 0).toString());
+                                int quantidade = Integer.parseInt(tabelaVendaProduto.getValueAt(i, 3).toString());
+
+                                quantidades[i] = quantidade;
+                                produtosVenda[i] = id;
+
+                            }
+
+                            ControllerPessoa controlPessoa = new ControllerPessoa();
+                            ControllerFuncionario controlFuncionario = new ControllerFuncionario();
+                            ControllerVendas controlVenda = new ControllerVendas();
+
+                            Map<String, String> mapFuncionario = controlFuncionario.searchFuncionario(Login.nome);
+                            Map<String, String> mapPessoa = controlPessoa.searchPessoa(buscaDocumentoCliente.getText());
+
+                            controlVenda.vender(
+                                Long.valueOf(mapPessoa.get("idPessoa")), 
+                                Long.valueOf(mapFuncionario.get("idFuncionario")),
+                                TipoVenda.Parcelado, 
+                                produtosVenda, 
+                                quantidades,
+                                Double.parseDouble(descontoVenda.getValue().toString()), 
+                                quantidadeParcelas, 
+                                dia, 
+                                mes, 
+                                ano
+                            );
+
+                            menu = "vendas";
+                            limpaCampos();
+
+                            JOptionPane.showMessageDialog(null, "Venda Realizada com Sucesso!");
+                        }
+                        else{
+                            JOptionPane.showMessageDialog(null,"Informa a data de vencimento da primeira parcela.");
+                        }
+       
                     }
                 }
                 else{
@@ -4521,7 +4560,7 @@ public class Principal extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }

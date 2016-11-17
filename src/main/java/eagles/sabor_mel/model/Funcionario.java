@@ -9,8 +9,6 @@ import java.util.Calendar;
 //@Table
 public class Funcionario extends Pessoa{
     
-
-    
     @Column(nullable = false, length = 20)
     private String usuario;
     

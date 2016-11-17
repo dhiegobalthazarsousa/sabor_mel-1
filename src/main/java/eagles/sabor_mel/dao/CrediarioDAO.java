@@ -2,6 +2,7 @@ package eagles.sabor_mel.dao;
 
 import eagles.sabor_mel.model.Crediario;
 import java.util.List;
+import javax.persistence.Query;
 
 /**
  *
@@ -35,5 +36,11 @@ public class CrediarioDAO extends DAO<Crediario>{
 	public List<Crediario> findAll() {
     	return entityManager
     		.createQuery("FROM Crediario").getResultList();
-    }  
+    }
+        
+    public Crediario getByVendaId(Long id){
+        Query query = entityManager.createQuery("FROM Crediario c WHERE c.venda.idvenda = :id");
+        query.setParameter("id", id);
+        return (Crediario) query.getSingleResult();
+    }
 }

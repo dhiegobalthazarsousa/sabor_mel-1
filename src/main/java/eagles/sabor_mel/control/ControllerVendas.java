@@ -98,17 +98,19 @@ public class ControllerVendas {
 
     }
 
-    public boolean vender(Long idPessoa, Long idFuncionario, TipoVenda tipoVenda, Long[] produtos, int[] quantidades, double desconto, int quantidadeParcela, int dia, int mes, int ano) {
-        boolean vendaOk = true;
+    public void vender(Long idPessoa, Long idFuncionario, TipoVenda tipoVenda, Long[] produtos, int[] quantidades, double desconto, int quantidadeParcela, int dia, int mes, int ano) {
+        //boolean vendaOk = true;
         Venda venda = createVenda(idPessoa, idFuncionario, tipoVenda, desconto, produtos, quantidades);
 
         VendaDAO daoVenda = new VendaDAO();
         double valorTotal = getValorTotal(venda.getItens(), desconto);
 
-        if(!(daoVenda.persist(venda)) && (ControllerCrediario.createCrediario(quantidadeParcela, dia, mes, ano, valorTotal, venda)))
-                vendaOk = false;
+        //if(!(daoVenda.merge(venda)) && ())
+        //daoVenda.merge(venda);
+        ControllerCrediario.createCrediario(quantidadeParcela, dia, mes, ano, valorTotal, venda);
+                //vendaOk = false;
         
-        return vendaOk;
+        //return vendaOk;
 
     }
 

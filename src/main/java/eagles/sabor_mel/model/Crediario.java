@@ -18,6 +18,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -38,8 +39,8 @@ public class Crediario implements Serializable{
     @Column(name = "quantidadeParcela", nullable = false)
     private Integer quantidadeParcela;
     
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "idVenda", nullable = false)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name="idVenda", nullable=false)
     private Venda venda;
     
     @OneToMany(mappedBy = "crediario", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
