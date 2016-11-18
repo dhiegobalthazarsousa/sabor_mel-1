@@ -49,7 +49,7 @@ public class ControllerCrediario {
     }
 
     public static List<Map> searchCrediario(String documentoCliente) {
-        List<Map> mapVendasParcelada = ControllerVendas.searchVenda(TipoVenda.Parcelado.toString());
+        List<Map> mapVendasParcelada = ControllerVendas.searchVenda(TipoVenda.Parcelado);
         List<Map> mapVendas = ControllerVendas.searchVenda(documentoCliente);
 
         List<Map> mapCrediario = new ArrayList<>();

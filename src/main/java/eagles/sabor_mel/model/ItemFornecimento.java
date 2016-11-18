@@ -36,9 +36,9 @@ public class ItemFornecimento implements Serializable{
     private Produto produto;
     
     /*Construtores*/
-    ItemFornecimento(){}
+    public ItemFornecimento(){}
     
-    ItemFornecimento(Integer quantidade){
+    public ItemFornecimento(Integer quantidade){
         this.quantidade = quantidade;
     }
     

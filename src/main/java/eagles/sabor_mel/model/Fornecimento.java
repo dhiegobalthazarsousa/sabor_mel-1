@@ -43,9 +43,9 @@ public class Fornecimento implements Serializable{
        cascade = CascadeType.ALL)
     private List<ItemFornecimento> itens;
     
-    Fornecimento(){}
+    public Fornecimento(){}
     
-    Fornecimento(Calendar dataFornecimento){
+    public Fornecimento(Calendar dataFornecimento){
         this.dataFornecimento = dataFornecimento;
     }
     
