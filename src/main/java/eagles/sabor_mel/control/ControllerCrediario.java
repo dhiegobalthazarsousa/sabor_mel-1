@@ -69,6 +69,7 @@ public class ControllerCrediario {
                     specParcela.put("status", par.getStatus());
                     mapParcelas.add(specParcela);
                 }
+                specCrediario.put("parcelas", mapParcelas);
                 mapCrediario.add(specCrediario);
             }
         }
