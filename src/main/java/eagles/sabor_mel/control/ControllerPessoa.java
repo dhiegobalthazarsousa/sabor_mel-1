@@ -35,11 +35,11 @@ public class ControllerPessoa {
     */
     public static boolean cadastrar(String nome, String email,
             Calendar dataNascimento, Sexo sexo, String[] numerosTel, 
-            String[] dddsTel, TipoTelefone[] tiposTel, String estadoNome, String estadoUF,
+            String[] dddsTel, TipoTelefone[] tiposTel, String estadoUF,
             String cidadeNome, String bairroNome, String logradouro, String numero,
             String cep, String numeroDocumento, TipoDocumento tipoDocumento){
         
-        Estado estado = new Estado(estadoNome, estadoUF);
+        Estado estado = new Estado(ControllerEstado.escreverEstado(estadoUF), estadoUF);
         Cidade cidade = new Cidade(cidadeNome);
         cidade.setEstado(estado);
         Bairro bairro = new Bairro(bairroNome);
@@ -70,6 +70,7 @@ public class ControllerPessoa {
         specPessoa.put("data_nascimento", String.valueOf(pessoa.getDataNascimento()));
         specPessoa.put("email", pessoa.getEmail());
         specPessoa.put("sexo", String.valueOf(pessoa.getSexo()));
+        
         return specPessoa;
         
     }
