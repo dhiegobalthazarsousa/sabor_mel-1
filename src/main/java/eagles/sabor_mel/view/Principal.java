@@ -5,7 +5,6 @@ import eagles.sabor_mel.control.ControllerPessoa;
 import eagles.sabor_mel.control.ControllerProduto;
 import eagles.sabor_mel.control.ControllerVendas;
 import eagles.sabor_mel.control.HashSha;
-import eagles.sabor_mel.control.Mensagem;
 import eagles.sabor_mel.control.Validacao;
 import eagles.sabor_mel.dao.BairroDAO;
 import eagles.sabor_mel.dao.CidadeDAO;
@@ -84,7 +83,7 @@ public class Principal extends javax.swing.JFrame {
      * Creates new form Principal
      */
     public Principal() {
-        //Login.permitir = true;
+        Login.permitir = true;
 
         if(Login.permitir){
             initComponents();
@@ -3453,10 +3452,10 @@ public class Principal extends javax.swing.JFrame {
                                                                         dao.merge(objFuncionario);
                                                                     }
 
-                                                                    acao = "insert";
-                                                                    Mensagem msg = new Mensagem();
-                                                                    Thread mensagemT = new Thread(msg);
-                                                                    mensagemT.start();
+//                                                                    acao = "insert";
+//                                                                    Mensagem msg = new Mensagem();
+//                                                                    Thread mensagemT = new Thread(msg);
+//                                                                    mensagemT.start();
 
                                                                     limpaCampos();
 
@@ -3623,10 +3622,10 @@ public class Principal extends javax.swing.JFrame {
 
                                                                     dao.merge(funcionario);
 
-                                                                    acao = "edit";
-                                                                    Mensagem msg = new Mensagem();
-                                                                    Thread mensagemT = new Thread(msg);
-                                                                    mensagemT.start();
+//                                                                    acao = "edit";
+//                                                                    Mensagem msg = new Mensagem();
+//                                                                    Thread mensagemT = new Thread(msg);
+//                                                                    mensagemT.start();
 
                                                                     limpaCampos();
                                                                     carregaDados();
@@ -3709,12 +3708,12 @@ public class Principal extends javax.swing.JFrame {
         );
 
         dao.removeById(id);
-        acao = "delete";
-        Mensagem msg = new Mensagem();
-        Thread mensagem = new Thread(msg);
-        mensagem.start();
-        limpaCampos();
-        carregaDados();
+//        acao = "delete";
+//        Mensagem msg = new Mensagem();
+//        Thread mensagem = new Thread(msg);
+//        mensagem.start();
+//        limpaCampos();
+//        carregaDados();
     }//GEN-LAST:event_deleteMouseClicked
 
     private void addTelefoneMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addTelefoneMouseClicked
@@ -3927,9 +3926,9 @@ public class Principal extends javax.swing.JFrame {
                                                         }
 
                                                         acao = "insert";
-                                                        Mensagem msg = new Mensagem();
-                                                        Thread mensagemT = new Thread(msg);
-                                                        mensagemT.start();
+//                                                        Mensagem msg = new Mensagem();
+//                                                        Thread mensagemT = new Thread(msg);
+//                                                        mensagemT.start();
 
                                                         limpaCampos();
 
@@ -4077,9 +4076,9 @@ public class Principal extends javax.swing.JFrame {
                                                         dao.merge(pessoa);
 
                                                         acao = "edit";
-                                                        Mensagem msg = new Mensagem();
-                                                        Thread mensagemT = new Thread(msg);
-                                                        mensagemT.start();
+//                                                        Mensagem msg = new Mensagem();
+//                                                        Thread mensagemT = new Thread(msg);
+//                                                        mensagemT.start();
 
                                                         limpaCampos();
                                                         carregaDados();
@@ -4153,11 +4152,11 @@ public class Principal extends javax.swing.JFrame {
 
         dao.removeById(id);
         acao = "delete";
-        Mensagem msg = new Mensagem();
-        Thread mensagem = new Thread(msg);
-        mensagem.start();
-        limpaCampos();
-        carregaDados();
+//        Mensagem msg = new Mensagem();
+//        Thread mensagem = new Thread(msg);
+//        mensagem.start();
+//        limpaCampos();
+//        carregaDados();
     }//GEN-LAST:event_deleteClienteMouseClicked
 
     private void addTelefoneFornecedorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addTelefoneFornecedorMouseClicked
@@ -4341,9 +4340,9 @@ public class Principal extends javax.swing.JFrame {
                                                     }
 
                                                     acao = "insert";
-                                                    Mensagem msg = new Mensagem();
-                                                    Thread mensagemT = new Thread(msg);
-                                                    mensagemT.start();
+//                                                    Mensagem msg = new Mensagem();
+//                                                    Thread mensagemT = new Thread(msg);
+//                                                    mensagemT.start();
 
                                                     limpaCampos();
 
@@ -4490,9 +4489,9 @@ public class Principal extends javax.swing.JFrame {
                                                     dao.merge(pessoa);
 
                                                     acao = "edit";
-                                                    Mensagem msg = new Mensagem();
-                                                    Thread mensagemT = new Thread(msg);
-                                                    mensagemT.start();
+//                                                    Mensagem msg = new Mensagem();
+//                                                    Thread mensagemT = new Thread(msg);
+//                                                    mensagemT.start();
 
                                                     limpaCampos();
                                                     carregaDados();
@@ -4564,9 +4563,9 @@ public class Principal extends javax.swing.JFrame {
 
         dao.removeById(id);
         acao = "delete";
-        Mensagem msg = new Mensagem();
-        Thread mensagem = new Thread(msg);
-        mensagem.start();
+//        Mensagem msg = new Mensagem();
+//        Thread mensagem = new Thread(msg);
+//        mensagem.start();
         limpaCampos();
         carregaDados();
     }//GEN-LAST:event_deleteFornecedorMouseClicked
@@ -4663,9 +4662,9 @@ public class Principal extends javax.swing.JFrame {
 
 
                                 acao = "insert";
-                                Mensagem msg = new Mensagem();
-                                Thread mensagemT = new Thread(msg);
-                                mensagemT.start();
+//                                Mensagem msg = new Mensagem();
+//                                Thread mensagemT = new Thread(msg);
+//                                mensagemT.start();
 
                                 limpaCampos();
 
@@ -4727,9 +4726,9 @@ public class Principal extends javax.swing.JFrame {
                                 dao.merge(produto);
 
                                 acao = "edit";
-                                Mensagem msg = new Mensagem();
-                                Thread mensagemT = new Thread(msg);
-                                mensagemT.start();
+//                                Mensagem msg = new Mensagem();
+//                                Thread mensagemT = new Thread(msg);
+//                                mensagemT.start();
 
                                 limpaCampos();
                                 carregaDados();
@@ -4779,9 +4778,9 @@ public class Principal extends javax.swing.JFrame {
         
         dao.removeById(id);
         acao = "delete";
-        Mensagem msg = new Mensagem();
-        Thread mensagem = new Thread(msg);
-        mensagem.start();
+//        Mensagem msg = new Mensagem();
+//        Thread mensagem = new Thread(msg);
+//        mensagem.start();
         limpaCampos();
         carregaDados();
     }//GEN-LAST:event_deleteProdutoMouseClicked

@@ -25,9 +25,9 @@ public class ControllerPessoa {
      * @author Dhiego and ...
      * This mehtod creates and persists a Pessoa Object
     */
-    public static boolean cadastrar(String nome, String email, Calendar dataNascimento, Sexo sexo, String[] numeroTelefone, String[] ddd, String[] tipo){
-        Pessoa pessoa = new Pessoa(nome, email, dataNascimento, sexo);
-    }
+//    public static boolean cadastrar(String nome, String email, Calendar dataNascimento, Sexo sexo, String[] numeroTelefone, String[] ddd, String[] tipo){
+//        Pessoa pessoa = new Pessoa(nome, email, dataNascimento, sexo);
+//    }
     
     
     /*
