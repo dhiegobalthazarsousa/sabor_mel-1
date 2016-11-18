@@ -3,6 +3,8 @@ package eagles.sabor_mel.view;
 import eagles.sabor_mel.control.HashSha;
 import eagles.sabor_mel.dao.*;
 import java.awt.Cursor;
+import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.util.logging.Level;
@@ -28,10 +30,22 @@ public class Login extends javax.swing.JFrame {
      */
     public Login() {
         initComponents();
+        if(checkCapsLock()){
+            avisoCapsLock.setText("TECLA CAPS LOCK ATIVADA!");
+        }
+        else{
+            avisoCapsLock.setText(null);
+        }
         this.setLocationRelativeTo(null);
         usuario.requestFocus();
         logo.setHorizontalAlignment(SwingConstants.CENTER);
         titulo.setHorizontalAlignment(SwingConstants.CENTER);
+    }
+    
+    private boolean checkCapsLock(){
+        boolean caps = Toolkit.getDefaultToolkit().getLockingKeyState(KeyEvent.VK_CAPS_LOCK);
+        
+        return caps;
     }
 
     /**
@@ -51,6 +65,7 @@ public class Login extends javax.swing.JFrame {
         senha = new javax.swing.JPasswordField();
         entrar = new javax.swing.JButton();
         lblSair = new javax.swing.JLabel();
+        avisoCapsLock = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -62,7 +77,19 @@ public class Login extends javax.swing.JFrame {
 
         jLabel3.setText("Usuário");
 
+        usuario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                usuarioKeyTyped(evt);
+            }
+        });
+
         jLabel4.setText("Senha");
+
+        senha.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                senhaKeyTyped(evt);
+            }
+        });
 
         entrar.setText("Entrar");
         entrar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -84,6 +111,9 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
+        avisoCapsLock.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
+        avisoCapsLock.setForeground(new java.awt.Color(204, 0, 0));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -96,17 +126,21 @@ public class Login extends javax.swing.JFrame {
                             .addComponent(titulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(logo, javax.swing.GroupLayout.DEFAULT_SIZE, 317, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(58, 58, 58)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(entrar)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(layout.createSequentialGroup()
+                                .addGap(58, 58, 58)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(usuario)
-                                    .addComponent(senha, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(senha, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(avisoCapsLock)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(entrar)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(lblSair)))
                 .addContainerGap())
@@ -133,7 +167,9 @@ public class Login extends javax.swing.JFrame {
                         .addContainerGap(23, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lblSair)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblSair)
+                            .addComponent(avisoCapsLock))
                         .addContainerGap())))
         );
 
@@ -197,6 +233,24 @@ public class Login extends javax.swing.JFrame {
         setCursor(cursor);
     }//GEN-LAST:event_lblSairMouseExited
 
+    private void usuarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_usuarioKeyTyped
+       if(checkCapsLock()){
+            avisoCapsLock.setText("TECLA CAPS LOCK ATIVADA!");
+        }
+        else{
+            avisoCapsLock.setText(null);
+        }
+    }//GEN-LAST:event_usuarioKeyTyped
+
+    private void senhaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_senhaKeyTyped
+        if(checkCapsLock()){
+            avisoCapsLock.setText("TECLA CAPS LOCK ATIVADA!");
+        }
+        else{
+            avisoCapsLock.setText(null);
+        }
+    }//GEN-LAST:event_senhaKeyTyped
+
     /**
      * @param args the command line arguments
      */
@@ -233,6 +287,7 @@ public class Login extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel avisoCapsLock;
     private javax.swing.JButton entrar;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
