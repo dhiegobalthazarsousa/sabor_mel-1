@@ -146,11 +146,6 @@ public class Principal extends javax.swing.JFrame {
         labelTelefone2Cliente.setEnabled(false);
         ddd2Cliente.setEnabled(false);
         telefone2Cliente.setEnabled(false);
-        delTel2Cliente.setEnabled(false);
-        labelTelefone3Cliente.setEnabled(false);
-        ddd3Cliente.setEnabled(false);
-        telefone3Cliente.setEnabled(false);
-        delTel3Cliente.setEnabled(false);
         
         /*Fornecedor*/
         deleteFornecedor.setEnabled(false);
@@ -350,7 +345,6 @@ public class Principal extends javax.swing.JFrame {
         catch (Exception e){
         }
         telefoneCliente = new javax.swing.JTextField();
-        addTelCliente = new javax.swing.JButton();
         labelTelefone2Cliente = new javax.swing.JLabel();
         ddd2Cliente = new javax.swing.JTextField();
         try{ 
@@ -360,17 +354,6 @@ public class Principal extends javax.swing.JFrame {
         catch (Exception e){
         }
         telefone2Cliente = new javax.swing.JTextField();
-        delTel2Cliente = new javax.swing.JButton();
-        labelTelefone3Cliente = new javax.swing.JLabel();
-        ddd3Cliente = new javax.swing.JTextField();
-        try{ 
-            javax.swing.text.MaskFormatter mask = new javax.swing.text.MaskFormatter("(##)");
-            ddd3Cliente = new javax.swing.JFormattedTextField(mask);
-        }
-        catch (Exception e){
-        }
-        telefone3Cliente = new javax.swing.JTextField();
-        delTel3Cliente = new javax.swing.JButton();
         jPanel9 = new javax.swing.JPanel();
         jLabel37 = new javax.swing.JLabel();
         cepCliente = new javax.swing.JTextField();
@@ -995,7 +978,7 @@ public class Principal extends javax.swing.JFrame {
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(fecharVenda)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(557, Short.MAX_VALUE))
         );
 
         mainPanel.add(vendas, "vendas");
@@ -1058,8 +1041,8 @@ public class Principal extends javax.swing.JFrame {
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 14, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Dados Pessoais", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 12))); // NOI18N
@@ -1078,30 +1061,7 @@ public class Principal extends javax.swing.JFrame {
 
         jLabel32.setText("Telefone");
 
-        addTelCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/add.png"))); // NOI18N
-        addTelCliente.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                addTelClienteMouseClicked(evt);
-            }
-        });
-
-        labelTelefone2Cliente.setText("Telefone");
-
-        delTel2Cliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/delete_icon.png"))); // NOI18N
-        delTel2Cliente.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                delTel2ClienteMouseClicked(evt);
-            }
-        });
-
-        labelTelefone3Cliente.setText("Telefone");
-
-        delTel3Cliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/delete_icon.png"))); // NOI18N
-        delTel3Cliente.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                delTel3ClienteMouseClicked(evt);
-            }
-        });
+        labelTelefone2Cliente.setText("Telefone 2");
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -1135,34 +1095,20 @@ public class Principal extends javax.swing.JFrame {
                             .addComponent(dataNascimentoCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE))
                         .addContainerGap(17, Short.MAX_VALUE))
                     .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
-                                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(labelTelefone3Cliente)
-                                    .addComponent(labelTelefone2Cliente))
+                                .addComponent(labelTelefone2Cliente)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(ddd2Cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(ddd2Cliente)
-                                    .addComponent(ddd3Cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel8Layout.createSequentialGroup()
-                                        .addComponent(telefone2Cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(delTel2Cliente))
-                                    .addGroup(jPanel8Layout.createSequentialGroup()
-                                        .addComponent(telefone3Cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(delTel3Cliente))))
+                                .addComponent(telefone2Cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
                                 .addComponent(jLabel32)
                                 .addGap(12, 12, 12)
                                 .addComponent(dddCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(telefoneCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(addTelCliente)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addComponent(telefoneCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(316, Short.MAX_VALUE))))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1182,28 +1128,16 @@ public class Principal extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel30)
                         .addComponent(dataNascimentoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel32)
-                        .addComponent(dddCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(telefoneCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(addTelCliente))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(delTel3Cliente)
-                    .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(ddd2Cliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(telefone2Cliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(labelTelefone2Cliente))
-                            .addComponent(delTel2Cliente))
-                        .addGap(14, 14, 14)
-                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(labelTelefone3Cliente)
-                            .addComponent(ddd3Cliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(telefone3Cliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(23, 23, 23)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel32)
+                    .addComponent(dddCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(telefoneCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(11, 11, 11)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ddd2Cliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(telefone2Cliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelTelefone2Cliente))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -1228,34 +1162,29 @@ public class Principal extends javax.swing.JFrame {
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel38)
+                    .addComponent(jLabel40)
+                    .addComponent(jLabel37))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cepCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel9Layout.createSequentialGroup()
-                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
-                                .addComponent(jLabel40)
-                                .addGap(39, 39, 39)
-                                .addComponent(bairroCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                            .addGroup(jPanel9Layout.createSequentialGroup()
-                                .addComponent(jLabel37)
-                                .addGap(49, 49, 49)
-                                .addComponent(cepCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(34, 34, 34)))
+                        .addComponent(bairroCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel41)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cidadeCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel42))
                     .addGroup(jPanel9Layout.createSequentialGroup()
-                        .addComponent(jLabel38)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(logradouroCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(logradouroCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(jLabel39)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(numeroCliente)
                     .addComponent(estadosCliente, 0, 61, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1289,14 +1218,14 @@ public class Principal extends javax.swing.JFrame {
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(clientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, clientesLayout.createSequentialGroup()
+                    .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(clientesLayout.createSequentialGroup()
                         .addComponent(refreshCliente)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(confirmCliente)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(deleteCliente))
-                    .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(deleteCliente)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         clientesLayout.setVerticalGroup(
@@ -1304,17 +1233,18 @@ public class Principal extends javax.swing.JFrame {
             .addGroup(clientesLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(clientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(clientesLayout.createSequentialGroup()
                         .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(clientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(refreshCliente, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(confirmCliente, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(deleteCliente, javax.swing.GroupLayout.Alignment.TRAILING)))
-                    .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(664, Short.MAX_VALUE))
+                            .addComponent(refreshCliente)
+                            .addGroup(clientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(confirmCliente, javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(deleteCliente, javax.swing.GroupLayout.Alignment.TRAILING)))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         mainPanel.add(clientes, "clientes");
@@ -1516,7 +1446,7 @@ public class Principal extends javax.swing.JFrame {
                             .addComponent(refreshProduto)
                             .addComponent(deleteProduto)
                             .addComponent(confirmProduto))))
-                .addContainerGap(604, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         mainPanel.add(produtos, "produtos");
@@ -1716,15 +1646,15 @@ public class Principal extends javax.swing.JFrame {
         jPanel24.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Vendas"));
 
         jButton5.setText("<html>Vendas <br/>por <br/>Funcionário</html>");
-        jButton5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton5.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jButton5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         jButton6.setText("<html>Vendas <br/>por <br/>Cliente</html>");
-        jButton6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton6.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jButton6.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         jButton10.setText("<html>Vendas <br/>por <br/>Período</html>");
-        jButton10.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton10.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jButton10.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout jPanel24Layout = new javax.swing.GroupLayout(jPanel24);
@@ -1786,7 +1716,7 @@ public class Principal extends javax.swing.JFrame {
         jPanel26.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Crediário"));
 
         jButton11.setText("<html>Crediários <br/>em <br/>Aberto</html>");
-        jButton11.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton11.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jButton11.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         jButton12.setText("Inadimplência");
@@ -1815,15 +1745,15 @@ public class Principal extends javax.swing.JFrame {
         jPanel27.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Gerencial"));
 
         jButton13.setText("<html>Relatório <br/>Geral <br/>Estoque</html>");
-        jButton13.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton13.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jButton13.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         jButton14.setText("<html>Valor <br/>Média <br/>Vendas</html>");
-        jButton14.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton14.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jButton14.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         jButton15.setText("<html>Ranking <br/>Vendas</html>");
-        jButton15.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton15.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jButton15.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout jPanel27Layout = new javax.swing.GroupLayout(jPanel27);
@@ -2447,15 +2377,16 @@ public class Principal extends javax.swing.JFrame {
                     .addComponent(jLabel17)
                     .addComponent(numero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel18)
-                    .addComponent(bairro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel20)
+                        .addComponent(estados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel19)
-                        .addComponent(cidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel20)
-                            .addComponent(estados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(cidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel18)
+                        .addComponent(bairro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -2903,11 +2834,6 @@ public class Principal extends javax.swing.JFrame {
         labelTelefone2Cliente.setEnabled(false);
         ddd2Cliente.setEnabled(false);
         telefone2Cliente.setEnabled(false);
-        delTel2Cliente.setEnabled(false);
-        labelTelefone3Cliente.setEnabled(false);
-        ddd3Cliente.setEnabled(false);
-        telefone3Cliente.setEnabled(false);
-        delTel3Cliente.setEnabled(false);
         
         labelTelefone2Fornecedor.setEnabled(false);
         ddd2Fornecedor.setEnabled(false);
@@ -3056,14 +2982,6 @@ public class Principal extends javax.swing.JFrame {
                 ddd2Cliente.setText(null);
                 telefone2Cliente.setEnabled(false);
                 telefone2Cliente.setText(null);
-                delTel2Cliente.setEnabled(false);
-
-                labelTelefone3Cliente.setEnabled(false);
-                ddd3Cliente.setEnabled(false);
-                ddd3Cliente.setText(null);
-                telefone3Cliente.setEnabled(false);
-                telefone3Cliente.setText(null);
-                delTel3Cliente.setEnabled(false);
 
                 dddCliente.setText(pessoa.getTelefones().get(0).getDdd());
                 telefoneCliente.setText(pessoa.getTelefones().get(0).getNumero());
@@ -3074,14 +2992,6 @@ public class Principal extends javax.swing.JFrame {
                 labelTelefone2Cliente.setEnabled(true);
                 ddd2Cliente.setEnabled(true);
                 telefone2Cliente.setEnabled(true);
-                delTel2Cliente.setEnabled(true);
-
-                labelTelefone3Cliente.setEnabled(false);
-                ddd3Cliente.setEnabled(false);
-                ddd3Cliente.setText(null);
-                telefone3Cliente.setEnabled(false);
-                telefone3Cliente.setText(null);
-                delTel3Cliente.setEnabled(false);
 
                 dddCliente.setText(pessoa.getTelefones().get(0).getDdd());
                 telefoneCliente.setText(pessoa.getTelefones().get(0).getNumero());
@@ -3094,22 +3004,14 @@ public class Principal extends javax.swing.JFrame {
                 labelTelefone2Cliente.setEnabled(true);
                 ddd2Cliente.setEnabled(true);
                 telefone2Cliente.setEnabled(true);
-                delTel2Cliente.setEnabled(true);
 
                 ddd2Cliente.setText(pessoa.getTelefones().get(1).getDdd());
                 telefone2Cliente.setText(pessoa.getTelefones().get(1).getNumero());
-
-                labelTelefone3Cliente.setEnabled(true);
-                ddd3Cliente.setEnabled(true);
-                telefone3Cliente.setEnabled(true);
-                delTel3Cliente.setEnabled(true);
 
                 dddCliente.setText(pessoa.getTelefones().get(0).getDdd());
                 telefoneCliente.setText(pessoa.getTelefones().get(0).getNumero());
                 ddd2Cliente.setText(pessoa.getTelefones().get(1).getDdd());
                 telefone2Cliente.setText(pessoa.getTelefones().get(1).getNumero());
-                ddd3Cliente.setText(pessoa.getTelefones().get(2).getDdd());
-                telefone3Cliente.setText(pessoa.getTelefones().get(2).getNumero());
             }
 
 
@@ -3439,18 +3341,18 @@ public class Principal extends javax.swing.JFrame {
 
                                                                     FuncionarioDAO dao = new FuncionarioDAO();
                                                                     EstadoDAO est = new EstadoDAO();
-                                                                    List<Estado> list = est.findByUf(estados.getSelectedItem().toString());
+//                                                                    List<Estado> list = est.findByUf(estados.getSelectedItem().toString());
 
-                                                                    for(int i = 0; i < list.size(); i++){
-                                                                        list.get(i).addCidade(objCidade);
-                                                                        objCidade.addBairro(objBairro);
-                                                                        objBairro.addEndereco(objEndereco);
-                                                                        objFuncionario.setEndereco(objEndereco);
-                                                                        objFuncionario.setTelefone(telefones);
-                                                                        objFuncionario.setDocumento(objDocumento);
-
-                                                                        dao.merge(objFuncionario);
-                                                                    }
+//                                                                    for(int i = 0; i < list.size(); i++){
+//                                                                        list.get(i).addCidade(objCidade);
+//                                                                        objCidade.addBairro(objBairro);
+//                                                                        objBairro.addEndereco(objEndereco);
+//                                                                        objFuncionario.setEndereco(objEndereco);
+//                                                                        objFuncionario.setTelefone(telefones);
+//                                                                        objFuncionario.setDocumento(objDocumento);
+//
+//                                                                        dao.merge(objFuncionario);
+//                                                                    }
 
 //                                                                    acao = "insert";
 //                                                                    Mensagem msg = new Mensagem();
@@ -3588,10 +3490,10 @@ public class Principal extends javax.swing.JFrame {
 
                                                                     EstadoDAO      estDao = new EstadoDAO();
                                                                     Estado atualEstado = null;
-                                                                    List<Estado> list = estDao.findByUf(estados.getSelectedItem().toString());
-                                                                    for(int i = 0; i < list.size(); i++){
-                                                                        atualEstado = list.get(i);
-                                                                    }
+//                                                                    List<Estado> list = estDao.findByUf(estados.getSelectedItem().toString());
+//                                                                    for(int i = 0; i < list.size(); i++){
+//                                                                        atualEstado = list.get(i);
+//                                                                    }
 
                                                                     atualEstado.addCidade(funcionario.getEndereco().getBairro().getCidade());
 
@@ -3740,78 +3642,6 @@ public class Principal extends javax.swing.JFrame {
         preencheFormulario();
     }//GEN-LAST:event_tabelaUsuarioMouseClicked
 
-    private void addTelClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addTelClienteMouseClicked
-        if(labelTelefone2Cliente.isVisible()){
-            labelTelefone3Cliente.setEnabled(true);
-            ddd3Cliente.setEnabled(true);
-            telefone3Cliente.setEnabled(true);
-            delTel3Cliente.setEnabled(true);
-        }
-        else{
-            labelTelefone2Cliente.setEnabled(true);
-            ddd2Cliente.setEnabled(true);
-            telefone2Cliente.setEnabled(true);
-            delTel2Cliente.setEnabled(true);
-        }
-    }//GEN-LAST:event_addTelClienteMouseClicked
-
-    private void delTel2ClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_delTel2ClienteMouseClicked
-        Validacao valida = new Validacao();
-        if(tabelaCliente.getSelectedRow() > -1){
-            if(valida.validaDdd(ddd2Cliente.getText()) && valida.validaTelefone(telefone2Cliente.getText())){
-                TelefoneDAO dao = new TelefoneDAO();
-                PessoaDAO pes = new PessoaDAO();
-                Long id = Long.parseLong((String) tabelaCliente.getValueAt(tabelaCliente.getSelectedRow(), 0));
-
-                Pessoa pessoa = pes.getById(id);
-
-                for(int i = 0; i < pessoa.getTelefones().size(); i++){
-                    if(pessoa.getTelefones().get(i).getDdd().equals(ddd2Cliente.getText())
-                        && pessoa.getTelefones().get(i).getNumero().equals(telefone2Cliente.getText())){
-                        dao.removeById(pessoa.getTelefones().get(i).getIdTelefone());
-                    }
-                }
-
-                preencheFormulario();
-            }
-        }
-        labelTelefone2Cliente.setEnabled(false);
-        ddd2Cliente.setEnabled(false);
-        ddd2Cliente.setText(null);
-        telefone2Cliente.setEnabled(false);
-        telefone2Cliente.setText(null);
-        delTel2Cliente.setEnabled(false);
-    }//GEN-LAST:event_delTel2ClienteMouseClicked
-
-    private void delTel3ClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_delTel3ClienteMouseClicked
-        Validacao valida = new Validacao();
-        if(tabelaCliente.getSelectedRow() > -1){
-            if(valida.validaDdd(ddd3Cliente.getText()) && valida.validaTelefone(telefone3Cliente.getText())){
-                TelefoneDAO dao = new TelefoneDAO();
-                PessoaDAO pes = new PessoaDAO();
-                Long id = Long.parseLong((String) tabelaCliente.getValueAt(tabelaCliente.getSelectedRow(), 0));
-
-                Pessoa pessoa = pes.getById(id);
-
-                for(int i = 0; i < pessoa.getTelefones().size(); i++){
-                    if(pessoa.getTelefones().get(i).getDdd().equals(ddd3Cliente.getText())
-                        && pessoa.getTelefones().get(i).getNumero().equals(telefone3Cliente.getText())){
-                        dao.removeById(pessoa.getTelefones().get(i).getIdTelefone());
-                    }
-                }
-
-                preencheFormulario();
-            }
-        }
-        labelTelefone3Cliente.setEnabled(false);
-        ddd3Cliente.setEnabled(false);
-        telefone3Cliente.setEnabled(false);
-        delTel3Cliente.setEnabled(false);
-        ddd3Cliente.setText(null);
-        telefone3Cliente.setText(null);
-       
-    }//GEN-LAST:event_delTel3ClienteMouseClicked
-
     private void refreshClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_refreshClienteMouseClicked
         limpaCampos();
         deleteCliente.setEnabled(false);
@@ -3832,103 +3662,67 @@ public class Principal extends javax.swing.JFrame {
                                         if(valida.validaNumero(numeroCliente.getText())){
                                             if(valida.validaEndereco(bairroCliente.getText())){
                                                 if(valida.validaEndereco(cidadeCliente.getText())){
-                                                    JOptionPane.showMessageDialog(null, "ALL DONE!!!");
+                                                    
                                                     /*Persist Pessoa*/
-                                                    
-                                                    
-                                                    List<Telefone> telefones = new ArrayList<>();
-
-                                                    if(telefoneCliente.getText().length() == 8){
-                                                        telefones.add(new Telefone(dddCliente.getText(), telefoneCliente.getText(), TipoTelefone.Fixo));
-                                                    }
-                                                    else{
-                                                        telefones.add(new Telefone(dddCliente.getText(), telefoneCliente.getText(), TipoTelefone.Celular));
-                                                    }
-
-                                                    if(ddd2Cliente.isVisible() && valida.validaDdd(ddd2Cliente.getText())){
-                                                        if(valida.validaTelefone(telefone2Cliente.getText())){
-                                                            if(telefone2Cliente.getText().length() == 8){
-                                                                telefones.add(new Telefone(ddd2Cliente.getText(), telefone2Cliente.getText(), TipoTelefone.Fixo));
-                                                            }
-                                                            else{
-                                                                telefones.add(new Telefone(ddd2Cliente.getText(), telefone2Cliente.getText(), TipoTelefone.Celular));
-                                                            }
-                                                        }
-                                                    }
-
-                                                    if(ddd3Cliente.isVisible() && valida.validaDdd(ddd3Cliente.getText())){
-                                                        if(valida.validaTelefone(telefone3Cliente.getText())){
-                                                            if(telefone3Cliente.getText().length() == 8){
-                                                                telefones.add(new Telefone(ddd3Cliente.getText(), telefone3Cliente.getText(), TipoTelefone.Fixo));
-                                                            }
-                                                            else{
-                                                                telefones.add(new Telefone(ddd3Cliente.getText(), telefone3Cliente.getText(), TipoTelefone.Celular));
-                                                            }
-                                                        }
-                                                    }
-
                                                     Calendar c = Calendar.getInstance();
                                                     int day   = Integer.parseInt(dataNascimentoCliente.getText().substring(0, 2));
                                                     int month = Integer.parseInt(dataNascimentoCliente.getText().substring(3, 5));
                                                     int year  = Integer.parseInt(dataNascimentoCliente.getText().substring(6, 10));
                                                     c.set(year, (month-1), day);
                                                     
-                                                    if(!deleteCliente.isVisible()){
-                                                        /*Persistence With Hibernate - Good Luck For Us!!!!*/
-
-                                                        EstadoDAO      estDAO = new EstadoDAO();
-                                                        CidadeDAO      cidDAO = new CidadeDAO();
-                                                        BairroDAO      baiDAO = new BairroDAO();
-                                                        EnderecoDAO    endDAO = new EnderecoDAO();
-                                                        PessoaDAO      pesDAO = new PessoaDAO();
-                                                        DocumentoDAO   docDAO = new DocumentoDAO();
-                                                        TelefoneDAO    telDAO = new TelefoneDAO();
-
-                                                        Cidade objCidade = null;
-                                                        for(int i = 0; i < cidDAO.findAll().size(); i++){
-                                                            if(cidDAO.findAll().get(i).getNome().equals(cidadeCliente.getText())){
-                                                                objCidade = cidDAO.findAll().get(i);
-                                                                break;
-                                                            }
+                                                    String[] numerosTel;
+                                                    String[] dddsTel;
+                                                    TipoTelefone[] tiposTel;
+                                                    
+                                                    
+                                                    /*Define qunatidade de Telefones*/
+                                                    int tam = 0;
+                                                    if(valida.validaTelefone(telefone2Cliente.getText()) && valida.validaDdd(ddd2Cliente.getText())){
+                                                        tam = 2;
+                                                        tiposTel = new TipoTelefone[tam];
+                                                        
+                                                        if(telefoneCliente.getText().length() == 8){
+                                                            tiposTel[0] = TipoTelefone.Fixo;
                                                         }
-
-                                                        if(objCidade == null){
-                                                            objCidade = new Cidade(cidadeCliente.getText());
+                                                        else{
+                                                            tiposTel[0] = TipoTelefone.Celular;
                                                         }
-
-                                                        Bairro objBairro = null;
-                                                        for(int i = 0; i < baiDAO.findAll().size(); i++){
-                                                            if(baiDAO.findAll().get(i).getNome().equals(bairroCliente.getText())){
-                                                                objBairro = baiDAO.findAll().get(i);
-                                                                break;
-                                                            }
+                                                        
+                                                        if(telefone2Cliente.getText().length() == 8){
+                                                            tiposTel[1] = TipoTelefone.Fixo;
                                                         }
-                                                        if(objBairro == null){
-                                                            objBairro = new Bairro(bairroCliente.getText());
+                                                        else{
+                                                            tiposTel[1] = TipoTelefone.Celular;
                                                         }
-
-                                                        Endereco objEndereco       = new Endereco   (logradouroCliente.getText(), numeroCliente.getText(), cepCliente.getText());
-                                                        Documento objDocumento     = new Documento  (documentoCliente.getText(), TipoDocumento.CPF);
-
-                                                        Pessoa objPessoa = new Pessoa(nomeCliente.getText(), emailCliente.getText(), c, Sexo.valueOf(sexoCliente.getSelectedItem().toString())); 
-                                                        EstadoDAO est = new EstadoDAO();
-                                                        List<Estado> list = est.findByUf(estadosCliente.getSelectedItem().toString());
-
-                                                        for(int i = 0; i < list.size(); i++){
-                                                            list.get(i).addCidade(objCidade);
-                                                            objCidade.addBairro(objBairro);
-                                                            objBairro.addEndereco(objEndereco);
-                                                            objPessoa.setEndereco(objEndereco);
-                                                            objPessoa.setTelefone(telefones);
-                                                            objPessoa.setDocumento(objDocumento);
-
-                                                            pesDAO.merge(objPessoa);
+                                                    }
+                                                    else{
+                                                        tam = 1;
+                                                        tiposTel = new TipoTelefone[tam];
+                                                        
+                                                        if(telefoneCliente.getText().length() == 8){
+                                                            tiposTel[0] = TipoTelefone.Fixo;
                                                         }
+                                                        else{
+                                                            tiposTel[0] = TipoTelefone.Celular;
+                                                        }
+                                                    }
+                                                    
+                                                    numerosTel = new String[tam];
+                                                    dddsTel = new String[tam];
+                                                    
 
-                                                        acao = "insert";
-//                                                        Mensagem msg = new Mensagem();
-//                                                        Thread mensagemT = new Thread(msg);
-//                                                        mensagemT.start();
+                                                    for(int i = 0; i < tam; i++){
+                                                        numerosTel[i] = telefoneCliente.getText();
+                                                        dddsTel[i] = dddCliente.getText();
+                                                    }
+                                                    
+                                                    if(!deleteCliente.isEnabled()){
+                                                        ControllerPessoa.cadastrar(nomeCliente.getText(), emailCliente.getText(),
+                                                            c, Sexo.valueOf(sexoCliente.getSelectedItem().toString()), numerosTel, 
+                                                            dddsTel, tiposTel, estadosCliente.getSelectedItem().toString(),
+                                                            cidadeCliente.getText(), bairroCliente.getText(), logradouroCliente.getText(), numeroCliente.getText(),
+                                                            cepCliente.getText(), documentoCliente.getText(), TipoDocumento.CPF
+                                                        );
 
                                                         limpaCampos();
 
@@ -3969,16 +3763,7 @@ public class Principal extends javax.swing.JFrame {
                                                                         }
                                                                     }
 
-                                                                    if(ddd3Cliente.isVisible() && valida.validaDdd(ddd3Cliente.getText())){
-                                                                        if(valida.validaTelefone(telefone3Cliente.getText())){
-                                                                            if(telefone3Cliente.getText().length() == 8){
-                                                                                pessoa.addTelefone(new Telefone(ddd3Cliente.getText(), telefone3Cliente.getText(), TipoTelefone.Fixo));
-                                                                            }
-                                                                            else{
-                                                                                pessoa.addTelefone(new Telefone(ddd3Cliente.getText(), telefone3Cliente.getText(), TipoTelefone.Celular));
-                                                                            }
-                                                                        }
-                                                                    }
+                                                                    
                                                                 }
                                                             }
                                                         }
@@ -3991,17 +3776,6 @@ public class Principal extends javax.swing.JFrame {
 
                                                                     pessoa.getTelefones().get(1).setDdd(ddd2Cliente.getText());
                                                                     pessoa.getTelefones().get(1).setNumero(telefone2Cliente.getText());
-
-                                                                    if(ddd3Cliente.isVisible() && valida.validaDdd(ddd3Cliente.getText())){
-                                                                        if(valida.validaTelefone(telefone3Cliente.getText())){
-                                                                            if(telefone3Cliente.getText().length() == 8){
-                                                                                pessoa.addTelefone(new Telefone(ddd3Cliente.getText(), telefone3Cliente.getText(), TipoTelefone.Fixo));
-                                                                            }
-                                                                            else{
-                                                                                pessoa.addTelefone(new Telefone(ddd3Cliente.getText(), telefone3Cliente.getText(), TipoTelefone.Celular));
-                                                                            }
-                                                                        }
-                                                                    }
                                                                 }
                                                             }
                                                         }
@@ -4015,8 +3789,6 @@ public class Principal extends javax.swing.JFrame {
                                                                     pessoa.getTelefones().get(1).setDdd(ddd2Cliente.getText());
                                                                     pessoa.getTelefones().get(1).setNumero(telefone2Cliente.getText());
 
-                                                                    pessoa.getTelefones().get(2).setDdd(ddd3Cliente.getText());
-                                                                    pessoa.getTelefones().get(2).setNumero(telefone3Cliente.getText());
                                                                 }
                                                             }
                                                         }
@@ -4062,10 +3834,10 @@ public class Principal extends javax.swing.JFrame {
 
                                                         EstadoDAO estDao = new EstadoDAO();
                                                         Estado atualEstado = null;
-                                                        List<Estado> list = estDao.findByUf(estadosCliente.getSelectedItem().toString());
-                                                        for(int i = 0; i < list.size(); i++){
-                                                            atualEstado = list.get(i);
-                                                        }
+//                                                        List<Estado> list = estDao.findByUf(estadosCliente.getSelectedItem().toString());
+//                                                        for(int i = 0; i < list.size(); i++){
+//                                                            atualEstado = list.get(i);
+//                                                        }
 
                                                         atualEstado.addCidade(pessoa.getEndereco().getBairro().getCidade());
 
@@ -4326,18 +4098,18 @@ public class Principal extends javax.swing.JFrame {
 
                                                     Pessoa objPessoa = new Pessoa(nomeFornecedor.getText(), emailFornecedor.getText(), c, Sexo.Não_Definido); 
                                                     EstadoDAO est = new EstadoDAO();
-                                                    List<Estado> list = est.findByUf(estadosFornecedor.getSelectedItem().toString());
+//                                                    List<Estado> list = est.findByUf(estadosFornecedor.getSelectedItem().toString());
 
-                                                    for(int i = 0; i < list.size(); i++){
-                                                        list.get(i).addCidade(objCidade);
-                                                        objCidade.addBairro(objBairro);
-                                                        objBairro.addEndereco(objEndereco);
-                                                        objPessoa.setEndereco(objEndereco);
-                                                        objPessoa.setTelefone(telefones);
-                                                        objPessoa.setDocumento(objDocumento);
-
-                                                        pesDAO.merge(objPessoa);
-                                                    }
+//                                                    for(int i = 0; i < list.size(); i++){
+//                                                        list.get(i).addCidade(objCidade);
+//                                                        objCidade.addBairro(objBairro);
+//                                                        objBairro.addEndereco(objEndereco);
+//                                                        objPessoa.setEndereco(objEndereco);
+//                                                        objPessoa.setTelefone(telefones);
+//                                                        objPessoa.setDocumento(objDocumento);
+//
+//                                                        pesDAO.merge(objPessoa);
+//                                                    }
 
                                                     acao = "insert";
 //                                                    Mensagem msg = new Mensagem();
@@ -4476,10 +4248,10 @@ public class Principal extends javax.swing.JFrame {
 
                                                     EstadoDAO estDao = new EstadoDAO();
                                                     Estado atualEstado = null;
-                                                    List<Estado> list = estDao.findByUf(estadosFornecedor.getSelectedItem().toString());
-                                                    for(int i = 0; i < list.size(); i++){
-                                                        atualEstado = list.get(i);
-                                                    }
+//                                                    List<Estado> list = estDao.findByUf(estadosFornecedor.getSelectedItem().toString());
+//                                                    for(int i = 0; i < list.size(); i++){
+//                                                        atualEstado = list.get(i);
+//                                                    }
 
                                                     atualEstado.addCidade(pessoa.getEndereco().getBairro().getCidade());
 
@@ -5199,7 +4971,6 @@ public class Principal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> acessos;
-    private javax.swing.JButton addTelCliente;
     private javax.swing.JButton addTelefone;
     private javax.swing.JButton addTelefoneFornecedor;
     private javax.swing.JTextField bairro;
@@ -5240,15 +5011,12 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JTextField ddd2Cliente;
     private javax.swing.JTextField ddd2Fornecedor;
     private javax.swing.JTextField ddd3;
-    private javax.swing.JTextField ddd3Cliente;
     private javax.swing.JTextField ddd3Fornecedor;
     private javax.swing.JTextField dddCliente;
     private javax.swing.JTextField dddFornecedor;
     private javax.swing.JButton delTel2;
-    private javax.swing.JButton delTel2Cliente;
     private javax.swing.JButton delTel2Fornecedor;
     private javax.swing.JButton delTel3;
-    private javax.swing.JButton delTel3Cliente;
     private javax.swing.JButton delTel3Fornecedor;
     private javax.swing.JButton delete;
     private javax.swing.JButton deleteCliente;
@@ -5393,7 +5161,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel labelTelefone2Cliente;
     private javax.swing.JLabel labelTelefone2Fornecedor;
     private javax.swing.JLabel labelTelefone3;
-    private javax.swing.JLabel labelTelefone3Cliente;
     private javax.swing.JLabel labelTelefone3Fornecedor;
     private javax.swing.JLabel labelTotalVenda;
     private javax.swing.JLabel labelTrocoVenda;
@@ -5436,7 +5203,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JTextField telefone2Cliente;
     private javax.swing.JTextField telefone2Fornecedor;
     private javax.swing.JTextField telefone3;
-    private javax.swing.JTextField telefone3Cliente;
     private javax.swing.JTextField telefone3Fornecedor;
     private javax.swing.JTextField telefoneCliente;
     private javax.swing.JTextField telefoneFornecedor;

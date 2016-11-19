@@ -3,6 +3,7 @@ package eagles.sabor_mel.dao;
 
 import eagles.sabor_mel.model.*;
 import java.util.*;
+import javax.persistence.Query;
 
 public class EstadoDAO extends DAO<Estado>{
     public Estado getById(final Long id) {
@@ -32,7 +33,10 @@ public class EstadoDAO extends DAO<Estado>{
         
         
     @SuppressWarnings("JPQLValidation")
-    public List<Estado> findByUf(String uf){
-        return entityManager.createQuery("FROM Estado WHERE uf = '"+uf+"'").getResultList();
+    public Estado findByUf(String uf){
+        Query query = entityManager.createQuery("FROM Estado e WHERE e.uf = :uf");
+        query.setParameter("uf", uf);
+        return (Estado) query.getSingleResult();
+        
     }
 }

@@ -160,7 +160,7 @@
                               <Component id="fecharVenda" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="557" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -654,7 +654,7 @@
                           </Table>
                         </Property>
                         <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                          <Color id="Default Cursor"/>
+                          <Color id="Cursor Padr&#xe3;o"/>
                         </Property>
                       </Properties>
                     </Component>
@@ -732,15 +732,15 @@
                       <Component id="jPanel7" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Group type="102" alignment="1" attributes="0">
+                          <Component id="jPanel9" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jPanel8" alignment="0" max="32767" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
                               <Component id="refreshCliente" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
                               <Component id="confirmCliente" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="deleteCliente" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="jPanel9" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jPanel8" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
@@ -751,20 +751,22 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="jPanel7" max="32767" attributes="0"/>
                           <Group type="102" attributes="0">
                               <Component id="jPanel8" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jPanel9" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="refreshCliente" alignment="1" min="-2" max="-2" attributes="0"/>
-                                  <Component id="confirmCliente" alignment="1" min="-2" max="-2" attributes="0"/>
-                                  <Component id="deleteCliente" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="refreshCliente" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="confirmCliente" alignment="1" min="-2" max="-2" attributes="0"/>
+                                      <Component id="deleteCliente" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
                           </Group>
-                          <Component id="jPanel7" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="664" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -827,8 +829,8 @@
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="jScrollPane2" min="-2" pref="335" max="-2" attributes="0"/>
-                          <EmptySpace min="0" pref="14" max="32767" attributes="0"/>
+                          <Component id="jScrollPane2" pref="0" max="32767" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -937,30 +939,13 @@
                                   <EmptySpace pref="17" max="32767" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                       <Group type="102" alignment="1" attributes="0">
-                                          <Group type="103" groupAlignment="1" attributes="0">
-                                              <Component id="labelTelefone3Cliente" alignment="1" min="-2" max="-2" attributes="0"/>
-                                              <Component id="labelTelefone2Cliente" alignment="1" min="-2" max="-2" attributes="0"/>
-                                          </Group>
+                                          <Component id="labelTelefone2Cliente" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="32767" attributes="0"/>
+                                          <Component id="ddd2Cliente" min="-2" pref="42" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                              <Component id="ddd2Cliente" max="32767" attributes="0"/>
-                                              <Component id="ddd3Cliente" min="-2" pref="42" max="-2" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Group type="102" alignment="0" attributes="0">
-                                                  <Component id="telefone2Cliente" min="-2" pref="109" max="-2" attributes="0"/>
-                                                  <EmptySpace max="-2" attributes="0"/>
-                                                  <Component id="delTel2Cliente" min="-2" max="-2" attributes="0"/>
-                                              </Group>
-                                              <Group type="102" alignment="0" attributes="0">
-                                                  <Component id="telefone3Cliente" min="-2" pref="109" max="-2" attributes="0"/>
-                                                  <EmptySpace max="-2" attributes="0"/>
-                                                  <Component id="delTel3Cliente" min="-2" max="-2" attributes="0"/>
-                                              </Group>
-                                          </Group>
+                                          <Component id="telefone2Cliente" min="-2" pref="109" max="-2" attributes="0"/>
                                       </Group>
                                       <Group type="102" alignment="1" attributes="0">
                                           <Component id="jLabel32" min="-2" max="-2" attributes="0"/>
@@ -968,11 +953,9 @@
                                           <Component id="dddCliente" min="-2" pref="41" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Component id="telefoneCliente" min="-2" pref="110" max="-2" attributes="0"/>
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="addTelCliente" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
-                                  <EmptySpace max="32767" attributes="0"/>
+                                  <EmptySpace pref="316" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -1000,34 +983,17 @@
                                   <Component id="dataNascimentoCliente" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Group type="103" alignment="1" groupAlignment="3" attributes="0">
-                                  <Component id="jLabel32" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="dddCliente" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="telefoneCliente" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <Component id="addTelCliente" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="jLabel32" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="dddCliente" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="telefoneCliente" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="delTel3Cliente" min="-2" max="-2" attributes="0"/>
-                              <Group type="102" alignment="1" attributes="0">
-                                  <Group type="103" groupAlignment="1" attributes="0">
-                                      <Group type="103" alignment="1" groupAlignment="3" attributes="0">
-                                          <Component id="ddd2Cliente" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="telefone2Cliente" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="labelTelefone2Cliente" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Component id="delTel2Cliente" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="labelTelefone3Cliente" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="ddd3Cliente" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="telefone3Cliente" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
+                          <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="ddd2Cliente" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="telefone2Cliente" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="labelTelefone2Cliente" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
@@ -1099,19 +1065,9 @@
                 </Component>
                 <Component class="javax.swing.JTextField" name="telefoneCliente">
                 </Component>
-                <Component class="javax.swing.JButton" name="addTelCliente">
-                  <Properties>
-                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/img/add.png"/>
-                    </Property>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="addTelClienteMouseClicked"/>
-                  </Events>
-                </Component>
                 <Component class="javax.swing.JLabel" name="labelTelefone2Cliente">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Telefone"/>
+                    <Property name="text" type="java.lang.String" value="Telefone 2"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="ddd2Cliente">
@@ -1120,38 +1076,6 @@
                   </AuxValues>
                 </Component>
                 <Component class="javax.swing.JTextField" name="telefone2Cliente">
-                </Component>
-                <Component class="javax.swing.JButton" name="delTel2Cliente">
-                  <Properties>
-                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/img/delete_icon.png"/>
-                    </Property>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="delTel2ClienteMouseClicked"/>
-                  </Events>
-                </Component>
-                <Component class="javax.swing.JLabel" name="labelTelefone3Cliente">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Telefone"/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JTextField" name="ddd3Cliente">
-                  <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="try{ &#xd;&#xa;    javax.swing.text.MaskFormatter mask = new javax.swing.text.MaskFormatter(&quot;(##)&quot;);&#xd;&#xa;    ddd3Cliente = new javax.swing.JFormattedTextField(mask);&#xd;&#xa;}&#xd;&#xa;catch (Exception e){&#xd;&#xa;}"/>
-                  </AuxValues>
-                </Component>
-                <Component class="javax.swing.JTextField" name="telefone3Cliente">
-                </Component>
-                <Component class="javax.swing.JButton" name="delTel3Cliente">
-                  <Properties>
-                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/img/delete_icon.png"/>
-                    </Property>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="delTel3ClienteMouseClicked"/>
-                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -1175,21 +1099,16 @@
                       <Group type="102" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jLabel38" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel40" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel37" alignment="0" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="cepCliente" min="-2" pref="82" max="-2" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" alignment="1" attributes="0">
-                                          <Component id="jLabel40" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
-                                          <Component id="bairroCliente" min="-2" pref="135" max="-2" attributes="0"/>
-                                          <EmptySpace max="-2" attributes="0"/>
-                                      </Group>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Component id="jLabel37" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
-                                          <Component id="cepCliente" min="-2" pref="82" max="-2" attributes="0"/>
-                                          <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
-                                      </Group>
-                                  </Group>
+                                  <Component id="bairroCliente" min="-2" pref="129" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
                                   <Component id="jLabel41" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="cidadeCliente" min="-2" pref="152" max="-2" attributes="0"/>
@@ -1197,19 +1116,17 @@
                                   <Component id="jLabel42" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
-                                  <Component id="jLabel38" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="logradouroCliente" min="-2" pref="350" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="logradouroCliente" min="-2" pref="322" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="jLabel39" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace pref="15" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="numeroCliente" max="32767" attributes="0"/>
                               <Component id="estadosCliente" pref="61" max="32767" attributes="0"/>
                           </Group>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace pref="20" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -1343,7 +1260,7 @@
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace pref="604" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -2077,7 +1994,7 @@
                       <Properties>
                         <Property name="text" type="java.lang.String" value="&lt;html&gt;Vendas &lt;br/&gt;por &lt;br/&gt;Funcion&#xe1;rio&lt;/html&gt;"/>
                         <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                          <Color id="Hand Cursor"/>
+                          <Color id="Cursor Padr&#xe3;o"/>
                         </Property>
                         <Property name="horizontalTextPosition" type="int" value="0"/>
                       </Properties>
@@ -2086,7 +2003,7 @@
                       <Properties>
                         <Property name="text" type="java.lang.String" value="&lt;html&gt;Vendas &lt;br/&gt;por &lt;br/&gt;Cliente&lt;/html&gt;"/>
                         <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                          <Color id="Hand Cursor"/>
+                          <Color id="Cursor Padr&#xe3;o"/>
                         </Property>
                         <Property name="horizontalTextPosition" type="int" value="0"/>
                       </Properties>
@@ -2095,7 +2012,7 @@
                       <Properties>
                         <Property name="text" type="java.lang.String" value="&lt;html&gt;Vendas &lt;br/&gt;por &lt;br/&gt;Per&#xed;odo&lt;/html&gt;"/>
                         <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                          <Color id="Hand Cursor"/>
+                          <Color id="Cursor Padr&#xe3;o"/>
                         </Property>
                         <Property name="horizontalTextPosition" type="int" value="0"/>
                       </Properties>
@@ -2204,7 +2121,7 @@
                       <Properties>
                         <Property name="text" type="java.lang.String" value="&lt;html&gt;Credi&#xe1;rios &lt;br/&gt;em &lt;br/&gt;Aberto&lt;/html&gt;"/>
                         <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                          <Color id="Hand Cursor"/>
+                          <Color id="Cursor Padr&#xe3;o"/>
                         </Property>
                         <Property name="horizontalTextPosition" type="int" value="0"/>
                       </Properties>
@@ -2261,7 +2178,7 @@
                       <Properties>
                         <Property name="text" type="java.lang.String" value="&lt;html&gt;Relat&#xf3;rio &lt;br/&gt;Geral &lt;br/&gt;Estoque&lt;/html&gt;"/>
                         <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                          <Color id="Hand Cursor"/>
+                          <Color id="Cursor Padr&#xe3;o"/>
                         </Property>
                         <Property name="horizontalTextPosition" type="int" value="0"/>
                       </Properties>
@@ -2270,7 +2187,7 @@
                       <Properties>
                         <Property name="text" type="java.lang.String" value="&lt;html&gt;Valor &lt;br/&gt;M&#xe9;dia &lt;br/&gt;Vendas&lt;/html&gt;"/>
                         <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                          <Color id="Hand Cursor"/>
+                          <Color id="Cursor Padr&#xe3;o"/>
                         </Property>
                         <Property name="horizontalTextPosition" type="int" value="0"/>
                       </Properties>
@@ -2279,7 +2196,7 @@
                       <Properties>
                         <Property name="text" type="java.lang.String" value="&lt;html&gt;Ranking &lt;br/&gt;Vendas&lt;/html&gt;"/>
                         <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                          <Color id="Hand Cursor"/>
+                          <Color id="Cursor Padr&#xe3;o"/>
                         </Property>
                         <Property name="horizontalTextPosition" type="int" value="0"/>
                       </Properties>
@@ -3254,16 +3171,18 @@
                               <Component id="numero" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jLabel18" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="bairro" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Group type="103" alignment="3" groupAlignment="3" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                                  <Component id="jLabel20" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="estados" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jLabel19" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="cidade" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Group type="103" alignment="3" groupAlignment="3" attributes="0">
-                                      <Component id="jLabel20" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="estados" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  </Group>
+                              </Group>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="jLabel18" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="bairro" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace max="32767" attributes="0"/>
