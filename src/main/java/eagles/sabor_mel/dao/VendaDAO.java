@@ -15,8 +15,10 @@ public class VendaDAO extends DAO<Venda>{
         return entityManager.find(Venda.class, id);
     }
     
-    public Venda getByPessoa(Long id){
-        return (Venda) entityManager.createQuery("SELECT * FROM Venda WHERE pessoa = '"+id+"';").getSingleResult();
+    public Venda getByFuncionario(Long id){
+        Query query = entityManager.createQuery("FROM Venda v WHERE v.funcionario.idPessoa = :id");
+        query.setParameter("id", id);
+        return (Venda) query.getSingleResult();
     }
     
     public boolean removeById(final Long id) {
@@ -47,7 +49,7 @@ public class VendaDAO extends DAO<Venda>{
        return query.getResultList();
     }
          
-    public List<Venda> getByClient(long idCliente){
+    public List<Venda> getByClient(Long idCliente){
         Query query = entityManager.createQuery("FROM Venda v WHERE v.idCliente = :idCliente");
         query.setParameter("idCliente", idCliente);
         return query.getResultList();

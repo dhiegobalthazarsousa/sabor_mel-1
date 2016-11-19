@@ -8,7 +8,6 @@ package eagles.sabor_mel.control;
 import eagles.sabor_mel.dao.CrediarioDAO;
 import eagles.sabor_mel.model.Crediario;
 import eagles.sabor_mel.model.Parcela;
-import eagles.sabor_mel.model.TipoVenda;
 import eagles.sabor_mel.model.Venda;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -49,30 +48,25 @@ public class ControllerCrediario {
     }
 
     public static List<Map> searchCrediario(String documentoCliente) {
-        List<Map> mapVendasParcelada = ControllerVendas.searchVenda(TipoVenda.Parcelado);
-        List<Map> mapVendas = ControllerVendas.searchVenda(documentoCliente);
+        Map<String,String> cliente = ControllerPessoa.searchPessoa(documentoCliente);
+        String value = cliente.get("idPessoa");
+        List<Crediario> crediarios = daoCrediario.getByCliente(Long.valueOf(cliente.get("idPessoa")));
 
         List<Map> mapCrediario = new ArrayList<>();
-        if (!mapVendas.isEmpty()) {
+        if (!crediarios.isEmpty()) {
             for (Map<String, String> specVenda : mapVendas) {
                 Crediario c = daoCrediario.getByVendaId(Long.valueOf(specVenda.get("idVenda")));
                 Map<String, String> specCrediario = new HashMap<>();
                 specCrediario.put("idCrediario", String.valueOf(c.getIdCrediario()));
                 specCrediario.put("quantidade", String.valueOf(c.getQuantidadeParcela()));
                 specCrediario.put("dataVenda", String.valueOf(c.getVenda().getDataVenda()));
-                List<Map> mapParcelas = new ArrayList();
-                for (Parcela par : c.getParcelas()) {
-                    Map<String, String> specParcela = new HashMap<>();
-                    specParcela.put("dataVencimento", String.valueOf(par.getDataVencimento()));
-                    specParcela.put("numeroParcela", String.valueOf(par.getParcela()));
-                    specParcela.put("valorParcela", String.valueOf(par.getValorParcela()));
-                    specParcela.put("status", par.getStatus());
-                    mapParcelas.add(specParcela);
-                }
-                specCrediario.put("parcelas", mapParcelas);
                 mapCrediario.add(specCrediario);
             }
         }
         return mapCrediario;
+    }
+    
+    public static List<Map> searchParcelas(Long){
+        
     }
 }
