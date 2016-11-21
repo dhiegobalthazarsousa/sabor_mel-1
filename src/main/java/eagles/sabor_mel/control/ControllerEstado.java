@@ -7,6 +7,7 @@ package eagles.sabor_mel.control;
 
 import eagles.sabor_mel.dao.EstadoDAO;
 import eagles.sabor_mel.model.Estado;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,27 +19,30 @@ import java.util.Map;
 
 public class ControllerEstado {
     
-    private static final EstadoDAO daoEstado = new EstadoDAO();
-    private static final List<Estado> estados = daoEstado.findAll();
-    
-    public static  Map <String, String> listEstados(){
-        Map<String, String> specEstado = new HashMap<>();
+    public static  List<Map<String, String>> listEstados(){
+        
+        EstadoDAO daoEstado = new EstadoDAO();
+        List<Estado> estados = daoEstado.findAll();
+        List<Map<String, String>> listaEstados = new ArrayList<Map<String, String>>();
         
         for(Estado e: estados){
+            Map<String, String> specEstado = new HashMap<>();
             specEstado.put("uf", String.valueOf(e.getUf()));
+            listaEstados.add(specEstado);
         }
         
-        return specEstado;
+        return listaEstados;
     }
     
     public static String escreverEstado(String uf){
-        
+        EstadoDAO daoEstado = new EstadoDAO();
         Estado estado = daoEstado.findByUf(uf);
         return estado.getNome();
         
     }
     
     public static Estado getEstadobyUf(String uf){
+        EstadoDAO daoEstado = new EstadoDAO();
         return daoEstado.findByUf(uf);
     }
 }

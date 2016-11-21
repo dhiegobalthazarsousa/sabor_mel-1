@@ -33,9 +33,7 @@ import java.util.Map;
 public class ControllerFuncionario {
     
     private static final FuncionarioDAO daoFuncionario = new FuncionarioDAO();
-//    private static final List<Funcionario> funcionarios = daoFuncionario.findAll();
-//    private static List<Map<String, String>> listaFuncionarios = new ArrayList<>();
-//    private static Map<String, String> specFuncionario;
+    
     /*
     * @author Tiago Lima Villalobos
     * Função para listar todos os funcionários cadastrados.

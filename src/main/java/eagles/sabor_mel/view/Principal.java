@@ -52,41 +52,50 @@ public class Principal extends javax.swing.JFrame {
      * @throws java.io.UnsupportedEncodingException
      */
     public Principal() throws NoSuchAlgorithmException, UnsupportedEncodingException {
-        if(!Login.login.getText().equals("")){
-            
-            Map <String, String> funcionario =
-                    ControllerFuncionario.searchFuncionario(Login.login.getText(), Login.senha.getText());
-            
-            initComponents();
-            
-            if(funcionario.get("acesso").equals("Vendedor")){
-                btnCompra.setEnabled(false);
-                btnRelatorio.setEnabled(false);
-                btnFornecedor.setEnabled(false);
-                btnUsuario.setEnabled(false);
+        try{
+            if(!Login.login.getText().equals("")){
+
+                Map <String, String> funcionario =
+                        ControllerFuncionario.searchFuncionario(Login.login.getText(), Login.senha.getText());
+
+                initComponents();
+
+                if(funcionario.get("acesso").equals("Vendedor")){
+                    btnCompra.setEnabled(false);
+                    btnRelatorio.setEnabled(false);
+                    btnFornecedor.setEnabled(false);
+                    btnUsuario.setEnabled(false);
+                }
+
+                logado.setText(funcionario.get("nome"));
+
+                this.setExtendedState(this.MAXIMIZED_BOTH); 
+
             }
-            
-            logado.setText(funcionario.get("nome"));
-            
-            this.setExtendedState(this.MAXIMIZED_BOTH); 
-            
+            else{
+                this.dispose();
+                JOptionPane.showMessageDialog(null, "Permissão Negada.... ");
+                new Login().setVisible(true);
+            }
         }
-        else{
+        catch(NullPointerException e){
+            JOptionPane.showMessageDialog(null, "Permissão Negada...");
             this.dispose();
-            JOptionPane.showMessageDialog(null, "Permissão Negada.... ");
-            new Login().setVisible(true);
+            //new Login().setVisible(true);
+            initComponents();
+            carregaComboEstados();
         }
         
         
     }
 
     public void carregaComboEstados() {
-        Map<String, String> estados = ControllerEstado.listEstados();
+        List<Map<String, String>> estados = ControllerEstado.listEstados();
         
         for(int i = 0; i < estados.size(); i++){
-            estadoUsuario.addItem(estados.get("uf"));
-            estadoCliente.addItem(estados.get("uf"));
-            estadoFornecedor.addItem(estados.get("uf"));
+            estadoUsuario.addItem(estados.get(i).get("uf"));
+            estadoCliente.addItem(estados.get(i).get("uf"));
+            estadoFornecedor.addItem(estados.get(i).get("uf"));
         }
     }
     
@@ -139,11 +148,10 @@ public class Principal extends javax.swing.JFrame {
     }
 
     public void carregaTabela(String menu) {
-         List<Map<String, String>> lista = null;
+        List<Map<String, String>> lista = null;
         
         if(menu.equals("usuario")){
             lista = ControllerFuncionario.listFuncionarios();
-            JOptionPane.showMessageDialog(null, lista.size());
             ((DefaultTableModel)tabelaUsuario.getModel()).setNumRows(0);
             
             for(int i = 0; i < lista.size(); i++){
@@ -161,7 +169,7 @@ public class Principal extends javax.swing.JFrame {
         }
         else{
             if(menu.equals("cliente")){
-                List<Map<String, String>> lista = ControllerPessoa.listClientes();
+                lista = ControllerPessoa.listClientes();
                 
                 ((DefaultTableModel)tabelaCliente.getModel()).setNumRows(0);
                 
@@ -178,7 +186,7 @@ public class Principal extends javax.swing.JFrame {
             }
             else{
                 if(menu.equals("fornecedor")){
-                    List<Map<String, String>> lista = ControllerPessoa.listFornecedores();
+                   lista = ControllerPessoa.listFornecedores();
                 
                     ((DefaultTableModel)tabelaFornecedor.getModel()).setNumRows(0);
 
@@ -195,7 +203,7 @@ public class Principal extends javax.swing.JFrame {
                 }
                 else{
                     if(menu.equals("produto")){
-                        List<Map<String, String>> lista = ControllerProduto.listProdutos();
+                        lista = ControllerProduto.listProdutos();
                 
                         ((DefaultTableModel)tabelaProduto.getModel()).setNumRows(0);
 
@@ -2002,6 +2010,7 @@ public class Principal extends javax.swing.JFrame {
         mainPanel.add(fornecedores, "fornecedores");
 
         deleteUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/delete.png"))); // NOI18N
+        deleteUsuario.setEnabled(false);
         deleteUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 deleteUsuarioMouseClicked(evt);
@@ -2099,11 +2108,10 @@ public class Principal extends javax.swing.JFrame {
                                 .addComponent(dddUsuario2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(telefoneUsuario2, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelUsuarioDadoPessoalLayout.createSequentialGroup()
+                            .addGroup(panelUsuarioDadoPessoalLayout.createSequentialGroup()
                                 .addComponent(dddUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(telefoneUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addComponent(telefoneUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(panelUsuarioDadoPessoalLayout.createSequentialGroup()
                         .addGroup(panelUsuarioDadoPessoalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelUsuarioDadoPessoalLayout.createSequentialGroup()
@@ -2128,8 +2136,8 @@ public class Principal extends javax.swing.JFrame {
                                 .addGap(22, 22, 22)))
                         .addGroup(panelUsuarioDadoPessoalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(sexoUsuario, 0, 82, Short.MAX_VALUE)
-                            .addComponent(dataNascimentoUsuario))
-                        .addContainerGap(70, Short.MAX_VALUE))))
+                            .addComponent(dataNascimentoUsuario))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelUsuarioDadoPessoalLayout.setVerticalGroup(
             panelUsuarioDadoPessoalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2207,7 +2215,7 @@ public class Principal extends javax.swing.JFrame {
                         .addGroup(panelUsuarioEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(estadoUsuario, 0, 65, Short.MAX_VALUE)
                             .addComponent(numeroUsuario))))
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
         panelUsuarioEnderecoLayout.setVerticalGroup(
             panelUsuarioEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -3414,8 +3422,8 @@ public class Principal extends javax.swing.JFrame {
         
 
         if (retorno == JFileChooser.APPROVE_OPTION) {
-            caminhoArquivo = arquivo.getSelectedFile().getAbsolutePath();
-            nomeArquivo = arquivo.getSelectedFile().getName();
+            String caminhoArquivo = arquivo.getSelectedFile().getAbsolutePath();
+            String nomeArquivo = arquivo.getSelectedFile().getName();
             File selecionado = arquivo.getSelectedFile();
 
             String extensao = getExtensaoArquivo(selecionado);
@@ -3474,10 +3482,10 @@ public class Principal extends javax.swing.JFrame {
 
                                     Produto objProduto = new Produto(
                                       descricaoProduto.getText(), Integer.parseInt(quantidadeProduto.getValue().toString()),
-                                      Double.parseDouble(precoProduto.getText().replace("R$", "").replace(",", ".")), (Paths.get(resource.toURI()).toFile()+ "/" +nomeArquivo));
+                                      Double.parseDouble(precoProduto.getText().replace("R$", "").replace(",", ".")), (Paths.get(resource.toURI()).toFile()+ "/" +"nomeArquivo"));
 
-                                    origem = new FileInputStream(caminhoArquivo);
-                                    destino = new FileOutputStream( Paths.get(resource.toURI()).toFile()+ "/" +nomeArquivo);
+                                    origem = new FileInputStream("caminhoArquivo");
+                                    destino = new FileOutputStream( Paths.get(resource.toURI()).toFile()+ "/" +"nomeArquivo");
 
                                     fcOrigem = origem.getChannel();
                                     fcDestino = destino.getChannel();
@@ -3497,15 +3505,9 @@ public class Principal extends javax.swing.JFrame {
                                 }
 
 
+                                limpaCampos("produto");
 
-                                acao = "insert";
-//                                Mensagem msg = new Mensagem();
-//                                Thread mensagemT = new Thread(msg);
-//                                mensagemT.start();
-
-                                limpaCampos();
-
-                                carregaDados();
+                                carregaTabela("produto");
                             }
                             else{
                                 /*Atualiza os Dados*/
@@ -3521,7 +3523,7 @@ public class Principal extends javax.swing.JFrame {
                                 produto.setValorUnitario(Double.parseDouble(precoProduto.getText().replace("R$", "").replace(",", ".")));
                                 produto.setDescricao(descricaoProduto.getText());
                                 
-                                if(!caminhoArquivo.isEmpty()){
+                                if(!"caminhoArquivo".isEmpty()){
                                     FileInputStream origem;
                                     FileOutputStream destino;
                                     FileChannel fcOrigem;
@@ -3532,11 +3534,11 @@ public class Principal extends javax.swing.JFrame {
                                     
                                     try {
                                         URL resource = Principal.class.getResource("/produtos/");
-                                        origem = new FileInputStream(caminhoArquivo);
-                                        JOptionPane.showMessageDialog(null, caminhoArquivo);
-                                        JOptionPane.showMessageDialog(null, nomeArquivo);
-                                        destino = new FileOutputStream( Paths.get(resource.toURI()).toFile()+ "/" +nomeArquivo);
-                                        produto.setImagem((Paths.get(resource.toURI()).toFile()+ "/" +nomeArquivo));
+                                        origem = new FileInputStream("caminhoArquivo");
+                                        JOptionPane.showMessageDialog(null, "caminhoArquivo");
+                                        JOptionPane.showMessageDialog(null, "nomeArquivo");
+                                        destino = new FileOutputStream( Paths.get(resource.toURI()).toFile()+ "/" +"nomeArquivo");
+                                        produto.setImagem((Paths.get(resource.toURI()).toFile()+ "/" +"nomeArquivo"));
                                         
                                         fcOrigem = origem.getChannel();
                                         fcDestino = destino.getChannel();
@@ -3562,13 +3564,9 @@ public class Principal extends javax.swing.JFrame {
                                 
                                 dao.merge(produto);
 
-                                acao = "edit";
-//                                Mensagem msg = new Mensagem();
-//                                Thread mensagemT = new Thread(msg);
-//                                mensagemT.start();
 
-                                limpaCampos();
-                                carregaDados();
+                                limpaCampos("produto");
+                                carregaTabela("produto");
                             
                             }
 
@@ -4010,7 +4008,7 @@ public class Principal extends javax.swing.JFrame {
                     new Principal().setVisible(true);
                 } 
                 catch (NoSuchAlgorithmException | UnsupportedEncodingException ex) {
-                    JOptionPane(null, "Erro ao carregar o software\nEntre em contato com o administrador");
+                    JOptionPane.showMessageDialog(null, "Erro ao carregar o software\nEntre em contato com o administrador");
                 } 
             }
         });

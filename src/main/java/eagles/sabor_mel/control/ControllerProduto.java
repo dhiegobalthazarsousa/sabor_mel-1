@@ -19,11 +19,12 @@ import java.util.List;
 public class ControllerProduto {
     
     private static ProdutoDAO daoProduto = new ProdutoDAO();
-    private static final List<Produto> produtos = daoProduto.findAll();
-    private static Map<String, String> specProduto;
-    private static final List<Map<String, String>> listaProdutos = new ArrayList<>();
     
     public static List<Map<String, String>> listProdutos(){
+        List<Map<String, String>> listaProdutos = new ArrayList<>();
+        Map<String, String> specProduto = new HashMap();
+        List<Produto> produtos = daoProduto.findAll();
+        
         for(Produto p: produtos){
             Double total = p.getQuantidade() * p.getValorUnitario();
             
@@ -40,7 +41,7 @@ public class ControllerProduto {
     }
     
     public static boolean cadastrar(String descricao, Integer quantidade,
-            Double valorUnitario, String imagem){
+        Double valorUnitario, String imagem){
         
         Produto produto = new Produto(descricao, quantidade, valorUnitario, imagem);
         
