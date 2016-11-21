@@ -43,5 +43,6 @@ public class ControllerFornecimento {
             fornecimento.addItem(itemFornecimento);
         }
         return daoFornecimento.merge(fornecimento);
-    }
+    }  
+        
 }

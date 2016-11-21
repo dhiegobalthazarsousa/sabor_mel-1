@@ -13,8 +13,10 @@ public class CrediarioDAO extends DAO<Crediario>{
         return entityManager.find(Crediario.class, id);
     }
     
-    public Crediario getByPessoa(Long id){
-        return (Crediario) entityManager.createQuery("SELECT * FROM Crediario WHERE pessoa = '"+id+"';").getSingleResult();
+    public List<Crediario> getByCliente(Long id){
+        Query query = entityManager.createQuery("FROM Crediario c WHERE c.venda.idCliente = :id");
+        query.setParameter("id", id);
+        return query.getResultList();
     }
     
     public boolean removeById(final Long id) {
