@@ -1,5 +1,6 @@
 package eagles.sabor_mel.view;
 
+import eagles.sabor_mel.control.ControllerFuncionario;
 import eagles.sabor_mel.control.HashSha;
 import eagles.sabor_mel.dao.*;
 import java.awt.Cursor;
@@ -7,8 +8,11 @@ import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.persistence.NoResultException;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 
@@ -17,14 +21,6 @@ import javax.swing.SwingConstants;
  * @author Tiago Lima Villalobos
  */
 public class Login extends javax.swing.JFrame {
-    
-    /*Controle de Login*/
-    public static boolean permitir = false;
-    
-    /**/
-    public static String nivelAcesso = "";
-    public static String nome = "";
-    
     /**
      * Creates new form Login
      */
@@ -37,7 +33,7 @@ public class Login extends javax.swing.JFrame {
             avisoCapsLock.setText(null);
         }
         this.setLocationRelativeTo(null);
-        usuario.requestFocus();
+        login.requestFocus();
         logo.setHorizontalAlignment(SwingConstants.CENTER);
         titulo.setHorizontalAlignment(SwingConstants.CENTER);
     }
@@ -59,11 +55,11 @@ public class Login extends javax.swing.JFrame {
 
         logo = new javax.swing.JLabel();
         titulo = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        usuario = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
+        labelLogin = new javax.swing.JLabel();
+        login = new javax.swing.JTextField();
+        labelSenha = new javax.swing.JLabel();
         senha = new javax.swing.JPasswordField();
-        entrar = new javax.swing.JButton();
+        btnEntrar = new javax.swing.JButton();
         lblSair = new javax.swing.JLabel();
         avisoCapsLock = new javax.swing.JLabel();
 
@@ -75,15 +71,15 @@ public class Login extends javax.swing.JFrame {
         titulo.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         titulo.setText("Login");
 
-        jLabel3.setText("Usuário");
+        labelLogin.setText("Usuário");
 
-        usuario.addKeyListener(new java.awt.event.KeyAdapter() {
+        login.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                usuarioKeyTyped(evt);
+                loginKeyTyped(evt);
             }
         });
 
-        jLabel4.setText("Senha");
+        labelSenha.setText("Senha");
 
         senha.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -91,23 +87,18 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
-        entrar.setText("Entrar");
-        entrar.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnEntrar.setText("Entrar");
+        btnEntrar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                entrarMouseClicked(evt);
+                btnEntrarMouseClicked(evt);
             }
         });
 
         lblSair.setText("sair...");
+        lblSair.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblSair.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblSairMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                lblSairMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                lblSairMouseExited(evt);
             }
         });
 
@@ -124,23 +115,23 @@ public class Login extends javax.swing.JFrame {
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(titulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(logo, javax.swing.GroupLayout.DEFAULT_SIZE, 317, Short.MAX_VALUE)))
+                            .addComponent(logo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(58, 58, 58)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(labelLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(labelSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(usuario)
+                                    .addComponent(login)
                                     .addComponent(senha, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addComponent(avisoCapsLock)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(entrar)))
+                                .addComponent(btnEntrar)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(lblSair)))
                 .addContainerGap())
@@ -156,14 +147,14 @@ public class Login extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(labelLogin)
+                            .addComponent(login, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(senha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4))
+                            .addComponent(labelSenha))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(entrar)
+                        .addComponent(btnEntrar)
                         .addContainerGap(23, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -176,71 +167,51 @@ public class Login extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void entrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_entrarMouseClicked
-        FuncionarioDAO dao = new FuncionarioDAO();
-        boolean found = false;
-        for(int i = 0; i < dao.findAll().size(); i++){
-            if(dao.findAll().get(i).getUsuario().equals(usuario.getText())){
-                HashSha hash = new HashSha(dao.findAll().get(i).getSenha());
-                HashSha hashNova = new HashSha(senha.getText());
-                
-                String hashSenha = "";
-                String hashNovaSenha  = "";
+    private void btnEntrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEntrarMouseClicked
+        if(!login.getText().equals("")){
+            if(!senha.getText().equals("")){
                 try {
-                    hashSenha = hash.hashSenha();
-                    hashNovaSenha = hash.hashSenha();
+                    ControllerFuncionario.searchFuncionario(login.getText(), senha.getText());
+                    
+                    this.dispose();
+                    new Principal().setVisible(true);
+                   
                 } 
-                catch (NoSuchAlgorithmException ex) {
-                    Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
-                } 
-                catch (UnsupportedEncodingException ex) {
-                    Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+                catch (NoSuchAlgorithmException | UnsupportedEncodingException ex) {
+                    JOptionPane.showMessageDialog(null, "Erro no Algoritmo!\nEntrar em contato com o Administrador.");
+                }
+                catch (NoResultException nre){
+                    JOptionPane.showMessageDialog(null, "Usuário não encontrado!");
+                    login.setText(null);
+                    senha.setText(null);
+
+                    login.requestFocus();
                 }
                 
-                
-                if(hashSenha.equals(hashNovaSenha)){
-                    found = true;
-                    nivelAcesso = dao.findAll().get(i).getAcesso().toString();
-                    nome = dao.findAll().get(i).getNome();
-                    break;
-                }
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Informe a senha!");
+                senha.requestFocus();
             }
         }
-        
-        if(found){
-            permitir = true;
-            this.dispose();
-            new Principal().setVisible(true);
-        }
         else{
-            JOptionPane.showMessageDialog(null,"Usuário ou Senha Inválida!");
-            usuario.setText(null);
-            senha.setText(null);
+            JOptionPane.showMessageDialog(null, "Informe o usuário!");
+            login.requestFocus();
         }
-    }//GEN-LAST:event_entrarMouseClicked
+    }//GEN-LAST:event_btnEntrarMouseClicked
 
     private void lblSairMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSairMouseClicked
         System.exit(0);
     }//GEN-LAST:event_lblSairMouseClicked
 
-    private void lblSairMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSairMouseEntered
-        Cursor cursor = Cursor.getPredefinedCursor(Cursor.HAND_CURSOR); 
-        setCursor(cursor);
-    }//GEN-LAST:event_lblSairMouseEntered
-
-    private void lblSairMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSairMouseExited
-        Cursor cursor = Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR); 
-        setCursor(cursor);
-    }//GEN-LAST:event_lblSairMouseExited
-
-    private void usuarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_usuarioKeyTyped
+    private void loginKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_loginKeyTyped
        if(checkCapsLock()){
             avisoCapsLock.setText("TECLA CAPS LOCK ATIVADA!");
         }
         else{
             avisoCapsLock.setText(null);
         }
-    }//GEN-LAST:event_usuarioKeyTyped
+    }//GEN-LAST:event_loginKeyTyped
 
     private void senhaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_senhaKeyTyped
         if(checkCapsLock()){
@@ -288,13 +259,13 @@ public class Login extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel avisoCapsLock;
-    private javax.swing.JButton entrar;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
+    private javax.swing.JButton btnEntrar;
+    private javax.swing.JLabel labelLogin;
+    private javax.swing.JLabel labelSenha;
     private javax.swing.JLabel lblSair;
+    public static javax.swing.JTextField login;
     private javax.swing.JLabel logo;
-    private javax.swing.JPasswordField senha;
+    public static javax.swing.JPasswordField senha;
     private javax.swing.JLabel titulo;
-    private javax.swing.JTextField usuario;
     // End of variables declaration//GEN-END:variables
 }

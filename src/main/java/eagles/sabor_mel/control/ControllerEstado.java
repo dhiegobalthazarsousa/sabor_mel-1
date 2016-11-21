@@ -7,18 +7,29 @@ package eagles.sabor_mel.control;
 
 import eagles.sabor_mel.dao.EstadoDAO;
 import eagles.sabor_mel.model.Estado;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  *
  * @author a1655086
  */
 
-
-
 public class ControllerEstado {
     
-    private static EstadoDAO daoEstado = new EstadoDAO();
+    private static final EstadoDAO daoEstado = new EstadoDAO();
+    private static final List<Estado> estados = daoEstado.findAll();
     
+    public static  Map <String, String> listEstados(){
+        Map<String, String> specEstado = new HashMap<>();
+        
+        for(Estado e: estados){
+            specEstado.put("uf", String.valueOf(e.getUf()));
+        }
+        
+        return specEstado;
+    }
     
     public static String escreverEstado(String uf){
         

@@ -7,8 +7,10 @@ package eagles.sabor_mel.control;
 
 import eagles.sabor_mel.dao.ProdutoDAO;
 import eagles.sabor_mel.model.Produto;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.List;
 
 /**
  *
@@ -17,6 +19,25 @@ import java.util.Map;
 public class ControllerProduto {
     
     private static ProdutoDAO daoProduto = new ProdutoDAO();
+    private static final List<Produto> produtos = daoProduto.findAll();
+    private static Map<String, String> specProduto;
+    private static final List<Map<String, String>> listaProdutos = new ArrayList<>();
+    
+    public static List<Map<String, String>> listProdutos(){
+        for(Produto p: produtos){
+            Double total = p.getQuantidade() * p.getValorUnitario();
+            
+            specProduto.put("id", String.valueOf(p.getIdProduto()));
+            specProduto.put("descricao", String.valueOf(p.getDescricao()));
+            specProduto.put("valorUnitario", String.valueOf(p.getValorUnitario()));
+            specProduto.put("quantidade", String.valueOf(p.getQuantidade()));
+            specProduto.put("total", String.valueOf(total));
+            
+            listaProdutos.add(specProduto);
+        }
+        
+        return listaProdutos;
+    }
     
     public static boolean cadastrar(String descricao, Integer quantidade,
             Double valorUnitario, String imagem){
@@ -37,5 +58,9 @@ public class ControllerProduto {
         specProduto.put("imagem", produto.getImagem());
         
         return specProduto;
+    }
+    
+    public static boolean deleteProduto(Long id){
+        return daoProduto.removeById(id);
     }
 }
