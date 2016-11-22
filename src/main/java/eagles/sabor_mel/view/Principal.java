@@ -1212,6 +1212,7 @@ public class Principal extends javax.swing.JFrame {
         mainPanel.add(clientes, "clientes");
 
         deleteProduto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/delete.png"))); // NOI18N
+        deleteProduto.setEnabled(false);
         deleteProduto.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 deleteProdutoMouseClicked(evt);
@@ -3521,8 +3522,6 @@ public class Principal extends javax.swing.JFrame {
                                 FileChannel fcDestino;
 
                                 /*Persistindo Produto*/
-                                
-
                                 try {
 
                                    URL resource = Principal.class.getResource("/produtos/");
@@ -3561,42 +3560,42 @@ public class Principal extends javax.swing.JFrame {
                             }
                             else{
                                 /*Atualiza os Dados*/
-                                ProdutoDAO dao = new ProdutoDAO();
-
                                 Long id = Long.parseLong(
                                     (String) tabelaProduto.getValueAt(tabelaProduto.getSelectedRow(), 0)
                                 );
 
-                                Produto produto = dao.getById(id);
+                                ControllerProduto.alterProduto(
+                                    id, 
+                                    descricaoProduto.getText(), 
+                                    Double.parseDouble(precoProduto.getText().replace(",", ".")),
+                                    Integer.parseInt(quantidadeProduto.getValue().toString()), 
+                                    labelNomeArquivo.getText()
+                                );
 
-                                produto.setQuantidade(Integer.parseInt(quantidadeProduto.getValue().toString()));
-                                produto.setValorUnitario(Double.parseDouble(precoProduto.getText().replace("R$", "").replace(",", ".")));
-                                produto.setDescricao(descricaoProduto.getText());
                                 
-                                if(!"caminhoArquivo".isEmpty()){
+                                Map<String, String> produto = ControllerProduto.searchProduto(id);
+                                if(!produto.get("imagem").equals(labelNomeArquivo.getText())){
                                     FileInputStream origem;
                                     FileOutputStream destino;
                                     FileChannel fcOrigem;
                                     FileChannel fcDestino;
                                     
-                                    File imagemAntiga = new File(produto.getImagem());
+                                    File imagemAntiga = new File(produto.get("imagem"));
                                     imagemAntiga.delete();
                                     
                                     try {
                                         URL resource = Principal.class.getResource("/produtos/");
-                                        origem = new FileInputStream("caminhoArquivo");
+                                        origem = new FileInputStream(labelCaminhoArquivo.getText());
                                         
-                                        destino = new FileOutputStream( Paths.get(resource.toURI()).toFile()+ "/" +"nomeArquivo");
-                                        produto.setImagem((Paths.get(resource.toURI()).toFile()+ "/" +"nomeArquivo"));
-                                        
+                                        destino = new FileOutputStream(Paths.get(resource.toURI()).toFile()+ "/" +labelNomeArquivo.getText());
+
                                         fcOrigem = origem.getChannel();
                                         fcDestino = destino.getChannel();
 
                                         fcOrigem.transferTo(0, fcOrigem.size(), fcDestino);
-                                        
+
                                         origem.close();
                                         destino.close();
-                                       
                                     } 
                                     catch (FileNotFoundException ex) {
                                         Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
@@ -3610,13 +3609,8 @@ public class Principal extends javax.swing.JFrame {
                                     
                                 }
                                 
-                                
-                                dao.merge(produto);
-
-
                                 limpaCampos("produto");
                                 carregaTabela("produto");
-                            
                             }
 
                         }

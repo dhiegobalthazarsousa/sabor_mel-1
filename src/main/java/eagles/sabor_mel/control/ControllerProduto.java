@@ -46,6 +46,7 @@ public class ControllerProduto {
         return daoProduto.merge(produto); 
     }
     
+    
     public static Map<String,String> searchProduto(Long id){
         Produto produto = daoProduto.getById(id);
         Map<String,String> specProduto = new HashMap<>();
@@ -83,5 +84,17 @@ public class ControllerProduto {
     
     public static boolean deleteProduto(Long id){
         return daoProduto.removeById(id);
+    }
+    
+    public static boolean alterProduto(Long id, String descricao, Double valorUnitario,
+            Integer quantidade, String imagem){
+        
+        Produto produto = daoProduto.getById(id);
+        produto.setDescricao(descricao);
+        produto.setImagem(imagem);
+        produto.setQuantidade(quantidade);
+        produto.setValorUnitario(valorUnitario);
+        
+        return daoProduto.merge(produto);
     }
 }
