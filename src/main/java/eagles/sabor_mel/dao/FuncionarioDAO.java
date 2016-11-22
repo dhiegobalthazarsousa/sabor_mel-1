@@ -50,7 +50,6 @@ public class FuncionarioDAO extends DAO<Funcionario>{
     public Funcionario getByNameSenha(String usuario, String senha) throws NoSuchAlgorithmException, UnsupportedEncodingException{
         HashSha hash = new HashSha(senha);
         senha = hash.hashSenha();
-        JOptionPane.showMessageDialog(null, senha);
         
         Query query = entityManager.createQuery("FROM Funcionario f WHERE f.usuario = :usuario AND f.senha = :senha");
         

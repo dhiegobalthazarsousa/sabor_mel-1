@@ -25,6 +25,7 @@ import java.nio.file.Paths;
 import java.text.DecimalFormat;
 import java.util.Calendar;
 import javax.swing.JFileChooser;
+import java.util.GregorianCalendar;
 
 
 /**
@@ -33,19 +34,19 @@ import javax.swing.JFileChooser;
  * 
  */
 public class Temp {
-    public static void main(String[] args) throws FileNotFoundException, IOException, URISyntaxException{
-        
+    public static void main(String[] args){
+        DecimalFormat df = new DecimalFormat("00");
+        DecimalFormat dff = new DecimalFormat("0000");
         PessoaDAO dao = new PessoaDAO();
-        
         Pessoa pessoa = dao.getById(32L);
-        System.out.println(pessoa.getIdPessoa());
         
-        for(Telefone t: pessoa.getTelefones()){
-            System.out.println(t.getNumero());
-            
-        }
+        String data = "";
         
-        ControllerPessoa.
+        data = df.format(pessoa.getDataNascimento().get(Calendar.DAY_OF_MONTH))+"/";
+        data += df.format(pessoa.getDataNascimento().get(Calendar.MONTH)+1)+"/";
+        data += dff.format(pessoa.getDataNascimento().get(Calendar.YEAR));
+        
+        System.out.println(data);
         
         System.exit(0);
         

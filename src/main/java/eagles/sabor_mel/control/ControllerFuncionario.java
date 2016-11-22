@@ -9,6 +9,7 @@ import eagles.sabor_mel.dao.FuncionarioDAO;
 import eagles.sabor_mel.model.Acesso;
 import eagles.sabor_mel.model.Bairro;
 import eagles.sabor_mel.model.Cidade;
+import eagles.sabor_mel.model.DateGenerator;
 import eagles.sabor_mel.model.Documento;
 import eagles.sabor_mel.model.Endereco;
 import eagles.sabor_mel.model.Estado;
@@ -17,6 +18,7 @@ import eagles.sabor_mel.model.Sexo;
 import eagles.sabor_mel.model.Telefone;
 import eagles.sabor_mel.model.TipoDocumento;
 import eagles.sabor_mel.model.TipoTelefone;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
@@ -31,10 +33,58 @@ public class ControllerFuncionario {
     private static FuncionarioDAO daoFuncionario = new FuncionarioDAO();
 
     /*
-     * @author dhiego and ...
-     * This method search a Funcionario Object by Funcionario.nome
-     */
-    public static Map<String, String> searchFuncionario(String nome) {
+    * @author Tiago Lima Villalobos
+    * Função para listar todos os funcionários cadastrados.
+    *
+    */
+    public static  List<Map<String, String>> listFuncionarios(){
+        Map<String, String> specFuncionario = new HashMap<>();
+        List<Funcionario> funcionarios = daoFuncionario.findAll();
+        List<Map<String, String>> listaFuncionarios = new ArrayList<>();
+        
+        for(Funcionario f: funcionarios){
+            specFuncionario.put("id", String.valueOf(f.getIdPessoa()));
+            specFuncionario.put("nome", String.valueOf(f.getNome()));
+            specFuncionario.put("usuario", String.valueOf(f.getUsuario()));
+            specFuncionario.put("acesso", String.valueOf(f.getAcesso()));
+            
+            listaFuncionarios.add(specFuncionario);
+        }
+        
+        return listaFuncionarios;
+    }
+    
+    public static  Map<String, String> searchFuncionario(Long id){
+        Funcionario funcionario = daoFuncionario.getById(id);
+        Map<String, String> specFuncionario = new HashMap<>();
+        
+        specFuncionario.put("idPessoa", String.valueOf(funcionario.getIdPessoa()));
+        specFuncionario.put("nome", funcionario.getNome());
+        specFuncionario.put("dataNascimento", DateGenerator.dateFormat(funcionario.getDataNascimento()));
+        specFuncionario.put("email", funcionario.getEmail());
+        specFuncionario.put("sexo", String.valueOf(funcionario.getSexo()));
+        specFuncionario.put("documento", String.valueOf(funcionario.getDocumento().getNumero()));
+        
+        specFuncionario.put("cep", String.valueOf(funcionario.getEndereco().getCep()));
+        specFuncionario.put("logradouro", String.valueOf(funcionario.getEndereco().getLogradouro()));
+        specFuncionario.put("numero", String.valueOf(funcionario.getEndereco().getNumero()));
+        specFuncionario.put("bairro", String.valueOf(funcionario.getEndereco().getBairro().getNome()));
+        specFuncionario.put("cidade", String.valueOf(funcionario.getEndereco().getBairro().getCidade().getNome()));
+        specFuncionario.put("estado", String.valueOf(funcionario.getEndereco().getBairro().getCidade().getEstado().getUf()));
+        
+        specFuncionario.put("usuario", String.valueOf(funcionario.getUsuario()));
+        specFuncionario.put("acesso", String.valueOf(funcionario.getAcesso()));
+        
+        return specFuncionario;
+    }
+    
+    /*
+    * @author dhiego
+    * This function calls VendaDAO and CrediarioDAO to persist a sell.
+    *
+    */
+    public static Map<String, String> searchFuncionario(String nome){
+        FuncionarioDAO daoFuncionario = new FuncionarioDAO();
         Funcionario funcionario = daoFuncionario.getByName(nome);
         Map<String, String> specFuncionario = new HashMap<>();
         specFuncionario.put("idFuncionario", String.valueOf(funcionario.getIdPessoa()));
@@ -75,10 +125,4 @@ public class ControllerFuncionario {
         }
         return daoFuncionario.merge(funcionario);
     }
-    
-    public static List<Funcionario> findByName(String nome){        
-        FuncionarioDAO dao = new FuncionarioDAO();
-        return null; //dao.getByName(nome);
-    }
-
 }

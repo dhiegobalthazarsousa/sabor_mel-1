@@ -5,6 +5,7 @@
  */
 package eagles.sabor_mel.model;
 
+import java.text.DecimalFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -29,10 +30,14 @@ public class DateGenerator {
     }
     
     public static String dateFormat(Calendar cal){
+        DecimalFormat df = new DecimalFormat("00");
+        DecimalFormat dff = new DecimalFormat("0000");
+        
         String data = "";
-        data += cal.get(Calendar.DAY_OF_MONTH) + "/";
-        data += cal.get(Calendar.MONTH)+1 + "/";
-        data += cal.get(Calendar.YEAR);
+        data = df.format(cal.get(Calendar.DAY_OF_MONTH)) + "/";
+        data += df.format(cal.get(Calendar.MONTH)+1) + "/";
+        data += dff.format(cal.get(Calendar.YEAR));
+        
         return data;
     }
 }

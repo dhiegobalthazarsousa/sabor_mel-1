@@ -39,8 +39,8 @@ public class TelefoneDAO extends DAO<Telefone>{
     
     public List<Telefone> getByPessoa(Long id) {        
        
-        Query query = entityManager.createQuery("FROM Telefone t WHERE t.idPessoa = :id");
-        query.setParameter("idPessoa", id);
+        Query query = entityManager.createQuery("FROM Telefone t WHERE t.pessoa.idPessoa = :id");
+        query.setParameter("id", id);
         
         return query.getResultList();
     }

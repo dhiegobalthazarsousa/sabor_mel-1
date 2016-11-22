@@ -1,17 +1,11 @@
 package eagles.sabor_mel.view;
 
 import eagles.sabor_mel.control.ControllerFuncionario;
-import eagles.sabor_mel.control.HashSha;
-import eagles.sabor_mel.dao.*;
-import java.awt.Cursor;
+import java.awt.HeadlessException;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.persistence.NoResultException;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
@@ -82,6 +76,9 @@ public class Login extends javax.swing.JFrame {
         labelSenha.setText("Senha");
 
         senha.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                senhaKeyPressed(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 senhaKeyTyped(evt);
             }
@@ -168,6 +165,10 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEntrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEntrarMouseClicked
+        logar();
+    }//GEN-LAST:event_btnEntrarMouseClicked
+
+    public void logar() throws HeadlessException {
         if(!login.getText().equals("")){
             if(!senha.getText().equals("")){
                 try {
@@ -175,8 +176,8 @@ public class Login extends javax.swing.JFrame {
                     
                     this.dispose();
                     new Principal().setVisible(true);
-                   
-                } 
+                    
+                }
                 catch (NoSuchAlgorithmException | UnsupportedEncodingException ex) {
                     JOptionPane.showMessageDialog(null, "Erro no Algoritmo!\nEntrar em contato com o Administrador.");
                 }
@@ -184,7 +185,7 @@ public class Login extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "Usuário não encontrado!");
                     login.setText(null);
                     senha.setText(null);
-
+                    
                     login.requestFocus();
                 }
                 
@@ -198,7 +199,7 @@ public class Login extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Informe o usuário!");
             login.requestFocus();
         }
-    }//GEN-LAST:event_btnEntrarMouseClicked
+    }
 
     private void lblSairMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSairMouseClicked
         System.exit(0);
@@ -222,6 +223,12 @@ public class Login extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_senhaKeyTyped
 
+    private void senhaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_senhaKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) { 
+            logar();
+        } 
+    }//GEN-LAST:event_senhaKeyPressed
+
     /**
      * @param args the command line arguments
      */
@@ -233,7 +240,7 @@ public class Login extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }

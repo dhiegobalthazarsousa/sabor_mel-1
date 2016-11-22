@@ -8,6 +8,7 @@ package eagles.sabor_mel.control;
 import eagles.sabor_mel.dao.PessoaDAO;
 import eagles.sabor_mel.model.Bairro;
 import eagles.sabor_mel.model.Cidade;
+import eagles.sabor_mel.model.DateGenerator;
 import eagles.sabor_mel.model.Documento;
 import eagles.sabor_mel.model.Endereco;
 import eagles.sabor_mel.model.Estado;
@@ -32,14 +33,17 @@ public class ControllerPessoa {
     
     public static List<Map<String, String>> listClientes(){
         List<Map<String, String>> listaPessoas = new ArrayList<>();
-        Map<String, String> specPessoa = new HashMap();
+        
         List<Pessoa> pessoas = daoPessoa.findAll();
         
         for(Pessoa p: pessoas){
             if(String.valueOf(p.getDocumento().getTipo()).equals("CPF")){
-                specPessoa.put("idPessoa", String.valueOf(p.getIdPessoa()));
-                specPessoa.put("nome", String.valueOf(p.getNome()));
-                listaPessoas.add(specPessoa);
+                if(!(String.valueOf(p.getNome()).equals("Cliente")) && !(String.valueOf(p.getNome()).equals("Administrador"))){
+                    Map<String, String> specPessoa = new HashMap();
+                    specPessoa.put("idPessoa", String.valueOf(p.getIdPessoa()));
+                    specPessoa.put("nome", String.valueOf(p.getNome()));
+                    listaPessoas.add(specPessoa);
+                }
             }
         }
         
@@ -148,6 +152,28 @@ public class ControllerPessoa {
         
     }
     
+    /*Consulta pessoas por nome*/
+    public static List<Map<String,String>> searchPessoaNome(String nome){
+        List<Map<String, String>> pessoas = new ArrayList<>();
+        List<Pessoa> listPessoas = daoPessoa.getByNome(nome);
+        
+        for(Pessoa p : listPessoas){
+            Map<String, String> specPessoa = new HashMap<>();
+            if(!(p.getNome().equals("Cliente")) && !(p.getNome().equals("Administrador"))){
+                specPessoa.put("idPessoa", String.valueOf(p.getIdPessoa()));
+                specPessoa.put("nome", p.getNome());
+                specPessoa.put("dataNascimento", String.valueOf(p.getDataNascimento()));
+                specPessoa.put("email", p.getEmail());
+                specPessoa.put("sexo", String.valueOf(p.getSexo()));
+
+                pessoas.add(specPessoa);
+            }
+        }
+        
+        return pessoas;
+        
+    }
+    
     /*
      * @author Dhiego and ...
      * This Method searchs a Pessoa Object by Pessoa.idPessoa
@@ -155,9 +181,11 @@ public class ControllerPessoa {
     public static Map<String,String> searchPessoa(Long id){
         Pessoa pessoa = daoPessoa.getById(id);
         Map<String, String> specPessoa = new HashMap();
+        DateGenerator dg = new DateGenerator();
+        
         specPessoa.put("idPessoa", String.valueOf(pessoa.getIdPessoa()));
         specPessoa.put("nome", pessoa.getNome());
-        specPessoa.put("dataNascimento", String.valueOf(pessoa.getDataNascimento()));
+        specPessoa.put("dataNascimento", dg.dateFormat(pessoa.getDataNascimento()));
         specPessoa.put("email", pessoa.getEmail());
         specPessoa.put("sexo", String.valueOf(pessoa.getSexo()));
         specPessoa.put("documento", String.valueOf(pessoa.getDocumento().getNumero()));
