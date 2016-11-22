@@ -27,4 +27,12 @@ public class DateGenerator {
     public static int getYear(){
         return CALENDAR.get(Calendar.YEAR);
     }
+    
+    public static String dateFormat(Calendar cal){
+        String data = "";
+        data += cal.get(Calendar.DAY_OF_MONTH) + "/";
+        data += cal.get(Calendar.MONTH)+1 + "/";
+        data += cal.get(Calendar.YEAR);
+        return data;
+    }
 }

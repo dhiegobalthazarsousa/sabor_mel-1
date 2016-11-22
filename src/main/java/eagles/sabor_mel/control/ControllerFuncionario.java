@@ -19,6 +19,7 @@ import eagles.sabor_mel.model.TipoDocumento;
 import eagles.sabor_mel.model.TipoTelefone;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -74,4 +75,10 @@ public class ControllerFuncionario {
         }
         return daoFuncionario.merge(funcionario);
     }
+    
+    public static List<Funcionario> findByName(String nome){        
+        FuncionarioDAO dao = new FuncionarioDAO();
+        return null; //dao.getByName(nome);
+    }
+
 }

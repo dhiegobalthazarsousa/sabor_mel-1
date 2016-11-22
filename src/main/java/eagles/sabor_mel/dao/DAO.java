@@ -5,13 +5,13 @@ import java.util.*;
 
 public abstract class DAO<E> {
 
-	protected EntityManager entityManager;
+    protected static EntityManager entityManager = DAO.getEntityManager();
 	 
     public DAO() {
-        entityManager = getEntityManager();
+        //entityManager = getEntityManager();
     }
  
-    private EntityManager getEntityManager() {
+    private static EntityManager getEntityManager() {
         
     	EntityManagerFactory factory = 
         		Persistence.createEntityManagerFactory("sabor_mel");

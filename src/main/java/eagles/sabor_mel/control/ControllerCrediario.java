@@ -6,6 +6,7 @@
 package eagles.sabor_mel.control;
 
 import eagles.sabor_mel.dao.CrediarioDAO;
+import eagles.sabor_mel.dao.ParcelaDAO;
 import eagles.sabor_mel.model.Crediario;
 import eagles.sabor_mel.model.Parcela;
 import eagles.sabor_mel.model.Venda;
@@ -22,6 +23,7 @@ import java.util.Map;
 public class ControllerCrediario {
 
     private static CrediarioDAO daoCrediario = new CrediarioDAO();
+    private static ParcelaDAO daoParcela = new ParcelaDAO();
 
     public static boolean createCrediario(int quantidadeParcela, int dia, int mes, int ano, double valorTotal, Venda venda) {
         daoCrediario = new CrediarioDAO();
@@ -48,14 +50,14 @@ public class ControllerCrediario {
     }
 
     public static List<Map> searchCrediario(String documentoCliente) {
-        Map<String,String> cliente = ControllerPessoa.searchPessoa(documentoCliente);
+
+        Map<String, String> cliente = ControllerPessoa.searchPessoa(documentoCliente);
         String value = cliente.get("idPessoa");
         List<Crediario> crediarios = daoCrediario.getByCliente(Long.valueOf(cliente.get("idPessoa")));
 
         List<Map> mapCrediario = new ArrayList<>();
         if (!crediarios.isEmpty()) {
-            for (Map<String, String> specVenda : mapVendas) {
-                Crediario c = daoCrediario.getByVendaId(Long.valueOf(specVenda.get("idVenda")));
+            for (Crediario c : crediarios) {
                 Map<String, String> specCrediario = new HashMap<>();
                 specCrediario.put("idCrediario", String.valueOf(c.getIdCrediario()));
                 specCrediario.put("quantidade", String.valueOf(c.getQuantidadeParcela()));
@@ -65,8 +67,16 @@ public class ControllerCrediario {
         }
         return mapCrediario;
     }
-    
-    public static List<Map> searchParcelas(Long){
-        
+
+    public static List<Map> searchParcelas(Long id) {
+        List<Parcela> parcelas = daoParcela.getByCrediario(id);
+        if (!parcelas.isEmpty()) {
+            for (Parcela p : parcelas) {
+                Map<String, String> specParcela = new HashMap<>();
+                specParcela.put("idParcela", String.valueOf(p.getIdParcela()));
+                specParcela.put("numeroParcela", String.valueOf(p.getParcela()));
+                specParcela.put("", p.getDataVencimento());
+            }
+        }
     }
 }

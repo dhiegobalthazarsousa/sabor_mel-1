@@ -114,7 +114,7 @@ public class ControllerVendas {
      * @author Dhiego e Thiago
      * Método para venda À VISTA
      */
-    public boolean vender(Long idPessoa, Long idFuncionario, TipoVenda tipoVenda, Long[] produtos, int[] quantidades, double desconto) {
+    public static boolean vender(Long idPessoa, Long idFuncionario, TipoVenda tipoVenda, Long[] produtos, int[] quantidades, double desconto) {
         Venda venda = createVenda(idPessoa, idFuncionario, tipoVenda, desconto, produtos, quantidades);
 
         return daoVenda.merge(venda);

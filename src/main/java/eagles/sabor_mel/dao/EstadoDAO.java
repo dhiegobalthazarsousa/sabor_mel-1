@@ -26,9 +26,9 @@ public class EstadoDAO extends DAO<Estado>{
     }
  
     @SuppressWarnings({"unchecked", "JPQLValidation"})
-	public List<Estado> findAll() {
-    	return entityManager
-    		.createQuery("FROM Estado").getResultList();
+    public List<Estado> findAll() {
+        return entityManager
+            .createQuery("FROM Estado").getResultList();
     }
         
         
