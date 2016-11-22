@@ -43,7 +43,7 @@ public class Produto implements Serializable{
     private List<ItemVenda> itens;
     
     /*Construtores*/
-    Produto() {}
+    public Produto() {}
     
     public Produto(String descricao, Integer quantidade, Double valorUnitario, String imagem){
         this.descricao = descricao;
