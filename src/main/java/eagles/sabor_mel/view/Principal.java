@@ -9,6 +9,7 @@ import eagles.sabor_mel.control.Validacao;
 import eagles.sabor_mel.dao.PessoaDAO;
 import eagles.sabor_mel.dao.ProdutoDAO;
 import eagles.sabor_mel.model.Acesso;
+import eagles.sabor_mel.model.DateGenerator;
 import eagles.sabor_mel.model.Produto;
 import eagles.sabor_mel.model.Sexo;
 import eagles.sabor_mel.model.TipoDocumento;
@@ -31,6 +32,7 @@ import java.nio.channels.FileChannel;
 import java.nio.file.Paths;
 import java.security.NoSuchAlgorithmException;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
@@ -2712,9 +2714,11 @@ public class Principal extends javax.swing.JFrame {
        }
        else{
            if(menu.equals("cliente")){
+               
                Long id = Long.parseLong((String) tabelaCliente.getValueAt(tabelaCliente.getSelectedRow(), 0));
                Map<String, String> pessoa;
                pessoa = ControllerPessoa.searchPessoa(id);
+               
                
                 /*Dados Pessoais*/
                 nomeCliente.setText(pessoa.get("nome"));
@@ -2722,6 +2726,7 @@ public class Principal extends javax.swing.JFrame {
                 sexoCliente.setSelectedItem(pessoa.get("sexo"));
                 emailCliente.setText(pessoa.get("email"));
                 dataNascimentoCliente.setText(pessoa.get("dataNascimento"));
+                
                 
                 List<Map<String, String>> telefones;
                 telefones = ControllerPessoa.procuraTelefones(Long.parseLong(pessoa.get("idPessoa")));

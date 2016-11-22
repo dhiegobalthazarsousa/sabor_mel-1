@@ -8,6 +8,7 @@ package eagles.sabor_mel.control;
 import eagles.sabor_mel.dao.PessoaDAO;
 import eagles.sabor_mel.model.Bairro;
 import eagles.sabor_mel.model.Cidade;
+import eagles.sabor_mel.model.DateGenerator;
 import eagles.sabor_mel.model.Documento;
 import eagles.sabor_mel.model.Endereco;
 import eagles.sabor_mel.model.Pessoa;
@@ -15,11 +16,13 @@ import eagles.sabor_mel.model.Sexo;
 import eagles.sabor_mel.model.Telefone;
 import eagles.sabor_mel.model.TipoDocumento;
 import eagles.sabor_mel.model.TipoTelefone;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -157,9 +160,12 @@ public class ControllerPessoa {
     public static Map<String,String> searchPessoa(Long id){
         Pessoa pessoa = daoPessoa.getById(id);
         Map<String, String> specPessoa = new HashMap();
+        DateGenerator dg = new DateGenerator();
+        
+        
         specPessoa.put("idPessoa", String.valueOf(pessoa.getIdPessoa()));
         specPessoa.put("nome", pessoa.getNome());
-        specPessoa.put("dataNascimento", String.valueOf(pessoa.getDataNascimento()));
+        specPessoa.put("dataNascimento", dg.dateFormat(pessoa.getDataNascimento()));
         specPessoa.put("email", pessoa.getEmail());
         specPessoa.put("sexo", String.valueOf(pessoa.getSexo()));
         specPessoa.put("documento", String.valueOf(pessoa.getDocumento().getNumero()));
