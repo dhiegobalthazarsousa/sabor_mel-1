@@ -14,6 +14,8 @@ import eagles.sabor_mel.model.ItemFornecimento;
 import eagles.sabor_mel.model.Pessoa;
 import eagles.sabor_mel.model.Produto;
 import java.util.Calendar;
+import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -45,8 +47,13 @@ public class ControllerFornecimento {
         return daoFornecimento.merge(fornecimento);
     }
     
-    public static Map<String, String> searchFornecimento(Calendar cal){
+    public static Map<String, String> searchFornecimento(Calendar start){
+        Calendar end = Calendar.getInstance();
+        end.set(DateGenerator.getYear(), DateGenerator.getMonth(), DateGenerator.getDay());
         
+        List<Fornecimento> fornecimentos = daoFornecimento.getByInterval(start, end);
+        
+        List<Map> 
     }
         
 }

@@ -1,7 +1,7 @@
 package eagles.sabor_mel.dao;
 
 import eagles.sabor_mel.model.Fornecimento;
-import java.util.Date;
+import java.util.Calendar;
 import java.util.List;
 import javax.persistence.Query;
 
@@ -40,7 +40,7 @@ public class FornecimentoDAO extends DAO<Fornecimento> {
                 .createQuery("FROM Fornecimento").getResultList();
     }
     
-    public List<Fornecimento> getByInterval(Date start, Date end){
+    public List<Fornecimento> getByInterval(Calendar start, Calendar end){
         Query query = entityManager.createQuery("FROM Fornecimento f WHERE"
                 + "f.dataFornecimento BETWEEN :startDate AND :endDate");
        query.setParameter("startDate", start);
