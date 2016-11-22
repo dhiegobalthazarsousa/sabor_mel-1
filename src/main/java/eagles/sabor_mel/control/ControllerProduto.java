@@ -22,12 +22,11 @@ public class ControllerProduto {
     
     public static List<Map<String, String>> listProdutos(){
         List<Map<String, String>> listaProdutos = new ArrayList<>();
-        Map<String, String> specProduto = new HashMap();
         List<Produto> produtos = daoProduto.findAll();
         
         for(Produto p: produtos){
             Double total = p.getQuantidade() * p.getValorUnitario();
-            
+            Map<String, String> specProduto = new HashMap();
             specProduto.put("id", String.valueOf(p.getIdProduto()));
             specProduto.put("descricao", String.valueOf(p.getDescricao()));
             specProduto.put("valorUnitario", String.valueOf(p.getValorUnitario()));
@@ -44,9 +43,7 @@ public class ControllerProduto {
         Double valorUnitario, String imagem){
         
         Produto produto = new Produto(descricao, quantidade, valorUnitario, imagem);
-        
-        return daoProduto.merge(produto);
-        
+        return daoProduto.merge(produto); 
     }
     
     public static Map<String,String> searchProduto(Long id){
@@ -59,6 +56,29 @@ public class ControllerProduto {
         specProduto.put("imagem", produto.getImagem());
         
         return specProduto;
+    }
+    
+    public static List<Map<String,String>> searchProduto(String descricao){
+        List<Map<String, String>> produtos = new ArrayList<>();
+        List<Produto> listProdutos = daoProduto.getByDescricao(descricao);
+        
+        for(Produto p : listProdutos){
+            
+            Double total = p.getQuantidade() * p.getValorUnitario();
+            
+            Map<String, String> specProduto = new HashMap();
+            specProduto.put("id", String.valueOf(p.getIdProduto()));
+            specProduto.put("descricao", String.valueOf(p.getDescricao()));
+            specProduto.put("valorUnitario", String.valueOf(p.getValorUnitario()));
+            specProduto.put("quantidade", String.valueOf(p.getQuantidade()));
+            specProduto.put("total", String.valueOf(total));
+            
+            produtos.add(specProduto);
+            
+        }
+        
+        return produtos;
+        
     }
     
     public static boolean deleteProduto(Long id){

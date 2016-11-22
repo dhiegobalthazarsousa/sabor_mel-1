@@ -1,6 +1,5 @@
 package eagles.sabor_mel.dao;
 
-import eagles.sabor_mel.model.Documento;
 import eagles.sabor_mel.model.Pessoa;
 import java.util.*;
 import javax.persistence.Query;
@@ -42,5 +41,13 @@ public class PessoaDAO extends DAO<Pessoa> {
         query.setParameter("numero", numero);
         
         return (Pessoa) query.getSingleResult();
+    }
+    
+    public List<Pessoa> getByNome(String nome) {        
+       
+        Query query = entityManager.createQuery("FROM Pessoa p WHERE p.nome LIKE :nome");
+        query.setParameter("nome", "%"+ nome +"%");
+        
+        return query.getResultList();
     }
 }

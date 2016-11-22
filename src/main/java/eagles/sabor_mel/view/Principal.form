@@ -314,6 +314,9 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="valorPagoVenda">
+                  <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
+                  </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="valorTotalVenda">
                   <Properties>
@@ -340,6 +343,7 @@
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/img/equal.png"/>
                     </Property>
+                    <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
                   <Events>
                     <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="calculaTrocoVendaMouseClicked"/>
@@ -414,6 +418,7 @@
                 </Component>
                 <Component class="javax.swing.JFormattedTextField" name="dataVencimentoParcela">
                   <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
                     <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
                       <Format format="##/##/####" subtype="-1" type="5"/>
                     </Property>
@@ -653,7 +658,7 @@
                           </Table>
                         </Property>
                         <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                          <Color id="Cursor Padr&#xe3;o"/>
+                          <Color id="Default Cursor"/>
                         </Property>
                       </Properties>
                     </Component>
@@ -733,7 +738,7 @@
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="panelClienteEndereco" alignment="0" max="32767" attributes="0"/>
                           <Component id="panelClienteDadoPessoal" alignment="0" max="32767" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
+                          <Group type="102" attributes="0">
                               <Component id="refreshCliente" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
                               <Component id="confirmCliente" min="-2" max="-2" attributes="0"/>
@@ -750,18 +755,16 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="panelCliente" max="32767" attributes="0"/>
+                          <Component id="panelCliente" min="-2" max="-2" attributes="0"/>
                           <Group type="102" attributes="0">
                               <Component id="panelClienteDadoPessoal" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="panelClienteEndereco" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="refreshCliente" min="-2" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="confirmCliente" alignment="1" min="-2" max="-2" attributes="0"/>
-                                      <Component id="deleteCliente" alignment="1" min="-2" max="-2" attributes="0"/>
-                                  </Group>
+                                  <Component id="refreshCliente" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="confirmCliente" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="deleteCliente" alignment="1" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -818,17 +821,33 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
+                      <Group type="102" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jScrollPane2" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="buscaCliente" min="-2" pref="155" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="btnBuscaCliente" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Component id="labelNomeBuscaCliente" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jScrollPane2" alignment="0" min="-2" max="-2" attributes="0"/>
+                          </Group>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="jScrollPane2" pref="0" max="32767" attributes="0"/>
+                      <Group type="102" alignment="1" attributes="0">
+                          <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+                          <Component id="labelNomeBuscaCliente" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="buscaCliente" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnBuscaCliente" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="jScrollPane2" min="-2" pref="285" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -884,6 +903,23 @@
                     </Component>
                   </SubComponents>
                 </Container>
+                <Component class="javax.swing.JTextField" name="buscaCliente">
+                </Component>
+                <Component class="javax.swing.JButton" name="btnBuscaCliente">
+                  <Properties>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/img/search.png"/>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnBuscaClienteMouseClicked"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JLabel" name="labelNomeBuscaCliente">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Nome"/>
+                  </Properties>
+                </Component>
               </SubComponents>
             </Container>
             <Container class="javax.swing.JPanel" name="panelClienteDadoPessoal">
@@ -1286,6 +1322,7 @@
               </Properties>
               <Events>
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="confirmProdutoMouseClicked"/>
+                <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="confirmProdutoMouseEntered"/>
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="refreshProduto">
@@ -1360,7 +1397,7 @@
                         <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                           <Table columnCount="5" rowCount="0">
                             <Column editable="false" title="ID" type="java.lang.Object"/>
-                            <Column editable="false" title="Nome" type="java.lang.Object"/>
+                            <Column editable="false" title="Produto" type="java.lang.Object"/>
                             <Column editable="false" title="R$" type="java.lang.Object"/>
                             <Column editable="false" title="QTD" type="java.lang.Object"/>
                             <Column editable="true" title="Total" type="java.lang.Object"/>
@@ -1386,6 +1423,9 @@
                       <Image iconType="3" name="/img/search.png"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnBuscaProdutoMouseClicked"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -1415,9 +1455,13 @@
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="avisoProduto1" max="32767" attributes="0"/>
                                       <Group type="102" attributes="0">
-                                          <Component id="avisoProduto2" min="-2" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="avisoProduto2" min="-2" max="-2" attributes="0"/>
+                                              <Component id="labelNomeArquivo" min="-2" pref="51" max="-2" attributes="0"/>
+                                          </Group>
                                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                       </Group>
+                                      <Component id="labelCaminhoArquivo" alignment="0" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                               <Component id="labelDescricaoProduto" min="-2" max="-2" attributes="0"/>
@@ -1440,15 +1484,19 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="imagemProduto" min="-2" pref="200" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Group type="102" attributes="0">
                                   <Component id="avisoProduto1" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="avisoProduto2" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Component id="labelNomeArquivo" min="-2" pref="20" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="labelCaminhoArquivo" min="-2" pref="20" max="-2" attributes="0"/>
                               </Group>
+                              <Component id="imagemProduto" min="-2" pref="200" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                           <Component id="labelDescricaoProduto" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                           <Component id="jScrollPane5" min="-2" max="-2" attributes="0"/>
@@ -1474,13 +1522,14 @@
                         <BevelBorder/>
                       </Border>
                     </Property>
+                    <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                      <Color id="Hand Cursor"/>
+                    </Property>
                     <Property name="horizontalTextPosition" type="int" value="0"/>
                     <Property name="verticalTextPosition" type="int" value="1"/>
                   </Properties>
                   <Events>
                     <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="imagemProdutoMouseClicked"/>
-                    <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="imagemProdutoMouseEntered"/>
-                    <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="imagemProdutoMouseExited"/>
                   </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="labelDescricaoProduto">
@@ -1537,6 +1586,10 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="* Tamanho recomendado 200x200 px."/>
                   </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="labelNomeArquivo">
+                </Component>
+                <Component class="javax.swing.JLabel" name="labelCaminhoArquivo">
                 </Component>
               </SubComponents>
             </Container>
@@ -1996,7 +2049,7 @@
                       <Properties>
                         <Property name="text" type="java.lang.String" value="&lt;html&gt;Vendas &lt;br/&gt;por &lt;br/&gt;Funcion&#xe1;rio&lt;/html&gt;"/>
                         <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                          <Color id="Cursor Padr&#xe3;o"/>
+                          <Color id="Default Cursor"/>
                         </Property>
                         <Property name="horizontalTextPosition" type="int" value="0"/>
                       </Properties>
@@ -2005,7 +2058,7 @@
                       <Properties>
                         <Property name="text" type="java.lang.String" value="&lt;html&gt;Vendas &lt;br/&gt;por &lt;br/&gt;Cliente&lt;/html&gt;"/>
                         <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                          <Color id="Cursor Padr&#xe3;o"/>
+                          <Color id="Default Cursor"/>
                         </Property>
                         <Property name="horizontalTextPosition" type="int" value="0"/>
                       </Properties>
@@ -2014,7 +2067,7 @@
                       <Properties>
                         <Property name="text" type="java.lang.String" value="&lt;html&gt;Vendas &lt;br/&gt;por &lt;br/&gt;Per&#xed;odo&lt;/html&gt;"/>
                         <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                          <Color id="Cursor Padr&#xe3;o"/>
+                          <Color id="Default Cursor"/>
                         </Property>
                         <Property name="horizontalTextPosition" type="int" value="0"/>
                       </Properties>
@@ -2123,7 +2176,7 @@
                       <Properties>
                         <Property name="text" type="java.lang.String" value="&lt;html&gt;Credi&#xe1;rios &lt;br/&gt;em &lt;br/&gt;Aberto&lt;/html&gt;"/>
                         <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                          <Color id="Cursor Padr&#xe3;o"/>
+                          <Color id="Default Cursor"/>
                         </Property>
                         <Property name="horizontalTextPosition" type="int" value="0"/>
                       </Properties>
@@ -2180,7 +2233,7 @@
                       <Properties>
                         <Property name="text" type="java.lang.String" value="&lt;html&gt;Relat&#xf3;rio &lt;br/&gt;Geral &lt;br/&gt;Estoque&lt;/html&gt;"/>
                         <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                          <Color id="Cursor Padr&#xe3;o"/>
+                          <Color id="Default Cursor"/>
                         </Property>
                         <Property name="horizontalTextPosition" type="int" value="0"/>
                       </Properties>
@@ -2189,7 +2242,7 @@
                       <Properties>
                         <Property name="text" type="java.lang.String" value="&lt;html&gt;Valor &lt;br/&gt;M&#xe9;dia &lt;br/&gt;Vendas&lt;/html&gt;"/>
                         <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                          <Color id="Cursor Padr&#xe3;o"/>
+                          <Color id="Default Cursor"/>
                         </Property>
                         <Property name="horizontalTextPosition" type="int" value="0"/>
                       </Properties>
@@ -2198,7 +2251,7 @@
                       <Properties>
                         <Property name="text" type="java.lang.String" value="&lt;html&gt;Ranking &lt;br/&gt;Vendas&lt;/html&gt;"/>
                         <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                          <Color id="Cursor Padr&#xe3;o"/>
+                          <Color id="Default Cursor"/>
                         </Property>
                         <Property name="horizontalTextPosition" type="int" value="0"/>
                       </Properties>

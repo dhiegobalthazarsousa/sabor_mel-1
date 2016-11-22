@@ -9,6 +9,7 @@ import eagles.sabor_mel.dao.FuncionarioDAO;
 import eagles.sabor_mel.model.Acesso;
 import eagles.sabor_mel.model.Bairro;
 import eagles.sabor_mel.model.Cidade;
+import eagles.sabor_mel.model.DateGenerator;
 import eagles.sabor_mel.model.Documento;
 import eagles.sabor_mel.model.Endereco;
 import eagles.sabor_mel.model.Funcionario;
@@ -62,7 +63,7 @@ public class ControllerFuncionario {
         
         specFuncionario.put("idPessoa", String.valueOf(funcionario.getIdPessoa()));
         specFuncionario.put("nome", funcionario.getNome());
-        specFuncionario.put("dataNascimento", String.valueOf(funcionario.getDataNascimento()));
+        specFuncionario.put("dataNascimento", DateGenerator.dateFormat(funcionario.getDataNascimento()));
         specFuncionario.put("email", funcionario.getEmail());
         specFuncionario.put("sexo", String.valueOf(funcionario.getSexo()));
         specFuncionario.put("documento", String.valueOf(funcionario.getDocumento().getNumero()));

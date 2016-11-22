@@ -2,6 +2,7 @@ package eagles.sabor_mel.dao;
 
 import eagles.sabor_mel.model.Produto;
 import java.util.List;
+import javax.persistence.Query;
 
 /**
  *
@@ -32,8 +33,16 @@ public class ProdutoDAO extends DAO<Produto>{
     }
  
     @SuppressWarnings("unchecked")
-	public List<Produto> findAll() {
-    	return entityManager
-    		.createQuery("FROM Produto").getResultList();
+    public List<Produto> findAll() {
+        return entityManager
+            .createQuery("FROM Produto").getResultList();
     }
+        
+    public List<Produto> getByDescricao(String descricao) {        
+       
+        Query query = entityManager.createQuery("FROM Produto p WHERE p.descricao LIKE :descricao");
+        query.setParameter("descricao", "%"+ descricao +"%");
+        
+        return query.getResultList();
+    }    
 }

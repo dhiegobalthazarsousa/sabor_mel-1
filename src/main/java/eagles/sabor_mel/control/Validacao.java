@@ -73,7 +73,7 @@ public class Validacao {
     }
     
     public boolean validaPreco(String preco){
-        return !preco.equals("R$   ,  ");
+        return preco.length() > 0;
     }
     
     public boolean validaImagem(String imagem){
