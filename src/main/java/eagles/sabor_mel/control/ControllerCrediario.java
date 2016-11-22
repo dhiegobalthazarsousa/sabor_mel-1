@@ -8,7 +8,9 @@ package eagles.sabor_mel.control;
 import eagles.sabor_mel.dao.CrediarioDAO;
 import eagles.sabor_mel.dao.ParcelaDAO;
 import eagles.sabor_mel.model.Crediario;
+import eagles.sabor_mel.model.DateGenerator;
 import eagles.sabor_mel.model.Parcela;
+import eagles.sabor_mel.model.StatusParcela;
 import eagles.sabor_mel.model.Venda;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -40,7 +42,7 @@ public class ControllerCrediario {
             cal.set(ano, mes, dia);
             parcela.setDataVencimento(cal);
             parcela.setParcela(i + 1);
-            parcela.setStatus("Não Pago");
+            parcela.setStatus(StatusParcela.NPAGO);
             parcela.setValorParcela(valorParcela);
             mes += 1;
             crediario.addParcela(parcela);
@@ -68,15 +70,26 @@ public class ControllerCrediario {
         return mapCrediario;
     }
 
-    public static List<Map> searchParcelas(Long id) {
-        List<Parcela> parcelas = daoParcela.getByCrediario(id);
+    public static List<Map> searchParcelas(Long idCrediario) {
+        List<Parcela> parcelas = daoParcela.getByCrediario(idCrediario);
+        List<Map> listMapParcelas = new ArrayList<>();
         if (!parcelas.isEmpty()) {
             for (Parcela p : parcelas) {
                 Map<String, String> specParcela = new HashMap<>();
                 specParcela.put("idParcela", String.valueOf(p.getIdParcela()));
                 specParcela.put("numeroParcela", String.valueOf(p.getParcela()));
-                specParcela.put("", p.getDataVencimento());
+                specParcela.put("dataVencimento", DateGenerator.dateFormat(p.getDataVencimento()));
+                specParcela.put("status", p.getStatus().toString());
+                specParcela.put("valor", String.valueOf(p.getValorParcela()));
+                listMapParcelas.add(specParcela);
             }
         }
+        return listMapParcelas;
+    }
+    
+    public static boolean pagarParcela(Long idParcela){
+        Parcela parcela = daoParcela.getById(idParcela);
+        parcela.setStatus(StatusParcela.PAGO);
+        return daoParcela.merge(parcela);
     }
 }

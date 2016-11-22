@@ -103,7 +103,7 @@ public class ControllerPessoa {
         pessoa.setDataNascimento(dataNascimento);
         pessoa.setSexo(sexo);
         pessoa.getEndereco().getBairro().setNome(bairroNome);
-        pessoa.getEndereco().getBairro().getCidade().setEstado(ControllerEstado.getEstadobyUf(estadoUF));
+        pessoa.getEndereco().getBairro().getCidade().setEstado(ControllerEstado.getEstadoByUf(estadoUF));
         pessoa.getEndereco().getBairro().getCidade().setNome(cidadeNome);
         pessoa.getEndereco().getBairro().setNome(bairroNome);
         pessoa.getEndereco().setLogradouro(logradouro);

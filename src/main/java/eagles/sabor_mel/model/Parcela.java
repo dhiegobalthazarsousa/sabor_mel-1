@@ -42,7 +42,7 @@ public class Parcela implements Serializable{
     private Integer parcela;
     
     @Column(name = "statusParcela", nullable = false)
-    private String status;
+    private StatusParcela status;
     
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "idCrediario", nullable = false)
@@ -68,11 +68,11 @@ public class Parcela implements Serializable{
         this.valorParcela = valorParcela;
     }
 
-    public String getStatus() {
+    public StatusParcela getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(StatusParcela status) {
         this.status = status;
     }
 

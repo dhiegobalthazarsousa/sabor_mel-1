@@ -22,8 +22,11 @@ public class ControllerEstado {
     
     public static String escreverEstado(String uf){
         
-        Estado estado = daoEstado.findByUf(uf);
-        return estado.getNome();
+        return daoEstado.findByUf(uf).getNome();
         
+    }
+    
+    public static Estado getEstadoByUf(String uf){
+        return daoEstado.findByUf(uf);
     }
 }
