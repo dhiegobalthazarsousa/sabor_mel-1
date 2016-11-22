@@ -43,6 +43,10 @@ public class ControllerFornecimento {
             fornecimento.addItem(itemFornecimento);
         }
         return daoFornecimento.merge(fornecimento);
-    }  
+    }
+    
+    public static Map<String, String> searchFornecimento(Calendar cal){
+        
+    }
         
 }
