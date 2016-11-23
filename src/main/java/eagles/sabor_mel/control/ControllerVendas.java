@@ -5,18 +5,13 @@
  */
 package eagles.sabor_mel.control;
 
-import eagles.sabor_mel.dao.CrediarioDAO;
-import eagles.sabor_mel.dao.DocumentoDAO;
 import eagles.sabor_mel.dao.FuncionarioDAO;
 import eagles.sabor_mel.dao.PessoaDAO;
 import eagles.sabor_mel.dao.ProdutoDAO;
 import eagles.sabor_mel.dao.VendaDAO;
-import eagles.sabor_mel.model.Crediario;
 import eagles.sabor_mel.model.DateGenerator;
-import eagles.sabor_mel.model.Documento;
 import eagles.sabor_mel.model.Funcionario;
 import eagles.sabor_mel.model.ItemVenda;
-import eagles.sabor_mel.model.Parcela;
 import eagles.sabor_mel.model.Pessoa;
 import eagles.sabor_mel.model.Produto;
 import eagles.sabor_mel.model.TipoVenda;
@@ -42,17 +37,12 @@ public class ControllerVendas {
     
     private static VendaDAO daoVenda = new VendaDAO();
     
-    public static List<Map> searchVenda(int dia, int mes, int ano) {
+    public static List<Map> searchVenda(Calendar start) {
         List<Map> listMapVendas = new ArrayList<>();
-        Map<String, String> specVenda = new HashMap<>();
-        Date start;
-        Date end;
-        Calendar cal = Calendar.getInstance();
-        cal.set(ano, mes, dia);
-        start = cal.getTime();
-        cal.set(DateGenerator.getYear(), DateGenerator.getMonth(), DateGenerator.getDay());
-        end = cal.getTime();
-
+        Map<String, String> specVenda = new HashMap<>();      
+        Calendar end = Calendar.getInstance();
+        end.set(DateGenerator.getYear(), DateGenerator.getMonth(), DateGenerator.getDay());
+        
         List<Venda> vendas = daoVenda.getByInterval(start, end);
 
         for (Venda v : vendas) {
@@ -182,18 +172,4 @@ public class ControllerVendas {
         p.setQuantidade(newQuantity);
         return pDAO.merge(p);
     }
-
-    /*
-    private boolean analisaQuantidadeProdutos(Long[] produtos, int[] quantidades) {
-        ProdutoDAO daoProduto = new ProdutoDAO();
-        boolean vendaOk = true;
-        for (int i = 0; i < produtos.length; i++) {
-            Produto produto = daoProduto.getById(produtos[i]);
-            if (produto.getQuantidade() < quantidades[i]) {
-                vendaOk = false;
-            }
-        }
-        return vendaOk;
-    }
-     */
 }

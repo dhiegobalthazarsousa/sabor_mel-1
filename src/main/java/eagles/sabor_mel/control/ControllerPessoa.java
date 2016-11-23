@@ -31,6 +31,30 @@ public class ControllerPessoa {
     
     private static PessoaDAO daoPessoa = new PessoaDAO();
     
+    public static List<Map<String, String>> relatorioListaClientes(){
+        List<Map<String, String>> listaPessoas = new ArrayList<>();
+        
+        List<Pessoa> pessoas = daoPessoa.findAll();
+        
+        for(Pessoa p: pessoas){
+            if(String.valueOf(p.getDocumento().getTipo()).equals("CPF")){
+                if(!(String.valueOf(p.getNome()).equals("Cliente")) && !(String.valueOf(p.getNome()).equals("Administrador"))){
+                    Map<String, String> specPessoa = new HashMap();
+                    
+                    specPessoa.put("nome", String.valueOf(p.getNome()));
+                    specPessoa.put("documento", String.valueOf(p.getDocumento().getNumero()));
+                    specPessoa.put("cidade", String.valueOf(p.getEndereco().getBairro().getCidade().getNome()));
+                    specPessoa.put("bairro", String.valueOf(p.getEndereco().getBairro().getNome()));
+                    specPessoa.put("email", String.valueOf(p.getEmail()));
+                    
+                    listaPessoas.add(specPessoa);
+                }
+            }
+        }
+        
+        return listaPessoas;
+    }
+    
     public static List<Map<String, String>> listClientes(){
         List<Map<String, String>> listaPessoas = new ArrayList<>();
         
@@ -52,11 +76,11 @@ public class ControllerPessoa {
     
     public static List<Map<String, String>> listFornecedores(){
         List<Map<String, String>> listaPessoas = new ArrayList<>();
-        Map<String, String> specPessoa = new HashMap();
         List<Pessoa> pessoas = daoPessoa.findAll();
         
         for(Pessoa p: pessoas){
             if(String.valueOf(p.getDocumento().getTipo()).equals("CNPJ")){
+                Map<String, String> specPessoa = new HashMap();
                 specPessoa.put("id", String.valueOf(p.getIdPessoa()));
                 specPessoa.put("nome", String.valueOf(p.getNome()));
                 
@@ -72,18 +96,30 @@ public class ControllerPessoa {
      * This mehtod creates and persists a Pessoa Object
     */
     public static boolean cadastrar(String nome, String email,
-            Calendar dataNascimento, Sexo sexo, String[] numerosTel, 
-            String[] dddsTel, TipoTelefone[] tiposTel, String estadoUF,
-            String cidadeNome, String bairroNome, String logradouro, String numero,
-            String cep, String numeroDocumento, TipoDocumento tipoDocumento){
+        Calendar dataNascimento, Sexo sexo, String[] numerosTel, 
+        String[] dddsTel, TipoTelefone[] tiposTel, String estadoUF,
+        String cidadeNome, String bairroNome, String logradouro, String numero,
+        String cep, String numeroDocumento, TipoDocumento tipoDocumento){
+      
+        Cidade cidade = null;
+        Bairro bairro = null;
         
-        Estado estado = new Estado(ControllerEstado.escreverEstado(estadoUF), estadoUF);
-        Cidade cidade = new Cidade(cidadeNome);
-        cidade.setEstado(estado);
-        Bairro bairro = new Bairro(bairroNome);
-        bairro.setCidade(cidade);
+        if(ControllerCidade.foundCidade(cidadeNome)){
+            cidade = ControllerCidade.getCidade(cidadeNome);
+        }
+        else{
+            cidade = new Cidade(cidadeNome);
+        }
+        
+        if(ControllerBairro.foundBairro(bairroNome)){
+            bairro = ControllerBairro.getBairro(bairroNome);
+        }
+        else{
+            bairro = new Bairro(bairroNome);
+        }
+        
         Endereco endereco = new Endereco(logradouro, numero, cep);
-        Documento documento = new Documento(numeroDocumento, TipoDocumento.CPF);
+        Documento documento = new Documento(numeroDocumento, tipoDocumento);
         Pessoa pessoa = new Pessoa(nome, email, dataNascimento, sexo);
         pessoa.setDocumento(documento);
         pessoa.setEndereco(endereco);
@@ -199,5 +235,27 @@ public class ControllerPessoa {
         
         return specPessoa;
         
+    }
+    
+    public static List<Map<String,String>> searchFornecedor(String nome){
+        List<Map<String, String>> pessoas = new ArrayList<>();
+        List<Pessoa> listPessoas = daoPessoa.getByNome(nome);
+        
+        for(Pessoa p: listPessoas){
+            if(String.valueOf(p.getDocumento().getTipo()).equals("CNPJ")){
+                Map<String, String> specPessoa = new HashMap();
+                specPessoa.put("id", String.valueOf(p.getIdPessoa()));
+                specPessoa.put("nome", String.valueOf(p.getNome()));
+                
+                pessoas.add(specPessoa);
+            }
+        }
+        
+        return pessoas;
+        
+    }
+    
+    public static List<Map<String, String>> procuraTelefones(Long id){
+        return ControllerTelefone.procuraTelefonePessoa(id);
     }
 }

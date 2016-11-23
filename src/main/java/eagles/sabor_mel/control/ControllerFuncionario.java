@@ -18,6 +18,10 @@ import eagles.sabor_mel.model.Sexo;
 import eagles.sabor_mel.model.Telefone;
 import eagles.sabor_mel.model.TipoDocumento;
 import eagles.sabor_mel.model.TipoTelefone;
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -38,17 +42,19 @@ public class ControllerFuncionario {
     *
     */
     public static  List<Map<String, String>> listFuncionarios(){
-        Map<String, String> specFuncionario = new HashMap<>();
         List<Funcionario> funcionarios = daoFuncionario.findAll();
         List<Map<String, String>> listaFuncionarios = new ArrayList<>();
         
         for(Funcionario f: funcionarios){
-            specFuncionario.put("id", String.valueOf(f.getIdPessoa()));
-            specFuncionario.put("nome", String.valueOf(f.getNome()));
-            specFuncionario.put("usuario", String.valueOf(f.getUsuario()));
-            specFuncionario.put("acesso", String.valueOf(f.getAcesso()));
-            
-            listaFuncionarios.add(specFuncionario);
+            if(!(String.valueOf(f.getNome()).equals("Administrador"))){
+                Map<String, String> specFuncionario = new HashMap<>();
+                specFuncionario.put("id", String.valueOf(f.getIdPessoa()));
+                specFuncionario.put("nome", String.valueOf(f.getNome()));
+                specFuncionario.put("usuario", String.valueOf(f.getUsuario()));
+                specFuncionario.put("acesso", String.valueOf(f.getAcesso()));
+                
+                listaFuncionarios.add(specFuncionario);
+            } 
         }
         
         return listaFuncionarios;
@@ -96,6 +102,39 @@ public class ControllerFuncionario {
         specFuncionario.put("senha", funcionario.getSenha());
         return specFuncionario;
     }
+    
+    public static Map<String, String> searchFuncionario(String nome, String senha) throws NoSuchAlgorithmException, UnsupportedEncodingException{
+        
+        Funcionario funcionario = daoFuncionario.getByNameSenha(nome, senha);
+        Map <String, String> specFuncionario = new HashMap<>();
+        
+        specFuncionario.put("nome", funcionario.getNome());
+        specFuncionario.put("login", funcionario.getUsuario());
+        specFuncionario.put("senha", funcionario.getSenha());
+        specFuncionario.put("acesso", String.valueOf(funcionario.getAcesso()));
+        
+        return specFuncionario;
+    }
+    
+    public static List<Map<String,String>> searchUsuario(String nome){
+        List<Map<String, String>> funcionarios = new ArrayList<>();
+        List<Funcionario> listFuncionarios = daoFuncionario.getByNome(nome);
+        
+        for(Funcionario f: listFuncionarios){
+            if(!f.getNome().equals("Administrador")){
+                Map<String, String> specFuncionario = new HashMap();
+
+                specFuncionario.put("id", String.valueOf(f.getIdPessoa()));
+                specFuncionario.put("nome", String.valueOf(f.getNome()));
+
+                funcionarios.add(specFuncionario);
+            }
+            
+        }
+        
+        return funcionarios;
+        
+    }
 
     /*
      * @author dhiego and ...
@@ -125,4 +164,37 @@ public class ControllerFuncionario {
         }
         return daoFuncionario.merge(funcionario);
     }
+    
+    public static boolean novaSenha(Long id, String senha) throws NoSuchAlgorithmException, UnsupportedEncodingException{
+        Funcionario funcionario = daoFuncionario.getById(id);
+        
+        HashSha hashSenha = new HashSha(senha);
+        senha = hashSenha.hashSenha();
+        
+        funcionario.setSenha(senha);
+        
+        return daoFuncionario.merge(funcionario);
+    }
+    
+    public static boolean deleteFuncionario(Long id){
+        return daoFuncionario.removeById(id);
+    }
+
+    public static Calendar transformData(String data) {
+        Calendar cal = null;
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            cal = Calendar.getInstance();
+            cal.setTime(sdf.parse(data));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return cal;
+    }
+    
+    public static List<Funcionario> findByName(String nome){        
+        FuncionarioDAO dao = new FuncionarioDAO();
+        return null; //dao.getByName(nome);
+    }
+
 }

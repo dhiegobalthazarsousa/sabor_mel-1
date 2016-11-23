@@ -58,4 +58,12 @@ public class FuncionarioDAO extends DAO<Funcionario>{
         
         return (Funcionario) query.getSingleResult();
     }
+    
+    public List<Funcionario> getByNome(String nome) {        
+       
+        Query query = entityManager.createQuery("FROM Funcionario p WHERE p.nome LIKE :nome");
+        query.setParameter("nome", "%"+ nome +"%");
+        
+        return query.getResultList();
+    }
 }
