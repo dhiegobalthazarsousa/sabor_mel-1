@@ -76,8 +76,23 @@ public class ControllerPessoa {
         String cidadeNome, String bairroNome, String logradouro, String numero,
         String cep, String numeroDocumento, TipoDocumento tipoDocumento){
       
-        Cidade cidade = new Cidade(cidadeNome);
-        Bairro bairro = new Bairro(bairroNome);
+        Cidade cidade = null;
+        Bairro bairro = null;
+        
+        if(ControllerCidade.foundCidade(cidadeNome)){
+            cidade = ControllerCidade.getCidade(cidadeNome);
+        }
+        else{
+            cidade = new Cidade(cidadeNome);
+        }
+        
+        if(ControllerBairro.foundBairro(bairroNome)){
+            bairro = ControllerBairro.getBairro(bairroNome);
+        }
+        else{
+            bairro = new Bairro(bairroNome);
+        }
+        
         Endereco endereco = new Endereco(logradouro, numero, cep);
         Documento documento = new Documento(numeroDocumento, TipoDocumento.CPF);
         Pessoa pessoa = new Pessoa(nome, email, dataNascimento, sexo);

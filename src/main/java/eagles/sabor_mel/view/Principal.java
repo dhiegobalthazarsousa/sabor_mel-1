@@ -930,6 +930,7 @@ public class Principal extends javax.swing.JFrame {
         });
 
         deleteCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/delete.png"))); // NOI18N
+        deleteCliente.setEnabled(false);
         deleteCliente.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 deleteClienteMouseClicked(evt);
@@ -1303,7 +1304,7 @@ public class Principal extends javax.swing.JFrame {
         imagemProduto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         imagemProduto.setText("IMAGEM");
         imagemProduto.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        imagemProduto.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        imagemProduto.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         imagemProduto.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         imagemProduto.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
         imagemProduto.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -3483,6 +3484,12 @@ public class Principal extends javax.swing.JFrame {
             
             String extensao = getExtensaoArquivo(selecionado);
             
+            /*Verifica o sistema operacional utilizado*/
+            String sistema = System.getProperty("os.name");
+            if(sistema.equals("Linux")){
+                extensao = "jpg";
+            }
+           
             if(extensao.toLowerCase().equals("jpg") || extensao.toLowerCase().equals("png")){
                 try {
                     BufferedImage original = ImageIO.read(new File(caminhoArquivo));
@@ -4083,6 +4090,7 @@ public class Principal extends javax.swing.JFrame {
         int linhas;
         Integer quantidadeGeral = 0;
         Double valorGeral = 0.0;
+        
         /*Setar quantidade geral e valor geral*/
         linhas = tabelaVendaProduto.getRowCount();
         for(int i = 0; i < linhas; i++){
@@ -4124,7 +4132,7 @@ public class Principal extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Windows".equals(info.getName())) {
+                if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }

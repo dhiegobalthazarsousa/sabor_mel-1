@@ -658,7 +658,7 @@
                           </Table>
                         </Property>
                         <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                          <Color id="Cursor Padr&#xe3;o"/>
+                          <Color id="Default Cursor"/>
                         </Property>
                       </Properties>
                     </Component>
@@ -789,6 +789,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/img/delete.png"/>
                 </Property>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <Events>
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="deleteClienteMouseClicked"/>
@@ -1524,7 +1525,7 @@
                       </Border>
                     </Property>
                     <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                      <Color id="Cursor em Forma de M&#xe3;o"/>
+                      <Color id="Default Cursor"/>
                     </Property>
                     <Property name="horizontalTextPosition" type="int" value="0"/>
                     <Property name="verticalTextPosition" type="int" value="1"/>
@@ -2049,7 +2050,7 @@
                       <Properties>
                         <Property name="text" type="java.lang.String" value="&lt;html&gt;Vendas &lt;br/&gt;por &lt;br/&gt;Funcion&#xe1;rio&lt;/html&gt;"/>
                         <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                          <Color id="Cursor Padr&#xe3;o"/>
+                          <Color id="Default Cursor"/>
                         </Property>
                         <Property name="horizontalTextPosition" type="int" value="0"/>
                       </Properties>
@@ -2058,7 +2059,7 @@
                       <Properties>
                         <Property name="text" type="java.lang.String" value="&lt;html&gt;Vendas &lt;br/&gt;por &lt;br/&gt;Cliente&lt;/html&gt;"/>
                         <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                          <Color id="Cursor Padr&#xe3;o"/>
+                          <Color id="Default Cursor"/>
                         </Property>
                         <Property name="horizontalTextPosition" type="int" value="0"/>
                       </Properties>
@@ -2067,7 +2068,7 @@
                       <Properties>
                         <Property name="text" type="java.lang.String" value="&lt;html&gt;Vendas &lt;br/&gt;por &lt;br/&gt;Per&#xed;odo&lt;/html&gt;"/>
                         <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                          <Color id="Cursor Padr&#xe3;o"/>
+                          <Color id="Default Cursor"/>
                         </Property>
                         <Property name="horizontalTextPosition" type="int" value="0"/>
                       </Properties>
@@ -2176,7 +2177,7 @@
                       <Properties>
                         <Property name="text" type="java.lang.String" value="&lt;html&gt;Credi&#xe1;rios &lt;br/&gt;em &lt;br/&gt;Aberto&lt;/html&gt;"/>
                         <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                          <Color id="Cursor Padr&#xe3;o"/>
+                          <Color id="Default Cursor"/>
                         </Property>
                         <Property name="horizontalTextPosition" type="int" value="0"/>
                       </Properties>
@@ -2233,7 +2234,7 @@
                       <Properties>
                         <Property name="text" type="java.lang.String" value="&lt;html&gt;Relat&#xf3;rio &lt;br/&gt;Geral &lt;br/&gt;Estoque&lt;/html&gt;"/>
                         <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                          <Color id="Cursor Padr&#xe3;o"/>
+                          <Color id="Default Cursor"/>
                         </Property>
                         <Property name="horizontalTextPosition" type="int" value="0"/>
                       </Properties>
@@ -2242,7 +2243,7 @@
                       <Properties>
                         <Property name="text" type="java.lang.String" value="&lt;html&gt;Valor &lt;br/&gt;M&#xe9;dia &lt;br/&gt;Vendas&lt;/html&gt;"/>
                         <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                          <Color id="Cursor Padr&#xe3;o"/>
+                          <Color id="Default Cursor"/>
                         </Property>
                         <Property name="horizontalTextPosition" type="int" value="0"/>
                       </Properties>
@@ -2251,7 +2252,7 @@
                       <Properties>
                         <Property name="text" type="java.lang.String" value="&lt;html&gt;Ranking &lt;br/&gt;Vendas&lt;/html&gt;"/>
                         <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                          <Color id="Cursor Padr&#xe3;o"/>
+                          <Color id="Default Cursor"/>
                         </Property>
                         <Property name="horizontalTextPosition" type="int" value="0"/>
                       </Properties>
