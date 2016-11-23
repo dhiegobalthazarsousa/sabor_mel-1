@@ -1,7 +1,10 @@
 package eagles.sabor_mel.dao;
 
+import static eagles.sabor_mel.dao.DAO.entityManager;
+import eagles.sabor_mel.model.ItemFornecimento;
 import eagles.sabor_mel.model.ItemVenda;
 import java.util.List;
+import javax.persistence.Query;
 /**
  *
  * @author Tiago Lima Villalobos
@@ -11,7 +14,7 @@ public class ItemVendaDAO extends DAO<ItemVenda>{
         return entityManager.find(ItemVenda.class, id);
     }
     
-    public ItemVenda getByPessoa(Long id){
+    public ItemVenda getByCliente(Long id){
         return (ItemVenda) entityManager.createQuery("SELECT * FROM ItemVenda WHERE pessoa = '"+id+"';").getSingleResult();
     }
     
