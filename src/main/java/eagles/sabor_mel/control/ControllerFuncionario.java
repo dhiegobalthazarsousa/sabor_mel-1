@@ -26,6 +26,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -41,17 +42,19 @@ public class ControllerFuncionario {
     *
     */
     public static  List<Map<String, String>> listFuncionarios(){
-        Map<String, String> specFuncionario = new HashMap<>();
         List<Funcionario> funcionarios = daoFuncionario.findAll();
         List<Map<String, String>> listaFuncionarios = new ArrayList<>();
         
         for(Funcionario f: funcionarios){
-            specFuncionario.put("id", String.valueOf(f.getIdPessoa()));
-            specFuncionario.put("nome", String.valueOf(f.getNome()));
-            specFuncionario.put("usuario", String.valueOf(f.getUsuario()));
-            specFuncionario.put("acesso", String.valueOf(f.getAcesso()));
-            
-            listaFuncionarios.add(specFuncionario);
+            if(!(String.valueOf(f.getNome()).equals("Administrador"))){
+                Map<String, String> specFuncionario = new HashMap<>();
+                specFuncionario.put("id", String.valueOf(f.getIdPessoa()));
+                specFuncionario.put("nome", String.valueOf(f.getNome()));
+                specFuncionario.put("usuario", String.valueOf(f.getUsuario()));
+                specFuncionario.put("acesso", String.valueOf(f.getAcesso()));
+                
+                listaFuncionarios.add(specFuncionario);
+            } 
         }
         
         return listaFuncionarios;
@@ -101,16 +104,36 @@ public class ControllerFuncionario {
     }
     
     public static Map<String, String> searchFuncionario(String nome, String senha) throws NoSuchAlgorithmException, UnsupportedEncodingException{
-        FuncionarioDAO daoFuncionario = new FuncionarioDAO();
+        
         Funcionario funcionario = daoFuncionario.getByNameSenha(nome, senha);
         Map <String, String> specFuncionario = new HashMap<>();
-     
+        
         specFuncionario.put("nome", funcionario.getNome());
         specFuncionario.put("login", funcionario.getUsuario());
         specFuncionario.put("senha", funcionario.getSenha());
         specFuncionario.put("acesso", String.valueOf(funcionario.getAcesso()));
         
         return specFuncionario;
+    }
+    
+    public static List<Map<String,String>> searchUsuario(String nome){
+        List<Map<String, String>> funcionarios = new ArrayList<>();
+        List<Funcionario> listFuncionarios = daoFuncionario.getByNome(nome);
+        
+        for(Funcionario f: listFuncionarios){
+            if(!f.getNome().equals("Administrador")){
+                Map<String, String> specFuncionario = new HashMap();
+
+                specFuncionario.put("id", String.valueOf(f.getIdPessoa()));
+                specFuncionario.put("nome", String.valueOf(f.getNome()));
+
+                funcionarios.add(specFuncionario);
+            }
+            
+        }
+        
+        return funcionarios;
+        
     }
 
     public static boolean cadastrar(String nome, String email,
@@ -181,6 +204,17 @@ public class ControllerFuncionario {
             funcionario.getTelefones().get(1).setDdd(dddsTel[1]);
             funcionario.getTelefones().get(1).setNumero(numerosTel[1]);
         }
+        
+        return daoFuncionario.merge(funcionario);
+    }
+    
+    public static boolean novaSenha(Long id, String senha) throws NoSuchAlgorithmException, UnsupportedEncodingException{
+        Funcionario funcionario = daoFuncionario.getById(id);
+        
+        HashSha hashSenha = new HashSha(senha);
+        senha = hashSenha.hashSenha();
+        
+        funcionario.setSenha(senha);
         
         return daoFuncionario.merge(funcionario);
     }
