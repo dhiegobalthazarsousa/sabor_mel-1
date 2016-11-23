@@ -6,9 +6,7 @@ import eagles.sabor_mel.control.ControllerPessoa;
 import eagles.sabor_mel.control.ControllerProduto;
 import eagles.sabor_mel.control.ControllerVendas;
 import eagles.sabor_mel.control.Validacao;
-import eagles.sabor_mel.dao.ProdutoDAO;
 import eagles.sabor_mel.model.Acesso;
-import eagles.sabor_mel.model.Produto;
 import eagles.sabor_mel.model.Sexo;
 import eagles.sabor_mel.model.TipoDocumento;
 import eagles.sabor_mel.model.TipoTelefone;
@@ -36,6 +34,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.persistence.NoResultException;
+import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -918,7 +917,7 @@ public class Principal extends javax.swing.JFrame {
                         .addComponent(panelVendaPagamentoParcelado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(fecharVenda)))
-                .addContainerGap(557, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         mainPanel.add(vendas, "vendas");
@@ -1411,7 +1410,7 @@ public class Principal extends javax.swing.JFrame {
             .addGroup(produtosLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(produtosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(panelProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(panelProduto, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(produtosLayout.createSequentialGroup()
                         .addComponent(panelProdutoCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -1757,15 +1756,14 @@ public class Principal extends javax.swing.JFrame {
         panelRelatorioLayout.setHorizontalGroup(
             panelRelatorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRelatorioLayout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(panelRelatorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(panelRelatorioCrediario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(panelRelatorioVenda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelRelatorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(panelRelatorioLista, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(panelRelatorioGerencial, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(138, Short.MAX_VALUE))
+                    .addComponent(panelRelatorioGerencial, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         panelRelatorioLayout.setVerticalGroup(
             panelRelatorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1787,14 +1785,14 @@ public class Principal extends javax.swing.JFrame {
             .addGroup(relatoriosLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(panelRelatorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(155, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         relatoriosLayout.setVerticalGroup(
             relatoriosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(relatoriosLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(panelRelatorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(89, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         mainPanel.add(relatorios, "relatorios");
@@ -2801,6 +2799,7 @@ public class Principal extends javax.swing.JFrame {
                    
                    /*Imagem do Produto*/
                    URL resource = Principal.class.getResource("/produtos/");
+                   
                    imagemProduto.setIcon(new javax.swing.ImageIcon(resource.getPath()+produto.get("imagem")));
                    
                    /*Edição*/
@@ -3511,7 +3510,7 @@ public class Principal extends javax.swing.JFrame {
     private void confirmProdutoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_confirmProdutoMouseClicked
           Validacao valida = new Validacao();
           
-          if(valida.validaImagem(imagemProduto.getText())){
+          if(valida.validaImagem(imagemProduto)){
                   if(valida.validaPreco(precoProduto.getText())){
                         if(valida.validaTexto(descricaoProduto.getText())){
                             
@@ -3560,21 +3559,17 @@ public class Principal extends javax.swing.JFrame {
                             }
                             else{
                                 /*Atualiza os Dados*/
+                                String imagem = "";
+                                
                                 Long id = Long.parseLong(
                                     (String) tabelaProduto.getValueAt(tabelaProduto.getSelectedRow(), 0)
                                 );
 
-                                ControllerProduto.alterProduto(
-                                    id, 
-                                    descricaoProduto.getText(), 
-                                    Double.parseDouble(precoProduto.getText().replace(",", ".")),
-                                    Integer.parseInt(quantidadeProduto.getValue().toString()), 
-                                    labelNomeArquivo.getText()
-                                );
-
-                                
                                 Map<String, String> produto = ControllerProduto.searchProduto(id);
-                                if(!produto.get("imagem").equals(labelNomeArquivo.getText())){
+                                if(labelNomeArquivo.getText() != null){
+                                    
+                                    imagem = labelNomeArquivo.getText();
+                                    
                                     FileInputStream origem;
                                     FileOutputStream destino;
                                     FileChannel fcOrigem;
@@ -3606,8 +3601,18 @@ public class Principal extends javax.swing.JFrame {
                                     catch (IOException ex) {
                                         Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
                                     }
-                                    
                                 }
+                                else{
+                                    imagem = produto.get("imagem");
+                                }
+                                
+                                ControllerProduto.alterProduto(
+                                    id, 
+                                    descricaoProduto.getText(), 
+                                    Double.parseDouble(precoProduto.getText().replace(",", ".")),
+                                    Integer.parseInt(quantidadeProduto.getValue().toString()), 
+                                    imagem
+                                );
                                 
                                 limpaCampos("produto");
                                 carregaTabela("produto");

@@ -6,6 +6,7 @@
 package eagles.sabor_mel.control;
 
 import java.util.regex.Pattern;
+import javax.swing.JLabel;
 
 /**
  *
@@ -76,8 +77,8 @@ public class Validacao {
         return preco.length() > 0;
     }
     
-    public boolean validaImagem(String imagem){
-        return imagem == null;
+    public boolean validaImagem(JLabel imagem){
+        return imagem.getIcon() != null;
     }
     
     public boolean validaTexto(String texto){
