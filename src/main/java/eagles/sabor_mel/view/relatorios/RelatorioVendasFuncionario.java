@@ -5,6 +5,12 @@
  */
 package eagles.sabor_mel.view.relatorios;
 
+import eagles.sabor_mel.control.ControllerVendas;
+import java.util.List;
+import java.util.Map;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
+
 /**
  *
  * @author etivideo
@@ -16,6 +22,28 @@ public class RelatorioVendasFuncionario extends javax.swing.JFrame {
      */
     public RelatorioVendasFuncionario() {
         initComponents();
+        
+        this.setExtendedState(RelatorioListaClientes.MAXIMIZED_BOTH);   
+        
+        
+        TableColumnModel tcm = tabelaVendas.getColumnModel();
+        tcm.getColumn(0).setPreferredWidth(120);     //Documento
+        tcm.getColumn(1).setPreferredWidth(400);       //Nome
+        tcm.getColumn(2).setPreferredWidth(300);    //Cidade
+        tcm.getColumn(3).setPreferredWidth(300);    //Bairro
+        tcm.getColumn(4).setPreferredWidth(400);    //E-Mail
+        
+        List<Map<String, String>> funcionarios = ControllerVendas.listVendasFuncionario();
+        
+        for(int i = 0; i < funcionarios.size(); i++){
+            ((DefaultTableModel)tabelaVendas.getModel()).addRow(new String[]{
+                funcionarios.get(i).get("idFuncionario"),
+                funcionarios.get(i).get("funcionario"),
+                funcionarios.get(i).get("vendas"), 
+                funcionarios.get(i).get("itens"),
+                funcionarios.get(i).get("valor")
+            });
+        }
     }
 
     /**
@@ -83,7 +111,7 @@ public class RelatorioVendasFuncionario extends javax.swing.JFrame {
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false, false

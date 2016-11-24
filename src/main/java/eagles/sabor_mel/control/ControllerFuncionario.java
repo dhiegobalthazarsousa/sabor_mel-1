@@ -245,5 +245,21 @@ public class ControllerFuncionario {
         
         return total;
     }
+    
+    /*Método para somar o desconto total concedido pelo funcionario*/
+    public static Double somarDesconto(Long id){
+        Double descontoTotal = 0.0;
+        
+        Funcionario funcionario = daoFuncionario.getById(id);
+        List<Map<String, String>> vendas = ControllerVendas.listVendas();
+        
+        for(Map<String, String> venda : vendas){
+            if(venda.get("idFuncionario").equals(String.valueOf(id))){
+                descontoTotal += Double.parseDouble(venda.get("desconto"));
+            }
+        }
+        
+        return descontoTotal;
+    }
 
 }

@@ -15,6 +15,7 @@ import eagles.sabor_mel.view.relatorios.RelatorioListaClientes;
 import eagles.sabor_mel.view.relatorios.RelatorioListaFornecedores;
 import eagles.sabor_mel.view.relatorios.RelatorioListaFuncionarios;
 import eagles.sabor_mel.view.relatorios.RelatorioListaProdutos;
+import eagles.sabor_mel.view.relatorios.RelatorioVendasFuncionario;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -1835,6 +1836,11 @@ public class Principal extends javax.swing.JFrame {
         btnRelatorio1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/venda_funcionario.png"))); // NOI18N
         btnRelatorio1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnRelatorio1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnRelatorio1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnRelatorio1MouseClicked(evt);
+            }
+        });
 
         btnRelatorio2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/venda_cliente.png"))); // NOI18N
         btnRelatorio2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -4328,6 +4334,10 @@ public class Principal extends javax.swing.JFrame {
     private void btnRelatorio12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRelatorio12MouseClicked
         new RelatorioListaFuncionarios().setVisible(true);
     }//GEN-LAST:event_btnRelatorio12MouseClicked
+
+    private void btnRelatorio1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRelatorio1MouseClicked
+        new RelatorioVendasFuncionario().setVisible(true);
+    }//GEN-LAST:event_btnRelatorio1MouseClicked
 
     public void filtraTabela(String menu) {
         List<Map<String, String>> lista;

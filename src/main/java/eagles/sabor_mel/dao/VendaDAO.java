@@ -34,9 +34,8 @@ public class VendaDAO extends DAO<Venda>{
     }
  
     @SuppressWarnings("unchecked")
-	public List<Venda> findAll() {
-    	return entityManager
-    		.createQuery("FROM Venda").getResultList();
+    public List<Venda> findAll() {
+        return entityManager.createQuery("FROM Venda").getResultList();
     }
         
     public List<Venda> getByInterval(Date start, Date end) {
@@ -49,6 +48,18 @@ public class VendaDAO extends DAO<Venda>{
     public List<Venda> getByClient(Long idCliente){
         Query query = entityManager.createQuery("FROM Venda v WHERE v.idCliente = :idCliente");
         query.setParameter("idCliente", idCliente);
+        return query.getResultList();
+    }
+    
+    public List<Venda> getByFuncionario(Long idFuncionario){
+        Query query = entityManager.createQuery("FROM Venda WHERE idFuncionario = :idFuncionario");
+        query.setParameter("idFuncionario", idFuncionario);
+        return query.getResultList();
+    }
+    
+    public List<Venda> groupByFuncionario(){
+        Query query = entityManager.createQuery("FROM Venda GROUP BY idFuncionario");
+        
         return query.getResultList();
     }
     

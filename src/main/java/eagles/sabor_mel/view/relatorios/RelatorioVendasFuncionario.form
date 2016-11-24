@@ -186,7 +186,7 @@
                         <Column editable="false" title="Funcion&#xe1;rio" type="java.lang.String"/>
                         <Column editable="false" title="Vendas" type="java.lang.String"/>
                         <Column editable="false" title="Itens" type="java.lang.String"/>
-                        <Column editable="false" title="R$ Valor" type="java.lang.Double"/>
+                        <Column editable="false" title="R$ Valor" type="java.lang.String"/>
                       </Table>
                     </Property>
                   </Properties>

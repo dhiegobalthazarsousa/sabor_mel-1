@@ -185,8 +185,8 @@
                         <Column editable="false" title="C&#xf3;digo" type="java.lang.String"/>
                         <Column editable="false" title="Descri&#xe7;&#xe3;o" type="java.lang.String"/>
                         <Column editable="false" title="Quantidade" type="java.lang.Integer"/>
-                        <Column editable="false" title="R$ Unit&#xe1;rio" type="java.lang.Double"/>
-                        <Column editable="false" title="R$ Total" type="java.lang.Double"/>
+                        <Column editable="false" title="R$ Unit&#xe1;rio" type="java.lang.String"/>
+                        <Column editable="false" title="R$ Total" type="java.lang.String"/>
                       </Table>
                     </Property>
                   </Properties>
