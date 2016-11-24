@@ -82,6 +82,10 @@ public class ControllerPessoa {
                 Map<String, String> specPessoa = new HashMap();
                 specPessoa.put("id", String.valueOf(p.getIdPessoa()));
                 specPessoa.put("nome", String.valueOf(p.getNome()));
+                specPessoa.put("documento", String.valueOf(p.getDocumento().getNumero()));
+                specPessoa.put("cidade", String.valueOf(p.getEndereco().getBairro().getCidade().getNome()));
+                specPessoa.put("bairro", String.valueOf(p.getEndereco().getBairro().getNome()));
+                specPessoa.put("email", String.valueOf(p.getEmail()));
                 
                 listaPessoas.add(specPessoa);
             }

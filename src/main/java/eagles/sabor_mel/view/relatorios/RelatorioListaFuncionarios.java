@@ -28,14 +28,16 @@ public class RelatorioListaFuncionarios extends javax.swing.JFrame {
         
         
         TableColumnModel tcm = tabelaFuncionarios.getColumnModel();
-        tcm.getColumn(0).setPreferredWidth(200);    //Nome
-        tcm.getColumn(1).setPreferredWidth(180);    //Usuario
-        tcm.getColumn(2).setPreferredWidth(150);    //Acesso
+        tcm.getColumn(0).setPreferredWidth(120);    //Documento
+        tcm.getColumn(1).setPreferredWidth(200);    //Nome
+        tcm.getColumn(2).setPreferredWidth(180);    //Usuario
+        tcm.getColumn(3).setPreferredWidth(150);    //Acesso
         
         List<Map<String, String>> funcionarios = ControllerFuncionario.listFuncionarios();
         
         for(int i = 0; i < funcionarios.size(); i++){
             ((DefaultTableModel)tabelaFuncionarios.getModel()).addRow(new String[]{
+                funcionarios.get(i).get("documento"),
                 funcionarios.get(i).get("nome"),
                 funcionarios.get(i).get("usuario"),
                 funcionarios.get(i).get("acesso")
@@ -104,14 +106,14 @@ public class RelatorioListaFuncionarios extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Nome", "Usuário", "Acesso"
+                "Documento", "Nome", "Usuário", "Acesso"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {

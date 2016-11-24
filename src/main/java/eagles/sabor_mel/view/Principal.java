@@ -11,6 +11,10 @@ import eagles.sabor_mel.model.Sexo;
 import eagles.sabor_mel.model.TipoDocumento;
 import eagles.sabor_mel.model.TipoTelefone;
 import eagles.sabor_mel.model.TipoVenda;
+import eagles.sabor_mel.view.relatorios.RelatorioListaClientes;
+import eagles.sabor_mel.view.relatorios.RelatorioListaFornecedores;
+import eagles.sabor_mel.view.relatorios.RelatorioListaFuncionarios;
+import eagles.sabor_mel.view.relatorios.RelatorioListaProdutos;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -385,7 +389,7 @@ public class Principal extends javax.swing.JFrame {
         btnRelatorio4 = new javax.swing.JButton();
         btnRelatorio5 = new javax.swing.JButton();
         btnRelatorio6 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btnRelatorio12 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -1638,12 +1642,32 @@ public class Principal extends javax.swing.JFrame {
         panelRelatorioLista.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Listas"));
 
         btnRelatorio4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/usuario.png"))); // NOI18N
+        btnRelatorio4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnRelatorio4MouseClicked(evt);
+            }
+        });
 
         btnRelatorio5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/fornecedor.png"))); // NOI18N
+        btnRelatorio5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnRelatorio5MouseClicked(evt);
+            }
+        });
 
         btnRelatorio6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/produto.png"))); // NOI18N
+        btnRelatorio6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnRelatorio6MouseClicked(evt);
+            }
+        });
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/funcionario.png"))); // NOI18N
+        btnRelatorio12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/funcionario.png"))); // NOI18N
+        btnRelatorio12.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnRelatorio12MouseClicked(evt);
+            }
+        });
 
         jLabel2.setText("Lista de Clientes");
 
@@ -1677,7 +1701,7 @@ public class Principal extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel4))
                             .addGroup(panelRelatorioListaLayout.createSequentialGroup()
-                                .addComponent(jButton1)
+                                .addComponent(btnRelatorio12)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel5)))
                         .addGap(0, 0, Short.MAX_VALUE))))
@@ -1700,7 +1724,7 @@ public class Principal extends javax.swing.JFrame {
                     .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelRelatorioListaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton1)
+                    .addComponent(btnRelatorio12)
                     .addComponent(jLabel5))
                 .addGap(0, 35, Short.MAX_VALUE))
         );
@@ -4289,6 +4313,22 @@ public class Principal extends javax.swing.JFrame {
         nomeBuscaUsuario.setText(null);
     }//GEN-LAST:event_btnBuscaUsuarioMouseClicked
 
+    private void btnRelatorio4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRelatorio4MouseClicked
+        new RelatorioListaClientes().setVisible(true);
+    }//GEN-LAST:event_btnRelatorio4MouseClicked
+
+    private void btnRelatorio5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRelatorio5MouseClicked
+        new RelatorioListaFornecedores().setVisible(true);
+    }//GEN-LAST:event_btnRelatorio5MouseClicked
+
+    private void btnRelatorio6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRelatorio6MouseClicked
+        new RelatorioListaProdutos().setVisible(true);
+    }//GEN-LAST:event_btnRelatorio6MouseClicked
+
+    private void btnRelatorio12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRelatorio12MouseClicked
+        new RelatorioListaFuncionarios().setVisible(true);
+    }//GEN-LAST:event_btnRelatorio12MouseClicked
+
     public void filtraTabela(String menu) {
         List<Map<String, String>> lista;
         
@@ -4465,6 +4505,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton btnRelatorio1;
     private javax.swing.JButton btnRelatorio10;
     private javax.swing.JButton btnRelatorio11;
+    private javax.swing.JButton btnRelatorio12;
     private javax.swing.JButton btnRelatorio2;
     private javax.swing.JButton btnRelatorio3;
     private javax.swing.JButton btnRelatorio4;
@@ -4528,7 +4569,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton finalizaCompra;
     private javax.swing.JPanel fornecedores;
     private javax.swing.JLabel imagemProduto;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

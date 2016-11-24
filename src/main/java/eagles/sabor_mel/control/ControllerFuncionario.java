@@ -26,7 +26,6 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -52,6 +51,7 @@ public class ControllerFuncionario {
                 specFuncionario.put("nome", String.valueOf(f.getNome()));
                 specFuncionario.put("usuario", String.valueOf(f.getUsuario()));
                 specFuncionario.put("acesso", String.valueOf(f.getAcesso()));
+                specFuncionario.put("documento", String.valueOf(f.getDocumento().getNumero()));
                 
                 listaFuncionarios.add(specFuncionario);
             } 
@@ -90,7 +90,7 @@ public class ControllerFuncionario {
     *
     */
     public static Map<String, String> searchFuncionario(String nome){
-        FuncionarioDAO daoFuncionario = new FuncionarioDAO();
+        
         Funcionario funcionario = daoFuncionario.getByName(nome);
         Map <String, String> specFuncionario = new HashMap<>();
         specFuncionario.put("idFuncionario", String.valueOf(funcionario.getIdPessoa()));
