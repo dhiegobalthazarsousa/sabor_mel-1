@@ -34,7 +34,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.persistence.NoResultException;
-import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -4674,7 +4673,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> sexoCliente;
     private javax.swing.JComboBox<String> sexoUsuario;
     private javax.swing.JTable tabelaCliente;
-    private javax.swing.JTable tabelaCompra;
+    protected javax.swing.JTable tabelaCompra;
     private javax.swing.JTable tabelaFornecedor;
     private javax.swing.JTable tabelaProduto;
     private javax.swing.JTable tabelaUsuario;
