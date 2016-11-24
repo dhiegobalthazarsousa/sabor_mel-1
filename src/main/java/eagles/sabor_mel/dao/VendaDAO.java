@@ -46,9 +46,16 @@ public class VendaDAO extends DAO<Venda>{
        return query.getResultList();
     }
          
-    public List<Venda> getByClient(long idCliente){
+    public List<Venda> getByClient(Long idCliente){
         Query query = entityManager.createQuery("FROM Venda v WHERE v.idCliente = :idCliente");
         query.setParameter("idCliente", idCliente);
         return query.getResultList();
     }
+    
+    /*Método para listar funcionarios e suas vendas - Relatório(VendaFuncionario)*/
+//    public List<Venda> getByFuncionario(){
+//        Query query = entityManager.createQuery("FROM Venda v WHERE v.idFuncionario = :idFuncionario");
+//        query.setParameter("idFuncionario", idFuncionario);
+//        return query.getResultList();
+//    }
 }

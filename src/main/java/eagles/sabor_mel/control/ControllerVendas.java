@@ -5,18 +5,13 @@
  */
 package eagles.sabor_mel.control;
 
-import eagles.sabor_mel.dao.CrediarioDAO;
-import eagles.sabor_mel.dao.DocumentoDAO;
 import eagles.sabor_mel.dao.FuncionarioDAO;
 import eagles.sabor_mel.dao.PessoaDAO;
 import eagles.sabor_mel.dao.ProdutoDAO;
 import eagles.sabor_mel.dao.VendaDAO;
-import eagles.sabor_mel.model.Crediario;
 import eagles.sabor_mel.model.DateGenerator;
-import eagles.sabor_mel.model.Documento;
 import eagles.sabor_mel.model.Funcionario;
 import eagles.sabor_mel.model.ItemVenda;
-import eagles.sabor_mel.model.Parcela;
 import eagles.sabor_mel.model.Pessoa;
 import eagles.sabor_mel.model.Produto;
 import eagles.sabor_mel.model.TipoVenda;
@@ -103,7 +98,7 @@ public class ControllerVendas {
     }
     
     /*
-     * @author Dhiego e Thiago
+     * @author Dhiego e Tiago
      * Método para venda a Crediário
     */
     public static boolean vender(Long idPessoa, Long idFuncionario, TipoVenda tipoVenda, Long[] produtos, int[] quantidades, double desconto, int quantidadeParcela, int dia, int mes, int ano) {
@@ -163,7 +158,76 @@ public class ControllerVendas {
         p.setQuantidade(newQuantity);
         return pDAO.merge(p);
     }
+    
+    
+    /*Método para listar vendas*/
+    public static List<Map<String, String>> listVendas(){
+        List<Venda> vendas = daoVenda.findAll();
+        List<Map<String, String>> listaVendas = new ArrayList<>();
+        
+        for(Venda v : vendas){
+            
+            Map<String, String> specVenda = new HashMap<>();
+            
+            specVenda.put("idVenda", String.valueOf(v.getIdVenda()));
+            specVenda.put("dataVenda", String.valueOf(v.getDataVenda()));
+            specVenda.put("desconto", String.valueOf(v.getDesconto()));
+            specVenda.put("tipoVenda", String.valueOf(v.getTipoVenda()));
+            specVenda.put("idCliente", String.valueOf(v.getCliente()));
+            specVenda.put("idFuncionario", String.valueOf(v.getFuncionario()));
+            specVenda.put("cliente", String.valueOf(v.getCliente().getNome()));
+            specVenda.put("funcionario", String.valueOf(v.getFuncionario().getNome()));
 
+            listaVendas.add(specVenda);
+            
+        }
+        
+        return listaVendas;
+    }
+    
+    /*Método para listar itens da venda - calculando o total de quantidade e valor por venda*/
+    public static Map<String, String> listItensTotal(Long idVenda){
+        Venda venda = daoVenda.getById(idVenda);
+        int tam = venda.getItens().size();
+        
+        Map<String, String> specVenda = new HashMap<>();
+        Integer quantitadeTotal = 0;
+        Double valorTotal = 0.0;
+        
+        for(int i = 0; i < tam; i++){
+            quantitadeTotal += venda.getItens().get(i).getQuantidade();
+            valorTotal += venda.getItens().get(i).getProduto().getValorUnitario();
+        }
+        
+        specVenda.put("valorTotal", String.valueOf(valorTotal));
+        specVenda.put("quantidadeTotal", String.valueOf(quantitadeTotal));
+        
+        return specVenda;
+    }
+    
+    /*Método para Listar as vendas dos funcionarios*/
+    public static List<Map<String, String>> listVendasFuncionario(Long id){
+        List<Venda> vendas = daoVenda.findAll();
+        List<Map<String, String>> listaVendas = new ArrayList<>();
+        
+        for(Venda v : vendas){
+            Map<String, String> specVenda = new HashMap<>();
+            
+            specVenda.put("funcionario", v.getFuncionario().getNome());
+            specVenda.put("vendas", String.valueOf(ControllerFuncionario.contarVendas(id)));
+            specVenda.put("itens", listItensTotal(id).get("quantidadeTotal"));
+            specVenda.put("valor", );
+            specVenda.put("tipoVenda", );
+            specVenda.put("desconto", );
+            specVenda.put("vendas", );
+            
+            listaVendas.add(specVenda);
+        }
+        
+        return listaVendas;
+        
+    }
+    
     /*
     private boolean analisaQuantidadeProdutos(Long[] produtos, int[] quantidades) {
         ProdutoDAO daoProduto = new ProdutoDAO();
