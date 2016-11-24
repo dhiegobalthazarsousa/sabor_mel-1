@@ -8,6 +8,8 @@ package eagles.sabor_mel.view.relatorios;
 import eagles.sabor_mel.control.ControllerPessoa;
 import java.util.List;
 import java.util.Map;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
 
 /**
  *
@@ -22,32 +24,27 @@ public class RelatorioListaClientes extends javax.swing.JFrame {
      */
     public RelatorioListaClientes() {
         initComponents();
+        this.setExtendedState(RelatorioListaClientes.MAXIMIZED_BOTH);   
+        
+        
+        TableColumnModel tcm = tabelaClientes.getColumnModel();
+        tcm.getColumn(0).setPreferredWidth(120);     //Documento
+        tcm.getColumn(1).setPreferredWidth(400);      //Nome
+        tcm.getColumn(2).setPreferredWidth(300);    //Cidade
+        tcm.getColumn(3).setPreferredWidth(300);    //Bairro
+        tcm.getColumn(4).setPreferredWidth(400);    //E-Mail
         
         List<Map<String, String>> clientes = ControllerPessoa.relatorioListaClientes();
         
-        String saida = "<html>"
-            + "<table>"
-                + "<tr>"
-                    + "<td><b>Documento</b></td>"
-                    + "<td><b>Nome</b></td>"
-                    + "<td><b>Cidade</b></td>"
-                    + "<td><b>Bairro</b></td>"
-                    + "<td><b>E-Mail</b></td>"
-                + "</tr>";
-        
-        for(Map<String, String> cliente : clientes){
-            saida += "<tr>";
-            saida += "<td>"+cliente.get("documento")+"</td>";
-            saida += "<td>"+cliente.get("nome")+"</td>";
-            saida += "<td>"+cliente.get("cidade")+"</td>";
-            saida += "<td>"+cliente.get("bairro")+"</td>";
-            saida += "<td>"+cliente.get("email")+"</td>";
-            saida += "</tr>";
+        for(int i = 0; i < clientes.size(); i++){
+            ((DefaultTableModel)tabelaClientes.getModel()).addRow(new String[]{
+                clientes.get(i).get("documento"),
+                clientes.get(i).get("nome"),
+                clientes.get(i).get("cidade"), 
+                clientes.get(i).get("bairro"),
+                clientes.get(i).get("email")
+            });
         }
-        saida += "</table>"
-                + "</html>";
-        
-        relatorio.setText(saida);
     }
 
     /**
@@ -65,7 +62,8 @@ public class RelatorioListaClientes extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         panelRelatorio = new javax.swing.JPanel();
-        relatorio = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tabelaClientes = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -87,7 +85,7 @@ public class RelatorioListaClientes extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(304, 304, 304))
@@ -106,7 +104,30 @@ public class RelatorioListaClientes extends javax.swing.JFrame {
 
         panelRelatorio.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Relatórios de Clientes"));
 
-        relatorio.setText("jLabel5");
+        tabelaClientes.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Documento", "Nome", "Cidade", "Bairro", "E-Mail"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, true
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tabelaClientes);
 
         javax.swing.GroupLayout panelRelatorioLayout = new javax.swing.GroupLayout(panelRelatorio);
         panelRelatorio.setLayout(panelRelatorioLayout);
@@ -114,14 +135,15 @@ public class RelatorioListaClientes extends javax.swing.JFrame {
             panelRelatorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRelatorioLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(relatorio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1)
                 .addContainerGap())
         );
         panelRelatorioLayout.setVerticalGroup(
             panelRelatorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRelatorioLayout.createSequentialGroup()
-                .addComponent(relatorio)
-                .addGap(0, 292, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jScrollPane1)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout panelMainLayout = new javax.swing.GroupLayout(panelMain);
@@ -145,7 +167,7 @@ public class RelatorioListaClientes extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jButton1.setText("Imprimir");
+        jButton1.setText("Sair");
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton1MouseClicked(evt);
@@ -163,18 +185,19 @@ public class RelatorioListaClientes extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(498, Short.MAX_VALUE)
-                        .addComponent(jButton1))
-                    .addComponent(panelMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(panelMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1)
+                        .addGap(15, 15, 15)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(24, 24, 24)
                 .addComponent(jButton1)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -183,7 +206,7 @@ public class RelatorioListaClientes extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-        //new PrintUIWindow(this);
+        this.dispose();
     }//GEN-LAST:event_jButton1MouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -233,8 +256,9 @@ public class RelatorioListaClientes extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel panelMain;
     private javax.swing.JPanel panelRelatorio;
-    private javax.swing.JLabel relatorio;
+    private javax.swing.JTable tabelaClientes;
     // End of variables declaration//GEN-END:variables
 }
