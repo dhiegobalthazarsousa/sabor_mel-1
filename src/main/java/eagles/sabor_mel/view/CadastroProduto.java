@@ -5,6 +5,9 @@
  */
 package eagles.sabor_mel.view;
 
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author a1655086
@@ -15,6 +18,8 @@ public class CadastroProduto extends javax.swing.JFrame {
      * Creates new form CadastroProduto
      */
     public CadastroProduto() {
+        
+        this.setUndecorated(true);
         initComponents();
     }
 
@@ -34,18 +39,17 @@ public class CadastroProduto extends javax.swing.JFrame {
         labelQuantidadeProduto = new javax.swing.JLabel();
         quantidadeProduto = new javax.swing.JSpinner();
         labelPrecoProduto = new javax.swing.JLabel();
-        precoCompra = new javax.swing.JTextField();
         labelNomeArquivo = new javax.swing.JLabel();
         labelCaminhoArquivo = new javax.swing.JLabel();
         labelMargemDeLucro = new javax.swing.JLabel();
         spinnerPorcentagemLucro = new javax.swing.JSpinner();
         jLabel1 = new javax.swing.JLabel();
-        labelPrecoProduto1 = new javax.swing.JLabel();
-        precoCompra1 = new javax.swing.JTextField();
         confirmProduto = new javax.swing.JButton();
         deleteProduto = new javax.swing.JButton();
+        valorUnitario = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBounds(new java.awt.Rectangle(350, 150, 0, 0));
 
         panelProdutoCadastro.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Cadastro de Produto", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 12))); // NOI18N
 
@@ -59,19 +63,13 @@ public class CadastroProduto extends javax.swing.JFrame {
 
         quantidadeProduto.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
 
-        labelPrecoProduto.setText("Preço De Compra");
+        labelPrecoProduto.setText("Valor Unitário");
 
         labelMargemDeLucro.setText("Margem De Lucro");
 
         spinnerPorcentagemLucro.setModel(new javax.swing.SpinnerNumberModel(50.0d, 50.0d, 150.0d, 1.0d));
 
         jLabel1.setText("%");
-
-        labelPrecoProduto1.setText("Preço De Venda");
-        labelPrecoProduto1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-
-        precoCompra1.setEditable(false);
-        precoCompra1.setBackground(new java.awt.Color(255, 255, 255));
 
         confirmProduto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/checked (1).png"))); // NOI18N
         confirmProduto.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -80,6 +78,11 @@ public class CadastroProduto extends javax.swing.JFrame {
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 confirmProdutoMouseEntered(evt);
+            }
+        });
+        confirmProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                confirmProdutoActionPerformed(evt);
             }
         });
 
@@ -100,41 +103,33 @@ public class CadastroProduto extends javax.swing.JFrame {
                 .addGroup(panelProdutoCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelProdutoCadastroLayout.createSequentialGroup()
                         .addGroup(panelProdutoCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelProdutoCadastroLayout.createSequentialGroup()
-                                .addComponent(labelPrecoProduto)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                            .addGroup(panelProdutoCadastroLayout.createSequentialGroup()
-                                .addComponent(labelPrecoProduto1)
-                                .addGap(11, 11, 11)))
+                            .addComponent(labelMargemDeLucro)
+                            .addComponent(labelPrecoProduto))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(panelProdutoCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(precoCompra, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE)
-                            .addComponent(precoCompra1))
+                            .addComponent(quantidadeProduto)
+                            .addComponent(spinnerPorcentagemLucro, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE)
+                            .addComponent(valorUnitario))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(panelProdutoCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(panelProdutoCadastroLayout.createSequentialGroup()
+                                .addGap(17, 17, 17)
                                 .addComponent(labelNomeArquivo, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 226, Short.MAX_VALUE))
                             .addComponent(labelCaminhoArquivo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(panelProdutoCadastroLayout.createSequentialGroup()
-                        .addGroup(panelProdutoCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(labelDescricaoProduto)
-                            .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 476, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(panelProdutoCadastroLayout.createSequentialGroup()
-                                .addComponent(labelQuantidadeProduto)
-                                .addGap(22, 22, 22)
-                                .addComponent(quantidadeProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(labelMargemDeLucro)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(spinnerPorcentagemLucro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel1)))
-                        .addGap(0, 13, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelProdutoCadastroLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(confirmProduto)
                         .addGap(12, 12, 12)
-                        .addComponent(deleteProduto)))
+                        .addComponent(deleteProduto))
+                    .addGroup(panelProdutoCadastroLayout.createSequentialGroup()
+                        .addGroup(panelProdutoCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(labelDescricaoProduto)
+                            .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 476, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(labelQuantidadeProduto))
+                        .addGap(0, 78, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         panelProdutoCadastroLayout.setVerticalGroup(
@@ -147,25 +142,24 @@ public class CadastroProduto extends javax.swing.JFrame {
                 .addGroup(panelProdutoCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelProdutoCadastroLayout.createSequentialGroup()
                         .addGap(7, 7, 7)
-                        .addGroup(panelProdutoCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(labelQuantidadeProduto)
-                            .addComponent(quantidadeProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(labelMargemDeLucro)
-                            .addComponent(spinnerPorcentagemLucro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(panelProdutoCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(labelNomeArquivo, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(panelProdutoCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(panelProdutoCadastroLayout.createSequentialGroup()
+                                .addGroup(panelProdutoCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(labelQuantidadeProduto)
+                                    .addComponent(quantidadeProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(panelProdutoCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(labelNomeArquivo, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(panelProdutoCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(labelMargemDeLucro)
+                                        .addComponent(spinnerPorcentagemLucro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel1)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(labelCaminhoArquivo, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(panelProdutoCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(labelPrecoProduto)
-                                .addComponent(precoCompra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(panelProdutoCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(labelCaminhoArquivo, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(panelProdutoCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(labelPrecoProduto1)
-                                .addComponent(precoCompra1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 117, Short.MAX_VALUE)
+                                .addComponent(valorUnitario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(confirmProduto))
                     .addGroup(panelProdutoCadastroLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -180,7 +174,7 @@ public class CadastroProduto extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(panelProdutoCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(110, Short.MAX_VALUE))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -194,157 +188,36 @@ public class CadastroProduto extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void confirmProdutoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_confirmProdutoMouseClicked
-        Validacao valida = new Validacao();
 
-        if(valida.validaImagem(imagemProduto)){
-            if(valida.validaPreco(precoProduto.getText())){
-                if(valida.validaTexto(descricaoProduto.getText())){
-
-                    if(!deleteProduto.isEnabled()){
-                        FileInputStream origem;
-                        FileOutputStream destino;
-                        FileChannel fcOrigem;
-                        FileChannel fcDestino;
-
-                        /*Persistindo Produto*/
-                        try {
-
-                            URL resource = Principal.class.getResource("/produtos/");
-
-                            origem  = new FileInputStream(labelCaminhoArquivo.getText());
-                            destino = new FileOutputStream(Paths.get(resource.toURI()).toFile()+ "/" +labelNomeArquivo.getText());
-
-                            fcOrigem = origem.getChannel();
-                            fcDestino = destino.getChannel();
-
-                            fcOrigem.transferTo(0, fcOrigem.size(), fcDestino);
-
-                            origem.close();
-                            destino.close();
-                        }
-                        catch (FileNotFoundException ex) {
-                            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                        catch (IOException ex) {
-                            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                        catch (URISyntaxException ex) {
-                            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-
-                        ControllerProduto.cadastrar(
-                            descricaoProduto.getText(),
-                            Integer.parseInt(quantidadeProduto.getValue().toString()),
-                            Double.parseDouble(precoProduto.getText().replace(",",".")),
-                            labelNomeArquivo.getText()
-                        );
-
-                        limpaCampos("produto");
-
-                        carregaTabela("produto");
-                    }
-                    else{
-                        /*Atualiza os Dados*/
-                        String imagem = "";
-
-                        Long id = Long.parseLong(
-                            (String) tabelaProduto.getValueAt(tabelaProduto.getSelectedRow(), 0)
-                        );
-
-                        Map<String, String> produto = ControllerProduto.searchProduto(id);
-                        if(labelNomeArquivo.getText() != null){
-
-                            imagem = labelNomeArquivo.getText();
-
-                            FileInputStream origem;
-                            FileOutputStream destino;
-                            FileChannel fcOrigem;
-                            FileChannel fcDestino;
-
-                            File imagemAntiga = new File(produto.get("imagem"));
-                            imagemAntiga.delete();
-
-                            try {
-                                URL resource = Principal.class.getResource("/produtos/");
-                                origem = new FileInputStream(labelCaminhoArquivo.getText());
-
-                                destino = new FileOutputStream(Paths.get(resource.toURI()).toFile()+ "/" +labelNomeArquivo.getText());
-
-                                fcOrigem = origem.getChannel();
-                                fcDestino = destino.getChannel();
-
-                                fcOrigem.transferTo(0, fcOrigem.size(), fcDestino);
-
-                                origem.close();
-                                destino.close();
-                            }
-                            catch (FileNotFoundException ex) {
-                                Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
-                            }
-                            catch (URISyntaxException ex) {
-                                Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
-                            }
-                            catch (IOException ex) {
-                                Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
-                            }
-                        }
-                        else{
-                            imagem = produto.get("imagem");
-                        }
-
-                        ControllerProduto.alterProduto(
-                            id,
-                            descricaoProduto.getText(),
-                            Double.parseDouble(precoProduto.getText().replace(",", ".")),
-                            Integer.parseInt(quantidadeProduto.getValue().toString()),
-                            imagem
-                        );
-
-                        limpaCampos("produto");
-                        carregaTabela("produto");
-                    }
-
-                }
-                else{
-                    JOptionPane.showMessageDialog(null,"Descrição requerida!");
-                    descricaoProduto.requestFocus();
-                }
+        if(!descricaoProduto.getText().equals("")){
+            if(!valorUnitario.getText().equals("")){
+                String textValor = valorUnitario.getText().replace(',', '.');
+                Double vUnitario = Double.valueOf(textValor);
+                Double porcentagem = (Double) spinnerPorcentagemLucro.getValue();
+                Double pVenda = (vUnitario + (vUnitario*(porcentagem/100)));
+                ((DefaultTableModel) Principal.tabelaCompra.getModel()).addRow(new String[]{
+                    descricaoProduto.getText(),
+                    String.valueOf(quantidadeProduto.getValue()),
+                    String.valueOf(vUnitario),
+                    String.valueOf(pVenda),
+                    String.valueOf(porcentagem)                
+                });
+                
             }
-            else{
-                JOptionPane.showMessageDialog(null,"Valor de compra requerido!");
-                precoProduto.requestFocus();
-            }
-
-        }
-        else{
-            JOptionPane.showMessageDialog(null,"Selecione uma imagem!");
-            imagemProduto.requestFocus();
         }
     }//GEN-LAST:event_confirmProdutoMouseClicked
 
     private void confirmProdutoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_confirmProdutoMouseEntered
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_confirmProdutoMouseEntered
 
     private void deleteProdutoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteProdutoMouseClicked
-        if(deleteProduto.isEnabled()){
-            Long id = Long.parseLong(
-                (String) tabelaProduto.getValueAt(tabelaProduto.getSelectedRow(), 0)
-            );
-            Map<String, String> produto = ControllerProduto.searchProduto(id);
 
-            URL resource = Principal.class.getResource("/produtos/");
-            File imagemAntiga = new File(resource.getPath()+produto.get("imagem"));
-            imagemAntiga.delete();
-
-            ControllerProduto.deleteProduto(id);
-
-            JOptionPane.showMessageDialog(null, "Produto Excluido.");
-
-            limpaCampos("produto");
-            carregaTabela("produto");
-        }
     }//GEN-LAST:event_deleteProdutoMouseClicked
+
+    private void confirmProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmProdutoActionPerformed
+
+    }//GEN-LAST:event_confirmProdutoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -392,12 +265,10 @@ public class CadastroProduto extends javax.swing.JFrame {
     private javax.swing.JLabel labelMargemDeLucro;
     private javax.swing.JLabel labelNomeArquivo;
     private javax.swing.JLabel labelPrecoProduto;
-    private javax.swing.JLabel labelPrecoProduto1;
     private javax.swing.JLabel labelQuantidadeProduto;
     private javax.swing.JPanel panelProdutoCadastro;
-    private javax.swing.JTextField precoCompra;
-    private javax.swing.JTextField precoCompra1;
     private javax.swing.JSpinner quantidadeProduto;
     private javax.swing.JSpinner spinnerPorcentagemLucro;
+    private javax.swing.JTextField valorUnitario;
     // End of variables declaration//GEN-END:variables
 }

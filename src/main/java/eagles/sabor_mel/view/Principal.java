@@ -35,6 +35,7 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.persistence.NoResultException;
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -367,9 +368,6 @@ public class Principal extends javax.swing.JFrame {
         jScrollPane7 = new javax.swing.JScrollPane();
         tabelaCompra = new javax.swing.JTable();
         btnInsereProduto = new javax.swing.JButton();
-        labelPorcetagemLucro = new javax.swing.JLabel();
-        porcentagemLucro = new javax.swing.JSpinner();
-        labelPorcentagemLucro2 = new javax.swing.JLabel();
         avisoCompra1 = new javax.swing.JLabel();
         avisoCompra2 = new javax.swing.JLabel();
         panelConfirmaCompra = new javax.swing.JPanel();
@@ -1487,29 +1485,28 @@ public class Principal extends javax.swing.JFrame {
 
         tabelaCompra.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null}
+
             },
             new String [] {
-                "Descrição", "Quantidade", "Valor"
+                "Descrição", "Quantidade", "Valor De Compra", "Valor De Venda", "Lucro %"
             }
         ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Integer.class, java.lang.Double.class
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
             };
 
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
         jScrollPane7.setViewportView(tabelaCompra);
 
         btnInsereProduto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/add.png"))); // NOI18N
-
-        labelPorcetagemLucro.setText("Percentagem de Lucro");
-
-        porcentagemLucro.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
-
-        labelPorcentagemLucro2.setText("%");
+        btnInsereProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInsereProdutoActionPerformed(evt);
+            }
+        });
 
         avisoCompra1.setFont(new java.awt.Font("Dialog", 2, 11)); // NOI18N
         avisoCompra1.setText("<html>* Atenção à descrição do produto, produtos com mesma descrição terão sua quantidade<br/>aumentada. Não será inserido novo produto.</html>");
@@ -1524,14 +1521,7 @@ public class Principal extends javax.swing.JFrame {
             .addGroup(panelCompraProdutoLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelCompraProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelCompraProdutoLayout.createSequentialGroup()
-                        .addComponent(labelPorcetagemLucro)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(porcentagemLucro, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(labelPorcentagemLucro2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnInsereProduto))
+                    .addComponent(btnInsereProduto, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(panelCompraProdutoLayout.createSequentialGroup()
                         .addGroup(panelCompraProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1546,12 +1536,7 @@ public class Principal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelCompraProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnInsereProduto)
-                    .addGroup(panelCompraProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(labelPorcetagemLucro)
-                        .addComponent(porcentagemLucro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(labelPorcentagemLucro2)))
+                .addComponent(btnInsereProduto)
                 .addGap(18, 18, 18)
                 .addComponent(avisoCompra1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -4288,6 +4273,10 @@ public class Principal extends javax.swing.JFrame {
         nomeBuscaUsuario.setText(null);
     }//GEN-LAST:event_btnBuscaUsuarioMouseClicked
 
+    private void btnInsereProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsereProdutoActionPerformed
+        new CadastroProduto().setVisible(true);
+    }//GEN-LAST:event_btnInsereProdutoActionPerformed
+
     public void filtraTabela(String menu) {
         List<Map<String, String>> lista;
         
@@ -4595,8 +4584,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel labelNumeroUsuario;
     private javax.swing.JLabel labelPagoVenda;
     private javax.swing.JLabel labelParcelasVenda;
-    private javax.swing.JLabel labelPorcentagemLucro2;
-    private javax.swing.JLabel labelPorcetagemLucro;
     private javax.swing.JLabel labelPorcetagemVenda;
     private javax.swing.JLabel labelPrecoProduto;
     private javax.swing.JLabel labelQuantidadeProduto;
@@ -4657,7 +4644,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JPanel panelVendaPagamentoParcelado;
     private javax.swing.JPanel panelVendaPagamentoVista;
     private javax.swing.JPanel panelVendaProduto;
-    private javax.swing.JSpinner porcentagemLucro;
     private javax.swing.JTextField precoProduto;
     private javax.swing.JPanel produtos;
     private javax.swing.JSpinner quantidadeProduto;
@@ -4673,7 +4659,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> sexoCliente;
     private javax.swing.JComboBox<String> sexoUsuario;
     private javax.swing.JTable tabelaCliente;
-    protected javax.swing.JTable tabelaCompra;
+    protected static javax.swing.JTable tabelaCompra;
     private javax.swing.JTable tabelaFornecedor;
     private javax.swing.JTable tabelaProduto;
     private javax.swing.JTable tabelaUsuario;

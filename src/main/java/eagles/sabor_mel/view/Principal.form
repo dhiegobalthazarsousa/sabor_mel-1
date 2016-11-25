@@ -1735,15 +1735,7 @@
                       <Group type="102" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="1" attributes="0">
-                                  <Component id="labelPorcetagemLucro" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="porcentagemLucro" min="-2" pref="51" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="labelPorcentagemLucro2" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="32767" attributes="0"/>
-                                  <Component id="btnInsereProduto" min="-2" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="btnInsereProduto" alignment="1" min="-2" max="-2" attributes="0"/>
                               <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="jScrollPane7" min="-2" max="-2" attributes="0"/>
@@ -1763,14 +1755,7 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jScrollPane7" min="-2" pref="128" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="btnInsereProduto" min="-2" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="labelPorcetagemLucro" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="porcentagemLucro" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="labelPorcentagemLucro2" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
+                          <Component id="btnInsereProduto" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="avisoCompra1" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
@@ -1791,15 +1776,17 @@
                     <Component class="javax.swing.JTable" name="tabelaCompra">
                       <Properties>
                         <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                          <Table columnCount="3" rowCount="1">
-                            <Column editable="true" title="Descri&#xe7;&#xe3;o" type="java.lang.String"/>
-                            <Column editable="true" title="Quantidade" type="java.lang.Integer"/>
-                            <Column editable="true" title="Valor" type="java.lang.Double"/>
+                          <Table columnCount="5" rowCount="0">
+                            <Column editable="false" title="Descri&#xe7;&#xe3;o" type="java.lang.Object"/>
+                            <Column editable="false" title="Quantidade" type="java.lang.Object"/>
+                            <Column editable="false" title="Valor De Compra" type="java.lang.Object"/>
+                            <Column editable="false" title="Valor De Venda" type="java.lang.Object"/>
+                            <Column editable="false" title="Lucro %" type="java.lang.Object"/>
                           </Table>
                         </Property>
                       </Properties>
                       <AuxValues>
-                        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="4"/>
+                        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="12"/>
                       </AuxValues>
                     </Component>
                   </SubComponents>
@@ -1810,23 +1797,9 @@
                       <Image iconType="3" name="/img/add.png"/>
                     </Property>
                   </Properties>
-                </Component>
-                <Component class="javax.swing.JLabel" name="labelPorcetagemLucro">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Percentagem de Lucro"/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JSpinner" name="porcentagemLucro">
-                  <Properties>
-                    <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
-                      <SpinnerModel initial="0" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
-                    </Property>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JLabel" name="labelPorcentagemLucro2">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="%"/>
-                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnInsereProdutoActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="avisoCompra1">
                   <Properties>
