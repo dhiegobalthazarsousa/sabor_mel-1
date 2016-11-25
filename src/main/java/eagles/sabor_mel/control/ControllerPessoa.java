@@ -63,8 +63,10 @@ public class ControllerPessoa {
             if(String.valueOf(p.getDocumento().getTipo()).equals("CPF")){
                 if(!(String.valueOf(p.getNome()).equals("Cliente")) && !(String.valueOf(p.getNome()).equals("Administrador"))){
                     Map<String, String> specPessoa = new HashMap();
+                    
                     specPessoa.put("idPessoa", String.valueOf(p.getIdPessoa()));
                     specPessoa.put("nome", String.valueOf(p.getNome()));
+                    
                     listaPessoas.add(specPessoa);
                 }
             }

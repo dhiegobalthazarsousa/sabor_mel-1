@@ -233,6 +233,27 @@ public class ControllerVendas {
         
     }
     
+    /*Método para Listar as compras dos clientes*/
+    public static List<Map<String, String>> listVendasCliente(){
+        List<Venda> vendas = daoVenda.groupByCliente();
+        List<Map<String, String>> listaVendas = new ArrayList<>();
+        
+        for(Venda v : vendas){
+            Map<String, String> specVenda = new HashMap<>();
+            
+            specVenda.put("cliente", v.getCliente().getNome());
+            specVenda.put("vendas", String.valueOf(ControllerFuncionario.contarVendas(v.getFuncionario().getIdPessoa())));
+            specVenda.put("itens", listItensTotal(v.getFuncionario().getIdPessoa()).get("quantidadeTotal"));
+            specVenda.put("valor", listItensTotal(v.getFuncionario().getIdPessoa()).get("valorTotal"));
+            specVenda.put("desconto", String.valueOf(ControllerFuncionario.somarDesconto(v.getFuncionario().getIdPessoa())));
+            
+            listaVendas.add(specVenda);
+        }
+        
+        return listaVendas;
+        
+    }
+    
     /*
     private boolean analisaQuantidadeProdutos(Long[] produtos, int[] quantidades) {
         ProdutoDAO daoProduto = new ProdutoDAO();
