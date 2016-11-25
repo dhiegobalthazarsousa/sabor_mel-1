@@ -58,7 +58,7 @@ public class VendaDAO extends DAO<Venda>{
     }
     
     public List<Venda> groupByFuncionario(){
-        Query query = entityManager.createQuery("FROM Venda GROUP BY idFuncionario");
+        Query query = entityManager.createQuery("FROM Venda GROUP BY idFuncionario, idVenda");
         
         return query.getResultList();
     }
