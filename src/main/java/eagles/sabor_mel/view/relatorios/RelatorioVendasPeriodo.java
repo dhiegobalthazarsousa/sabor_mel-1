@@ -28,11 +28,12 @@ public class RelatorioVendasPeriodo extends javax.swing.JFrame {
         
         
         TableColumnModel tcm = tabelaVendas.getColumnModel();
-        tcm.getColumn(0).setPreferredWidth(120);    //Documento
-        tcm.getColumn(1).setPreferredWidth(400);    //Nome
-        tcm.getColumn(2).setPreferredWidth(300);    //Cidade
-        tcm.getColumn(3).setPreferredWidth(300);    //Bairro
-        tcm.getColumn(4).setPreferredWidth(400);    //E-Mail
+        tcm.getColumn(0).setPreferredWidth(120);    //Data
+        tcm.getColumn(1).setPreferredWidth(400);    //Funcionario
+        tcm.getColumn(2).setPreferredWidth(300);    //Cliente
+        tcm.getColumn(3).setPreferredWidth(100);    //Produtos
+        tcm.getColumn(4).setPreferredWidth(200);    //Valor Total
+        tcm.getColumn(5).setPreferredWidth(200);    //Tipo
        
         
         
@@ -44,9 +45,19 @@ public class RelatorioVendasPeriodo extends javax.swing.JFrame {
                 vendas.get(i).get("funcionario"),
                 vendas.get(i).get("cliente"),
                 vendas.get(i).get("quantidadeTotal"),
-                vendas.get(i).get("valorTotal")
+                vendas.get(i).get("valorTotal"),
+                vendas.get(i).get("tipoVenda")
                 
             });
+        }
+        
+        if(tabelaVendas.getRowCount() == 0){
+            labelPeriodo.setText("Período de "+DateGenerator.dateFormat(start)+" a "+DateGenerator.dateFormat(end)+
+                    ". Não existem registros.");
+        }
+        else{
+            labelPeriodo.setText("Período de "+DateGenerator.dateFormat(start)+" a "+DateGenerator.dateFormat(end)+
+                    ". "+tabelaVendas.getRowCount()+" registro(s).");
         }
     }
 
@@ -68,6 +79,7 @@ public class RelatorioVendasPeriodo extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelaVendas = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
+        labelPeriodo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -104,21 +116,21 @@ public class RelatorioVendasPeriodo extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        panelRelatorio.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Relatórios de Vendas por Funcionário"));
+        panelRelatorio.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Relatórios de Vendas por Período"));
 
         tabelaVendas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Data", "Funcionário", "Cliente", "Produtos", "R$ Total"
+                "Data", "Funcionário", "Cliente", "Produtos", "R$ Total", "Tipo"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -144,7 +156,7 @@ public class RelatorioVendasPeriodo extends javax.swing.JFrame {
             panelRelatorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRelatorioLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -165,8 +177,8 @@ public class RelatorioVendasPeriodo extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panelRelatorio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(panelRelatorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(33, Short.MAX_VALUE))
         );
 
         jButton1.setText("Sair");
@@ -175,6 +187,8 @@ public class RelatorioVendasPeriodo extends javax.swing.JFrame {
                 jButton1MouseClicked(evt);
             }
         });
+
+        labelPeriodo.setText("periodo");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -186,7 +200,10 @@ public class RelatorioVendasPeriodo extends javax.swing.JFrame {
                     .addComponent(panelMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton1)))
+                        .addComponent(jButton1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(labelPeriodo)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -195,7 +212,9 @@ public class RelatorioVendasPeriodo extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panelMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(panelMain, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(labelPeriodo)
                 .addContainerGap())
         );
 
@@ -248,6 +267,7 @@ public class RelatorioVendasPeriodo extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel labelPeriodo;
     private javax.swing.JPanel panelMain;
     private javax.swing.JPanel panelRelatorio;
     private javax.swing.JTable tabelaVendas;
