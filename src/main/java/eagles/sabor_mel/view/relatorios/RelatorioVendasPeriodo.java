@@ -6,6 +6,8 @@
 package eagles.sabor_mel.view.relatorios;
 
 import eagles.sabor_mel.control.ControllerVendas;
+import eagles.sabor_mel.model.DateGenerator;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 import javax.swing.table.DefaultTableModel;
@@ -15,13 +17,14 @@ import javax.swing.table.TableColumnModel;
  *
  * @author tiago
  */
-public class RelatorioVendasCliente extends javax.swing.JFrame {
+public class RelatorioVendasPeriodo extends javax.swing.JFrame {
 
     /**
-     * Creates new form RelatorioVendasCliente
+     * Creates new form RelatorioVendasPeriodo
      */
-    public RelatorioVendasCliente() {
+    public RelatorioVendasPeriodo() {
         initComponents();
+        
         
         this.setExtendedState(RelatorioListaClientes.MAXIMIZED_BOTH);   
         
@@ -33,15 +36,24 @@ public class RelatorioVendasCliente extends javax.swing.JFrame {
         tcm.getColumn(3).setPreferredWidth(300);    //Bairro
         tcm.getColumn(4).setPreferredWidth(400);    //E-Mail
         
-        List<Map<String, String>> clientes = ControllerVendas.listVendasCliente();
+        Calendar start;
+        Calendar end;
         
-        for(int i = 0; i < clientes.size(); i++){
+        start = DateGenerator.getCalendar(intervaloVenda.start.getText());
+        end = DateGenerator.getCalendar(intervaloVenda.end.getText());
+        
+        System.out.println(start.getTime());
+        System.out.println(end.getTime());
+        
+        List<Map<String, String>> vendas = ControllerVendas.searchVenda(start, end);
+        
+        for(int i = 0; i < vendas.size(); i++){
             ((DefaultTableModel)tabelaVendas.getModel()).addRow(new String[]{
-                clientes.get(i).get("cliente"),
-                clientes.get(i).get("produtos"),
-                clientes.get(i).get("valor"),
-                clientes.get(i).get("primeiraCompra"),
-                clientes.get(i).get("ultimaCompra")
+                vendas.get(i).get("dataVenda"),
+                vendas.get(i).get("funcionario"),
+                vendas.get(i).get("cliente"),
+                vendas.get(i).get("produtos"),
+                vendas.get(i).get("valorTotal")
                 
             });
         }
@@ -64,7 +76,7 @@ public class RelatorioVendasCliente extends javax.swing.JFrame {
         panelRelatorio = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelaVendas = new javax.swing.JTable();
-        btnSair = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -101,14 +113,14 @@ public class RelatorioVendasCliente extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        panelRelatorio.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Relatórios de Vendas por Cliente"));
+        panelRelatorio.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Relatórios de Vendas por Funcionário"));
 
         tabelaVendas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Nome", "Produtos", "R$ Total Gasto", "Primeira Compra", "Última Compra"
+                "Data", "Funcionário", "Cliente", "Produtos", "R$ Total"
             }
         ) {
             Class[] types = new Class [] {
@@ -141,7 +153,7 @@ public class RelatorioVendasCliente extends javax.swing.JFrame {
             panelRelatorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRelatorioLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -166,10 +178,10 @@ public class RelatorioVendasCliente extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        btnSair.setText("Sair");
-        btnSair.addMouseListener(new java.awt.event.MouseAdapter() {
+        jButton1.setText("Sair");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnSairMouseClicked(evt);
+                jButton1MouseClicked(evt);
             }
         });
 
@@ -183,14 +195,14 @@ public class RelatorioVendasCliente extends javax.swing.JFrame {
                     .addComponent(panelMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnSair)))
+                        .addComponent(jButton1)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnSair)
+                .addComponent(jButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -199,9 +211,9 @@ public class RelatorioVendasCliente extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnSairMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSairMouseClicked
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         this.dispose();
-    }//GEN-LAST:event_btnSairMouseClicked
+    }//GEN-LAST:event_jButton1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -220,26 +232,26 @@ public class RelatorioVendasCliente extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(RelatorioVendasCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RelatorioVendasPeriodo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(RelatorioVendasCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RelatorioVendasPeriodo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(RelatorioVendasCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RelatorioVendasPeriodo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(RelatorioVendasCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RelatorioVendasPeriodo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new RelatorioVendasCliente().setVisible(true);
+                new RelatorioVendasPeriodo().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnSair;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

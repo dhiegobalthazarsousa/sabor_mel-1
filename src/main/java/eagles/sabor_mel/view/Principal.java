@@ -15,6 +15,7 @@ import eagles.sabor_mel.view.relatorios.RelatorioListaClientes;
 import eagles.sabor_mel.view.relatorios.RelatorioListaFornecedores;
 import eagles.sabor_mel.view.relatorios.RelatorioListaFuncionarios;
 import eagles.sabor_mel.view.relatorios.RelatorioListaProdutos;
+import eagles.sabor_mel.view.relatorios.RelatorioVendasCliente;
 import eagles.sabor_mel.view.relatorios.RelatorioVendasFuncionario;
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -1845,10 +1846,20 @@ public class Principal extends javax.swing.JFrame {
         btnRelatorio2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/venda_cliente.png"))); // NOI18N
         btnRelatorio2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnRelatorio2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnRelatorio2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnRelatorio2MouseClicked(evt);
+            }
+        });
 
         btnRelatorio3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/venda_periodo.png"))); // NOI18N
         btnRelatorio3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnRelatorio3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnRelatorio3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnRelatorio3MouseClicked(evt);
+            }
+        });
 
         jLabel12.setText("Vendas por Funcionário");
 
@@ -4338,6 +4349,14 @@ public class Principal extends javax.swing.JFrame {
     private void btnRelatorio1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRelatorio1MouseClicked
         new RelatorioVendasFuncionario().setVisible(true);
     }//GEN-LAST:event_btnRelatorio1MouseClicked
+
+    private void btnRelatorio3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRelatorio3MouseClicked
+        
+    }//GEN-LAST:event_btnRelatorio3MouseClicked
+
+    private void btnRelatorio2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRelatorio2MouseClicked
+        new RelatorioVendasCliente().setVisible(true);
+    }//GEN-LAST:event_btnRelatorio2MouseClicked
 
     public void filtraTabela(String menu) {
         List<Map<String, String>> lista;

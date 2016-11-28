@@ -36,30 +36,25 @@ public class ControllerVendas {
      */
     private static VendaDAO daoVenda = new VendaDAO();
 
-    public static List<Map> searchVenda(int dia, int mes, int ano) {
-        List<Map> listMapVendas = new ArrayList<>();
-        Map<String, String> specVenda = new HashMap<>();
-        Date start;
-        Date end;
-        Calendar cal = Calendar.getInstance();
-        cal.set(ano, mes, dia);
-        start = cal.getTime();
-        cal.set(DateGenerator.getYear(), DateGenerator.getMonth(), DateGenerator.getDay());
-        end = cal.getTime();
-
+    public static List<Map<String, String>> searchVenda(Calendar start, Calendar end) {
+        List<Map<String, String>> listMapVendas = new ArrayList<>();
         List<Venda> vendas = daoVenda.getByInterval(start, end);
 
         for (Venda v : vendas) {
+            Map<String, String> specVenda = new HashMap<>();
+            
             specVenda.put("idVenda", String.valueOf(v.getIdVenda()));
             specVenda.put("dataVenda", String.valueOf(v.getDataVenda()));
             specVenda.put("tipoVenda", v.getTipoVenda().toString());
             specVenda.put("desconto", String.valueOf(v.getDesconto()));
-            specVenda.put("cliente_name", v.getCliente().getNome());
-            specVenda.put("cliente_document", v.getCliente().getDocumento().getNumero());
-            specVenda.put("vendedor_name", v.getFuncionario().getNome());
-            specVenda.put("vendedor_document", v.getFuncionario().getDocumento().getNumero());
+            specVenda.put("cliente", v.getCliente().getNome());
+            specVenda.put("documentoCliente", v.getCliente().getDocumento().getNumero());
+            specVenda.put("funcionario", v.getFuncionario().getNome());
+            specVenda.put("documentoFuncionario", v.getFuncionario().getDocumento().getNumero());
+            
             listMapVendas.add(specVenda);
         }
+        
         return listMapVendas;
     }
 
@@ -186,9 +181,37 @@ public class ControllerVendas {
     }
     
     /*Método para listar itens da venda - calculando o total de quantidade e valor por venda*/
-    public static Map<String, String> listItensTotal(Long idFuncionario){
+    /*ID - funcionario ou cliente*/
+    public static Map<String, String> listItensTotalFuncionario(Long id){
         
-        List<Venda> vendas = daoVenda.getByFuncionario(idFuncionario);
+        List<Venda> vendas = daoVenda.getByFuncionario(id);
+        int tam = 0;
+        
+        Map<String, String> specVenda = new HashMap<>();
+        Integer quantitadeTotal = 0;
+        Double valorTotal = 0.0;
+        
+        for(int i = 0; i < vendas.size(); i++){
+            
+            tam = vendas.get(i).getItens().size();
+            for(int j = 0; j < tam; j++){
+                quantitadeTotal += vendas.get(i).getItens().get(j).getQuantidade();
+                valorTotal += vendas.get(i).getItens().get(j).getProduto().getValorUnitario() *
+                        vendas.get(i).getItens().get(j).getQuantidade();
+            }
+        }
+        
+        specVenda.put("valorTotal", String.valueOf(valorTotal));
+        specVenda.put("quantidadeTotal", String.valueOf(quantitadeTotal));
+        
+        return specVenda;
+    }
+    
+    /*Método para listar itens da venda - calculando o total de quantidade e valor por venda*/
+    /*ID - funcionario ou cliente*/
+    public static Map<String, String> listItensTotalCliente(Long id){
+        
+        List<Venda> vendas = daoVenda.getByClient(id);
         int tam = 0;
         
         Map<String, String> specVenda = new HashMap<>();
@@ -213,18 +236,18 @@ public class ControllerVendas {
     
     /*Método para Listar as vendas dos funcionarios*/
     public static List<Map<String, String>> listVendasFuncionario(){
-        List<Venda> vendas = daoVenda.groupByFuncionario();
+        List<Pessoa> vendas = daoVenda.groupByFuncionario();
         List<Map<String, String>> listaVendas = new ArrayList<>();
         
-        for(Venda v : vendas){
+        for(Pessoa v : vendas){
             Map<String, String> specVenda = new HashMap<>();
             
-            specVenda.put("idFuncionario", String.valueOf(v.getFuncionario().getIdPessoa()));
-            specVenda.put("funcionario", v.getFuncionario().getNome());
-            specVenda.put("vendas", String.valueOf(ControllerFuncionario.contarVendas(v.getFuncionario().getIdPessoa())));
-            specVenda.put("itens", listItensTotal(v.getFuncionario().getIdPessoa()).get("quantidadeTotal"));
-            specVenda.put("valor", listItensTotal(v.getFuncionario().getIdPessoa()).get("valorTotal"));
-            specVenda.put("desconto", String.valueOf(ControllerFuncionario.somarDesconto(v.getFuncionario().getIdPessoa())));
+            specVenda.put("idFuncionario", String.valueOf(v.getIdPessoa()));
+            specVenda.put("funcionario", v.getNome());
+            specVenda.put("vendas", String.valueOf(ControllerFuncionario.contarVendas(v.getIdPessoa())));
+            specVenda.put("itens", listItensTotalFuncionario(v.getIdPessoa()).get("quantidadeTotal"));
+            specVenda.put("valor", listItensTotalFuncionario(v.getIdPessoa()).get("valorTotal"));
+            specVenda.put("desconto", String.valueOf(ControllerFuncionario.somarDesconto(v.getIdPessoa())));
             
             listaVendas.add(specVenda);
         }
@@ -235,17 +258,17 @@ public class ControllerVendas {
     
     /*Método para Listar as compras dos clientes*/
     public static List<Map<String, String>> listVendasCliente(){
-        List<Venda> vendas = daoVenda.groupByCliente();
+        List<Pessoa> vendas = daoVenda.groupByCliente();
         List<Map<String, String>> listaVendas = new ArrayList<>();
         
-        for(Venda v : vendas){
+        for(Pessoa v : vendas){
             Map<String, String> specVenda = new HashMap<>();
             
-            specVenda.put("cliente", v.getCliente().getNome());
-            specVenda.put("vendas", String.valueOf(ControllerFuncionario.contarVendas(v.getFuncionario().getIdPessoa())));
-            specVenda.put("itens", listItensTotal(v.getFuncionario().getIdPessoa()).get("quantidadeTotal"));
-            specVenda.put("valor", listItensTotal(v.getFuncionario().getIdPessoa()).get("valorTotal"));
-            specVenda.put("desconto", String.valueOf(ControllerFuncionario.somarDesconto(v.getFuncionario().getIdPessoa())));
+            specVenda.put("cliente", v.getNome());
+            specVenda.put("produtos", listItensTotalCliente(v.getIdPessoa()).get("quantidadeTotal"));
+            specVenda.put("valor", listItensTotalCliente(v.getIdPessoa()).get("valorTotal"));
+            specVenda.put("primeiraCompra", DateGenerator.dateFormat(daoVenda.getMindataCliente(v.getIdPessoa())));
+            specVenda.put("ultimaCompra", DateGenerator.dateFormat(daoVenda.getMaxdataCliente(v.getIdPessoa())));
             
             listaVendas.add(specVenda);
         }

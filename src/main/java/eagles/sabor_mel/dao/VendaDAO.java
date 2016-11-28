@@ -1,6 +1,8 @@
 package eagles.sabor_mel.dao;
 
+import eagles.sabor_mel.model.Pessoa;
 import eagles.sabor_mel.model.Venda;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Date;
 import javax.persistence.Query;
@@ -38,7 +40,7 @@ public class VendaDAO extends DAO<Venda>{
         return entityManager.createQuery("FROM Venda").getResultList();
     }
         
-    public List<Venda> getByInterval(Date start, Date end) {
+    public List<Venda> getByInterval(Calendar start, Calendar end) {
        Query query = entityManager.createQuery("FROM Venda v WHERE v.dataVenda BETWEEN :startDate AND :endDate");
        query.setParameter("startDate", start);
        query.setParameter("endDate", end);
@@ -46,7 +48,7 @@ public class VendaDAO extends DAO<Venda>{
     }
          
     public List<Venda> getByClient(Long idCliente){
-        Query query = entityManager.createQuery("FROM Venda v WHERE v.idCliente = :idCliente");
+        Query query = entityManager.createQuery("FROM Venda WHERE idCliente = :idCliente");
         query.setParameter("idCliente", idCliente);
         return query.getResultList();
     }
@@ -57,15 +59,29 @@ public class VendaDAO extends DAO<Venda>{
         return query.getResultList();
     }
     
-    public List<Venda> groupByFuncionario(){
-        Query query = entityManager.createQuery("FROM Venda GROUP BY idFuncionario, idVenda");
+    public List<Pessoa> groupByFuncionario(){
+        Query query = entityManager.createQuery("SELECT DISTINCT funcionario FROM Venda");
         
         return query.getResultList();
     }
     
-    public List<Venda> groupByCliente(){
-        Query query = entityManager.createQuery("FROM Venda GROUP BY idCliente, idVenda");
+    public List<Pessoa> groupByCliente(){
+        Query query = entityManager.createQuery("SELECT DISTINCT cliente FROM Venda");
         
         return query.getResultList();
+    }
+    
+    public Calendar getMaxdataCliente(Long idCliente){
+        Query query = entityManager.createQuery("SELECT MAX(dataVenda) FROM Venda WHERE idCliente = :idCliente");
+        query.setParameter("idCliente", idCliente);
+        
+        return (Calendar) query.getSingleResult();
+    }
+    
+    public Calendar getMindataCliente(Long idCliente){
+        Query query = entityManager.createQuery("SELECT MIN(dataVenda) FROM Venda WHERE idCliente = :idCliente");
+        query.setParameter("idCliente", idCliente);
+        
+        return (Calendar) query.getSingleResult();
     }
 }
