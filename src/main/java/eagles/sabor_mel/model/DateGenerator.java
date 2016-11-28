@@ -48,8 +48,20 @@ public class DateGenerator {
         
         Calendar c = Calendar.getInstance();
         
-        c.set(ano, mes, dia);
+        c.set(ano, mes-1, dia);
          
         return c;
+    }
+    
+    public static String getReverseData(Calendar cal){
+        DecimalFormat df = new DecimalFormat("00");
+        DecimalFormat dff = new DecimalFormat("0000");
+        
+        String data = "";
+        data = df.format(cal.get(Calendar.DAY_OF_MONTH)) + "/";
+        data += df.format(cal.get(Calendar.MONTH)+1) + "/";
+        data += dff.format(cal.get(Calendar.YEAR));
+        
+        return data;
     }
 }

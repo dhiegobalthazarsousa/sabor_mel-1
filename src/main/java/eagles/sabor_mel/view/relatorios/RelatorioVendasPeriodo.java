@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package eagles.sabor_mel.view.relatorios;
 
 import eagles.sabor_mel.control.ControllerVendas;
@@ -18,7 +13,10 @@ import javax.swing.table.TableColumnModel;
  * @author tiago
  */
 public class RelatorioVendasPeriodo extends javax.swing.JFrame {
-
+    
+    public static Calendar start;
+    public static Calendar end;
+    
     /**
      * Creates new form RelatorioVendasPeriodo
      */
@@ -30,20 +28,13 @@ public class RelatorioVendasPeriodo extends javax.swing.JFrame {
         
         
         TableColumnModel tcm = tabelaVendas.getColumnModel();
-        tcm.getColumn(0).setPreferredWidth(120);     //Documento
+        tcm.getColumn(0).setPreferredWidth(120);    //Documento
         tcm.getColumn(1).setPreferredWidth(400);    //Nome
         tcm.getColumn(2).setPreferredWidth(300);    //Cidade
         tcm.getColumn(3).setPreferredWidth(300);    //Bairro
         tcm.getColumn(4).setPreferredWidth(400);    //E-Mail
+       
         
-        Calendar start;
-        Calendar end;
-        
-        start = DateGenerator.getCalendar(intervaloVenda.start.getText());
-        end = DateGenerator.getCalendar(intervaloVenda.end.getText());
-        
-        System.out.println(start.getTime());
-        System.out.println(end.getTime());
         
         List<Map<String, String>> vendas = ControllerVendas.searchVenda(start, end);
         
@@ -52,7 +43,7 @@ public class RelatorioVendasPeriodo extends javax.swing.JFrame {
                 vendas.get(i).get("dataVenda"),
                 vendas.get(i).get("funcionario"),
                 vendas.get(i).get("cliente"),
-                vendas.get(i).get("produtos"),
+                vendas.get(i).get("quantidadeTotal"),
                 vendas.get(i).get("valorTotal")
                 
             });

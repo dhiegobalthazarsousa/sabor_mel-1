@@ -1,7 +1,9 @@
 package eagles.sabor_mel.dao;
 
+import eagles.sabor_mel.model.DateGenerator;
 import eagles.sabor_mel.model.Pessoa;
 import eagles.sabor_mel.model.Venda;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Date;
@@ -41,9 +43,12 @@ public class VendaDAO extends DAO<Venda>{
     }
         
     public List<Venda> getByInterval(Calendar start, Calendar end) {
-       Query query = entityManager.createQuery("FROM Venda v WHERE v.dataVenda BETWEEN :startDate AND :endDate");
+       SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+       Query query = entityManager.createQuery("FROM Venda WHERE dataVenda BETWEEN :startDate AND :endDate");
+        
        query.setParameter("startDate", start);
        query.setParameter("endDate", end);
+       
        return query.getResultList();
     }
          
