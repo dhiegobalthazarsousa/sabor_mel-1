@@ -16,6 +16,8 @@ public class intervaloVenda extends javax.swing.JFrame {
      */
     public intervaloVenda() {
         initComponents();
+        
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -135,8 +137,26 @@ public class intervaloVenda extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2MouseClicked
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-        this.dispose();
-        new RelatorioVendasPeriodo().setVisible(true);
+        Validacao valida = new Validacao();
+        
+        if(valida.validaDataNascimento(start.getText())){
+            if(valida.validaDataNascimento(end.getText())){
+                this.dispose();
+                
+                RelatorioVendasPeriodo.start = DateGenerator.getCalendar(start.getText());
+                RelatorioVendasPeriodo.end   = DateGenerator.getCalendar(end.getText());
+                
+                new RelatorioVendasPeriodo().setVisible(true);
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Informe a data final.");
+                end.requestFocus();
+            }
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Informe a data inicial.");
+            start.requestFocus();
+        }
     }//GEN-LAST:event_jButton1MouseClicked
 
     /**
