@@ -2212,6 +2212,9 @@
                         </Property>
                         <Property name="horizontalTextPosition" type="int" value="0"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnRelatorio7MouseClicked"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JButton" name="btnRelatorio8">
                       <Properties>
@@ -2219,6 +2222,9 @@
                           <Image iconType="3" name="/img/divida.png"/>
                         </Property>
                       </Properties>
+                      <Events>
+                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnRelatorio8MouseClicked"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel10">
                       <Properties>

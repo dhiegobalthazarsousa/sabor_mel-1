@@ -2,6 +2,7 @@ package eagles.sabor_mel.dao;
 
 import eagles.sabor_mel.model.Parcela;
 import java.util.List;
+import javax.persistence.Query;
 /**
  *
  * @author Tiago Lima Villalobos
@@ -11,8 +12,12 @@ public class ParcelaDAO extends DAO<Parcela>{
         return entityManager.find(Parcela.class, id);
     }
     
-    public Parcela getByPessoa(Long id){
-        return (Parcela) entityManager.createQuery("SELECT * FROM Parcela WHERE pessoa = '"+id+"';").getSingleResult();
+    public List<Parcela> getByCrediario(Long idCrediario){
+        Query query = entityManager.createQuery("FROM Parcela WHERE idCrediario = :idCrediario");
+        query.setParameter("idCrediario", idCrediario);
+        
+        return query.getResultList();
+        
     }
     
     public boolean removeById(final Long id) {

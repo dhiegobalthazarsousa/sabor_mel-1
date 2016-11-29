@@ -5,7 +5,7 @@
  */
 package eagles.sabor_mel.view.relatorios;
 
-import eagles.sabor_mel.control.ControllerVendas;
+import eagles.sabor_mel.control.ControllerCrediario;
 import java.util.List;
 import java.util.Map;
 import javax.swing.table.DefaultTableModel;
@@ -15,34 +15,41 @@ import javax.swing.table.TableColumnModel;
  *
  * @author etivideo
  */
-public class RelatorioVendasFuncionario extends javax.swing.JFrame {
+public class RelatorioInadimplencia extends javax.swing.JFrame {
 
     /**
-     * Creates new form RelatorioVendasFuncionario
+     * Creates new form RelatorioInadimplencia
      */
-    public RelatorioVendasFuncionario() {
+    public RelatorioInadimplencia() {
         initComponents();
         
         this.setExtendedState(this.MAXIMIZED_BOTH);   
         
         
         TableColumnModel tcm = tabelaVendas.getColumnModel();
-        tcm.getColumn(0).setPreferredWidth(120);     //Documento
-        tcm.getColumn(1).setPreferredWidth(400);       //Nome
-        tcm.getColumn(2).setPreferredWidth(300);    //Cidade
-        tcm.getColumn(3).setPreferredWidth(300);    //Bairro
-        tcm.getColumn(4).setPreferredWidth(400);    //E-Mail
+        tcm.getColumn(0).setPreferredWidth(120);    //Data
+        tcm.getColumn(1).setPreferredWidth(300);    //Cliente
+        tcm.getColumn(2).setPreferredWidth(100);    //Parcelas
+        tcm.getColumn(3).setPreferredWidth(100);    //Atrasadas
+        tcm.getColumn(4).setPreferredWidth(100);    //Pagas
+        tcm.getColumn(5).setPreferredWidth(100);    //Valor Parcela
+        tcm.getColumn(6).setPreferredWidth(100);    //Valor Devido
         
-        List<Map<String, String>> funcionarios = ControllerVendas.listVendasFuncionario();
         
-        for(int i = 0; i < funcionarios.size(); i++){
-            ((DefaultTableModel)tabelaVendas.getModel()).addRow(new String[]{
-                funcionarios.get(i).get("idFuncionario"),
-                funcionarios.get(i).get("funcionario"),
-                funcionarios.get(i).get("vendas"), 
-                funcionarios.get(i).get("itens"),
-                funcionarios.get(i).get("valor")
-            });
+        List<Map<String, String>> crediarios = ControllerCrediario.listCrediario();
+        
+        for(int i = 0; i < crediarios.size(); i++){
+            if(!crediarios.get(i).get("parcelasAtrasadas").equals("0")){
+                ((DefaultTableModel)tabelaVendas.getModel()).addRow(new String[]{
+                    crediarios.get(i).get("dataVenda"),
+                    crediarios.get(i).get("cliente"), 
+                    crediarios.get(i).get("parcelas"),
+                    crediarios.get(i).get("parcelasAtrasadas"),
+                    crediarios.get(i).get("parcelasPagas"),
+                    crediarios.get(i).get("valorParcela"),
+                    crediarios.get(i).get("valorDevido")
+                });
+            }
         }
     }
 
@@ -100,21 +107,21 @@ public class RelatorioVendasFuncionario extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        panelRelatorio.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Relatórios de Vendas por Funcionário"));
+        panelRelatorio.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Relatórios de Crediários em Atraso"));
 
         tabelaVendas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "ID", "Funcionário", "Vendas", "Itens", "R$ Valor"
+                "Data", "Cliente", "Parcelas", "Atrasadas", "Pagas", "R$ Parcela", "R$ Devido"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -140,7 +147,7 @@ public class RelatorioVendasFuncionario extends javax.swing.JFrame {
             panelRelatorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRelatorioLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -219,20 +226,20 @@ public class RelatorioVendasFuncionario extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(RelatorioVendasFuncionario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RelatorioInadimplencia.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(RelatorioVendasFuncionario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RelatorioInadimplencia.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(RelatorioVendasFuncionario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RelatorioInadimplencia.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(RelatorioVendasFuncionario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RelatorioInadimplencia.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new RelatorioVendasFuncionario().setVisible(true);
+                new RelatorioInadimplencia().setVisible(true);
             }
         });
     }

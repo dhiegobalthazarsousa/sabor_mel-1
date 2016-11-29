@@ -12,6 +12,8 @@ import eagles.sabor_mel.model.TipoDocumento;
 import eagles.sabor_mel.model.TipoTelefone;
 import eagles.sabor_mel.model.TipoVenda;
 import eagles.sabor_mel.view.relatorios.IntervaloVenda;
+import eagles.sabor_mel.view.relatorios.RelatorioCrediarioAberto;
+import eagles.sabor_mel.view.relatorios.RelatorioInadimplencia;
 import eagles.sabor_mel.view.relatorios.RelatorioListaClientes;
 import eagles.sabor_mel.view.relatorios.RelatorioListaFornecedores;
 import eagles.sabor_mel.view.relatorios.RelatorioListaFuncionarios;
@@ -41,7 +43,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.persistence.NoResultException;
-import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -1737,8 +1738,18 @@ public class Principal extends javax.swing.JFrame {
         btnRelatorio7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/credito.png"))); // NOI18N
         btnRelatorio7.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnRelatorio7.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnRelatorio7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnRelatorio7MouseClicked(evt);
+            }
+        });
 
         btnRelatorio8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/divida.png"))); // NOI18N
+        btnRelatorio8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnRelatorio8MouseClicked(evt);
+            }
+        });
 
         jLabel10.setText("Crediários em Aberto");
 
@@ -4358,6 +4369,14 @@ public class Principal extends javax.swing.JFrame {
     private void btnRelatorio2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRelatorio2MouseClicked
         new RelatorioVendasCliente().setVisible(true);
     }//GEN-LAST:event_btnRelatorio2MouseClicked
+
+    private void btnRelatorio7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRelatorio7MouseClicked
+        new RelatorioCrediarioAberto().setVisible(true);
+    }//GEN-LAST:event_btnRelatorio7MouseClicked
+
+    private void btnRelatorio8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRelatorio8MouseClicked
+       new RelatorioInadimplencia().setVisible(true);
+    }//GEN-LAST:event_btnRelatorio8MouseClicked
 
     public void filtraTabela(String menu) {
         List<Map<String, String>> lista;
