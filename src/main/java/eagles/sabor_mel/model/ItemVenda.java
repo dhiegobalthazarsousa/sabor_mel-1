@@ -31,7 +31,7 @@ public class ItemVenda implements Serializable{
     private Produto produto;
     
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "idVenda")
+    @JoinColumn(name = "idVenda", nullable = false)
     private Venda venda;
     
     /*Construtores*/

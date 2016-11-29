@@ -64,6 +64,8 @@ public class Principal extends javax.swing.JFrame {
             }
             
             carregaComboEstados();
+            carregaComboFornecedores();
+            
             logado.setText(funcionario.get("nome"));
 
             this.setExtendedState(this.MAXIMIZED_BOTH);   
@@ -84,6 +86,14 @@ public class Principal extends javax.swing.JFrame {
             estadoUsuario.addItem(estados.get(i).get("uf"));
             estadoCliente.addItem(estados.get(i).get("uf"));
             estadoFornecedor.addItem(estados.get(i).get("uf"));
+        }
+    }
+    
+    public void carregaComboFornecedores(){
+        List<Map<String, String>> fornecedores = ControllerPessoa.listFornecedores();
+        
+        for(Map<String, String> fornecedor: fornecedores){
+            comboFornecedores.addItem(fornecedor.get("nome"));
         }
     }
     
@@ -358,6 +368,8 @@ public class Principal extends javax.swing.JFrame {
         avisoProduto2 = new javax.swing.JLabel();
         labelNomeArquivo = new javax.swing.JLabel();
         labelCaminhoArquivo = new javax.swing.JLabel();
+        labelPrecoProduto2 = new javax.swing.JLabel();
+        comboFornecedores = new javax.swing.JComboBox<>();
         compras = new javax.swing.JPanel();
         labelCompraFornecedor = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -1347,17 +1359,21 @@ public class Principal extends javax.swing.JFrame {
         avisoProduto2.setFont(new java.awt.Font("Dialog", 2, 11)); // NOI18N
         avisoProduto2.setText("* Tamanho recomendado 200x200 px.");
 
+        labelPrecoProduto2.setText("Fornecedor");
+
+        comboFornecedores.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         javax.swing.GroupLayout panelProdutoCadastroLayout = new javax.swing.GroupLayout(panelProdutoCadastro);
         panelProdutoCadastro.setLayout(panelProdutoCadastroLayout);
         panelProdutoCadastroLayout.setHorizontalGroup(
             panelProdutoCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelProdutoCadastroLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(panelProdutoCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(panelProdutoCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelProdutoCadastroLayout.createSequentialGroup()
                         .addComponent(imagemProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(panelProdutoCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(panelProdutoCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(avisoProduto1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(panelProdutoCadastroLayout.createSequentialGroup()
                                 .addGroup(panelProdutoCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1366,15 +1382,20 @@ public class Principal extends javax.swing.JFrame {
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addComponent(labelCaminhoArquivo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addComponent(labelDescricaoProduto)
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 476, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(panelProdutoCadastroLayout.createSequentialGroup()
-                        .addComponent(labelQuantidadeProduto)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(quantidadeProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(labelPrecoProduto)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(precoProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(panelProdutoCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelProdutoCadastroLayout.createSequentialGroup()
+                            .addComponent(labelQuantidadeProduto)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(quantidadeProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(labelPrecoProduto)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(precoProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(labelPrecoProduto2)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(comboFornecedores, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 476, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelProdutoCadastroLayout.setVerticalGroup(
@@ -1391,7 +1412,7 @@ public class Principal extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(labelCaminhoArquivo, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(imagemProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addComponent(labelDescricaoProduto)
                 .addGap(8, 8, 8)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1400,8 +1421,10 @@ public class Principal extends javax.swing.JFrame {
                     .addComponent(labelQuantidadeProduto)
                     .addComponent(quantidadeProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(labelPrecoProduto)
-                    .addComponent(precoProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(precoProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelPrecoProduto2)
+                    .addComponent(comboFornecedores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout produtosLayout = new javax.swing.GroupLayout(produtos);
@@ -1427,14 +1450,13 @@ public class Principal extends javax.swing.JFrame {
             .addGroup(produtosLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(produtosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(panelProduto, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE)
-                    .addGroup(produtosLayout.createSequentialGroup()
-                        .addComponent(panelProdutoCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(produtosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(refreshProduto)
-                            .addComponent(deleteProduto)
-                            .addComponent(confirmProduto))))
+                    .addComponent(panelProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(panelProdutoCadastro, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(produtosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(refreshProduto)
+                    .addComponent(deleteProduto)
+                    .addComponent(confirmProduto))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -4477,6 +4499,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JTextField cidadeFornecedor;
     private javax.swing.JTextField cidadeUsuario;
     private javax.swing.JPanel clientes;
+    private javax.swing.JComboBox<String> comboFornecedores;
     private javax.swing.JTextField compraQuantidadeTotal;
     private javax.swing.JTextField compraValorTotal;
     private javax.swing.JPanel compras;
@@ -4586,6 +4609,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel labelParcelasVenda;
     private javax.swing.JLabel labelPorcetagemVenda;
     private javax.swing.JLabel labelPrecoProduto;
+    private javax.swing.JLabel labelPrecoProduto2;
     private javax.swing.JLabel labelQuantidadeProduto;
     private javax.swing.JLabel labelQuantidadeVendaProduto;
     private javax.swing.JLabel labelSenhaUsuario;

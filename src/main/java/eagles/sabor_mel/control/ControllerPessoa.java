@@ -118,7 +118,11 @@ public class ControllerPessoa {
             bairro = new Bairro(bairroNome);
         }
         
+        ControllerEstado.getEstadoByUf(estadoUF).addCidade(cidade);
+        cidade.addBairro(bairro);
         Endereco endereco = new Endereco(logradouro, numero, cep);
+        bairro.addEndereco(endereco);
+        
         Documento documento = new Documento(numeroDocumento, tipoDocumento);
         Pessoa pessoa = new Pessoa(nome, email, dataNascimento, sexo);
         pessoa.setDocumento(documento);
