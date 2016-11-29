@@ -32,6 +32,8 @@ public class DadosEmpresa extends javax.swing.JFrame {
      */
     public DadosEmpresa() {
         initComponents();
+        
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -44,8 +46,8 @@ public class DadosEmpresa extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        logo = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
+        panelLogo = new javax.swing.JPanel();
+        logo = new javax.swing.JLabel();
         labelNomeArquivo = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -64,33 +66,33 @@ public class DadosEmpresa extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Dados da Empresa"));
 
-        logo.setBorder(javax.swing.BorderFactory.createTitledBorder("Imagem"));
-        logo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        logo.addMouseListener(new java.awt.event.MouseAdapter() {
+        panelLogo.setBorder(javax.swing.BorderFactory.createTitledBorder("Imagem"));
+        panelLogo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        panelLogo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                logoMouseClicked(evt);
+                panelLogoMouseClicked(evt);
             }
         });
 
-        jLabel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        logo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         labelNomeArquivo.setText("...");
 
-        javax.swing.GroupLayout logoLayout = new javax.swing.GroupLayout(logo);
-        logo.setLayout(logoLayout);
-        logoLayout.setHorizontalGroup(
-            logoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(logoLayout.createSequentialGroup()
+        javax.swing.GroupLayout panelLogoLayout = new javax.swing.GroupLayout(panelLogo);
+        panelLogo.setLayout(panelLogoLayout);
+        panelLogoLayout.setHorizontalGroup(
+            panelLogoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelLogoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(logoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(panelLogoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(logo, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(labelNomeArquivo))
                 .addContainerGap(126, Short.MAX_VALUE))
         );
-        logoLayout.setVerticalGroup(
-            logoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(logoLayout.createSequentialGroup()
-                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+        panelLogoLayout.setVerticalGroup(
+            panelLogoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelLogoLayout.createSequentialGroup()
+                .addComponent(logo, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(labelNomeArquivo))
         );
@@ -196,14 +198,14 @@ public class DadosEmpresa extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(logo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(panelLogo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(logo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(panelLogo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -228,7 +230,7 @@ public class DadosEmpresa extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void logoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoMouseClicked
+    private void panelLogoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelLogoMouseClicked
         
         JFileChooser arquivo = new JFileChooser();
 
@@ -254,7 +256,7 @@ public class DadosEmpresa extends javax.swing.JFrame {
 
                     
                     labelNomeArquivo.setText(nomeArquivo);
-                    labelCaminhoArquivo.setText(caminhoArquivo);
+                    
                     logo.setIcon(new javax.swing.ImageIcon(original));
                 } catch (IOException ex) {
                     JOptionPane.showMessageDialog(null, "Arquivo não suportado.");
@@ -265,36 +267,50 @@ public class DadosEmpresa extends javax.swing.JFrame {
             }
         
         
-        FileInputStream origem;
-        FileOutputStream destino;
-        FileChannel fcOrigem;
-        FileChannel fcDestino;
+//        FileInputStream origem;
+//        FileOutputStream destino;
+//        FileChannel fcOrigem;
+//        FileChannel fcDestino;
+//        
+//        try {
+//            URL resource = Principal.class.getResource("/img/");
+//
+//            origem  = new FileInputStream(labelCaminhoArquivo.getText());
+//            destino = new FileOutputStream(Paths.get(resource.toURI()).toFile()+ "/" +labelNomeArquivo.getText());
+//
+//            fcOrigem = origem.getChannel();
+//            fcDestino = destino.getChannel();
+//
+//            fcOrigem.transferTo(0, fcOrigem.size(), fcDestino);
+//
+//            origem.close();
+//            destino.close();
+//         } 
+//          catch (FileNotFoundException ex) {
+//             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+//         } 
+//          catch (IOException ex) {
+//             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+//         } 
+//          catch (URISyntaxException ex) {
+//             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+//         }
+//        
+        }
+    }//GEN-LAST:event_panelLogoMouseClicked
+    
+    
+    private static String getExtensaoArquivo(File file){
+        String nomeArquivo = file.getName();
+        if(nomeArquivo.lastIndexOf(".") != -1 && nomeArquivo.lastIndexOf(".") != 0){
+            return nomeArquivo.substring(nomeArquivo.lastIndexOf(".")+1);
+        }
+        else {
+            return "";
+        }
+    }
+    
         
-        try {
-            URL resource = Principal.class.getResource("/img/");
-
-            origem  = new FileInputStream(labelCaminhoArquivo.getText());
-            destino = new FileOutputStream(Paths.get(resource.toURI()).toFile()+ "/" +labelNomeArquivo.getText());
-
-            fcOrigem = origem.getChannel();
-            fcDestino = destino.getChannel();
-
-            fcOrigem.transferTo(0, fcOrigem.size(), fcDestino);
-
-            origem.close();
-            destino.close();
-         } 
-          catch (FileNotFoundException ex) {
-             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
-         } 
-          catch (IOException ex) {
-             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
-         } 
-          catch (URISyntaxException ex) {
-             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
-         }
-    }//GEN-LAST:event_logoMouseClicked
-
     /**
      * @param args the command line arguments
      */
@@ -306,7 +322,7 @@ public class DadosEmpresa extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -340,12 +356,12 @@ public class DadosEmpresa extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JLabel labelNomeArquivo;
-    private javax.swing.JPanel logo;
+    private javax.swing.JLabel logo;
+    private javax.swing.JPanel panelLogo;
     // End of variables declaration//GEN-END:variables
 }
