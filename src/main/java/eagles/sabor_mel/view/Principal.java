@@ -11,7 +11,7 @@ import eagles.sabor_mel.model.Sexo;
 import eagles.sabor_mel.model.TipoDocumento;
 import eagles.sabor_mel.model.TipoTelefone;
 import eagles.sabor_mel.model.TipoVenda;
-import eagles.sabor_mel.view.relatorios.IntervaloVenda;
+import eagles.sabor_mel.view.relatorios.intervaloVenda;
 import eagles.sabor_mel.view.relatorios.RelatorioCrediarioAberto;
 import eagles.sabor_mel.view.relatorios.RelatorioInadimplencia;
 import eagles.sabor_mel.view.relatorios.RelatorioListaClientes;
@@ -4369,7 +4369,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRelatorio1MouseClicked
 
     private void btnRelatorio3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRelatorio3MouseClicked
-        new IntervaloVenda().setVisible(true);
+        new intervaloVenda().setVisible(true);
     }//GEN-LAST:event_btnRelatorio3MouseClicked
 
     private void btnRelatorio2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRelatorio2MouseClicked

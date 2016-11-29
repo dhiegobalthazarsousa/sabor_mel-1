@@ -75,6 +75,11 @@ public class DadosEmpresa extends javax.swing.JFrame {
         });
 
         logo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        logo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                logoMouseClicked(evt);
+            }
+        });
 
         labelNomeArquivo.setText("...");
 
@@ -237,13 +242,49 @@ public class DadosEmpresa extends javax.swing.JFrame {
 
     private void panelLogoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelLogoMouseClicked
         
+        
+    }//GEN-LAST:event_panelLogoMouseClicked
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        FileInputStream origem;
+        FileOutputStream destino;
+        FileChannel fcOrigem;
+        FileChannel fcDestino;
+        
+        try {
+            URL resource = Principal.class.getResource("/empresa/");
+            System.out.println(resource.getPath());
+            origem  = new FileInputStream(caminhoArquivo);
+            destino = new FileOutputStream(Paths.get(resource.toURI()).toFile()+ "/" +labelNomeArquivo.getText());
+
+            fcOrigem = origem.getChannel();
+            fcDestino = destino.getChannel();
+
+            fcOrigem.transferTo(0, fcOrigem.size(), fcDestino);
+
+            origem.close();
+            destino.close();
+         } 
+          catch (FileNotFoundException ex) {
+             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+         } 
+          catch (IOException ex) {
+             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+         } 
+          catch (URISyntaxException ex) {
+             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+         }
+    }//GEN-LAST:event_jButton1MouseClicked
+    
+    private static String caminhoArquivo = "";
+    private void logoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoMouseClicked
         JFileChooser arquivo = new JFileChooser();
 
         int retorno = arquivo.showOpenDialog(arquivo);
         
 
         if (retorno == JFileChooser.APPROVE_OPTION) {
-            String caminhoArquivo = arquivo.getSelectedFile().getAbsolutePath();
+            caminhoArquivo = arquivo.getSelectedFile().getAbsolutePath();
             String nomeArquivo = arquivo.getSelectedFile().getName();
             File selecionado = arquivo.getSelectedFile();
             
@@ -271,38 +312,7 @@ public class DadosEmpresa extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Extensão não permitida.\nApenas jpg ou png");
             } 
         }
-    }//GEN-LAST:event_panelLogoMouseClicked
-
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-        FileInputStream origem;
-        FileOutputStream destino;
-        FileChannel fcOrigem;
-        FileChannel fcDestino;
-        
-        try {
-            URL resource = Principal.class.getResource("/empresa/");
-
-            origem  = new FileInputStream(labelCaminhoArquivo.getText());
-            destino = new FileOutputStream(Paths.get(resource.toURI()).toFile()+ "/" +labelNomeArquivo.getText());
-
-            fcOrigem = origem.getChannel();
-            fcDestino = destino.getChannel();
-
-            fcOrigem.transferTo(0, fcOrigem.size(), fcDestino);
-
-            origem.close();
-            destino.close();
-         } 
-          catch (FileNotFoundException ex) {
-             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
-         } 
-          catch (IOException ex) {
-             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
-         } 
-          catch (URISyntaxException ex) {
-             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
-         }
-    }//GEN-LAST:event_jButton1MouseClicked
+    }//GEN-LAST:event_logoMouseClicked
     
     
     private static String getExtensaoArquivo(File file){
