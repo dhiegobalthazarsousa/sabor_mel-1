@@ -126,6 +126,11 @@ public class DadosEmpresa extends javax.swing.JFrame {
         }
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/checked (1).png"))); // NOI18N
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/cancel.png"))); // NOI18N
 
@@ -264,40 +269,40 @@ public class DadosEmpresa extends javax.swing.JFrame {
             }
             else{
                 JOptionPane.showMessageDialog(null, "Extensão não permitida.\nApenas jpg ou png");
-            }
-        
-        
-//        FileInputStream origem;
-//        FileOutputStream destino;
-//        FileChannel fcOrigem;
-//        FileChannel fcDestino;
-//        
-//        try {
-//            URL resource = Principal.class.getResource("/img/");
-//
-//            origem  = new FileInputStream(labelCaminhoArquivo.getText());
-//            destino = new FileOutputStream(Paths.get(resource.toURI()).toFile()+ "/" +labelNomeArquivo.getText());
-//
-//            fcOrigem = origem.getChannel();
-//            fcDestino = destino.getChannel();
-//
-//            fcOrigem.transferTo(0, fcOrigem.size(), fcDestino);
-//
-//            origem.close();
-//            destino.close();
-//         } 
-//          catch (FileNotFoundException ex) {
-//             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
-//         } 
-//          catch (IOException ex) {
-//             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
-//         } 
-//          catch (URISyntaxException ex) {
-//             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
-//         }
-//        
+            } 
         }
     }//GEN-LAST:event_panelLogoMouseClicked
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        FileInputStream origem;
+        FileOutputStream destino;
+        FileChannel fcOrigem;
+        FileChannel fcDestino;
+        
+        try {
+            URL resource = Principal.class.getResource("/empresa/");
+
+            origem  = new FileInputStream(labelCaminhoArquivo.getText());
+            destino = new FileOutputStream(Paths.get(resource.toURI()).toFile()+ "/" +labelNomeArquivo.getText());
+
+            fcOrigem = origem.getChannel();
+            fcDestino = destino.getChannel();
+
+            fcOrigem.transferTo(0, fcOrigem.size(), fcDestino);
+
+            origem.close();
+            destino.close();
+         } 
+          catch (FileNotFoundException ex) {
+             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+         } 
+          catch (IOException ex) {
+             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+         } 
+          catch (URISyntaxException ex) {
+             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+         }
+    }//GEN-LAST:event_jButton1MouseClicked
     
     
     private static String getExtensaoArquivo(File file){
