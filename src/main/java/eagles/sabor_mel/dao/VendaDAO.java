@@ -103,4 +103,11 @@ public class VendaDAO extends DAO<Venda>{
         
         return query.getResultList();
     }
+    
+    public List<Venda> groupByMesAno(){
+        Query query = entityManager.createQuery("FROM Venda GROUP BY YEAR(dataVenda), MONTH(dataVenda)");
+        
+        return query.getResultList();
+    }
+    
 }

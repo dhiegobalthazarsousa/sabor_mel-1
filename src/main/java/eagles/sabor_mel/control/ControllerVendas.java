@@ -203,7 +203,7 @@ public class ControllerVendas {
         Double valorTotal = 0.0;
         
         for(int i = 0; i < vendas.size(); i++){
-            quantitadeTotal += vendas.get(i).getItens().size();
+            quantitadeTotal += contaItens(vendas.get(i).getItens());
             valorTotal += getValorTotal(vendas.get(i).getItens(), vendas.get(i).getDesconto());
         }
         
@@ -211,6 +211,17 @@ public class ControllerVendas {
         specVenda.put("quantidadeTotal", String.valueOf(quantitadeTotal));
         
         return specVenda;
+    }
+    
+    /*Método para contar quantidade de itens*/
+    private static int contaItens(List<ItemVenda> itens){
+        int total = 0;
+        
+        for(ItemVenda iv : itens){
+            total += iv.getQuantidade();
+        }
+        
+        return total;
     }
     
     /*Método para listar itens da venda - calculando o total de quantidade e valor por venda*/
@@ -225,13 +236,8 @@ public class ControllerVendas {
         Double valorTotal = 0.0;
         
         for(int i = 0; i < vendas.size(); i++){
-            
-            tam = vendas.get(i).getItens().size();
-            for(int j = 0; j < tam; j++){
-                quantitadeTotal += vendas.get(i).getItens().get(j).getQuantidade();
-                valorTotal += (vendas.get(i).getItens().get(j).getProduto().getValorUnitario() *
-                        vendas.get(i).getItens().get(j).getQuantidade()) - vendas.get(i).getDesconto();
-            }
+            quantitadeTotal += contaItens(vendas.get(i).getItens());
+            valorTotal += getValorTotal(vendas.get(i).getItens(), vendas.get(i).getDesconto());
         }
         
         specVenda.put("valorTotal", String.valueOf(valorTotal));
@@ -286,7 +292,7 @@ public class ControllerVendas {
     /*Método para listar Média de Vendas*/
     public static List<Map<String, String>> mediaVendasMes(){
         List<Map<String, String>> listVendas = new ArrayList<>();
-        List<Venda> vendas = daoVenda.getVendasOrderByData();
+        List<Venda> vendas = daoVenda.groupByMesAno();
         
         for(Venda v : vendas){
             Map<String, String> specVenda = new HashMap<>();
