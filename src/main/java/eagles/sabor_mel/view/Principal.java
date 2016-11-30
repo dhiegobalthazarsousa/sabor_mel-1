@@ -11,7 +11,7 @@ import eagles.sabor_mel.model.Sexo;
 import eagles.sabor_mel.model.TipoDocumento;
 import eagles.sabor_mel.model.TipoTelefone;
 import eagles.sabor_mel.model.TipoVenda;
-import eagles.sabor_mel.view.relatorios.intervaloVenda;
+import eagles.sabor_mel.view.relatorios.IntervaloVenda;
 import eagles.sabor_mel.view.relatorios.RelatorioCrediarioAberto;
 import eagles.sabor_mel.view.relatorios.RelatorioInadimplencia;
 import eagles.sabor_mel.view.relatorios.RelatorioListaClientes;

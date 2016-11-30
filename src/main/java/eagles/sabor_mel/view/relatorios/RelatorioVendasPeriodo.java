@@ -46,8 +46,7 @@ public class RelatorioVendasPeriodo extends javax.swing.JFrame {
                 vendas.get(i).get("cliente"),
                 vendas.get(i).get("quantidadeTotal"),
                 vendas.get(i).get("valorTotal"),
-                vendas.get(i).get("tipoVenda")
-                
+                vendas.get(i).get("tipoVenda") 
             });
         }
         
