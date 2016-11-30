@@ -207,8 +207,8 @@ public class ControllerVendas {
             tam = vendas.get(i).getItens().size();
             for(int j = 0; j < tam; j++){
                 quantitadeTotal += vendas.get(i).getItens().get(j).getQuantidade();
-                valorTotal += vendas.get(i).getItens().get(j).getProduto().getValorUnitario() *
-                        vendas.get(i).getItens().get(j).getQuantidade();
+                valorTotal += (vendas.get(i).getItens().get(j).getProduto().getValorUnitario() *
+                        vendas.get(i).getItens().get(j).getQuantidade()) - vendas.get(i).getDesconto();
             }
         }
         
@@ -234,8 +234,8 @@ public class ControllerVendas {
             tam = vendas.get(i).getItens().size();
             for(int j = 0; j < tam; j++){
                 quantitadeTotal += vendas.get(i).getItens().get(j).getQuantidade();
-                valorTotal += vendas.get(i).getItens().get(j).getProduto().getValorUnitario() *
-                        vendas.get(i).getItens().get(j).getQuantidade();
+                valorTotal += (vendas.get(i).getItens().get(j).getProduto().getValorUnitario() *
+                        vendas.get(i).getItens().get(j).getQuantidade()) - vendas.get(i).getDesconto();
             }
         }
         
@@ -296,14 +296,30 @@ public class ControllerVendas {
         for(Venda v : vendas){
             Map<String, String> specVenda = new HashMap<>();
             
+            int dias = v.getDataVenda().get(Calendar.DAY_OF_MONTH);
+            
             specVenda.put("ano", String.valueOf(v.getDataVenda().get(Calendar.YEAR)));
             specVenda.put("mes", DateGenerator.getMonthName(v.getDataVenda().get(Calendar.MONTH)));
-            specVenda.put("media", "test");
+            specVenda.put("media", String.valueOf(somarValorMesAno(
+                    v.getDataVenda().get(Calendar.MONTH)+1, v.getDataVenda().get(Calendar.YEAR)
+                )/dias));
             
             listVendas.add(specVenda);
         }
         
         return listVendas;
+    }
+    
+    /*Método para somar valor de vendas do mesmo mês e ano*/
+    private static Double somarValorMesAno(int mes, int ano){
+        Double total = 0.0;
+        List<Venda> listVendas = daoVenda.getByMesAno(mes, ano);
+        
+        for(Venda v : listVendas){
+            total += getValorTotal(v.getItens(), v.getDesconto());
+        }
+        
+        return total;
     }
     
     /*

@@ -69,6 +69,7 @@ public class Principal extends javax.swing.JFrame {
             estiloPadrao();
             
             if(funcionario.get("acesso").equals("Vendedor")){
+                btnProduto.setEnabled(false);
                 btnCompra.setEnabled(false);
                 btnRelatorio.setEnabled(false);
                 btnFornecedor.setEnabled(false);
@@ -608,6 +609,7 @@ public class Principal extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/new_logo.png"))); // NOI18N
+        logo.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         logo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         logo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -1371,7 +1373,7 @@ public class Principal extends javax.swing.JFrame {
         imagemProduto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         imagemProduto.setText("IMAGEM");
         imagemProduto.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        imagemProduto.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        imagemProduto.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         imagemProduto.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         imagemProduto.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
         imagemProduto.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2770,14 +2772,14 @@ public class Principal extends javax.swing.JFrame {
                         .addComponent(eagles))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(logo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(panelUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(panelDataHora, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(panelDataHora, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(logo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(ferramentas, javax.swing.GroupLayout.PREFERRED_SIZE, 844, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 121, Short.MAX_VALUE))
+                                .addGap(0, 117, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                                 .addContainerGap())))))
@@ -2788,7 +2790,7 @@ public class Principal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(ferramentas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(logo))
+                    .addComponent(logo, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -2818,10 +2820,12 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnClienteActionPerformed
 
     private void btnProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProdutoActionPerformed
-        CardLayout card = (CardLayout)mainPanel.getLayout();
-        card.show(mainPanel, "produtos");
-        limpaCampos("produto");
-        carregaTabela("produto");
+        if(btnProduto.isEnabled()){
+            CardLayout card = (CardLayout)mainPanel.getLayout();
+            card.show(mainPanel, "produtos");
+            limpaCampos("produto");
+            carregaTabela("produto");
+        }
     }//GEN-LAST:event_btnProdutoActionPerformed
 
     private void btnCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCompraActionPerformed

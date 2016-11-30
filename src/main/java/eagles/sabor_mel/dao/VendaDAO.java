@@ -95,4 +95,12 @@ public class VendaDAO extends DAO<Venda>{
         
         return query.getResultList();
     }
+    
+    public List<Venda> getByMesAno(int mes, int ano){
+        Query query = entityManager.createQuery("FROM Venda WHERE MONTH(dataVenda) = :mes AND YEAR(dataVenda) = :ano");
+        query.setParameter("mes", mes);
+        query.setParameter("ano", ano);
+        
+        return query.getResultList();
+    }
 }
