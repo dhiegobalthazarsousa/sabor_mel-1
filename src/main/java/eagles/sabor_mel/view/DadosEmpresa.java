@@ -5,12 +5,18 @@
  */
 package eagles.sabor_mel.view;
 
+import eagles.sabor_mel.control.Validacao;
 import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.channels.FileChannel;
@@ -32,6 +38,7 @@ public class DadosEmpresa extends javax.swing.JFrame {
      */
     public DadosEmpresa() {
         initComponents();
+        lerDados();
         
         this.setLocationRelativeTo(null);
     }
@@ -51,30 +58,31 @@ public class DadosEmpresa extends javax.swing.JFrame {
         labelNomeArquivo = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jFormattedTextField1 = new javax.swing.JFormattedTextField();
+        cnpj = new javax.swing.JFormattedTextField();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        nome = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        endereco = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jFormattedTextField2 = new javax.swing.JFormattedTextField();
-        jFormattedTextField3 = new javax.swing.JFormattedTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        ddd = new javax.swing.JFormattedTextField();
+        telefone = new javax.swing.JFormattedTextField();
+        gravar = new javax.swing.JButton();
+        sair = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Dados da Empresa"));
 
         panelLogo.setBorder(javax.swing.BorderFactory.createTitledBorder("Imagem"));
-        panelLogo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        panelLogo.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         panelLogo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 panelLogoMouseClicked(evt);
             }
         });
 
-        logo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        logo.setBorder(new javax.swing.border.MatteBorder(null));
+        logo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         logo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 logoMouseClicked(evt);
@@ -107,7 +115,7 @@ public class DadosEmpresa extends javax.swing.JFrame {
         jLabel1.setText("CNPJ");
 
         try {
-            jFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##.###.###/####-##")));
+            cnpj.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##.###.###/####-##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
@@ -119,25 +127,30 @@ public class DadosEmpresa extends javax.swing.JFrame {
         jLabel4.setText("Telefone");
 
         try {
-            jFormattedTextField2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##)")));
+            ddd.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##)")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
 
         try {
-            jFormattedTextField3.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####-####")));
+            telefone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####-####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/checked (1).png"))); // NOI18N
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+        gravar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/checked (1).png"))); // NOI18N
+        gravar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton1MouseClicked(evt);
+                gravarMouseClicked(evt);
             }
         });
 
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/cancel.png"))); // NOI18N
+        sair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/cancel.png"))); // NOI18N
+        sair.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                sairMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -148,26 +161,26 @@ public class DadosEmpresa extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField1)
-                            .addComponent(jTextField2)
+                            .addComponent(nome)
+                            .addComponent(endereco)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel1)
-                                    .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cnpj, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel2)
                                     .addComponent(jLabel3)
                                     .addComponent(jLabel4)
                                     .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addComponent(jFormattedTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(ddd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jFormattedTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(telefone, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(0, 0, Short.MAX_VALUE)))
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton3)
+                        .addComponent(sair)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1))))
+                        .addComponent(gravar))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -175,28 +188,28 @@ public class DadosEmpresa extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cnpj, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(nome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(endereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jFormattedTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jFormattedTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(ddd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(telefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1))
+                        .addComponent(gravar))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton3)))
+                        .addComponent(sair)))
                 .addContainerGap())
         );
 
@@ -245,36 +258,151 @@ public class DadosEmpresa extends javax.swing.JFrame {
         
     }//GEN-LAST:event_panelLogoMouseClicked
 
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-        FileInputStream origem;
-        FileOutputStream destino;
-        FileChannel fcOrigem;
-        FileChannel fcDestino;
+    private void gravarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_gravarMouseClicked
+        Validacao valida = new Validacao();
         
+        URL resource = Principal.class.getResource("/empresa/");
+        
+        if(!labelNomeArquivo.getText().equals("...")){
+            if(valida.validaCnpj(cnpj.getText())){
+                if(nome.getText().length() > 5){
+                    if(endereco.getText().length() > 5){
+                        if(valida.validaDdd(ddd.getText())){
+                            if(valida.validaTelefone(telefone.getText())){
+                                
+                                FileInputStream origem;
+                                FileOutputStream destino;
+                                FileChannel fcOrigem;
+                                FileChannel fcDestino;
+
+                                try {
+                                    if(!caminhoArquivo.equals("")){
+                                        origem  = new FileInputStream(caminhoArquivo);
+                                        destino = new FileOutputStream(Paths.get(resource.toURI()).toFile()+ "/" +labelNomeArquivo.getText());
+
+                                        fcOrigem = origem.getChannel();
+                                        fcDestino = destino.getChannel();
+
+                                        fcOrigem.transferTo(0, fcOrigem.size(), fcDestino);
+
+                                        origem.close();
+                                        destino.close();
+                                    }
+
+                                    /*Escrita do arquivo de texto*/
+                                    File file = new File(resource.getPath()+"dados.txt");
+                                    BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+
+                                    writer.write(labelNomeArquivo.getText());
+                                    writer.newLine();
+                                    writer.write(cnpj.getText());
+                                    writer.newLine();
+                                    writer.write(nome.getText());
+                                    writer.newLine();
+                                    writer.write(endereco.getText());
+                                    writer.newLine();
+                                    writer.write(ddd.getText());
+                                    writer.newLine();
+                                    writer.write(telefone.getText());
+                                    writer.newLine();
+                                    
+                                    writer.flush();
+                                    writer.close();
+
+                                    lerDados();
+                                    
+                                    JOptionPane.showMessageDialog(null, "Dados Alterados com Sucesso!");
+
+                                } 
+                                 catch (FileNotFoundException ex) {
+                                    Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+                                } 
+                                 catch (IOException ex) {
+                                    Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+                                } 
+                                 catch (URISyntaxException ex) {
+                                    Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+                                }
+                            }
+                            else{
+                                JOptionPane.showMessageDialog(null, "Telefone Requerido");
+                                telefone.setText(null);
+                                telefone.requestFocus();
+                            }
+                        }
+                        else{
+                            JOptionPane.showMessageDialog(null, "DDD Requerido");
+                            ddd.setText(null);
+                            ddd.requestFocus();
+                        }
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(null, "Endereço Inválido");
+                        endereco.setText(null);
+                        endereco.requestFocus();
+                    }
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "Nome Fantasia Inválido");
+                    nome.setText(null);
+                    nome.requestFocus();
+                }
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "CNPJ Inválido");
+                cnpj.setText(null);
+                cnpj.requestFocus();
+            }
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Você deve selecionar uma imagem");
+        }
+    }//GEN-LAST:event_gravarMouseClicked
+
+    private void lerDados() {
+        /*LER*/
+        URL resource = Principal.class.getResource("/empresa/");
         try {
-            URL resource = Principal.class.getResource("/empresa/");
-            System.out.println(resource.getPath());
-            origem  = new FileInputStream(caminhoArquivo);
-            destino = new FileOutputStream(Paths.get(resource.toURI()).toFile()+ "/" +labelNomeArquivo.getText());
-
-            fcOrigem = origem.getChannel();
-            fcDestino = destino.getChannel();
-
-            fcOrigem.transferTo(0, fcOrigem.size(), fcDestino);
-
-            origem.close();
-            destino.close();
-         } 
-          catch (FileNotFoundException ex) {
-             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
-         } 
-          catch (IOException ex) {
-             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
-         } 
-          catch (URISyntaxException ex) {
-             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
-         }
-    }//GEN-LAST:event_jButton1MouseClicked
+            FileReader fileReader = new FileReader(resource.getPath()+"dados.txt");
+            BufferedReader reader = new BufferedReader(fileReader);
+            
+            String data = null;
+            
+            int count = 0;
+            while((data = reader.readLine()) != null){
+                switch(count){
+                    case 0:
+                        labelNomeArquivo.setText(data);
+                        logo.setIcon(new javax.swing.ImageIcon(resource.getPath()+data));
+                        break;
+                    case 1:
+                        cnpj.setText(data);
+                        break;
+                    case 2:
+                        nome.setText(data);
+                        break;
+                    case 3:
+                        endereco.setText(data);
+                        break;
+                    case 4:
+                        ddd.setText(data);
+                        break;
+                    case 5:
+                        telefone.setText(data);
+                        break;
+                }
+                count++;
+            }
+            
+            reader.close();
+        }
+        catch (FileNotFoundException ex) {
+            Logger.getLogger(DadosEmpresa.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        catch (IOException ex) {
+            Logger.getLogger(DadosEmpresa.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     
     private static String caminhoArquivo = "";
     private void logoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoMouseClicked
@@ -313,6 +441,10 @@ public class DadosEmpresa extends javax.swing.JFrame {
             } 
         }
     }//GEN-LAST:event_logoMouseClicked
+
+    private void sairMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sairMouseClicked
+        this.dispose();
+    }//GEN-LAST:event_sairMouseClicked
     
     
     private static String getExtensaoArquivo(File file){
@@ -362,21 +494,21 @@ public class DadosEmpresa extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JFormattedTextField jFormattedTextField1;
-    private javax.swing.JFormattedTextField jFormattedTextField2;
-    private javax.swing.JFormattedTextField jFormattedTextField3;
+    private javax.swing.JFormattedTextField cnpj;
+    private javax.swing.JFormattedTextField ddd;
+    private javax.swing.JTextField endereco;
+    private javax.swing.JButton gravar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JLabel labelNomeArquivo;
     private javax.swing.JLabel logo;
+    private javax.swing.JTextField nome;
     private javax.swing.JPanel panelLogo;
+    private javax.swing.JButton sair;
+    private javax.swing.JFormattedTextField telefone;
     // End of variables declaration//GEN-END:variables
 }

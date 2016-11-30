@@ -4369,7 +4369,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRelatorio1MouseClicked
 
     private void btnRelatorio3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRelatorio3MouseClicked
-        new intervaloVenda().setVisible(true);
+        new IntervaloVenda().setVisible(true);
     }//GEN-LAST:event_btnRelatorio3MouseClicked
 
     private void btnRelatorio2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRelatorio2MouseClicked
