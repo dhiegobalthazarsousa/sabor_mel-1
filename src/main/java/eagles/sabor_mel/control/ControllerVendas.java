@@ -203,13 +203,8 @@ public class ControllerVendas {
         Double valorTotal = 0.0;
         
         for(int i = 0; i < vendas.size(); i++){
-            
-            tam = vendas.get(i).getItens().size();
-            for(int j = 0; j < tam; j++){
-                quantitadeTotal += vendas.get(i).getItens().get(j).getQuantidade();
-                valorTotal += (vendas.get(i).getItens().get(j).getProduto().getValorUnitario() *
-                        vendas.get(i).getItens().get(j).getQuantidade()) - vendas.get(i).getDesconto();
-            }
+            quantitadeTotal += vendas.get(i).getItens().size();
+            valorTotal += getValorTotal(vendas.get(i).getItens(), vendas.get(i).getDesconto());
         }
         
         specVenda.put("valorTotal", String.valueOf(valorTotal));
