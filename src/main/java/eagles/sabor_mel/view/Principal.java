@@ -18,6 +18,7 @@ import eagles.sabor_mel.view.relatorios.RelatorioListaClientes;
 import eagles.sabor_mel.view.relatorios.RelatorioListaFornecedores;
 import eagles.sabor_mel.view.relatorios.RelatorioListaFuncionarios;
 import eagles.sabor_mel.view.relatorios.RelatorioListaProdutos;
+import eagles.sabor_mel.view.relatorios.RelatorioValorMedioVendas;
 import eagles.sabor_mel.view.relatorios.RelatorioVendasCliente;
 import eagles.sabor_mel.view.relatorios.RelatorioVendasFuncionario;
 import java.awt.CardLayout;
@@ -1480,7 +1481,7 @@ public class Principal extends javax.swing.JFrame {
             .addGroup(produtosLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(produtosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(panelProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(panelProduto, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(produtosLayout.createSequentialGroup()
                         .addComponent(panelProdutoCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -1836,6 +1837,11 @@ public class Principal extends javax.swing.JFrame {
         btnRelatorio10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/grafico.png"))); // NOI18N
         btnRelatorio10.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnRelatorio10.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnRelatorio10.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnRelatorio10MouseClicked(evt);
+            }
+        });
 
         btnRelatorio11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/ranking.png"))); // NOI18N
         btnRelatorio11.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -2781,7 +2787,7 @@ public class Principal extends javax.swing.JFrame {
                                 .addComponent(ferramentas, javax.swing.GroupLayout.PREFERRED_SIZE, 844, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 117, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE)
                                 .addContainerGap())))))
         );
         layout.setVerticalGroup(
@@ -4425,6 +4431,10 @@ public class Principal extends javax.swing.JFrame {
     private void logoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoMouseClicked
         new DadosEmpresa().setVisible(true);
     }//GEN-LAST:event_logoMouseClicked
+
+    private void btnRelatorio10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRelatorio10MouseClicked
+        new RelatorioValorMedioVendas().setVisible(true);
+    }//GEN-LAST:event_btnRelatorio10MouseClicked
 
     public void filtraTabela(String menu) {
         List<Map<String, String>> lista;

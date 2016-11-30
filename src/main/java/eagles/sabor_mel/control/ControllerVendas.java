@@ -301,6 +301,8 @@ public class ControllerVendas {
             
             specVenda.put("ano", String.valueOf(v.getDataVenda().get(Calendar.YEAR)));
             specVenda.put("mes", DateGenerator.getMonthName(v.getDataVenda().get(Calendar.MONTH)));
+            specVenda.put("total", String.valueOf(somarValorMesAno(
+                    v.getDataVenda().get(Calendar.MONTH)+1, v.getDataVenda().get(Calendar.YEAR))));
             specVenda.put("media", String.valueOf(somarValorMesAno(
                     v.getDataVenda().get(Calendar.MONTH)+1, v.getDataVenda().get(Calendar.YEAR)
                 )/dias));
