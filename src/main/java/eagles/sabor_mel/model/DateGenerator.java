@@ -25,6 +25,51 @@ public class DateGenerator {
         return CALENDAR.get(Calendar.MONTH);
     }
     
+    public static String getMonthName(int month){
+        String out = "";
+        
+        switch(month){
+            case 0:
+                out = "Janeiro";
+                break;
+            case 1:
+                out = "Fevereiro";
+                break;
+            case 2:
+                out = "Março";
+                break;
+            case 3:
+                out = "Abril";
+                break;
+            case 4:
+                out = "Maio";
+                break;
+            case 5:
+                out = "Junho";
+                break;
+            case 6:
+                out = "Julho";
+                break;
+            case 7:
+                out = "Agosto";
+                break;
+            case 8:
+                out = "Setembro";
+                break;
+            case 9:
+                out = "Outubro";
+                break;
+            case 10:
+                out = "Novembro";
+                break;
+            case 11:
+                out = "Dezembro";
+                break;
+        }
+        
+        return out;
+    }
+    
     public static int getYear(){
         return CALENDAR.get(Calendar.YEAR);
     }

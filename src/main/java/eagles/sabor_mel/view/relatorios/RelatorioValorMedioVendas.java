@@ -5,32 +5,43 @@
  */
 package eagles.sabor_mel.view.relatorios;
 
+import eagles.sabor_mel.control.ControllerVendas;
+import java.util.List;
+import java.util.Map;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
 /**
  *
  * @author etivideo
  */
-public class RelatorioGeralEstoque extends javax.swing.JFrame {
+public class RelatorioValorMedioVendas extends javax.swing.JFrame {
 
     /**
-     * Creates new form RelatorioGeralEstoque
+     * Creates new form RelatorioValorMedioVendas
      */
-    public RelatorioGeralEstoque() {
+    public RelatorioValorMedioVendas() {
         initComponents();
         
         this.setExtendedState(RelatorioListaClientes.MAXIMIZED_BOTH);   
         
+        
         TableColumnModel tcm = tabelaVendas.getColumnModel();
-        tcm.getColumn(0).setPreferredWidth(250);    //Produto
-        tcm.getColumn(1).setPreferredWidth(250);    //Fornecedor
-        tcm.getColumn(2).setPreferredWidth(50);    //Qtd Estoque
-        tcm.getColumn(3).setPreferredWidth(50);    //Qtd Vendido
-        tcm.getColumn(4).setPreferredWidth(50);    //R$ Unitario
-        tcm.getColumn(5).setPreferredWidth(50);    //R$ Estoque
-        tcm.getColumn(6).setPreferredWidth(50);    //R$ Vendido
-        tcm.getColumn(7).setPreferredWidth(50);    //Tempo Médio
-        tcm.getColumn(8).setPreferredWidth(50);    //Vendas/Mês
+        tcm.getColumn(0).setPreferredWidth(50);    //Ano
+        tcm.getColumn(1).setPreferredWidth(100);    //Mês
+        tcm.getColumn(2).setPreferredWidth(50);    //Média
+       
+        
+        
+        List<Map<String, String>> vendas = ControllerVendas.mediaVendasMes();
+        
+        for(int i = 0; i < vendas.size(); i++){
+            ((DefaultTableModel)tabelaVendas.getModel()).addRow(new String[]{
+                vendas.get(i).get("ano"),
+                vendas.get(i).get("mes"),
+                vendas.get(i).get("media")
+            });
+        }
     }
 
     /**
@@ -42,6 +53,7 @@ public class RelatorioGeralEstoque extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jButton1 = new javax.swing.JButton();
         panelMain = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -50,9 +62,15 @@ public class RelatorioGeralEstoque extends javax.swing.JFrame {
         panelRelatorio = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelaVendas = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jButton1.setText("Sair");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Dados da Empresa"));
 
@@ -94,14 +112,14 @@ public class RelatorioGeralEstoque extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Produto", "Fornecedor", "Estoque", "Vendido", "R$ Unitário", "R$ Estoque", "R$ Vendido", "Tempo Médio", "Vendas/Mês"
+                "ANO", "MÊS", "MÉDIA"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false
+                false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -152,13 +170,6 @@ public class RelatorioGeralEstoque extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jButton1.setText("Sair");
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton1MouseClicked(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -206,20 +217,20 @@ public class RelatorioGeralEstoque extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(RelatorioGeralEstoque.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RelatorioValorMedioVendas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(RelatorioGeralEstoque.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RelatorioValorMedioVendas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(RelatorioGeralEstoque.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RelatorioValorMedioVendas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(RelatorioGeralEstoque.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RelatorioValorMedioVendas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new RelatorioGeralEstoque().setVisible(true);
+                new RelatorioValorMedioVendas().setVisible(true);
             }
         });
     }

@@ -13,7 +13,6 @@ import eagles.sabor_mel.model.TipoVenda;
 import eagles.sabor_mel.model.Venda;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -287,6 +286,24 @@ public class ControllerVendas {
         
         return listaVendas;
         
+    }
+    
+    /*Método para listar Média de Vendas*/
+    public static List<Map<String, String>> mediaVendasMes(){
+        List<Map<String, String>> listVendas = new ArrayList<>();
+        List<Venda> vendas = daoVenda.getVendasOrderByData();
+        
+        for(Venda v : vendas){
+            Map<String, String> specVenda = new HashMap<>();
+            
+            specVenda.put("ano", String.valueOf(v.getDataVenda().get(Calendar.YEAR)));
+            specVenda.put("mes", DateGenerator.getMonthName(v.getDataVenda().get(Calendar.MONTH)));
+            specVenda.put("media", "test");
+            
+            listVendas.add(specVenda);
+        }
+        
+        return listVendas;
     }
     
     /*

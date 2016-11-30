@@ -311,7 +311,7 @@ public class DadosEmpresa extends javax.swing.JFrame {
 
                                     lerDados();
                                     
-                                    JOptionPane.showMessageDialog(null, "Dados Alterados com Sucesso!");
+                                    JOptionPane.showMessageDialog(null, "As alterações serão aplicadas no próximo Login.");
 
                                 } 
                                  catch (FileNotFoundException ex) {

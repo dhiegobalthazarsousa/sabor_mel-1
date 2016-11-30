@@ -89,4 +89,10 @@ public class VendaDAO extends DAO<Venda>{
         
         return (Calendar) query.getSingleResult();
     }
+    
+    public List<Venda> getVendasOrderByData(){
+        Query query = entityManager.createQuery("FROM Venda ORDER BY dataVenda");
+        
+        return query.getResultList();
+    }
 }

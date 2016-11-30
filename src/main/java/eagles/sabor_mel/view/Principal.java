@@ -23,11 +23,14 @@ import eagles.sabor_mel.view.relatorios.RelatorioVendasFuncionario;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.HeadlessException;
 import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URISyntaxException;
@@ -63,6 +66,7 @@ public class Principal extends javax.swing.JFrame {
                     ControllerFuncionario.searchFuncionario(Login.login.getText(), Login.senha.getText());
 
             initComponents();
+            estiloPadrao();
             
             if(funcionario.get("acesso").equals("Vendedor")){
                 btnCompra.setEnabled(false);
@@ -81,8 +85,6 @@ public class Principal extends javax.swing.JFrame {
             this.dispose();
             new Login().setVisible(true);
         }
-        
-        
     }
 
     public void carregaComboEstados() {
@@ -96,6 +98,9 @@ public class Principal extends javax.swing.JFrame {
     }
     
     public void estiloPadrao() {
+        /*Geral*/
+        lerDados();
+        
         /*Background para os combobox*/
         acessoUsuario.setBackground(Color.white);
         estadoUsuario.setBackground(Color.white);
@@ -141,6 +146,35 @@ public class Principal extends javax.swing.JFrame {
         valorTotalVenda.setEnabled(false);
         valorTrocoVenda.setEnabled(false);
         calculaTrocoVenda.setEnabled(false);
+    }
+
+    private void lerDados() throws HeadlessException {
+        /*Geral*/
+        URL resource = Principal.class.getResource("/empresa/");
+        try {
+            FileReader fileReader = new FileReader(resource.getPath()+"dados.txt");
+            BufferedReader reader = new BufferedReader(fileReader);
+            
+            String data = null;
+            
+            int count = 0;
+            while((data = reader.readLine()) != null){
+                switch(count){
+                    case 0:
+                        logo.setIcon(new javax.swing.ImageIcon(resource.getPath()+data));
+                        break;
+                }
+                count++;
+            }
+            
+            reader.close();
+        }
+        catch (FileNotFoundException ex) {
+            JOptionPane.showMessageDialog(null, "Arquivo dados.txt não encontrado.");
+        }
+        catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, "Problemas na Leitura do Arquivo dados.txt.");
+        }
     }
 
     public void carregaTabela(String menu) {
@@ -4526,16 +4560,7 @@ public class Principal extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    new Principal().setVisible(true);
-                } 
-                catch (NoSuchAlgorithmException | UnsupportedEncodingException ex) {
-                    JOptionPane.showMessageDialog(null, "Erro ao carregar o software\nEntre em contato com o administrador");
-                } 
-            }
-        });
+        java.awt.EventQueue.invokeLater(new RunnableImpl());
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -4795,4 +4820,20 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> vendaParcela;
     private javax.swing.JPanel vendas;
     // End of variables declaration//GEN-END:variables
+
+    private static class RunnableImpl implements Runnable {
+
+        public RunnableImpl() {
+        }
+
+        @Override
+        public void run() {
+            try {
+                new Principal().setVisible(true);
+            }
+            catch (NoSuchAlgorithmException | UnsupportedEncodingException ex) {
+                JOptionPane.showMessageDialog(null, "Erro ao carregar o software\nEntre em contato com o administrador");
+            }
+        }
+    }
 }

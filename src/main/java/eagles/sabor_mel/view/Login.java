@@ -4,7 +4,12 @@ import eagles.sabor_mel.control.ControllerFuncionario;
 import java.awt.HeadlessException;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.net.URL;
 import java.security.NoSuchAlgorithmException;
 import javax.persistence.NoResultException;
 import javax.swing.JOptionPane;
@@ -20,16 +25,48 @@ public class Login extends javax.swing.JFrame {
      */
     public Login() {
         initComponents();
+        
         if(checkCapsLock()){
             avisoCapsLock.setText("TECLA CAPS LOCK ATIVADA!");
         }
         else{
             avisoCapsLock.setText(null);
         }
+        
         this.setLocationRelativeTo(null);
         login.requestFocus();
         logo.setHorizontalAlignment(SwingConstants.CENTER);
         titulo.setHorizontalAlignment(SwingConstants.CENTER);
+        
+        lerDados();
+    }
+
+    private void lerDados() throws HeadlessException {
+        URL resource = Principal.class.getResource("/empresa/");
+        try {
+            FileReader fileReader = new FileReader(resource.getPath()+"dados.txt");
+            BufferedReader reader = new BufferedReader(fileReader);
+            
+            String data = null;
+            
+            int count = 0;
+            while((data = reader.readLine()) != null){
+                switch(count){
+                    case 0:
+                        logo.setIcon(new javax.swing.ImageIcon(resource.getPath()+data));
+                        break;
+                }
+                count++;
+            }
+            
+            reader.close();
+        }
+        catch (FileNotFoundException ex) {
+            JOptionPane.showMessageDialog(null, "Arquivo dados.txt não encontrado.");
+        }
+        catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, "Problemas na Leitura do Arquivo dados.txt.");
+        }
     }
     
     private boolean checkCapsLock(){
