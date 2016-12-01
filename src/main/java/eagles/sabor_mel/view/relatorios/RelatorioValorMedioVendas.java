@@ -39,8 +39,8 @@ public class RelatorioValorMedioVendas extends javax.swing.JFrame {
             ((DefaultTableModel)tabelaVendas.getModel()).addRow(new String[]{
                 vendas.get(i).get("ano"),
                 vendas.get(i).get("mes"),
-                vendas.get(i).get("total"),
-                vendas.get(i).get("media")
+                "R$ "+vendas.get(i).get("total"),
+                "R$ "+vendas.get(i).get("media")
             });
         }
     }

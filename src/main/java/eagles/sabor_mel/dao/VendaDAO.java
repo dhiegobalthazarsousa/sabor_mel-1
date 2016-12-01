@@ -43,7 +43,6 @@ public class VendaDAO extends DAO<Venda>{
     }
         
     public List<Venda> getByInterval(Calendar start, Calendar end) {
-       SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
        Query query = entityManager.createQuery("FROM Venda WHERE dataVenda BETWEEN :startDate AND :endDate");
         
        query.setParameter("startDate", start);

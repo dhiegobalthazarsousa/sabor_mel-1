@@ -1,6 +1,7 @@
 package eagles.sabor_mel.control;
 
 import eagles.sabor_mel.dao.FuncionarioDAO;
+import eagles.sabor_mel.dao.ItemVendaDAO;
 import eagles.sabor_mel.dao.PessoaDAO;
 import eagles.sabor_mel.dao.ProdutoDAO;
 import eagles.sabor_mel.dao.VendaDAO;
@@ -11,6 +12,7 @@ import eagles.sabor_mel.model.Pessoa;
 import eagles.sabor_mel.model.Produto;
 import eagles.sabor_mel.model.TipoVenda;
 import eagles.sabor_mel.model.Venda;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -138,7 +140,7 @@ public class ControllerVendas {
     }
 
     private static Double getValorTotal(List<ItemVenda> itens, double desconto) {
-        double valorTotal = 0d;
+        double valorTotal = 0.0;
         for (ItemVenda iv : itens) {
             valorTotal += iv.getProduto().getValorUnitario() * iv.getQuantidade();
         }
@@ -192,7 +194,7 @@ public class ControllerVendas {
     }
     
     /*Método para listar itens da venda - calculando o total de quantidade e valor por venda*/
-    /*ID - funcionario ou cliente*/
+    /*ID - funcionario*/
     public static Map<String, String> listItensTotalFuncionario(Long id){
         
         List<Venda> vendas = daoVenda.getByFuncionario(id);
@@ -225,7 +227,7 @@ public class ControllerVendas {
     }
     
     /*Método para listar itens da venda - calculando o total de quantidade e valor por venda*/
-    /*ID - funcionario ou cliente*/
+    /*ID - cliente*/
     public static Map<String, String> listItensTotalCliente(Long id){
         
         List<Venda> vendas = daoVenda.getByClient(id);
@@ -291,6 +293,7 @@ public class ControllerVendas {
     
     /*Método para listar Média de Vendas*/
     public static List<Map<String, String>> mediaVendasMes(){
+        DecimalFormat df = new DecimalFormat("0.00");
         List<Map<String, String>> listVendas = new ArrayList<>();
         List<Venda> vendas = daoVenda.groupByMesAno();
         
@@ -301,9 +304,9 @@ public class ControllerVendas {
             
             specVenda.put("ano", String.valueOf(v.getDataVenda().get(Calendar.YEAR)));
             specVenda.put("mes", DateGenerator.getMonthName(v.getDataVenda().get(Calendar.MONTH)));
-            specVenda.put("total", String.valueOf(somarValorMesAno(
+            specVenda.put("total", df.format(somarValorMesAno(
                     v.getDataVenda().get(Calendar.MONTH)+1, v.getDataVenda().get(Calendar.YEAR))));
-            specVenda.put("media", String.valueOf(somarValorMesAno(
+            specVenda.put("media", df.format(somarValorMesAno(
                     v.getDataVenda().get(Calendar.MONTH)+1, v.getDataVenda().get(Calendar.YEAR)
                 )/dias));
             
@@ -324,6 +327,34 @@ public class ControllerVendas {
         
         return total;
     }
+    
+    /*Método para listar ItemVenda por Produto*/
+    public static List<Map<String, String>> listItemProduto(){
+        DecimalFormat df = new DecimalFormat("0.00");
+        ItemVendaDAO daoItemVenda = new ItemVendaDAO();
+        List<Map<String, String>> listItens = new ArrayList<>();
+        
+        List<ItemVenda> itens = daoItemVenda.getItemGroupByProduto();
+        
+        for(ItemVenda iv : itens){
+            Map<String, String> specItem = new HashMap<>();
+            List<ItemVenda> itemProduto = daoItemVenda.listItemProduto(iv.getProduto().getIdProduto());
+            Double total = getValorTotal(itemProduto, iv.getVenda().getDesconto());
+            
+            
+            specItem.put("imagem", iv.getProduto().getImagem());
+            specItem.put("produto", iv.getProduto().getDescricao());
+            specItem.put("vendidos", String.valueOf(daoItemVenda.contaProdutoVendido(iv.getProduto().getIdProduto())));
+            specItem.put("total", df.format(total));
+            
+            listItens.add(specItem);
+        }
+        
+        return listItens;
+    }
+    
+    /*Método para contar produtos vendidos*/
+    
     
     /*
     private boolean analisaQuantidadeProdutos(Long[] produtos, int[] quantidades) {
