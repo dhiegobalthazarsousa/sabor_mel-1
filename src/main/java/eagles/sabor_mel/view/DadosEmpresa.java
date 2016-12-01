@@ -171,10 +171,10 @@ public class DadosEmpresa extends javax.swing.JFrame {
                                     .addComponent(jLabel3)
                                     .addComponent(jLabel4)
                                     .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addComponent(ddd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(ddd, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(telefone, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(0, 0, Short.MAX_VALUE)))
+                                .addGap(0, 159, Short.MAX_VALUE)))
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -312,6 +312,7 @@ public class DadosEmpresa extends javax.swing.JFrame {
                                     lerDados();
                                     
                                     JOptionPane.showMessageDialog(null, "As alterações serão aplicadas no próximo Login.");
+                                    this.dispose();
 
                                 } 
                                  catch (FileNotFoundException ex) {

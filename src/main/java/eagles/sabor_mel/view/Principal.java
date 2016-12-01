@@ -612,7 +612,7 @@ public class Principal extends javax.swing.JFrame {
 
         logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/new_logo.png"))); // NOI18N
         logo.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        logo.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        logo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         logo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 logoMouseClicked(evt);
@@ -1482,7 +1482,7 @@ public class Principal extends javax.swing.JFrame {
             .addGroup(produtosLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(produtosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(panelProduto, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(panelProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(produtosLayout.createSequentialGroup()
                         .addComponent(panelProdutoCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -2793,7 +2793,7 @@ public class Principal extends javax.swing.JFrame {
                                 .addComponent(ferramentas, javax.swing.GroupLayout.PREFERRED_SIZE, 844, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 117, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE)
+                                .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                                 .addContainerGap())))))
         );
         layout.setVerticalGroup(
