@@ -23,8 +23,10 @@ public class ControllerTelefone {
         
         for(Telefone t: telefonesPessoa){
             Map<String, String> specTelefone = new HashMap();
+            
             specTelefone.put("ddd", String.valueOf(t.getDdd()));
             specTelefone.put("numero", String.valueOf(t.getNumero()));
+            
             specTelefones.add(specTelefone);
         }
         

@@ -5,23 +5,21 @@ import eagles.sabor_mel.model.ItemFornecimento;
 import eagles.sabor_mel.model.ItemVenda;
 import java.util.List;
 import javax.persistence.Query;
+
 /**
  *
  * @author Tiago Lima Villalobos
  */
-public class ItemVendaDAO extends DAO<ItemVenda>{
+public class ItemVendaDAO extends DAO<ItemVenda> {
+
     public ItemVenda getById(final Long id) {
         return entityManager.find(ItemVenda.class, id);
     }
-    
-    public ItemVenda getByCliente(Long id){
-        return (ItemVenda) entityManager.createQuery("SELECT * FROM ItemVenda WHERE pessoa = '"+id+"';").getSingleResult();
-    }
-    
+
     public boolean removeById(final Long id) {
-    	
-    	boolean result = true;
-    	
+
+        boolean result = true;
+
         try {
             ItemVenda itemVenda = this.getById(id);
             super.remove(itemVenda);
@@ -29,13 +27,13 @@ public class ItemVendaDAO extends DAO<ItemVenda>{
             ex.printStackTrace();
             result = false;
         }
-        
+
         return result;
     }
- 
+
     @SuppressWarnings("unchecked")
-	public List<ItemVenda> findAll() {
-    	return entityManager
-    		.createQuery("FROM ItemVenda").getResultList();
+    public List<ItemVenda> findAll() {
+        return entityManager
+                .createQuery("FROM ItemVenda").getResultList();
     }
 }

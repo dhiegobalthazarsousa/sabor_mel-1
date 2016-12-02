@@ -12,10 +12,12 @@ public class ParcelaDAO extends DAO<Parcela>{
         return entityManager.find(Parcela.class, id);
     }
     
-    public List<Parcela> getByCrediario(Long id){
-        Query query = entityManager.createQuery("FROM Parcela p WHERE p.crediario.idCrediario = :id");
-        query.setParameter("id", id);
+    public List<Parcela> getByCrediario(Long idCrediario){
+        Query query = entityManager.createQuery("FROM Parcela WHERE idCrediario = :idCrediario");
+        query.setParameter("idCrediario", idCrediario);
+        
         return query.getResultList();
+        
     }
     
     public boolean removeById(final Long id) {

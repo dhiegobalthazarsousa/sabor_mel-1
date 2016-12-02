@@ -5,7 +5,7 @@
  */
 package eagles.sabor_mel.view.relatorios;
 
-import eagles.sabor_mel.control.ControllerPessoa;
+import eagles.sabor_mel.control.ControllerVendas;
 import java.util.List;
 import java.util.Map;
 import javax.swing.table.DefaultTableModel;
@@ -15,34 +15,33 @@ import javax.swing.table.TableColumnModel;
  *
  * @author etivideo
  */
-public class RelatorioListaClientes extends javax.swing.JFrame {
+public class RelatorioVendasFuncionario extends javax.swing.JFrame {
 
     /**
-     * Creates new form RelatorioListaClientes
-     * 
-     *
+     * Creates new form RelatorioVendasFuncionario
      */
-    public RelatorioListaClientes() {
+    public RelatorioVendasFuncionario() {
         initComponents();
-        this.setExtendedState(RelatorioListaClientes.MAXIMIZED_BOTH);   
+        
+        this.setExtendedState(this.MAXIMIZED_BOTH);   
         
         
-        TableColumnModel tcm = tabelaClientes.getColumnModel();
+        TableColumnModel tcm = tabelaVendas.getColumnModel();
         tcm.getColumn(0).setPreferredWidth(120);     //Documento
-        tcm.getColumn(1).setPreferredWidth(400);      //Nome
+        tcm.getColumn(1).setPreferredWidth(400);       //Nome
         tcm.getColumn(2).setPreferredWidth(300);    //Cidade
         tcm.getColumn(3).setPreferredWidth(300);    //Bairro
         tcm.getColumn(4).setPreferredWidth(400);    //E-Mail
         
-        List<Map<String, String>> clientes = ControllerPessoa.relatorioListaClientes();
+        List<Map<String, String>> funcionarios = ControllerVendas.listVendasFuncionario();
         
-        for(int i = 0; i < clientes.size(); i++){
-            ((DefaultTableModel)tabelaClientes.getModel()).addRow(new String[]{
-                clientes.get(i).get("documento"),
-                clientes.get(i).get("nome"),
-                clientes.get(i).get("cidade"), 
-                clientes.get(i).get("bairro"),
-                clientes.get(i).get("email")
+        for(int i = 0; i < funcionarios.size(); i++){
+            ((DefaultTableModel)tabelaVendas.getModel()).addRow(new String[]{
+                funcionarios.get(i).get("idFuncionario"),
+                funcionarios.get(i).get("funcionario"),
+                funcionarios.get(i).get("vendas"), 
+                funcionarios.get(i).get("itens"),
+                funcionarios.get(i).get("valor")
             });
         }
     }
@@ -63,11 +62,10 @@ public class RelatorioListaClientes extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         panelRelatorio = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tabelaClientes = new javax.swing.JTable();
+        tabelaVendas = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setResizable(false);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Dados da Empresa"));
 
@@ -85,7 +83,7 @@ public class RelatorioListaClientes extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(304, 304, 304))
@@ -102,21 +100,21 @@ public class RelatorioListaClientes extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        panelRelatorio.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Relatórios de Clientes"));
+        panelRelatorio.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Relatórios de Vendas por Funcionário"));
 
-        tabelaClientes.setModel(new javax.swing.table.DefaultTableModel(
+        tabelaVendas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Documento", "Nome", "Cidade", "Bairro", "E-Mail"
+                "ID", "Funcionário", "Vendas", "Itens", "R$ Valor"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, true
+                false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -127,7 +125,7 @@ public class RelatorioListaClientes extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(tabelaClientes);
+        jScrollPane1.setViewportView(tabelaVendas);
 
         javax.swing.GroupLayout panelRelatorioLayout = new javax.swing.GroupLayout(panelRelatorio);
         panelRelatorio.setLayout(panelRelatorioLayout);
@@ -142,7 +140,7 @@ public class RelatorioListaClientes extends javax.swing.JFrame {
             panelRelatorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRelatorioLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -173,29 +171,24 @@ public class RelatorioListaClientes extends javax.swing.JFrame {
                 jButton1MouseClicked(evt);
             }
         });
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(panelMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1)
-                        .addGap(15, 15, 15)))
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton1)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(24, 24, 24)
+                .addContainerGap()
                 .addComponent(jButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -208,10 +201,6 @@ public class RelatorioListaClientes extends javax.swing.JFrame {
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         this.dispose();
     }//GEN-LAST:event_jButton1MouseClicked
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
-    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -230,22 +219,20 @@ public class RelatorioListaClientes extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(RelatorioListaClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RelatorioVendasFuncionario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(RelatorioListaClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RelatorioVendasFuncionario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(RelatorioListaClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RelatorioVendasFuncionario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(RelatorioListaClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RelatorioVendasFuncionario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                
-                new RelatorioListaClientes().setVisible(true);
-                
+                new RelatorioVendasFuncionario().setVisible(true);
             }
         });
     }
@@ -259,6 +246,6 @@ public class RelatorioListaClientes extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel panelMain;
     private javax.swing.JPanel panelRelatorio;
-    private javax.swing.JTable tabelaClientes;
+    private javax.swing.JTable tabelaVendas;
     // End of variables declaration//GEN-END:variables
 }

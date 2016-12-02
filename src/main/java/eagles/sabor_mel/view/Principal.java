@@ -11,6 +11,14 @@ import eagles.sabor_mel.model.Sexo;
 import eagles.sabor_mel.model.TipoDocumento;
 import eagles.sabor_mel.model.TipoTelefone;
 import eagles.sabor_mel.model.TipoVenda;
+import eagles.sabor_mel.view.relatorios.RelatorioCrediarioAberto;
+import eagles.sabor_mel.view.relatorios.RelatorioInadimplencia;
+import eagles.sabor_mel.view.relatorios.RelatorioListaClientes;
+import eagles.sabor_mel.view.relatorios.RelatorioListaFornecedores;
+import eagles.sabor_mel.view.relatorios.RelatorioListaFuncionarios;
+import eagles.sabor_mel.view.relatorios.RelatorioListaProdutos;
+import eagles.sabor_mel.view.relatorios.RelatorioVendasCliente;
+import eagles.sabor_mel.view.relatorios.RelatorioVendasFuncionario;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -35,7 +43,6 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.persistence.NoResultException;
 import javax.swing.JFileChooser;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -394,7 +401,7 @@ public class Principal extends javax.swing.JFrame {
         btnRelatorio4 = new javax.swing.JButton();
         btnRelatorio5 = new javax.swing.JButton();
         btnRelatorio6 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btnRelatorio12 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -575,6 +582,12 @@ public class Principal extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/new_logo.png"))); // NOI18N
+        logo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        logo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                logoMouseClicked(evt);
+            }
+        });
 
         eagles.setText("Eagle's Alliance © 2016");
 
@@ -1332,7 +1345,7 @@ public class Principal extends javax.swing.JFrame {
         imagemProduto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         imagemProduto.setText("IMAGEM");
         imagemProduto.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        imagemProduto.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        imagemProduto.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         imagemProduto.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         imagemProduto.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
         imagemProduto.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1457,6 +1470,13 @@ public class Principal extends javax.swing.JFrame {
                     .addComponent(refreshProduto)
                     .addComponent(deleteProduto)
                     .addComponent(confirmProduto))
+                    .addGroup(produtosLayout.createSequentialGroup()
+                        .addComponent(panelProdutoCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(produtosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(refreshProduto)
+                            .addComponent(deleteProduto)
+                            .addComponent(confirmProduto))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -1644,12 +1664,32 @@ public class Principal extends javax.swing.JFrame {
         panelRelatorioLista.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Listas"));
 
         btnRelatorio4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/usuario.png"))); // NOI18N
+        btnRelatorio4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnRelatorio4MouseClicked(evt);
+            }
+        });
 
         btnRelatorio5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/fornecedor.png"))); // NOI18N
+        btnRelatorio5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnRelatorio5MouseClicked(evt);
+            }
+        });
 
         btnRelatorio6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/produto.png"))); // NOI18N
+        btnRelatorio6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnRelatorio6MouseClicked(evt);
+            }
+        });
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/funcionario.png"))); // NOI18N
+        btnRelatorio12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/funcionario.png"))); // NOI18N
+        btnRelatorio12.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnRelatorio12MouseClicked(evt);
+            }
+        });
 
         jLabel2.setText("Lista de Clientes");
 
@@ -1683,7 +1723,7 @@ public class Principal extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel4))
                             .addGroup(panelRelatorioListaLayout.createSequentialGroup()
-                                .addComponent(jButton1)
+                                .addComponent(btnRelatorio12)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel5)))
                         .addGap(0, 0, Short.MAX_VALUE))))
@@ -1706,7 +1746,7 @@ public class Principal extends javax.swing.JFrame {
                     .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelRelatorioListaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton1)
+                    .addComponent(btnRelatorio12)
                     .addComponent(jLabel5))
                 .addGap(0, 35, Short.MAX_VALUE))
         );
@@ -1716,8 +1756,18 @@ public class Principal extends javax.swing.JFrame {
         btnRelatorio7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/credito.png"))); // NOI18N
         btnRelatorio7.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnRelatorio7.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnRelatorio7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnRelatorio7MouseClicked(evt);
+            }
+        });
 
         btnRelatorio8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/divida.png"))); // NOI18N
+        btnRelatorio8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnRelatorio8MouseClicked(evt);
+            }
+        });
 
         jLabel10.setText("Crediários em Aberto");
 
@@ -1817,14 +1867,29 @@ public class Principal extends javax.swing.JFrame {
         btnRelatorio1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/venda_funcionario.png"))); // NOI18N
         btnRelatorio1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnRelatorio1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnRelatorio1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnRelatorio1MouseClicked(evt);
+            }
+        });
 
         btnRelatorio2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/venda_cliente.png"))); // NOI18N
         btnRelatorio2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnRelatorio2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnRelatorio2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnRelatorio2MouseClicked(evt);
+            }
+        });
 
         btnRelatorio3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/venda_periodo.png"))); // NOI18N
         btnRelatorio3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnRelatorio3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnRelatorio3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnRelatorio3MouseClicked(evt);
+            }
+        });
 
         jLabel12.setText("Vendas por Funcionário");
 
@@ -2692,7 +2757,7 @@ public class Principal extends javax.swing.JFrame {
                                 .addComponent(ferramentas, javax.swing.GroupLayout.PREFERRED_SIZE, 844, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 121, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE)
+                                .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                                 .addContainerGap())))))
         );
         layout.setVerticalGroup(
@@ -4298,6 +4363,45 @@ public class Principal extends javax.swing.JFrame {
     private void btnInsereProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsereProdutoActionPerformed
         new CadastroProduto().setVisible(true);
     }//GEN-LAST:event_btnInsereProdutoActionPerformed
+    private void btnRelatorio4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRelatorio4MouseClicked
+        new RelatorioListaClientes().setVisible(true);
+    }//GEN-LAST:event_btnRelatorio4MouseClicked
+
+    private void btnRelatorio5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRelatorio5MouseClicked
+        new RelatorioListaFornecedores().setVisible(true);
+    }//GEN-LAST:event_btnRelatorio5MouseClicked
+
+    private void btnRelatorio6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRelatorio6MouseClicked
+        new RelatorioListaProdutos().setVisible(true);
+    }//GEN-LAST:event_btnRelatorio6MouseClicked
+
+    private void btnRelatorio12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRelatorio12MouseClicked
+        new RelatorioListaFuncionarios().setVisible(true);
+    }//GEN-LAST:event_btnRelatorio12MouseClicked
+
+    private void btnRelatorio1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRelatorio1MouseClicked
+        new RelatorioVendasFuncionario().setVisible(true);
+    }//GEN-LAST:event_btnRelatorio1MouseClicked
+
+    private void btnRelatorio3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRelatorio3MouseClicked
+        new intervaloVenda().setVisible(true);
+    }//GEN-LAST:event_btnRelatorio3MouseClicked
+
+    private void btnRelatorio2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRelatorio2MouseClicked
+        new RelatorioVendasCliente().setVisible(true);
+    }//GEN-LAST:event_btnRelatorio2MouseClicked
+
+    private void btnRelatorio7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRelatorio7MouseClicked
+        new RelatorioCrediarioAberto().setVisible(true);
+    }//GEN-LAST:event_btnRelatorio7MouseClicked
+
+    private void btnRelatorio8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRelatorio8MouseClicked
+       new RelatorioInadimplencia().setVisible(true);
+    }//GEN-LAST:event_btnRelatorio8MouseClicked
+
+    private void logoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoMouseClicked
+        new DadosEmpresa().setVisible(true);
+    }//GEN-LAST:event_logoMouseClicked
 
     public void filtraTabela(String menu) {
         List<Map<String, String>> lista;
@@ -4420,7 +4524,7 @@ public class Principal extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -4475,6 +4579,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton btnRelatorio1;
     private javax.swing.JButton btnRelatorio10;
     private javax.swing.JButton btnRelatorio11;
+    private javax.swing.JButton btnRelatorio12;
     private javax.swing.JButton btnRelatorio2;
     private javax.swing.JButton btnRelatorio3;
     private javax.swing.JButton btnRelatorio4;
@@ -4539,7 +4644,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton finalizaCompra;
     private javax.swing.JPanel fornecedores;
     private javax.swing.JLabel imagemProduto;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

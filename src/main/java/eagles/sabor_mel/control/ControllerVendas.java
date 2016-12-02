@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package eagles.sabor_mel.control;
 
 import eagles.sabor_mel.dao.FuncionarioDAO;
@@ -18,7 +13,6 @@ import eagles.sabor_mel.model.TipoVenda;
 import eagles.sabor_mel.model.Venda;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -39,23 +33,33 @@ public class ControllerVendas {
     
     public static List<Map> searchVenda(Calendar start) {
         List<Map> listMapVendas = new ArrayList<>();
-        Map<String, String> specVenda = new HashMap<>();      
         Calendar end = Calendar.getInstance();
         end.set(DateGenerator.getYear(), DateGenerator.getMonth(), DateGenerator.getDay());
         
         List<Venda> vendas = daoVenda.getByInterval(start, end);
 
         for (Venda v : vendas) {
+            System.out.println(v.getDataVenda().getTime());
+            System.out.println(start.getTime());
+            
+            
+            Map<String, String> specVenda = new HashMap<>();
+
             specVenda.put("idVenda", String.valueOf(v.getIdVenda()));
-            specVenda.put("dataVenda", String.valueOf(v.getDataVenda()));
+            specVenda.put("dataVenda", DateGenerator.dateFormat(v.getDataVenda()));
             specVenda.put("tipoVenda", v.getTipoVenda().toString());
             specVenda.put("desconto", String.valueOf(v.getDesconto()));
-            specVenda.put("cliente_name", v.getCliente().getNome());
-            specVenda.put("cliente_document", v.getCliente().getDocumento().getNumero());
-            specVenda.put("vendedor_name", v.getFuncionario().getNome());
-            specVenda.put("vendedor_document", v.getFuncionario().getDocumento().getNumero());
+            specVenda.put("cliente", v.getCliente().getNome());
+            specVenda.put("documentoCliente", v.getCliente().getDocumento().getNumero());
+            specVenda.put("funcionario", v.getFuncionario().getNome());
+            specVenda.put("documentoFuncionario", v.getFuncionario().getDocumento().getNumero());
+            specVenda.put("valorTotal", String.valueOf(getValorTotal(v.getItens(), v.getDesconto())));
+            specVenda.put("quantidadeTotal", String.valueOf(getQuantidadeTotal(v.getItens())));
+
             listMapVendas.add(specVenda);
+            
         }
+        
         return listMapVendas;
     }
 
@@ -112,7 +116,7 @@ public class ControllerVendas {
     }
     
     /*
-     * @author Dhiego e Thiago
+     * @author Dhiego e Tiago
      * Método para venda a Crediário
     */
     public static boolean vender(Long idPessoa, Long idFuncionario, TipoVenda tipoVenda, Long[] produtos, int[] quantidades, double desconto, int quantidadeParcela, int dia, int mes, int ano) {
@@ -158,12 +162,22 @@ public class ControllerVendas {
     private static Double getValorTotal(List<ItemVenda> itens, double desconto) {
         double valorTotal = 0d;
         for (ItemVenda iv : itens) {
-            valorTotal += iv.getProduto().getValorUnitario();
+            valorTotal += iv.getProduto().getValorUnitario() * iv.getQuantidade();
         }
         if (desconto > 0) {
             valorTotal = valorTotal - (valorTotal * (desconto / 100));
         }
         return valorTotal;
+    }
+    
+    private static Integer getQuantidadeTotal(List<ItemVenda> itens) {
+        Integer quantidade = 0;
+        
+        for (ItemVenda iv : itens) {
+            quantidade += iv.getQuantidade();
+        }
+ 
+        return quantidade;
     }
 
     private static boolean changeQuantityProduto(Produto p, int quantity) {

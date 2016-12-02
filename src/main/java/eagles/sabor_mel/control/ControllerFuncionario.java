@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package eagles.sabor_mel.control;
 
 import eagles.sabor_mel.dao.FuncionarioDAO;
@@ -51,7 +46,8 @@ public class ControllerFuncionario {
                 specFuncionario.put("nome", String.valueOf(f.getNome()));
                 specFuncionario.put("usuario", String.valueOf(f.getUsuario()));
                 specFuncionario.put("acesso", String.valueOf(f.getAcesso()));
-
+                specFuncionario.put("documento", String.valueOf(f.getDocumento().getNumero()));
+                
                 listaFuncionarios.add(specFuncionario);
             }
         }
@@ -87,9 +83,9 @@ public class ControllerFuncionario {
     * @author dhiego
     * This function calls VendaDAO and CrediarioDAO to persist a sell.
     *
-     */
-    public static Map<String, String> searchFuncionario(String nome) {
-        FuncionarioDAO daoFuncionario = new FuncionarioDAO();
+    */
+    public static Map<String, String> searchFuncionario(String nome){
+        
         Funcionario funcionario = daoFuncionario.getByName(nome);
         Map<String, String> specFuncionario = new HashMap<>();
         specFuncionario.put("idFuncionario", String.valueOf(funcionario.getIdPessoa()));
@@ -242,5 +238,4 @@ public class ControllerFuncionario {
         
         return daoFuncionario.merge(funcionario);
     }
-
 }

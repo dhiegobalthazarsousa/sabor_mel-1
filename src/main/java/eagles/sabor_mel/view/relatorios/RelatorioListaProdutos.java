@@ -6,6 +6,7 @@
 package eagles.sabor_mel.view.relatorios;
 
 import eagles.sabor_mel.control.ControllerPessoa;
+import eagles.sabor_mel.control.ControllerProduto;
 import java.util.List;
 import java.util.Map;
 import javax.swing.table.DefaultTableModel;
@@ -15,34 +16,33 @@ import javax.swing.table.TableColumnModel;
  *
  * @author etivideo
  */
-public class RelatorioListaClientes extends javax.swing.JFrame {
+public class RelatorioListaProdutos extends javax.swing.JFrame {
 
     /**
-     * Creates new form RelatorioListaClientes
-     * 
-     *
+     * Creates new form RelatorioListaProdutos
      */
-    public RelatorioListaClientes() {
+    public RelatorioListaProdutos() {
         initComponents();
-        this.setExtendedState(RelatorioListaClientes.MAXIMIZED_BOTH);   
+        
+        this.setExtendedState(RelatorioListaProdutos.MAXIMIZED_BOTH);   
         
         
-        TableColumnModel tcm = tabelaClientes.getColumnModel();
-        tcm.getColumn(0).setPreferredWidth(120);     //Documento
-        tcm.getColumn(1).setPreferredWidth(400);      //Nome
-        tcm.getColumn(2).setPreferredWidth(300);    //Cidade
-        tcm.getColumn(3).setPreferredWidth(300);    //Bairro
-        tcm.getColumn(4).setPreferredWidth(400);    //E-Mail
+        TableColumnModel tcm = tabelaProdutos.getColumnModel();
+        tcm.getColumn(0).setPreferredWidth(120);    //Código
+        tcm.getColumn(1).setPreferredWidth(800);    //Descrição
+        tcm.getColumn(2).setPreferredWidth(100);    //Quantidade
+        tcm.getColumn(3).setPreferredWidth(150);    //Unitario
+        tcm.getColumn(4).setPreferredWidth(150);    //Total
         
-        List<Map<String, String>> clientes = ControllerPessoa.relatorioListaClientes();
+        List<Map<String, String>> produtos = ControllerProduto.listProdutos();
         
-        for(int i = 0; i < clientes.size(); i++){
-            ((DefaultTableModel)tabelaClientes.getModel()).addRow(new String[]{
-                clientes.get(i).get("documento"),
-                clientes.get(i).get("nome"),
-                clientes.get(i).get("cidade"), 
-                clientes.get(i).get("bairro"),
-                clientes.get(i).get("email")
+        for(int i = 0; i < produtos.size(); i++){
+            ((DefaultTableModel)tabelaProdutos.getModel()).addRow(new String[]{
+                produtos.get(i).get("id"),
+                produtos.get(i).get("descricao"),
+                produtos.get(i).get("quantidade"), 
+                produtos.get(i).get("valorUnitario"),
+                produtos.get(i).get("total")
             });
         }
     }
@@ -63,11 +63,10 @@ public class RelatorioListaClientes extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         panelRelatorio = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tabelaClientes = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        tabelaProdutos = new javax.swing.JTable();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setResizable(false);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Dados da Empresa"));
 
@@ -85,7 +84,7 @@ public class RelatorioListaClientes extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(304, 304, 304))
@@ -102,21 +101,21 @@ public class RelatorioListaClientes extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        panelRelatorio.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Relatórios de Clientes"));
+        panelRelatorio.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Relatórios de Produtos"));
 
-        tabelaClientes.setModel(new javax.swing.table.DefaultTableModel(
+        tabelaProdutos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Documento", "Nome", "Cidade", "Bairro", "E-Mail"
+                "Código", "Descrição", "Quantidade", "R$ Unitário", "R$ Total"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
+                java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, true
+                false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -127,7 +126,7 @@ public class RelatorioListaClientes extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(tabelaClientes);
+        jScrollPane1.setViewportView(tabelaProdutos);
 
         javax.swing.GroupLayout panelRelatorioLayout = new javax.swing.GroupLayout(panelRelatorio);
         panelRelatorio.setLayout(panelRelatorioLayout);
@@ -142,7 +141,7 @@ public class RelatorioListaClientes extends javax.swing.JFrame {
             panelRelatorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRelatorioLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -167,15 +166,10 @@ public class RelatorioListaClientes extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jButton1.setText("Sair");
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+        jButton2.setText("Sair");
+        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton1MouseClicked(evt);
-            }
-        });
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButton2MouseClicked(evt);
             }
         });
 
@@ -184,19 +178,19 @@ public class RelatorioListaClientes extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(panelMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1)
-                        .addGap(15, 15, 15)))
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton2)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(jButton1)
+                .addContainerGap()
+                .addComponent(jButton2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -205,13 +199,9 @@ public class RelatorioListaClientes extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
         this.dispose();
-    }//GEN-LAST:event_jButton1MouseClicked
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jButton2MouseClicked
 
     /**
      * @param args the command line arguments
@@ -230,28 +220,26 @@ public class RelatorioListaClientes extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(RelatorioListaClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RelatorioListaProdutos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(RelatorioListaClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RelatorioListaProdutos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(RelatorioListaClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RelatorioListaProdutos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(RelatorioListaClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RelatorioListaProdutos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                
-                new RelatorioListaClientes().setVisible(true);
-                
+                new RelatorioListaProdutos().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -259,6 +247,6 @@ public class RelatorioListaClientes extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel panelMain;
     private javax.swing.JPanel panelRelatorio;
-    private javax.swing.JTable tabelaClientes;
+    private javax.swing.JTable tabelaProdutos;
     // End of variables declaration//GEN-END:variables
 }

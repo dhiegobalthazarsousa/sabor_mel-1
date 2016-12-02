@@ -7,11 +7,13 @@ package eagles.sabor_mel.control;
 
 import eagles.sabor_mel.dao.FornecimentoDAO;
 import eagles.sabor_mel.dao.ItemFornecimentoDAO;
+import eagles.sabor_mel.dao.ItemVendaDAO;
 import eagles.sabor_mel.dao.PessoaDAO;
 import eagles.sabor_mel.dao.ProdutoDAO;
 import eagles.sabor_mel.model.DateGenerator;
 import eagles.sabor_mel.model.Fornecimento;
 import eagles.sabor_mel.model.ItemFornecimento;
+import eagles.sabor_mel.model.ItemVenda;
 import eagles.sabor_mel.model.Pessoa;
 import eagles.sabor_mel.model.Produto;
 import java.util.ArrayList;
@@ -82,6 +84,21 @@ public class ControllerFornecimento {
         }
         
         return itens;
+    }
+    
+    public static List<Map<String, String>> getItensByFornecimento(Long id){
+        ItemFornecimentoDAO daoIF = new ItemFornecimentoDAO();
+        List<ItemFornecimento> itens = daoIF.getByIdFornecimento(id);
+        
+        List<Map<String, String>> listSpecItens = new ArrayList();
+        for(ItemFornecimento item : itens){
+            Map<String, String> specItens = new HashMap<>();
+            specItens.put("id", String.valueOf(item.getIdItemFornecimento()));
+            specItens.put("produto", item.getProduto().getDescricao());
+            specItens.put("quantidade", String.valueOf(item.getQuantidade()));
+            listSpecItens.add(specItens);
+        }
+        return listSpecItens;
     }
 
 }
