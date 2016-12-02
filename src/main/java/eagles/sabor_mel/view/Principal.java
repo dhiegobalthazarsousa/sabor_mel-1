@@ -11,22 +11,28 @@ import eagles.sabor_mel.model.Sexo;
 import eagles.sabor_mel.model.TipoDocumento;
 import eagles.sabor_mel.model.TipoTelefone;
 import eagles.sabor_mel.model.TipoVenda;
+import eagles.sabor_mel.view.relatorios.IntervaloVenda;
 import eagles.sabor_mel.view.relatorios.RelatorioCrediarioAberto;
 import eagles.sabor_mel.view.relatorios.RelatorioInadimplencia;
 import eagles.sabor_mel.view.relatorios.RelatorioListaClientes;
 import eagles.sabor_mel.view.relatorios.RelatorioListaFornecedores;
 import eagles.sabor_mel.view.relatorios.RelatorioListaFuncionarios;
 import eagles.sabor_mel.view.relatorios.RelatorioListaProdutos;
+import eagles.sabor_mel.view.relatorios.RelatorioRankingVendas;
+import eagles.sabor_mel.view.relatorios.RelatorioValorMedioVendas;
 import eagles.sabor_mel.view.relatorios.RelatorioVendasCliente;
 import eagles.sabor_mel.view.relatorios.RelatorioVendasFuncionario;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.HeadlessException;
 import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URISyntaxException;
@@ -62,8 +68,10 @@ public class Principal extends javax.swing.JFrame {
                     ControllerFuncionario.searchFuncionario(Login.login.getText(), Login.senha.getText());
 
             initComponents();
+            estiloPadrao();
             
             if(funcionario.get("acesso").equals("Vendedor")){
+                btnProduto.setEnabled(false);
                 btnCompra.setEnabled(false);
                 btnRelatorio.setEnabled(false);
                 btnFornecedor.setEnabled(false);
@@ -82,8 +90,6 @@ public class Principal extends javax.swing.JFrame {
             this.dispose();
             new Login().setVisible(true);
         }
-        
-        
     }
 
     public void carregaComboEstados() {
@@ -105,6 +111,9 @@ public class Principal extends javax.swing.JFrame {
     }
     
     public void estiloPadrao() {
+        /*Geral*/
+        lerDados();
+        
         /*Background para os combobox*/
         acessoUsuario.setBackground(Color.white);
         estadoUsuario.setBackground(Color.white);
@@ -150,6 +159,35 @@ public class Principal extends javax.swing.JFrame {
         valorTotalVenda.setEnabled(false);
         valorTrocoVenda.setEnabled(false);
         calculaTrocoVenda.setEnabled(false);
+    }
+
+    private void lerDados() throws HeadlessException {
+        /*Geral*/
+        URL resource = Principal.class.getResource("/empresa/");
+        try {
+            FileReader fileReader = new FileReader(resource.getPath()+"dados.txt");
+            BufferedReader reader = new BufferedReader(fileReader);
+            
+            String data = null;
+            
+            int count = 0;
+            while((data = reader.readLine()) != null){
+                switch(count){
+                    case 0:
+                        logo.setIcon(new javax.swing.ImageIcon(resource.getPath()+data));
+                        break;
+                }
+                count++;
+            }
+            
+            reader.close();
+        }
+        catch (FileNotFoundException ex) {
+            JOptionPane.showMessageDialog(null, "Arquivo dados.txt não encontrado.");
+        }
+        catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, "Problemas na Leitura do Arquivo dados.txt.");
+        }
     }
 
     public void carregaTabela(String menu) {
@@ -582,6 +620,7 @@ public class Principal extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/new_logo.png"))); // NOI18N
+        logo.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         logo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         logo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -1464,12 +1503,6 @@ public class Principal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(produtosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(panelProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(panelProdutoCadastro, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(produtosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(refreshProduto)
-                    .addComponent(deleteProduto)
-                    .addComponent(confirmProduto))
                     .addGroup(produtosLayout.createSequentialGroup()
                         .addComponent(panelProdutoCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -1812,10 +1845,20 @@ public class Principal extends javax.swing.JFrame {
         btnRelatorio10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/grafico.png"))); // NOI18N
         btnRelatorio10.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnRelatorio10.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnRelatorio10.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnRelatorio10MouseClicked(evt);
+            }
+        });
 
         btnRelatorio11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/ranking.png"))); // NOI18N
         btnRelatorio11.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnRelatorio11.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnRelatorio11.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnRelatorio11MouseClicked(evt);
+            }
+        });
 
         jLabel6.setText("Relatório Geral de Estoque");
 
@@ -2748,14 +2791,14 @@ public class Principal extends javax.swing.JFrame {
                         .addComponent(eagles))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(logo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(panelUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(panelDataHora, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(panelDataHora, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(logo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(ferramentas, javax.swing.GroupLayout.PREFERRED_SIZE, 844, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 121, Short.MAX_VALUE))
+                                .addGap(0, 117, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                                 .addContainerGap())))))
@@ -2766,7 +2809,7 @@ public class Principal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(ferramentas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(logo))
+                    .addComponent(logo, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -2796,10 +2839,12 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnClienteActionPerformed
 
     private void btnProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProdutoActionPerformed
-        CardLayout card = (CardLayout)mainPanel.getLayout();
-        card.show(mainPanel, "produtos");
-        limpaCampos("produto");
-        carregaTabela("produto");
+        if(btnProduto.isEnabled()){
+            CardLayout card = (CardLayout)mainPanel.getLayout();
+            card.show(mainPanel, "produtos");
+            limpaCampos("produto");
+            carregaTabela("produto");
+        }
     }//GEN-LAST:event_btnProdutoActionPerformed
 
     private void btnCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCompraActionPerformed
@@ -4360,9 +4405,6 @@ public class Principal extends javax.swing.JFrame {
         nomeBuscaUsuario.setText(null);
     }//GEN-LAST:event_btnBuscaUsuarioMouseClicked
 
-    private void btnInsereProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsereProdutoActionPerformed
-        new CadastroProduto().setVisible(true);
-    }//GEN-LAST:event_btnInsereProdutoActionPerformed
     private void btnRelatorio4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRelatorio4MouseClicked
         new RelatorioListaClientes().setVisible(true);
     }//GEN-LAST:event_btnRelatorio4MouseClicked
@@ -4384,7 +4426,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRelatorio1MouseClicked
 
     private void btnRelatorio3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRelatorio3MouseClicked
-        new intervaloVenda().setVisible(true);
+        new IntervaloVenda().setVisible(true);
     }//GEN-LAST:event_btnRelatorio3MouseClicked
 
     private void btnRelatorio2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRelatorio2MouseClicked
@@ -4402,6 +4444,14 @@ public class Principal extends javax.swing.JFrame {
     private void logoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoMouseClicked
         new DadosEmpresa().setVisible(true);
     }//GEN-LAST:event_logoMouseClicked
+
+    private void btnRelatorio10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRelatorio10MouseClicked
+        new RelatorioValorMedioVendas().setVisible(true);
+    }//GEN-LAST:event_btnRelatorio10MouseClicked
+
+    private void btnRelatorio11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRelatorio11MouseClicked
+        new RelatorioRankingVendas().setVisible(true);
+    }//GEN-LAST:event_btnRelatorio11MouseClicked
 
     public void filtraTabela(String menu) {
         List<Map<String, String>> lista;
@@ -4541,16 +4591,7 @@ public class Principal extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    new Principal().setVisible(true);
-                } 
-                catch (NoSuchAlgorithmException | UnsupportedEncodingException ex) {
-                    JOptionPane.showMessageDialog(null, "Erro ao carregar o software\nEntre em contato com o administrador");
-                } 
-            }
-        });
+        java.awt.EventQueue.invokeLater(new RunnableImpl());
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -4809,4 +4850,20 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> vendaParcela;
     private javax.swing.JPanel vendas;
     // End of variables declaration//GEN-END:variables
+
+    private static class RunnableImpl implements Runnable {
+
+        public RunnableImpl() {
+        }
+
+        @Override
+        public void run() {
+            try {
+                new Principal().setVisible(true);
+            }
+            catch (NoSuchAlgorithmException | UnsupportedEncodingException ex) {
+                JOptionPane.showMessageDialog(null, "Erro ao carregar o software\nEntre em contato com o administrador");
+            }
+        }
+    }
 }

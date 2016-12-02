@@ -71,32 +71,9 @@ public class ControllerCrediario {
         }
         return mapCrediario;
     }
-
-    public static List<Map> searchParcelas(Long idCrediario) {
-        List<Parcela> parcelas = daoParcela.getByCrediario(idCrediario);
-        List<Map> listMapParcelas = new ArrayList<>();
-        if (!parcelas.isEmpty()) {
-            for (Parcela p : parcelas) {
-                Map<String, String> specParcela = new HashMap<>();
-                specParcela.put("idParcela", String.valueOf(p.getIdParcela()));
-                specParcela.put("numeroParcela", String.valueOf(p.getParcela()));
-                specParcela.put("dataVencimento", DateGenerator.dateFormat(p.getDataVencimento()));
-                specParcela.put("status", p.getStatus().toString());
-                specParcela.put("valor", String.valueOf(p.getValorParcela()));
-                listMapParcelas.add(specParcela);
-            }
-        }
-        return listMapParcelas;
-    }
-
-    public static boolean pagarParcela(Long idParcela) {
-        Parcela parcela = daoParcela.getById(idParcela);
-        parcela.setStatus(StatusParcela.PAGO);
-        return daoParcela.merge(parcela);
-    }
-
-/*Método para Listar Crediarios*/
-public static List<Map<String, String>> listCrediario(){
+    
+    /*Método para Listar Crediarios*/
+    public static List<Map<String, String>> listCrediario(){
         List<Map<String, String>> listCrediario = new ArrayList<>();
         
         List<Crediario> crediarios = daoCrediario.findAll();
@@ -137,7 +114,7 @@ public static List<Map<String, String>> listCrediario(){
             specParcela.put("idParcela", String.valueOf(p.getIdParcela()));
             specParcela.put("dataVencimento", DateGenerator.dateFormat(p.getDataVencimento()));
             specParcela.put("parcela", String.valueOf(p.getParcela()));
-            specParcela.put("statusParcela", p.getStatus().toString());
+            specParcela.put("statusParcela", p.getStatus());
             specParcela.put("valorParcela", String.valueOf(p.getValorParcela()));
             specParcela.put("parcelasPagas", String.valueOf(contaParcelasPagas(idCrediario)));
             

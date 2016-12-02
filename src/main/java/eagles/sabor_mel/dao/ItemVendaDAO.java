@@ -1,7 +1,6 @@
 package eagles.sabor_mel.dao;
 
 import static eagles.sabor_mel.dao.DAO.entityManager;
-import eagles.sabor_mel.model.ItemFornecimento;
 import eagles.sabor_mel.model.ItemVenda;
 import java.util.List;
 import javax.persistence.Query;

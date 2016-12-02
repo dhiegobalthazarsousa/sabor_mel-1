@@ -238,4 +238,64 @@ public class ControllerFuncionario {
         
         return daoFuncionario.merge(funcionario);
     }
+    
+    public static boolean novaSenha(Long id, String senha) throws NoSuchAlgorithmException, UnsupportedEncodingException{
+        Funcionario funcionario = daoFuncionario.getById(id);
+        
+        HashSha hashSenha = new HashSha(senha);
+        senha = hashSenha.hashSenha();
+        
+        funcionario.setSenha(senha);
+        
+        return daoFuncionario.merge(funcionario);
+    }
+    
+    public static boolean deleteFuncionario(Long id){
+        return daoFuncionario.removeById(id);
+    }
+
+    public static Calendar transformData(String data) {
+        Calendar cal = null;
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            cal = Calendar.getInstance();
+            cal.setTime(sdf.parse(data));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return cal;
+    }
+    
+   /*Conta as vendas do funcionario*/
+    public static Integer contarVendas(Long id){
+        Integer total = 0;
+        
+        Funcionario funcionario = daoFuncionario.getById(id);
+        List<Map<String, String>> vendas = ControllerVendas.listVendas();
+        
+        for(Map<String, String> venda : vendas){
+            if(venda.get("idFuncionario").equals(String.valueOf(id))){
+                total++;
+            }
+        }
+        
+        return total;
+    }
+    
+    /*Método para somar o desconto total concedido pelo funcionario*/
+    public static Double somarDesconto(Long id){
+        Double descontoTotal = 0.0;
+        
+        Funcionario funcionario = daoFuncionario.getById(id);
+        List<Map<String, String>> vendas = ControllerVendas.listVendas();
+        
+        for(Map<String, String> venda : vendas){
+            if(venda.get("idFuncionario").equals(String.valueOf(id))){
+                descontoTotal += Double.parseDouble(venda.get("desconto"));
+            }
+        }
+        
+        return descontoTotal;
+    }
+
 }
